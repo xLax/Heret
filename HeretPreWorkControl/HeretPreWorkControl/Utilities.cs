@@ -1,0 +1,355 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tulpep.NotificationWindow;
+
+namespace HeretPreWorkControl
+{
+    public static class Utilities
+    {
+        public static PopupNotifier currPopup;
+
+        public static void CreatePopup(String strTitle, String strMessage)
+        {
+            PopupNotifier popup = new PopupNotifier();
+            popup.IsRightToLeft = true;
+            popup.Image = Properties.Resources.Notification_Icon;
+            popup.TitleText = strTitle;
+            popup.ContentText = strMessage;
+            popup.Popup();
+        }
+
+        public static void Popup_Clicked(object sender, System.EventArgs e)
+        {
+            if(Globals.OpenScreenID == Globals.ToMyJobs)
+            {
+                if(Globals.UserGroupID == Globals.SalesUserID)
+                {
+                    new MyJobsForm().Show();
+                }
+            }
+            else if(Globals.OpenScreenID == Globals.ToDeclinedOrders)
+            {
+                foreach (tbl_orders Order in Globals.MyDeclinedOrders)
+                {
+                    new EnterDeclinedOrdersForm(Order).Show();
+                }
+            }
+
+            currPopup.Hide();
+        }
+
+        public static List<tbl_clients> GetAllClientsList()
+        {
+            List<tbl_clients> lstClients;
+
+            if(Globals.AllClients == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstClients = context.tbl_clients.ToList<tbl_clients>();
+                        Utilities.SetClientList(lstClients);
+                    }
+                    catch(Exception ex) { }
+                }
+            }
+            
+            return Globals.AllClients;
+        }
+
+        public static List<tbl_sla_actions> GetAllActionsList()
+        {
+            List<tbl_sla_actions> lstActions;
+
+            if (Globals.AllActions == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstActions = context.tbl_sla_actions.ToList<tbl_sla_actions>();
+                        Utilities.SetActionsList(lstActions);
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+
+            return Globals.AllActions;
+        }
+
+        public static string GetDateInNormalFormat(DateTime date)
+        {
+            string strDayVal = date.Day.ToString();
+            string strMonthVal = date.Month.ToString();
+            string strYearVal = date.Year.ToString();
+
+            return strDayVal + "/" + strMonthVal + "/" + strYearVal;
+        }
+
+        public static void CreatePopup(String strTitle, String strMessage, int nOpenScreenID)
+        {
+            PopupNotifier popup = new PopupNotifier();
+
+            Globals.OpenScreenID = nOpenScreenID;
+            
+            popup.Click += new EventHandler(Popup_Clicked);
+            popup.IsRightToLeft = true;
+            popup.Image = Properties.Resources.Notification_Icon;
+            popup.TitleText = strTitle;
+            popup.ContentText = strMessage;
+
+            currPopup = popup;
+
+            popup.Popup();
+        }
+
+        public static string GetFilledDataFromOrder(tbl_orders Order)
+        {
+            string strToReturn = String.Empty;
+
+            if (Order.template_id != 0 &&
+                Order.template_id != null)
+            {
+                strToReturn = Order.template_id.ToString();
+            }
+            else if (Order.prisa_id != 0 &&
+                    Order.prisa_id != null)
+            {
+                strToReturn = Order.prisa_id.ToString();
+            }
+            else
+            {
+                strToReturn = Order.project_desc;
+            }
+
+            return strToReturn;
+        }
+
+        public static void SetGlobalUserData(int nUserID, String strUserName, String strName, int nUserGroupID, String strUserGroup)
+        {
+            Globals.UserID = nUserID;
+            Globals.Name = strName;
+            Globals.UserName = strUserName;
+            Globals.UserGroupID = nUserGroupID;
+            Globals.UserGroup = strUserGroup;
+        }
+
+        public static void SetClientList(List<tbl_clients> Clients)
+        {
+            Globals.AllClients = Clients;
+        }
+
+        public static void SetActionsList(List<tbl_sla_actions> Actions)
+        {
+            Globals.AllActions = Actions;
+        }
+
+        public static string CalculateSlaStatus(DateTime? recievedDate, TimeSpan? recievedHour, int nSlaHours)
+        {
+            string strSlaStatus = String.Empty;
+            
+            if(nSlaHours == Globals.SlaImmediate)
+            {
+                if(System.DateTime.Now.Hour - recievedHour.Value.Hours < 1)
+                {
+                    strSlaStatus = "לביצוע מיידי";
+                }
+                else
+                {
+                    strSlaStatus = "מאחר";
+                }
+            }
+            else if(nSlaHours == Globals.SlaUntil12)
+            {
+                if(recievedHour.Value.Hours >= 12)
+                {
+                    if( (int)(System.DateTime.Now.Date - recievedDate).Value.TotalDays >= 1 )
+                    {
+                        strSlaStatus = "מאחר";
+                    }
+                    else
+                    {
+                        strSlaStatus = "בתהליך";
+                    }
+                }
+                else
+                {
+                    if (System.DateTime.Now.Hour >= 12)
+                    {
+                        strSlaStatus = "מאחר";
+                    }
+                    else
+                    {
+                        strSlaStatus = "בתהליך";
+                    }
+                }
+            }
+            else
+            {
+                int nElapsedDaysHours = (int)(System.DateTime.Now.Date - recievedDate).Value.TotalHours;
+                int nElapsedHours = System.DateTime.Now.Hour - recievedHour.Value.Hours;
+
+                if (nSlaHours > (nElapsedDaysHours + nElapsedHours))
+                {
+                    strSlaStatus = "בתהליך";
+                }
+                else
+                {
+                    strSlaStatus = "מאחר";
+                }
+            }
+
+            return strSlaStatus;
+        }
+
+        public static void SetNewDeclinedJobs(List<tbl_orders> myDeclinedJobs)
+        {
+            Globals.MyDeclinedOrders = myDeclinedJobs;
+        }
+
+        // Returns the job count.
+        // Exceptions : returns -1 if error has occured.
+        public static int GetMyJobCount()
+        {
+            List<tbl_orders> MyJobs = new List<tbl_orders>();
+            int nMyJobsCount = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    if (Globals.UserGroupID == Globals.OrdersUserID)
+                    {
+                        MyJobs =
+                           context.tbl_orders
+                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
+                                            o.special_department_id == Globals.UserGroupID ) &&
+                                          o.orders_agent_id == Globals.UserID &&
+                                          o.current_status_id == Globals.StatusInWork
+                                              ).ToList<tbl_orders>();
+                    }
+                    else if (Globals.UserGroupID == Globals.KadasUserID)
+                    {
+                        MyJobs =
+                           context.tbl_orders
+                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
+                                            o.special_department_id == Globals.UserGroupID ) &&
+                                          o.kadas_agent_id == Globals.UserID &&
+                                          o.current_status_id == Globals.StatusInWork
+                                              ).ToList<tbl_orders>();
+                    }
+                    else if (Globals.UserGroupID == Globals.SalesUserID)
+                    {
+                        MyJobs =
+                           context.tbl_orders
+                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
+                                            o.special_department_id == Globals.UserGroupID ) &&
+                                          o.sales_agent_id == Globals.UserID &&
+                                          o.current_status_id == Globals.StatusInWork
+                                              ).ToList<tbl_orders>();
+                    }
+                    // Only left with Studio ID
+                    else
+                    {
+                        MyJobs =
+                           context.tbl_orders
+                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
+                                            o.special_department_id == Globals.UserGroupID ) &&
+                                          o.studio_agent_id == Globals.UserID &&
+                                          o.current_status_id == Globals.StatusInWork
+                                              ).ToList<tbl_orders>();
+                    }
+
+                    if(MyJobs.Count > 0)
+                    {
+                        Utilities.SetNewJobs(MyJobs);
+                    }
+
+                    nMyJobsCount = MyJobs.Count;
+                }
+                catch (Exception ex)
+                {
+                    nMyJobsCount = -1;
+                }
+            }
+
+            return nMyJobsCount;
+        }
+
+        public static void SetNewJobs(List<tbl_orders> myJobs)
+        {
+            Globals.MyJobs = myJobs;
+        }
+
+        // Returns false if save to database failed else returns true.
+        public static Boolean UpdateOrderRecord(tbl_orders OrderToUpdate)
+        {
+            Boolean isOperationSucceeded = true;
+
+            try
+            {
+                using (var context = new DB_Entities())
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                isOperationSucceeded = false;
+            }
+
+            return isOperationSucceeded;
+        }
+
+        // Returns -1 when error has occured
+        public static int GetNewDeclinedOrdersAndCount()
+        {
+            int nDeclinedOrderCount = 0;
+            List<tbl_orders> MyDeclinedJobs = new List<tbl_orders>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    DateTime dtTwoWeeksBeforeToday = DateTime.Now.AddDays(-14);
+
+                    MyDeclinedJobs =
+                          context.tbl_orders
+                             .Where(o => o.sales_agent_id == Globals.UserID &&
+                                         o.current_status_id == Globals.StatusInWork &&
+                                         o.action_type_id == Globals.ActionTypeIDRecieveClientOrder &&
+                                         o.dep_recieve_date <= dtTwoWeeksBeforeToday
+                                             ).ToList<tbl_orders>();
+                }
+                catch (Exception ex)
+                {
+                    nDeclinedOrderCount = -1; 
+                }
+            }
+
+            if (MyDeclinedJobs.Count > 0)
+            {
+                Utilities.SetNewDeclinedJobs(MyDeclinedJobs);
+            }
+
+            if(nDeclinedOrderCount != -1)
+            {
+                nDeclinedOrderCount = MyDeclinedJobs.Count;
+            }
+
+            return nDeclinedOrderCount;
+        }
+
+        public static void SetMainForm(SalesMainForm instance)
+        {
+            Globals.SalesFormInstance = instance;
+        }
+
+        public static void SetMainForm(NotSalesMainForm instance)
+        {
+            Globals.NotSalesFormInstance = instance;
+        }
+    }
+}

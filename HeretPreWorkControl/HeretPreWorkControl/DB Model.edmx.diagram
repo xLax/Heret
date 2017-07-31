@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6eb036fce8d46bcb45e4229c99b1e5e" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="DB_Model.tbl_client_response" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Model.tbl_clients" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Model.tbl_orders" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Model.tbl_sla_data" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Model.tbl_user_groups" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_Model.tbl_users" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="DB_Model.client_response" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.client" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.current_department" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.kadas_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.order_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.orders_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.sales_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.special_department" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.user_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_Model.tbl_sla_actions" Width="1.5" PointX="2.75" PointY="4.125" />
+        <AssociationConnector Association="DB_Model.action_type1" />
+        <EntityTypeShape EntityType="DB_Model.tbl_action_to_dept" Width="1.5" PointX="5.25" PointY="4.875" />
+        <AssociationConnector Association="DB_Model.action" />
+        <AssociationConnector Association="DB_Model.dept" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

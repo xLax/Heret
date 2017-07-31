@@ -1,0 +1,820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_actions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="desc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_client_response">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="desc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="english_name" Type="varchar" MaxLength="45" />
+          <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="person_responsible" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="sales_agent_id" Type="int" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="contact_date" Type="date" />
+          <Property Name="files_number" Type="int" />
+          <Property Name="template_id" Type="int" />
+          <Property Name="prisa_id" Type="int" />
+          <Property Name="project_desc" Type="varchar" MaxLength="45" />
+          <Property Name="amount" Type="int" />
+          <Property Name="studio_work" Type="varchar" MaxLength="45" />
+          <Property Name="reject_date" Type="date" />
+          <Property Name="reject_reason" Type="varchar" MaxLength="200" />
+          <Property Name="comments" Type="varchar" MaxLength="45" />
+          <Property Name="curr_departnent_id" Type="int" />
+          <Property Name="studio_agent_id" Type="int" />
+          <Property Name="kadas_agent_id" Type="int" />
+          <Property Name="orders_agent_id" Type="int" />
+          <Property Name="action_type_id" Type="int" />
+          <Property Name="client_response_id" Type="int" />
+          <Property Name="special_approve" Type="int" />
+          <Property Name="special_department_id" Type="int" />
+          <Property Name="order_number" Type="varchar" MaxLength="45" />
+          <Property Name="current_status_id" Type="int" Nullable="false" />
+          <Property Name="dep_recieve_date" Type="date" />
+          <Property Name="dep_recieve_hour" Type="time" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_sla_actions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sla_hours" Type="int" Nullable="false" />
+          <Property Name="desc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_sla_data">
+          <Key>
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="sla_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="sla_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_user_groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="text" Nullable="false" />
+          <Property Name="name" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="user_group_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_value_groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_desc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_values">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="action_type">
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="action_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="client">
+          <End Role="tbl_clients" Type="Self.tbl_clients" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="client_response">
+          <End Role="tbl_client_response" Type="Self.tbl_client_response" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client_response">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="client_response_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="current_department">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="curr_departnent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_id">
+          <End Role="tbl_values" Type="Self.tbl_values" Multiplicity="1" />
+          <End Role="tbl_value_groups" Type="Self.tbl_value_groups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_values">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_value_groups">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Id">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="1" />
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_users">
+              <PropertyRef Name="user_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="kadas_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="kadas_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="order_id">
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orders_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="orders_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sales_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="sales_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="special_department">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="special_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_id">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_ModelStoreContainer">
+          <EntitySet Name="tbl_actions" EntityType="Self.tbl_actions" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_sla_actions" EntityType="Self.tbl_sla_actions" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_sla_data" EntityType="Self.tbl_sla_data" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_user_groups" EntityType="Self.tbl_user_groups" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_value_groups" EntityType="Self.tbl_value_groups" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_values" EntityType="Self.tbl_values" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <AssociationSet Name="action_type" Association="Self.action_type">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="client" Association="Self.client">
+            <End Role="tbl_clients" EntitySet="tbl_clients" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="client_response" Association="Self.client_response">
+            <End Role="tbl_client_response" EntitySet="tbl_client_response" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="current_department" Association="Self.current_department">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="group_id" Association="Self.group_id">
+            <End Role="tbl_values" EntitySet="tbl_values" />
+            <End Role="tbl_value_groups" EntitySet="tbl_value_groups" />
+          </AssociationSet>
+          <AssociationSet Name="Id" Association="Self.Id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_users" EntitySet="tbl_users" />
+          </AssociationSet>
+          <AssociationSet Name="kadas_agent" Association="Self.kadas_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="order_id" Association="Self.order_id">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
+          <AssociationSet Name="orders_agent" Association="Self.orders_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="sales_agent" Association="Self.sales_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="special_department" Association="Self.special_department">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="user_id" Association="Self.user_id">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_actions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.action_type" FromRole="tbl_actions" ToRole="tbl_orders" />
+        </EntityType>
+        <EntityType Name="tbl_client_response">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.client_response" FromRole="tbl_client_response" ToRole="tbl_orders" />
+        </EntityType>
+        <EntityType Name="tbl_clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="english_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="person_responsible" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.client" FromRole="tbl_clients" ToRole="tbl_orders" />
+        </EntityType>
+        <EntityType Name="tbl_orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="sales_agent_id" Type="Int32" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="contact_date" Type="DateTime" />
+          <Property Name="files_number" Type="Int32" />
+          <Property Name="template_id" Type="Int32" />
+          <Property Name="prisa_id" Type="Int32" />
+          <Property Name="project_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="studio_work" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="reject_date" Type="DateTime" />
+          <Property Name="reject_reason" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="comments" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="curr_departnent_id" Type="Int32" />
+          <Property Name="studio_agent_id" Type="Int32" />
+          <Property Name="kadas_agent_id" Type="Int32" />
+          <Property Name="orders_agent_id" Type="Int32" />
+          <Property Name="action_type_id" Type="Int32" />
+          <Property Name="client_response_id" Type="Int32" />
+          <Property Name="special_approve" Type="Int32" />
+          <Property Name="special_department_id" Type="Int32" />
+          <Property Name="order_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_actions" Relationship="Self.action_type" FromRole="tbl_orders" ToRole="tbl_actions" />
+          <NavigationProperty Name="tbl_client_response" Relationship="Self.client_response" FromRole="tbl_orders" ToRole="tbl_client_response" />
+          <NavigationProperty Name="tbl_clients" Relationship="Self.client" FromRole="tbl_orders" ToRole="tbl_clients" />
+          <NavigationProperty Name="tbl_user_groups" Relationship="Self.current_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
+          <NavigationProperty Name="tbl_users" Relationship="Self.kadas_agent" FromRole="tbl_orders" ToRole="tbl_users" />
+          <NavigationProperty Name="tbl_sla_data" Relationship="Self.order_id" FromRole="tbl_orders" ToRole="tbl_sla_data" />
+          <NavigationProperty Name="tbl_users1" Relationship="Self.orders_agent" FromRole="tbl_orders" ToRole="tbl_users" />
+          <NavigationProperty Name="tbl_users2" Relationship="Self.sales_agent" FromRole="tbl_orders" ToRole="tbl_users" />
+          <NavigationProperty Name="tbl_user_groups1" Relationship="Self.special_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
+          <Property Name="current_status_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_sla_actions" Relationship="DB_Model.action_type1" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
+          <Property Name="dep_recieve_date" Type="DateTime" />
+          <Property Name="dep_recieve_hour" Type="Time" />
+        </EntityType>
+        <EntityType Name="tbl_sla_data">
+          <Key>
+            <PropertyRef Name="order_id" />
+            <PropertyRef Name="sla_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="sla_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.order_id" FromRole="tbl_sla_data" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_users" Relationship="Self.user_id" FromRole="tbl_sla_data" ToRole="tbl_users" />
+        </EntityType>
+        <EntityType Name="tbl_user_groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.current_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_orders1" Relationship="Self.special_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_users" Relationship="Self.Id" FromRole="tbl_user_groups" ToRole="tbl_users" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_group_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="Self.kadas_agent" FromRole="tbl_users" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_orders1" Relationship="Self.orders_agent" FromRole="tbl_users" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_orders2" Relationship="Self.sales_agent" FromRole="tbl_users" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_sla_data" Relationship="Self.user_id" FromRole="tbl_users" ToRole="tbl_sla_data" />
+          <NavigationProperty Name="tbl_user_groups" Relationship="Self.Id" FromRole="tbl_users" ToRole="tbl_user_groups" />
+        </EntityType>
+        <EntityType Name="tbl_value_groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_values" Relationship="Self.group_id" FromRole="tbl_value_groups" ToRole="tbl_values" />
+        </EntityType>
+        <EntityType Name="tbl_values">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_value_groups" Relationship="Self.group_id" FromRole="tbl_values" ToRole="tbl_value_groups" />
+        </EntityType>
+        <Association Name="action_type">
+          <End Role="tbl_actions" Type="Self.tbl_actions" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="action_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="client_response">
+          <End Role="tbl_client_response" Type="Self.tbl_client_response" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client_response">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="client_response_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="client">
+          <End Role="tbl_clients" Type="Self.tbl_clients" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="current_department">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="curr_departnent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="kadas_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="kadas_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="order_id">
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orders_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="orders_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sales_agent">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="sales_agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="special_department">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="special_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_id">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Id">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="1" />
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_users">
+              <PropertyRef Name="user_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="group_id">
+          <End Role="tbl_values" Type="Self.tbl_values" Multiplicity="1" />
+          <End Role="tbl_value_groups" Type="Self.tbl_value_groups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_values">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_value_groups">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_actions" EntityType="Self.tbl_actions" />
+          <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" />
+          <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" />
+          <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" />
+          <EntitySet Name="tbl_sla_data" EntityType="Self.tbl_sla_data" />
+          <EntitySet Name="tbl_user_groups" EntityType="Self.tbl_user_groups" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" />
+          <EntitySet Name="tbl_value_groups" EntityType="Self.tbl_value_groups" />
+          <EntitySet Name="tbl_values" EntityType="Self.tbl_values" />
+          <AssociationSet Name="action_type" Association="Self.action_type">
+            <End Role="tbl_actions" EntitySet="tbl_actions" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="client_response" Association="Self.client_response">
+            <End Role="tbl_client_response" EntitySet="tbl_client_response" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="client" Association="Self.client">
+            <End Role="tbl_clients" EntitySet="tbl_clients" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="current_department" Association="Self.current_department">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="kadas_agent" Association="Self.kadas_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="order_id" Association="Self.order_id">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
+          <AssociationSet Name="orders_agent" Association="Self.orders_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="sales_agent" Association="Self.sales_agent">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="special_department" Association="Self.special_department">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="user_id" Association="Self.user_id">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
+          <AssociationSet Name="Id" Association="Self.Id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_users" EntitySet="tbl_users" />
+          </AssociationSet>
+          <AssociationSet Name="group_id" Association="Self.group_id">
+            <End Role="tbl_values" EntitySet="tbl_values" />
+            <End Role="tbl_value_groups" EntitySet="tbl_value_groups" />
+          </AssociationSet>
+          <EntitySet Name="tbl_sla_actions" EntityType="DB_Model.tbl_sla_actions" />
+          <AssociationSet Name="action_type1" Association="DB_Model.action_type1">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_sla_actions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sla_hours" Type="Int32" Nullable="false" />
+          <Property Name="desc" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="DB_Model.action_type1" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
+        </EntityType>
+        <Association Name="action_type1">
+          <End Type="DB_Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="0..1" />
+          <End Type="DB_Model.tbl_orders" Role="tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="action_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_ModelStoreContainer" CdmEntityContainer="DB_Entities">
+          <EntitySetMapping Name="tbl_actions">
+            <EntityTypeMapping TypeName="DB_Model.tbl_actions">
+              <MappingFragment StoreEntitySet="tbl_actions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_client_response">
+            <EntityTypeMapping TypeName="DB_Model.tbl_client_response">
+              <MappingFragment StoreEntitySet="tbl_client_response">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_clients">
+            <EntityTypeMapping TypeName="DB_Model.tbl_clients">
+              <MappingFragment StoreEntitySet="tbl_clients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="english_name" ColumnName="english_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="person_responsible" ColumnName="person_responsible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_orders">
+            <EntityTypeMapping TypeName="DB_Model.tbl_orders">
+              <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="dep_recieve_hour" ColumnName="dep_recieve_hour" />
+                <ScalarProperty Name="dep_recieve_date" ColumnName="dep_recieve_date" />
+                <ScalarProperty Name="current_status_id" ColumnName="current_status_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sales_agent_id" ColumnName="sales_agent_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="contact_date" ColumnName="contact_date" />
+                <ScalarProperty Name="files_number" ColumnName="files_number" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="prisa_id" ColumnName="prisa_id" />
+                <ScalarProperty Name="project_desc" ColumnName="project_desc" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="studio_work" ColumnName="studio_work" />
+                <ScalarProperty Name="reject_date" ColumnName="reject_date" />
+                <ScalarProperty Name="reject_reason" ColumnName="reject_reason" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="curr_departnent_id" ColumnName="curr_departnent_id" />
+                <ScalarProperty Name="studio_agent_id" ColumnName="studio_agent_id" />
+                <ScalarProperty Name="kadas_agent_id" ColumnName="kadas_agent_id" />
+                <ScalarProperty Name="orders_agent_id" ColumnName="orders_agent_id" />
+                <ScalarProperty Name="action_type_id" ColumnName="action_type_id" />
+                <ScalarProperty Name="client_response_id" ColumnName="client_response_id" />
+                <ScalarProperty Name="special_approve" ColumnName="special_approve" />
+                <ScalarProperty Name="special_department_id" ColumnName="special_department_id" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sla_data">
+            <EntityTypeMapping TypeName="DB_Model.tbl_sla_data">
+              <MappingFragment StoreEntitySet="tbl_sla_data">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="sla_id" ColumnName="sla_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user_groups">
+            <EntityTypeMapping TypeName="DB_Model.tbl_user_groups">
+              <MappingFragment StoreEntitySet="tbl_user_groups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_users">
+            <EntityTypeMapping TypeName="DB_Model.tbl_users">
+              <MappingFragment StoreEntitySet="tbl_users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_group_id" ColumnName="user_group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_value_groups">
+            <EntityTypeMapping TypeName="DB_Model.tbl_value_groups">
+              <MappingFragment StoreEntitySet="tbl_value_groups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="group_desc" ColumnName="group_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_values">
+            <EntityTypeMapping TypeName="DB_Model.tbl_values">
+              <MappingFragment StoreEntitySet="tbl_values">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="group" ColumnName="group" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sla_actions">
+            <EntityTypeMapping TypeName="DB_Model.tbl_sla_actions">
+              <MappingFragment StoreEntitySet="tbl_sla_actions">
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="sla_hours" ColumnName="sla_hours" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
