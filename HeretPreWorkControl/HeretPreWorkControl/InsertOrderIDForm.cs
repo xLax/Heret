@@ -30,6 +30,8 @@ namespace HeretPreWorkControl
             else
             {
                 this.OrderToInsert.order_number = tbOrderNum.Text;
+                this.OrderToInsert.current_status_id = Globals.StatusClosed;
+
 
                 try
                 {

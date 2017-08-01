@@ -17,8 +17,10 @@ namespace HeretPreWorkControl
         public int ID { get; set; }
         public int action_ID { get; set; }
         public int recieved_department_ID { get; set; }
+        public Nullable<int> recieved_department_action_id { get; set; }
     
         public virtual tbl_sla_actions tbl_sla_actions { get; set; }
         public virtual tbl_user_groups tbl_user_groups { get; set; }
+        public virtual tbl_sla_actions tbl_sla_actions1 { get; set; }
     }
 }

@@ -23,9 +23,10 @@
         <AssociationConnector Association="DB_Model.Id" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_Model.tbl_sla_actions" Width="1.5" PointX="2.75" PointY="4.125" />
         <AssociationConnector Association="DB_Model.action_type1" />
-        <EntityTypeShape EntityType="DB_Model.tbl_action_to_dept" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="DB_Model.tbl_action_to_dept" Width="1.5" PointX="5.25" PointY="4.75" />
         <AssociationConnector Association="DB_Model.action" />
         <AssociationConnector Association="DB_Model.dept" />
+        <AssociationConnector Association="DB_Model.next_dept_action" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

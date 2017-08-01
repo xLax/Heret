@@ -45,6 +45,7 @@ namespace HeretPreWorkControl
         public int current_status_id { get; set; }
         public Nullable<System.DateTime> dep_recieve_date { get; set; }
         public Nullable<System.TimeSpan> dep_recieve_hour { get; set; }
+        public Nullable<int> client_order_id { get; set; }
     
         public virtual tbl_client_response tbl_client_response { get; set; }
         public virtual tbl_clients tbl_clients { get; set; }

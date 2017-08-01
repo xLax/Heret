@@ -115,7 +115,7 @@ namespace HeretPreWorkControl
                     {
                         lstNextDepartmentsID =
                             context.tbl_action_to_dept
-                                .Where(ad => ad.action_ID == SelectedOrder.curr_departnent_id)
+                                .Where(ad => ad.action_ID == SelectedOrder.action_type_id)
                                             .ToList<tbl_action_to_dept>();
 
                     }
@@ -127,16 +127,26 @@ namespace HeretPreWorkControl
 
                 if (lstNextDepartmentsID.Count != 0)
                 {
-                    if(lstNextDepartmentsID.Count == 1 &&
-                       lstNextDepartmentsID[0].recieved_department_ID == Globals.OrdersUserID)
+                    if (lstNextDepartmentsID.Count == 1)
                     {
-                        // Insert order number
-                        new InsertOrderIDForm(SelectedOrder);
+                        if (lstNextDepartmentsID[0].recieved_department_ID == Globals.OrdersUserID)
+                        {
+                            // Insert order number
+                            new InsertOrderIDForm(SelectedOrder);
+                        }
+                        else if(lstNextDepartmentsID[0].action_ID == Globals.ActionTypeIDRecieveClientOrder)
+                        {
+                            new InsertClientOrderIDForm(SelectedOrder).Show();
+                        }
+                        else
+                        {
+                            // Update current department id and action type to the next
+                        }
                     }
                     else if(lstNextDepartmentsID.Count > 1)
                     {
                         // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                        
+
                     }
                 }
             }

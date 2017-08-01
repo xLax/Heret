@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="action_ID" Type="int" Nullable="false" />
           <Property Name="recieved_department_ID" Type="int" Nullable="false" />
+          <Property Name="recieved_department_action_id" Type="int" />
         </EntityType>
         <EntityType Name="tbl_client_response">
           <Key>
@@ -39,6 +40,7 @@
           <Property Name="client_id" Type="int" />
           <Property Name="contact_date" Type="date" />
           <Property Name="files_number" Type="int" />
+          <Property Name="client_order_id" Type="int" />
           <Property Name="template_id" Type="int" />
           <Property Name="prisa_id" Type="int" />
           <Property Name="project_desc" Type="varchar" MaxLength="45" />
@@ -194,6 +196,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="next_dept_action">
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="0..1" />
+          <End Role="tbl_action_to_dept" Type="Self.tbl_action_to_dept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_action_to_dept">
+              <PropertyRef Name="recieved_department_action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="order_id">
           <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
           <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
@@ -295,6 +309,10 @@
             <End Role="tbl_users" EntitySet="tbl_users" />
             <End Role="tbl_orders" EntitySet="tbl_orders" />
           </AssociationSet>
+          <AssociationSet Name="next_dept_action" Association="Self.next_dept_action">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
+          </AssociationSet>
           <AssociationSet Name="order_id" Association="Self.order_id">
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
@@ -377,6 +395,7 @@
           <NavigationProperty Name="tbl_sla_actions" Relationship="DB_Model.action_type1" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
           <Property Name="dep_recieve_date" Type="DateTime" />
           <Property Name="dep_recieve_hour" Type="Time" />
+          <Property Name="client_order_id" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_sla_data">
           <Key>
@@ -599,6 +618,10 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
           </AssociationSet>
+          <AssociationSet Name="next_dept_action" Association="DB_Model.next_dept_action">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -610,6 +633,7 @@
           <Property Name="desc" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_orders" Relationship="DB_Model.action_type1" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_action_to_dept" Relationship="DB_Model.action" FromRole="tbl_sla_actions" ToRole="tbl_action_to_dept" />
+          <NavigationProperty Name="tbl_action_to_dept1" Relationship="DB_Model.next_dept_action" FromRole="tbl_sla_actions" ToRole="tbl_action_to_dept" />
         </EntityType>
         <Association Name="action_type1">
           <End Type="DB_Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="0..1" />
@@ -632,6 +656,8 @@
           <Property Name="recieved_department_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_sla_actions" Relationship="DB_Model.action" FromRole="tbl_action_to_dept" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups" Relationship="DB_Model.dept" FromRole="tbl_action_to_dept" ToRole="tbl_user_groups" />
+          <Property Name="recieved_department_action_id" Type="Int32" />
+          <NavigationProperty Name="tbl_sla_actions1" Relationship="DB_Model.next_dept_action" FromRole="tbl_action_to_dept" ToRole="tbl_sla_actions" />
         </EntityType>
         <Association Name="action">
           <End Type="DB_Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="1" />
@@ -654,6 +680,18 @@
             </Principal>
             <Dependent Role="tbl_action_to_dept">
               <PropertyRef Name="recieved_department_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="next_dept_action">
+          <End Type="DB_Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="0..1" />
+          <End Type="DB_Model.tbl_action_to_dept" Role="tbl_action_to_dept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_action_to_dept">
+              <PropertyRef Name="recieved_department_action_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -685,6 +723,7 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="client_order_id" ColumnName="client_order_id" />
                 <ScalarProperty Name="dep_recieve_hour" ColumnName="dep_recieve_hour" />
                 <ScalarProperty Name="dep_recieve_date" ColumnName="dep_recieve_date" />
                 <ScalarProperty Name="current_status_id" ColumnName="current_status_id" />
@@ -756,6 +795,7 @@
           <EntitySetMapping Name="tbl_action_to_dept">
             <EntityTypeMapping TypeName="DB_Model.tbl_action_to_dept">
               <MappingFragment StoreEntitySet="tbl_action_to_dept">
+                <ScalarProperty Name="recieved_department_action_id" ColumnName="recieved_department_action_id" />
                 <ScalarProperty Name="recieved_department_ID" ColumnName="recieved_department_ID" />
                 <ScalarProperty Name="action_ID" ColumnName="action_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
