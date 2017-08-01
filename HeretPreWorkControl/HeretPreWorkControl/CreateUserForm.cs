@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace HeretPreWorkControl
 {
-    public partial class TopUserForm : Form
+    public partial class CreateUserForm : Form
     {
-        public TopUserForm()
+        public CreateUserForm()
         {
             InitializeComponent();
-        }
-
-        private void TopUserForm_Load(object sender, EventArgs e)
-        {
-            lblHello.Text = "שלום " + Globals.Name;
         }
     }
 }

@@ -80,6 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateUserForm.Designer.cs">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,6 +171,9 @@
       <DependentUpon>TopUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
+    <EmbeddedResource Include="CreateUserForm.resx">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnterDeclinedOrdersForm.resx">
       <DependentUpon>EnterDeclinedOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +238,7 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\InsertOrderNumberTitle.png" />
     <None Include="Resources\LoginTitle.png" />
     <None Include="Resources\Delay Icon.png" />

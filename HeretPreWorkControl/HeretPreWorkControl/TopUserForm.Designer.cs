@@ -28,44 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbHeret = new System.Windows.Forms.PictureBox();
             this.lblHello = new System.Windows.Forms.Label();
-            this.pbStatus = new System.Windows.Forms.PictureBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblCreateUser = new System.Windows.Forms.Label();
-            this.pbAddUser = new System.Windows.Forms.PictureBox();
             this.lblSpecialApprove = new System.Windows.Forms.Label();
-            this.pbSpecialApprove = new System.Windows.Forms.PictureBox();
             this.lblUnapprovedJobs = new System.Windows.Forms.Label();
-            this.pbUnapprovedJobs = new System.Windows.Forms.PictureBox();
             this.lblStatistics = new System.Windows.Forms.Label();
-            this.pbStatistics = new System.Windows.Forms.PictureBox();
             this.tbPanel = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).BeginInit();
+            this.pbStatistics = new System.Windows.Forms.PictureBox();
+            this.pbUnapprovedJobs = new System.Windows.Forms.PictureBox();
+            this.pbSpecialApprove = new System.Windows.Forms.PictureBox();
+            this.pbAddUser = new System.Windows.Forms.PictureBox();
+            this.pbStatus = new System.Windows.Forms.PictureBox();
+            this.pbHeret = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbHeret
-            // 
-            this.pbHeret.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pbHeret.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pbHeret.Location = new System.Drawing.Point(64, 40);
-            this.pbHeret.Margin = new System.Windows.Forms.Padding(4);
-            this.pbHeret.Name = "pbHeret";
-            this.pbHeret.Size = new System.Drawing.Size(307, 80);
-            this.pbHeret.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbHeret.TabIndex = 1;
-            this.pbHeret.TabStop = false;
             // 
             // lblHello
             // 
             this.lblHello.AutoSize = true;
             this.lblHello.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHello.Location = new System.Drawing.Point(554, 60);
+            this.lblHello.Location = new System.Drawing.Point(99, 60);
             this.lblHello.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHello.Name = "lblHello";
             this.lblHello.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -73,20 +61,11 @@
             this.lblHello.TabIndex = 11;
             this.lblHello.Text = "שלום <שם עובד>";
             // 
-            // pbStatus
-            // 
-            this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
-            this.pbStatus.Location = new System.Drawing.Point(530, 151);
-            this.pbStatus.Name = "pbStatus";
-            this.pbStatus.Size = new System.Drawing.Size(131, 127);
-            this.pbStatus.TabIndex = 12;
-            this.pbStatus.TabStop = false;
-            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(489, 281);
+            this.lblStatus.Location = new System.Drawing.Point(163, 290);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(211, 33);
             this.lblStatus.TabIndex = 13;
@@ -96,93 +75,45 @@
             // 
             this.lblCreateUser.AutoSize = true;
             this.lblCreateUser.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreateUser.Location = new System.Drawing.Point(166, 281);
+            this.lblCreateUser.Location = new System.Drawing.Point(517, 290);
             this.lblCreateUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCreateUser.Name = "lblCreateUser";
             this.lblCreateUser.Size = new System.Drawing.Size(168, 33);
             this.lblCreateUser.TabIndex = 19;
             this.lblCreateUser.Text = "צור משתמש";
             // 
-            // pbAddUser
-            // 
-            this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
-            this.pbAddUser.Location = new System.Drawing.Point(172, 151);
-            this.pbAddUser.Margin = new System.Windows.Forms.Padding(4);
-            this.pbAddUser.Name = "pbAddUser";
-            this.pbAddUser.Size = new System.Drawing.Size(151, 127);
-            this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbAddUser.TabIndex = 18;
-            this.pbAddUser.TabStop = false;
-            // 
             // lblSpecialApprove
             // 
             this.lblSpecialApprove.AutoSize = true;
             this.lblSpecialApprove.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpecialApprove.Location = new System.Drawing.Point(552, 485);
+            this.lblSpecialApprove.Location = new System.Drawing.Point(44, 485);
             this.lblSpecialApprove.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSpecialApprove.Name = "lblSpecialApprove";
             this.lblSpecialApprove.Size = new System.Drawing.Size(272, 33);
             this.lblSpecialApprove.TabIndex = 21;
             this.lblSpecialApprove.Text = "אישור קידום עבודות";
             // 
-            // pbSpecialApprove
-            // 
-            this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
-            this.pbSpecialApprove.Location = new System.Drawing.Point(613, 355);
-            this.pbSpecialApprove.Margin = new System.Windows.Forms.Padding(4);
-            this.pbSpecialApprove.Name = "pbSpecialApprove";
-            this.pbSpecialApprove.Size = new System.Drawing.Size(151, 127);
-            this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbSpecialApprove.TabIndex = 20;
-            this.pbSpecialApprove.TabStop = false;
-            // 
             // lblUnapprovedJobs
             // 
             this.lblUnapprovedJobs.AutoSize = true;
             this.lblUnapprovedJobs.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnapprovedJobs.Location = new System.Drawing.Point(328, 485);
+            this.lblUnapprovedJobs.Location = new System.Drawing.Point(358, 485);
             this.lblUnapprovedJobs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUnapprovedJobs.Name = "lblUnapprovedJobs";
             this.lblUnapprovedJobs.Size = new System.Drawing.Size(180, 33);
             this.lblUnapprovedJobs.TabIndex = 23;
             this.lblUnapprovedJobs.Text = "הצעות שנדחו";
             // 
-            // pbUnapprovedJobs
-            // 
-            this.pbUnapprovedJobs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbUnapprovedJobs.Image = global::HeretPreWorkControl.Properties.Resources.Unapproved_Jobs;
-            this.pbUnapprovedJobs.Location = new System.Drawing.Point(349, 355);
-            this.pbUnapprovedJobs.Margin = new System.Windows.Forms.Padding(4);
-            this.pbUnapprovedJobs.Name = "pbUnapprovedJobs";
-            this.pbUnapprovedJobs.Size = new System.Drawing.Size(138, 127);
-            this.pbUnapprovedJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbUnapprovedJobs.TabIndex = 22;
-            this.pbUnapprovedJobs.TabStop = false;
-            // 
             // lblStatistics
             // 
             this.lblStatistics.AutoSize = true;
             this.lblStatistics.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatistics.Location = new System.Drawing.Point(46, 485);
+            this.lblStatistics.Location = new System.Drawing.Point(624, 485);
             this.lblStatistics.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatistics.Name = "lblStatistics";
             this.lblStatistics.Size = new System.Drawing.Size(187, 33);
             this.lblStatistics.TabIndex = 25;
             this.lblStatistics.Text = "הצג דוח מנהל";
-            // 
-            // pbStatistics
-            // 
-            this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
-            this.pbStatistics.Location = new System.Drawing.Point(63, 355);
-            this.pbStatistics.Margin = new System.Windows.Forms.Padding(4);
-            this.pbStatistics.Name = "pbStatistics";
-            this.pbStatistics.Size = new System.Drawing.Size(151, 127);
-            this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbStatistics.TabIndex = 24;
-            this.pbStatistics.TabStop = false;
             // 
             // tbPanel
             // 
@@ -196,6 +127,75 @@
             this.tbPanel.Size = new System.Drawing.Size(835, 35);
             this.tbPanel.TabIndex = 26;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pbStatistics
+            // 
+            this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
+            this.pbStatistics.Location = new System.Drawing.Point(641, 355);
+            this.pbStatistics.Margin = new System.Windows.Forms.Padding(4);
+            this.pbStatistics.Name = "pbStatistics";
+            this.pbStatistics.Size = new System.Drawing.Size(151, 127);
+            this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbStatistics.TabIndex = 24;
+            this.pbStatistics.TabStop = false;
+            // 
+            // pbUnapprovedJobs
+            // 
+            this.pbUnapprovedJobs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbUnapprovedJobs.Image = global::HeretPreWorkControl.Properties.Resources.Unapproved_Jobs;
+            this.pbUnapprovedJobs.Location = new System.Drawing.Point(379, 355);
+            this.pbUnapprovedJobs.Margin = new System.Windows.Forms.Padding(4);
+            this.pbUnapprovedJobs.Name = "pbUnapprovedJobs";
+            this.pbUnapprovedJobs.Size = new System.Drawing.Size(138, 127);
+            this.pbUnapprovedJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUnapprovedJobs.TabIndex = 22;
+            this.pbUnapprovedJobs.TabStop = false;
+            // 
+            // pbSpecialApprove
+            // 
+            this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
+            this.pbSpecialApprove.Location = new System.Drawing.Point(105, 355);
+            this.pbSpecialApprove.Margin = new System.Windows.Forms.Padding(4);
+            this.pbSpecialApprove.Name = "pbSpecialApprove";
+            this.pbSpecialApprove.Size = new System.Drawing.Size(151, 127);
+            this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbSpecialApprove.TabIndex = 20;
+            this.pbSpecialApprove.TabStop = false;
+            // 
+            // pbAddUser
+            // 
+            this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
+            this.pbAddUser.Location = new System.Drawing.Point(527, 160);
+            this.pbAddUser.Margin = new System.Windows.Forms.Padding(4);
+            this.pbAddUser.Name = "pbAddUser";
+            this.pbAddUser.Size = new System.Drawing.Size(151, 127);
+            this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbAddUser.TabIndex = 18;
+            this.pbAddUser.TabStop = false;
+            // 
+            // pbStatus
+            // 
+            this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
+            this.pbStatus.Location = new System.Drawing.Point(204, 160);
+            this.pbStatus.Name = "pbStatus";
+            this.pbStatus.Size = new System.Drawing.Size(131, 127);
+            this.pbStatus.TabIndex = 12;
+            this.pbStatus.TabStop = false;
+            // 
+            // pbHeret
+            // 
+            this.pbHeret.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
+            this.pbHeret.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
+            this.pbHeret.Location = new System.Drawing.Point(457, 36);
+            this.pbHeret.Margin = new System.Windows.Forms.Padding(4);
+            this.pbHeret.Name = "pbHeret";
+            this.pbHeret.Size = new System.Drawing.Size(307, 80);
+            this.pbHeret.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbHeret.TabIndex = 1;
+            this.pbHeret.TabStop = false;
             // 
             // TopUserForm
             // 
@@ -217,13 +217,16 @@
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.pbHeret);
             this.Name = "TopUserForm";
-            this.Text = "TopUserForm";
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).EndInit();
+            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.RightToLeftLayout = true;
+            this.Text = "מסך מנהל מערכת";
+            this.Load += new System.EventHandler(this.TopUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
