@@ -49,15 +49,15 @@
             this.lbRejectReason = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbComments = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pbEnterLater = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.InsertButton = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbCleanAll = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEnterLater)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCleanAll)).BeginInit();
             this.SuspendLayout();
             // 
             // tbAgentName
@@ -296,6 +296,28 @@
             this.tbComments.TabIndex = 25;
             this.tbComments.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(12, 451);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(183, 20);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "הזן במועד מאוחר יותר";
+            // 
+            // pbEnterLater
+            // 
+            this.pbEnterLater.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbEnterLater.Image = global::HeretPreWorkControl.Properties.Resources.Delay_Icon;
+            this.pbEnterLater.Location = new System.Drawing.Point(191, 441);
+            this.pbEnterLater.Name = "pbEnterLater";
+            this.pbEnterLater.Size = new System.Drawing.Size(45, 40);
+            this.pbEnterLater.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEnterLater.TabIndex = 26;
+            this.pbEnterLater.TabStop = false;
+            this.pbEnterLater.Click += new System.EventHandler(this.pbEnterLater_Click);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.EnterDeclinedOrderTitle;
@@ -329,28 +351,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pbCleanAll
-            // 
-            this.pbCleanAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCleanAll.Image = global::HeretPreWorkControl.Properties.Resources.Clean_Icon;
-            this.pbCleanAll.Location = new System.Drawing.Point(87, 441);
-            this.pbCleanAll.Name = "pbCleanAll";
-            this.pbCleanAll.Size = new System.Drawing.Size(45, 40);
-            this.pbCleanAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCleanAll.TabIndex = 26;
-            this.pbCleanAll.TabStop = false;
-            this.pbCleanAll.Click += new System.EventHandler(this.pbCleanAll_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 451);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 20);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "נקה הכל";
-            // 
             // EnterDeclinedOrdersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,7 +358,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(531, 522);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.pbCleanAll);
+            this.Controls.Add(this.pbEnterLater);
             this.Controls.Add(this.tbComments);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lbRejectReason);
@@ -392,10 +392,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
             this.Load += new System.EventHandler(this.EnterDeclinedOrdersForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbEnterLater)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCleanAll)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,7 +427,7 @@
         private System.Windows.Forms.ListBox lbRejectReason;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbComments;
-        private System.Windows.Forms.PictureBox pbCleanAll;
+        private System.Windows.Forms.PictureBox pbEnterLater;
         private System.Windows.Forms.Label label10;
     }
 }

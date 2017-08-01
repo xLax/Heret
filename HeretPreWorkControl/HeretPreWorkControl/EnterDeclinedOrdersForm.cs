@@ -111,27 +111,7 @@ namespace HeretPreWorkControl
 
         private void pbCleanAll_Click(object sender, EventArgs e)
         {
-            foreach (Control control in this.Controls)
-            {
-                if (control is TextBox)
-                {
-                    if ((control as TextBox).Enabled == true)
-                    {
-                        (control as TextBox).Clear();
-                    }
-                    else
-                    {
-                        if ((control as TextBox).Name.Equals("tbClientName"))
-                        {
-                            (control as TextBox).Clear();
-                        }
-                    }
-                }
-                else if(control is ListBox)
-                {
-                    (control as ListBox).SelectedItem = null;
-                }
-            }
+            
         }
 
         private void tbContactDate_Leave(object sender, EventArgs e)
@@ -292,6 +272,43 @@ namespace HeretPreWorkControl
                 {
                     tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                 }
+            }
+        }
+
+        private void pbEnterLater_Click(object sender, EventArgs e)
+        {
+            DeclinedOrder.dep_recieve_date = System.DateTime.Now.Date;
+
+            try
+            {
+                using (var context = new DB_Entities())
+                {
+                    context.tbl_orders.Attach(DeclinedOrder);
+                    var Entry = context.Entry(DeclinedOrder);
+                    Entry.Property(o => o.dep_recieve_date).IsModified = true;
+
+                    // context.tbl_orders.AddOrUpdate(DeclinedOrder);
+
+                    context.SaveChanges();
+
+                    if (Utilities.GetNewDeclinedOrdersAndCount() == 0)
+                    {
+                        Globals.SalesFormInstance.pbEnterDeclinedOrder.Image =
+                                        Properties.Resources.Enter_Rejected_Job_Icon;
+                    }
+
+                    if (Utilities.GetMyJobCount() == 0)
+                    {
+                        Globals.SalesFormInstance.pbMyJobs.Image =
+                                        Properties.Resources.My_Jobs;
+                    }
+
+                    tbPanel.Text = "הזנת ההזמנה נדחתה בהצלחה!";
+                }
+            }
+            catch (Exception ex)
+            {
+                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
             }
         }
     }

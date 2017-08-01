@@ -64,7 +64,6 @@ namespace HeretPreWorkControl
                                                             userGroupData.name);
 
                                 this.OpenNextForm(userData.user_group_id);
-
                             }
                         }
                         catch (Exception ex)

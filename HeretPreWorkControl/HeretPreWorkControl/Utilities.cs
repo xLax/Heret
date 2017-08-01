@@ -220,53 +220,15 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    if (Globals.UserGroupID == Globals.OrdersUserID)
-                    {
-                        MyJobs =
-                           context.tbl_orders
-                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
-                                            o.special_department_id == Globals.UserGroupID ) &&
-                                          o.orders_agent_id == Globals.UserID &&
-                                          o.current_status_id == Globals.StatusInWork
+                    MyJobs =
+                       context.tbl_orders
+                           .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
+                                         o.special_department_id == Globals.UserGroupID ) &&
+                                         o.current_status_id == Globals.StatusInWork
                                               ).ToList<tbl_orders>();
-                    }
-                    else if (Globals.UserGroupID == Globals.KadasUserID)
-                    {
-                        MyJobs =
-                           context.tbl_orders
-                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
-                                            o.special_department_id == Globals.UserGroupID ) &&
-                                          o.kadas_agent_id == Globals.UserID &&
-                                          o.current_status_id == Globals.StatusInWork
-                                              ).ToList<tbl_orders>();
-                    }
-                    else if (Globals.UserGroupID == Globals.SalesUserID)
-                    {
-                        MyJobs =
-                           context.tbl_orders
-                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
-                                            o.special_department_id == Globals.UserGroupID ) &&
-                                          o.sales_agent_id == Globals.UserID &&
-                                          o.current_status_id == Globals.StatusInWork
-                                              ).ToList<tbl_orders>();
-                    }
-                    // Only left with Studio ID
-                    else
-                    {
-                        MyJobs =
-                           context.tbl_orders
-                              .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
-                                            o.special_department_id == Globals.UserGroupID ) &&
-                                          o.studio_agent_id == Globals.UserID &&
-                                          o.current_status_id == Globals.StatusInWork
-                                              ).ToList<tbl_orders>();
-                    }
 
-                    if(MyJobs.Count > 0)
-                    {
-                        Utilities.SetNewJobs(MyJobs);
-                    }
-
+                    Utilities.SetNewJobs(MyJobs);
+                    
                     nMyJobsCount = MyJobs.Count;
                 }
                 catch (Exception ex)
@@ -317,26 +279,19 @@ namespace HeretPreWorkControl
 
                     MyDeclinedJobs =
                           context.tbl_orders
-                             .Where(o => o.sales_agent_id == Globals.UserID &&
-                                         o.current_status_id == Globals.StatusInWork &&
+                             .Where(o => o.current_status_id == Globals.StatusInWork &&
                                          o.action_type_id == Globals.ActionTypeIDRecieveClientOrder &&
                                          o.dep_recieve_date <= dtTwoWeeksBeforeToday
                                              ).ToList<tbl_orders>();
+
+                    nDeclinedOrderCount = MyDeclinedJobs.Count;
+
+                    Utilities.SetNewDeclinedJobs(MyDeclinedJobs);
                 }
                 catch (Exception ex)
                 {
                     nDeclinedOrderCount = -1; 
                 }
-            }
-
-            if (MyDeclinedJobs.Count > 0)
-            {
-                Utilities.SetNewDeclinedJobs(MyDeclinedJobs);
-            }
-
-            if(nDeclinedOrderCount != -1)
-            {
-                nDeclinedOrderCount = MyDeclinedJobs.Count;
             }
 
             return nDeclinedOrderCount;

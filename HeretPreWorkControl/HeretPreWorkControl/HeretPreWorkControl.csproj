@@ -211,10 +211,11 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\LoginTitle.png" />
+    <None Include="Resources\Delay Icon.png" />
     <None Include="Resources\Clean Icon.png" />
     <None Include="Resources\EnterDeclinedOrderTitle.png" />
     <None Include="Resources\MyJobsTitle.png" />
-    <None Include="Resources\LoginTitle.png" />
     <None Include="Resources\Notification Icon.jpg" />
     <None Include="Resources\V.png" />
     <None Include="Resources\Unapproved Jobs.jpg" />
