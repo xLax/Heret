@@ -302,6 +302,11 @@ namespace HeretPreWorkControl
             Globals.SalesFormInstance = instance;
         }
 
+        public static void SetMainForm(TopUserForm instance)
+        {
+            Globals.TopUserFormInstance = instance;
+        }
+
         public static void SetMainForm(NotSalesMainForm instance)
         {
             Globals.NotSalesFormInstance = instance;

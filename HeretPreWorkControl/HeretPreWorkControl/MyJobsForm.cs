@@ -60,16 +60,19 @@ namespace HeretPreWorkControl
                 foreach (tbl_orders Order in Globals.MyJobs)
                 {
                     // First Col
+                    int nOrderID = Order.ID;
+
+                    // Second Col
                     string strClientName =
                         Globals.AllClients.Where(c => c.ID == Order.client_id).Single<tbl_clients>().name;
 
-                    // Second Col
+                    // Third Col
                     Nullable<int> nFilesNo = Order.files_number;
 
-                    // Third Col
+                    // Fourth Col
                     string strThirdCol = Utilities.GetFilledDataFromOrder(Order);
 
-                    // Fourth Col - Getting sla status
+                    // Fifth Col - Getting sla status
                     tbl_sla_actions ActionData =
                         Globals.AllActions.Where(a => a.ID == Order.action_type_id)
                                                         .Single<tbl_sla_actions>();
@@ -82,7 +85,7 @@ namespace HeretPreWorkControl
                     // Last Col
                     string strAction = ActionData.desc;
 
-                    dataGridView.Rows.Add(strClientName, nFilesNo, strThirdCol, strSlaStatus, strAction);
+                    dataGridView.Rows.Add(nOrderID, strClientName, nFilesNo, strThirdCol, strSlaStatus, strAction);
                 }
             }
         }
@@ -104,17 +107,16 @@ namespace HeretPreWorkControl
 
             if(SelectedOrder != null)
             {
-                int nNextDepartmentID = 0;
+                List<tbl_action_to_dept> lstNextDepartmentsID = new List<tbl_action_to_dept>();
 
                 try
                 {
                     using (var context = new DB_Entities())
                     {
-                        nNextDepartmentID =
+                        lstNextDepartmentsID =
                             context.tbl_action_to_dept
                                 .Where(ad => ad.action_ID == SelectedOrder.curr_departnent_id)
-                                            .SingleOrDefault<tbl_action_to_dept>().recieved_department_ID;
-
+                                            .ToList<tbl_action_to_dept>();
 
                     }
                 }
@@ -123,15 +125,17 @@ namespace HeretPreWorkControl
                     tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                 }
 
-                if (nNextDepartmentID != 0)
+                if (lstNextDepartmentsID.Count != 0)
                 {
-                    if (nNextDepartmentID == Globals.OrdersUserID)
+                    if(lstNextDepartmentsID.Count == 1 &&
+                       lstNextDepartmentsID[0].recieved_department_ID == Globals.OrdersUserID)
                     {
                         // Insert order number
                     }
-                    else
+                    else if(lstNextDepartmentsID.Count > 1)
                     {
                         // פתח מסך ניתוב עבודה לפי ID של מחלקה
+                        
                     }
                 }
             }
@@ -188,9 +192,10 @@ namespace HeretPreWorkControl
             else
             {
                 // Get all the data about the selected row
-                string strClientName = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[1].Value;
-                string strThirdCol = dataGridView.SelectedRows[0].Cells[2].Value.ToString();
+                int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
+                string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
+                Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[2].Value;
+                string strThirdCol = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
 
                 int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
 
@@ -214,11 +219,12 @@ namespace HeretPreWorkControl
                 }
 
                 tbl_orders SelectedOrder =
-                        Globals.MyJobs.Where(m => m.client_id == nClientID &&
-                                          m.files_number == NoFiles &&
-                                          (m.prisa_id == nPrisaID ||
-                                           m.template_id == nTemplateID ||
-                                           m.project_desc == strProjectDesc)).SingleOrDefault<tbl_orders>();
+                        Globals.MyJobs.Where(m => m.ID == nOrderID &&
+                                                  m.client_id == nClientID &&
+                                                  m.files_number == NoFiles &&
+                                                  (m.prisa_id == nPrisaID ||
+                                                   m.template_id == nTemplateID ||
+                                                   m.project_desc == strProjectDesc)).SingleOrDefault<tbl_orders>();
 
                 if (SelectedOrder == null)
                 {

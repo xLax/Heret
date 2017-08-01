@@ -30,11 +30,6 @@
         {
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.No_Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Project_Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sla = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Action_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,6 +37,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblEnterDeclined = new System.Windows.Forms.Label();
             this.pbSetDeclinedAndInsert = new System.Windows.Forms.PictureBox();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.No_Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Project_Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sla = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Action_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -66,6 +67,7 @@
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.Client_Name,
             this.No_Files,
             this.Project_Desc,
@@ -75,41 +77,6 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 12;
-            // 
-            // Client_Name
-            // 
-            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Client_Name.HeaderText = "שם לקוח";
-            this.Client_Name.Name = "Client_Name";
-            this.Client_Name.ReadOnly = true;
-            // 
-            // No_Files
-            // 
-            this.No_Files.HeaderText = "מספר קבצים";
-            this.No_Files.Name = "No_Files";
-            this.No_Files.ReadOnly = true;
-            this.No_Files.Width = 60;
-            // 
-            // Project_Desc
-            // 
-            this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ תיאור פרויקט";
-            this.Project_Desc.Name = "Project_Desc";
-            this.Project_Desc.ReadOnly = true;
-            this.Project_Desc.Width = 132;
-            // 
-            // Sla
-            // 
-            this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Sla.HeaderText = "סטטוס SLA";
-            this.Sla.Name = "Sla";
-            this.Sla.ReadOnly = true;
-            // 
-            // Action_Type
-            // 
-            this.Action_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Action_Type.HeaderText = "סוג פעולה";
-            this.Action_Type.Name = "Action_Type";
-            this.Action_Type.ReadOnly = true;
             // 
             // pbRefresh
             // 
@@ -188,6 +155,48 @@
             this.pbSetDeclinedAndInsert.TabStop = false;
             this.pbSetDeclinedAndInsert.Click += new System.EventHandler(this.pbSetDeclinedAndInsert_Click);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "מס\"ד עבודה";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 70;
+            // 
+            // Client_Name
+            // 
+            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Client_Name.HeaderText = "שם לקוח";
+            this.Client_Name.Name = "Client_Name";
+            this.Client_Name.ReadOnly = true;
+            // 
+            // No_Files
+            // 
+            this.No_Files.HeaderText = "מספר קבצים";
+            this.No_Files.Name = "No_Files";
+            this.No_Files.ReadOnly = true;
+            this.No_Files.Width = 60;
+            // 
+            // Project_Desc
+            // 
+            this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ תיאור פרויקט";
+            this.Project_Desc.Name = "Project_Desc";
+            this.Project_Desc.ReadOnly = true;
+            this.Project_Desc.Width = 132;
+            // 
+            // Sla
+            // 
+            this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Sla.HeaderText = "סטטוס SLA";
+            this.Sla.Name = "Sla";
+            this.Sla.ReadOnly = true;
+            // 
+            // Action_Type
+            // 
+            this.Action_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Action_Type.HeaderText = "סוג פעולה";
+            this.Action_Type.Name = "Action_Type";
+            this.Action_Type.ReadOnly = true;
+            // 
             // MyJobsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,12 +240,13 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.PictureBox pbExecute;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblEnterDeclined;
+        private System.Windows.Forms.PictureBox pbSetDeclinedAndInsert;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn No_Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn Project_Desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla;
         private System.Windows.Forms.DataGridViewTextBoxColumn Action_Type;
-        private System.Windows.Forms.Label lblEnterDeclined;
-        private System.Windows.Forms.PictureBox pbSetDeclinedAndInsert;
     }
 }

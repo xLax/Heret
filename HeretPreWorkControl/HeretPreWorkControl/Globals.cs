@@ -53,7 +53,9 @@ namespace HeretPreWorkControl
         public static List<tbl_sla_actions> AllActions;
 
         public static List<tbl_orders> MyDeclinedOrders;
-        public static List<tbl_orders> MyJobs; 
+        public static List<tbl_orders> MyJobs;
+
+        public static TopUserForm TopUserFormInstance;
         public static SalesMainForm SalesFormInstance;
         public static NotSalesMainForm NotSalesFormInstance;
     }

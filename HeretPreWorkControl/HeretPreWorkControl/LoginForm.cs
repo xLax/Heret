@@ -81,7 +81,11 @@ namespace HeretPreWorkControl
             {
                 case (Globals.AdminID):
                 {
-                    
+                    TopUserForm form = new TopUserForm();
+                    Utilities.SetMainForm(form);
+                    form.Show();
+
+                    this.Hide();
 
                     break;
                 }
