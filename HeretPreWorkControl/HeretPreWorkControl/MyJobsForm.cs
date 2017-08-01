@@ -131,6 +131,7 @@ namespace HeretPreWorkControl
                        lstNextDepartmentsID[0].recieved_department_ID == Globals.OrdersUserID)
                     {
                         // Insert order number
+                        new InsertOrderIDForm(SelectedOrder);
                     }
                     else if(lstNextDepartmentsID.Count > 1)
                     {

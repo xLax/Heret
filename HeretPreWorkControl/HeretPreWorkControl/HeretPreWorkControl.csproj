@@ -101,6 +101,12 @@
     <Compile Include="EnterDeclinedOrdersForm.Designer.cs">
       <DependentUpon>EnterDeclinedOrdersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InsertOrderIDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertOrderIDForm.Designer.cs">
+      <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyJobsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     <EmbeddedResource Include="EnterDeclinedOrdersForm.resx">
       <DependentUpon>EnterDeclinedOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InsertOrderIDForm.resx">
+      <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyJobsForm.resx">
       <DependentUpon>MyJobsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -220,6 +229,7 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\InsertOrderNumberTitle.png" />
     <None Include="Resources\LoginTitle.png" />
     <None Include="Resources\Delay Icon.png" />
     <None Include="Resources\Clean Icon.png" />

@@ -190,4 +190,7 @@
   <data name="Delay_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delay Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="InsertOrderNumberTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\InsertOrderNumberTitle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
