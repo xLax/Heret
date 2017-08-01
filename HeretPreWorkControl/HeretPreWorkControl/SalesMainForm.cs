@@ -159,5 +159,10 @@ namespace HeretPreWorkControl
         {
             Application.Exit();
         }
+
+        private void lblHello_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

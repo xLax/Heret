@@ -152,6 +152,12 @@
     <Compile Include="tbl_user_groups.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="TopUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopUserForm.Designer.cs">
+      <DependentUpon>TopUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="EnterDeclinedOrdersForm.resx">
       <DependentUpon>EnterDeclinedOrdersForm.cs</DependentUpon>
@@ -177,6 +183,9 @@
     </Compile>
     <EmbeddedResource Include="SalesMainForm.resx">
       <DependentUpon>SalesMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopUserForm.resx">
+      <DependentUpon>TopUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DB Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
