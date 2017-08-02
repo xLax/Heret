@@ -23,10 +23,7 @@ namespace HeretPreWorkControl
         {
             if(Globals.OpenScreenID == Globals.ToMyJobs)
             {
-                if(Globals.UserGroupID == Globals.SalesUserID)
-                {
-                    new MyJobsForm().Show();
-                }
+                new MyJobsForm().Show();
             }
             else if(Globals.OpenScreenID == Globals.ToDeclinedOrders)
             {
@@ -39,7 +36,30 @@ namespace HeretPreWorkControl
             currPopup.Hide();
         }
 
-        public static List<tbl_clients> GetAllClientsList()
+        public static void GetAllActionToDeptList()
+        {
+            List<tbl_action_to_dept> lstActionsToDept;
+
+            if (Globals.AllActionToDept == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstActionsToDept = context.tbl_action_to_dept.ToList<tbl_action_to_dept>();
+                        Utilities.SetAllActionToDeptList(lstActionsToDept);
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+        }
+
+        private static void SetAllActionToDeptList(List<tbl_action_to_dept> lstActionsToDept)
+        {
+            Globals.AllActionToDept = lstActionsToDept;
+        }
+
+        public static void GetAllClientsList()
         {
             List<tbl_clients> lstClients;
 
@@ -55,11 +75,9 @@ namespace HeretPreWorkControl
                     catch(Exception ex) { }
                 }
             }
-            
-            return Globals.AllClients;
         }
 
-        public static List<tbl_sla_actions> GetAllActionsList()
+        public static void GetAllActionsList()
         {
             List<tbl_sla_actions> lstActions;
 
@@ -75,8 +93,6 @@ namespace HeretPreWorkControl
                     catch (Exception ex) { }
                 }
             }
-
-            return Globals.AllActions;
         }
 
         public static string GetDateInNormalFormat(DateTime date)
@@ -141,6 +157,46 @@ namespace HeretPreWorkControl
             Globals.AllClients = Clients;
         }
 
+        public static Boolean TransferJobAndActionToNext(tbl_orders selectedOrder)
+        {
+            Boolean isSucceeded = true;
+
+            Utilities.GetAllActionToDeptList();
+
+            tbl_action_to_dept MovementData = Globals.AllActionToDept
+                                    .Where(a => a.action_ID == selectedOrder.action_type_id)
+                                            .Single<tbl_action_to_dept>();
+
+            selectedOrder.curr_departnent_id = MovementData.recieved_department_ID;
+            selectedOrder.action_type_id = MovementData.recieved_department_action_id;
+
+            selectedOrder.dep_recieve_date = System.DateTime.Now.Date;
+            selectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+
+            try
+            {
+                using (var context = new DB_Entities())
+                {
+                    context.tbl_orders.Attach(selectedOrder);
+                    var Entry = context.Entry(selectedOrder);
+
+                    Entry.Property(o => o.action_type_id).IsModified = true;
+                    Entry.Property(o => o.curr_departnent_id).IsModified = true;
+                    Entry.Property(o => o.dep_recieve_date).IsModified = true;
+                    Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+                    // context.tbl_orders.AddOrUpdate(DeclinedOrder);
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                isSucceeded = false;
+            }
+
+            return isSucceeded;
+        }
+
         public static void SetActionsList(List<tbl_sla_actions> Actions)
         {
             Globals.AllActions = Actions;
@@ -185,6 +241,10 @@ namespace HeretPreWorkControl
                         strSlaStatus = "בתהליך";
                     }
                 }
+            }
+            else if(nSlaHours == Globals.SlaNone)
+            {
+                strSlaStatus = "ללא SLA";
             }
             else
             {

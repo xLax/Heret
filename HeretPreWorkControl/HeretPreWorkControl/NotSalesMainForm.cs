@@ -30,9 +30,13 @@ namespace HeretPreWorkControl
 
             if (nPrevJobCount > 0)
             {
+                Utilities.CreatePopup("התקבלה עבודה חדשה",
+                                      "אנא הכנס למסך עבודות לביצוע על מנת לבקר את עבודתך",
+                                      Globals.ToMyJobs);
+
                 pbMyJobs.Image = Properties.Resources.My_Jobs_Note;
             }
-            else if (nPrevJobCount == 0)
+            else if(nPrevJobCount == 0)
             {
                 pbMyJobs.Image = Properties.Resources.My_Jobs;
             }

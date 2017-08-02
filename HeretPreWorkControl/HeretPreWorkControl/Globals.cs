@@ -32,6 +32,8 @@ namespace HeretPreWorkControl
         public const int SlaUntil12 = 0;
         // ערך שמסמן ביצוע מיידי
         public const int SlaImmediate = -1;
+        // ערך שמסמן שאין SLA
+        public const int SlaNone = -2;
 
         public const int StatusInWork = 1;
         public const int StatusClosed = 2;
@@ -42,6 +44,7 @@ namespace HeretPreWorkControl
 
         // Meaning that the next step is to recieve the order from the client
         public const int ActionTypeIDRecieveClientOrder = 5;
+        public const int ActionTypeInsertOrderID = 10;
 
         public static int UserID;
         public static String UserName;
@@ -51,6 +54,7 @@ namespace HeretPreWorkControl
 
         public static List<tbl_clients> AllClients;
         public static List<tbl_sla_actions> AllActions;
+        public static List<tbl_action_to_dept> AllActionToDept;
 
         public static List<tbl_orders> MyDeclinedOrders;
         public static List<tbl_orders> MyJobs;

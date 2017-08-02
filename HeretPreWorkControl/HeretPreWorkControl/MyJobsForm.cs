@@ -26,6 +26,8 @@ namespace HeretPreWorkControl
                 lblEnterDeclined.Visible = false;
             }
 
+            Utilities.GetAllActionToDeptList();
+
             LoadRelevantData();
             SetZebraMode();
         }
@@ -107,46 +109,43 @@ namespace HeretPreWorkControl
 
             if(SelectedOrder != null)
             {
-                List<tbl_action_to_dept> lstNextDepartmentsID = new List<tbl_action_to_dept>();
+                List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
 
-                try
+                lstActionsToDept =
+                        Globals.AllActionToDept
+                            .Where(ad => ad.action_ID == SelectedOrder.action_type_id)
+                                        .ToList<tbl_action_to_dept>();
+
+                if (lstActionsToDept.Count != 0)
                 {
-                    using (var context = new DB_Entities())
+                    if (lstActionsToDept.Count == 1)
                     {
-                        lstNextDepartmentsID =
-                            context.tbl_action_to_dept
-                                .Where(ad => ad.action_ID == SelectedOrder.action_type_id)
-                                            .ToList<tbl_action_to_dept>();
-
-                    }
-                }
-                catch(Exception ex)
-                {
-                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-                }
-
-                if (lstNextDepartmentsID.Count != 0)
-                {
-                    if (lstNextDepartmentsID.Count == 1)
-                    {
-                        if (lstNextDepartmentsID[0].recieved_department_ID == Globals.OrdersUserID)
+                        if (lstActionsToDept[0].action_ID == Globals.ActionTypeInsertOrderID)
                         {
                             // Insert order number
-                            new InsertOrderIDForm(SelectedOrder);
+                            new InsertOrderIDForm(SelectedOrder).Show();
                         }
-                        else if(lstNextDepartmentsID[0].action_ID == Globals.ActionTypeIDRecieveClientOrder)
+                        else if(lstActionsToDept[0].action_ID == Globals.ActionTypeIDRecieveClientOrder)
                         {
                             new InsertClientOrderIDForm(SelectedOrder).Show();
                         }
                         else
                         {
                             // Update current department id and action type to the next
+                            if(Utilities.TransferJobAndActionToNext(SelectedOrder))
+                            {
+                                tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                            }
+                            else
+                            {
+                                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                            }
                         }
                     }
-                    else if(lstNextDepartmentsID.Count > 1)
+                    else if(lstActionsToDept.Count > 1)
                     {
                         // פתח מסך ניתוב עבודה לפי ID של מחלקה
-
+                        // new MovementsForm(lstActionsToDept, SelectedOrder).Show();
                     }
                 }
             }
