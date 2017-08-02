@@ -21,5 +21,10 @@ namespace HeretPreWorkControl
         {
             lblHello.Text = "שלום " + Globals.Name;
         }
+
+        private void pbAddUser_Click(object sender, EventArgs e)
+        {
+            new CreateUserForm().Show();
+        }
     }
 }

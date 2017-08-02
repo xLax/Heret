@@ -175,6 +175,7 @@
             this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAddUser.TabIndex = 18;
             this.pbAddUser.TabStop = false;
+            this.pbAddUser.Click += new System.EventHandler(this.pbAddUser_Click);
             // 
             // pbStatus
             // 
@@ -182,6 +183,7 @@
             this.pbStatus.Location = new System.Drawing.Point(204, 160);
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(131, 127);
+            this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStatus.TabIndex = 12;
             this.pbStatus.TabStop = false;
             // 

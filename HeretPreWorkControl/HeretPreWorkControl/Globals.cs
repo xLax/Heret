@@ -14,6 +14,11 @@ namespace HeretPreWorkControl
         public const int KadasUserID = 4;
         public const int OrdersUserID = 5;
 
+        public const string SalesUserType = "סוכן מכירות";
+        public const string StudioUserType = "סטודיו";
+        public const string KadasUserType = "קדם דפוס";
+        public const string OrdersUserType = "הזמנות";
+
         public const int ToMyJobs = 1;
         public const int ToDeclinedOrders = 2;
         public static int OpenScreenID;
