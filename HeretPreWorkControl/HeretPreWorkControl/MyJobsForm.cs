@@ -127,6 +127,7 @@ namespace HeretPreWorkControl
                         }
                         else if(lstActionsToDept[0].action_ID == Globals.ActionTypeIDRecieveClientOrder)
                         {
+                            // Insert Client order number
                             new InsertClientOrderIDForm(SelectedOrder).Show();
                         }
                         else

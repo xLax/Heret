@@ -45,6 +45,7 @@ namespace HeretPreWorkControl
         // Meaning that the next step is to recieve the order from the client
         public const int ActionTypeIDRecieveClientOrder = 5;
         public const int ActionTypeInsertOrderID = 10;
+        // public const int ActionTypeOnlyPrisa
 
         public static int UserID;
         public static String UserName;
