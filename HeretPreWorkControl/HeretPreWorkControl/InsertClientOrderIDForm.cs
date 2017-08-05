@@ -36,7 +36,7 @@ namespace HeretPreWorkControl
                     this.OrderToInsert.curr_departnent_id = Globals.SalesUserID;
 
                     this.OrderToInsert.action_type_id = 
-                        Globals.AllActionToDept.Where(a => a.action_ID == Globals.ActionTypeIDRecieveClientOrder)
+                        Globals.AllActionToDept.Where(a => a.action_ID == Globals.ActionTypeRecieveClientOrder)
                                 .Single<tbl_action_to_dept>()
                                         .recieved_department_action_id;
 

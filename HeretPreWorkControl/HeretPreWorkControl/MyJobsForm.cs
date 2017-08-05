@@ -46,6 +46,7 @@ namespace HeretPreWorkControl
             else if(nJobCount > 0)
             {
                 dataGridView.Visible = true;
+                pbExecute.Enabled = true;
 
                 Utilities.GetAllClientsList();
                 Utilities.GetAllActionsList();
@@ -111,9 +112,13 @@ namespace HeretPreWorkControl
             {
                 List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
 
+                int nActionTypeID = 
+                    Utilities.ConvertIfNeeded
+                        (int.Parse(SelectedOrder.action_type_id.ToString()));
+
                 lstActionsToDept =
                         Globals.AllActionToDept
-                            .Where(ad => ad.action_ID == SelectedOrder.action_type_id)
+                            .Where(ad => ad.action_ID == nActionTypeID)
                                         .ToList<tbl_action_to_dept>();
 
                 if (lstActionsToDept.Count != 0)
@@ -125,13 +130,100 @@ namespace HeretPreWorkControl
                             // Insert order number
                             new InsertOrderIDForm(SelectedOrder).Show();
                         }
-                        else if(lstActionsToDept[0].action_ID == Globals.ActionTypeIDRecieveClientOrder)
+                        else if (lstActionsToDept[0].action_ID == Globals.ActionTypeRecieveClientOrder)
                         {
                             // Insert Client order number
                             new InsertClientOrderIDForm(SelectedOrder).Show();
                         }
-                        else
+                        // Studio model approve - קבלת אישור מהלקוח על דגם סטודיו
+                        else if (lstActionsToDept[0].action_ID == Globals.ActionTypeStudioWaitClient)
                         {
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                {
+                                    tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                }
+                                else
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
+                            else if (result == DialogResult.No)
+                            {
+                                SelectedOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.StudioUserID,SelectedOrder.studio_work);
+                                SelectedOrder.dep_recieve_date = System.DateTime.Now.Date;
+                                SelectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+
+                                try
+                                {
+                                    using (var context = new DB_Entities())
+                                    {
+                                        context.tbl_orders.Attach(SelectedOrder);
+                                        var Entry = context.Entry(SelectedOrder);
+
+                                        Entry.Property(o => o.action_type_id).IsModified = true;
+                                        Entry.Property(o => o.dep_recieve_date).IsModified = true;
+                                        Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+
+                                        context.SaveChanges();
+
+                                        pbRefresh_Click(new object(), new EventArgs());
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
+                        }
+                        else if(lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
+                        {
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                {
+                                    tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                }
+                                else
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
+                            else if (result == DialogResult.No)
+                            {
+                                SelectedOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, SelectedOrder.kadas_work);
+                                SelectedOrder.dep_recieve_date = System.DateTime.Now.Date;
+                                SelectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+
+                                try
+                                {
+                                    using (var context = new DB_Entities())
+                                    {
+                                        context.tbl_orders.Attach(SelectedOrder);
+                                        var Entry = context.Entry(SelectedOrder);
+
+                                        Entry.Property(o => o.action_type_id).IsModified = true;
+                                        Entry.Property(o => o.dep_recieve_date).IsModified = true;
+                                        Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+
+                                        context.SaveChanges();
+
+                                        pbRefresh_Click(new object(), new EventArgs());
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
+                        }
+                        else
+                        { 
                             // Update current department id and action type to the next
                             if(Utilities.TransferJobAndActionToNext(SelectedOrder))
                             {
@@ -146,7 +238,7 @@ namespace HeretPreWorkControl
                     else if(lstActionsToDept.Count > 1)
                     {
                         // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                        // new MovementsForm(lstActionsToDept, SelectedOrder).Show();
+                        new MovementsForm(lstActionsToDept, SelectedOrder).Show();
                     }
                 }
             }

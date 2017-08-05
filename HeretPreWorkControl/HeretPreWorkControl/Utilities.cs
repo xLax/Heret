@@ -36,6 +36,29 @@ namespace HeretPreWorkControl
             currPopup.Hide();
         }
 
+        public static void GetAllUserGroupList()
+        {
+            List<tbl_user_groups> lstUserGroups;
+
+            if (Globals.AllUserGroups == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstUserGroups = context.tbl_user_groups.ToList<tbl_user_groups>();
+                        Utilities.SetAllUserGroupsList(lstUserGroups);
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+        }
+
+        private static void SetAllUserGroupsList(List<tbl_user_groups> lstUserGroups)
+        {
+            Globals.AllUserGroups = lstUserGroups;
+        }
+
         public static void GetAllActionToDeptList()
         {
             List<tbl_action_to_dept> lstActionsToDept;
@@ -104,6 +127,34 @@ namespace HeretPreWorkControl
             return strDayVal + "/" + strMonthVal + "/" + strYearVal;
         }
 
+        // Convertion for the tree navigations
+        public static int ConvertIfNeeded(int nActionTypeID)
+        {
+            if(nActionTypeID == 20 ||
+               nActionTypeID == 21 || 
+               nActionTypeID == 23)
+            {
+                nActionTypeID = 8;
+            }
+            else if(nActionTypeID == 22)
+            {
+                nActionTypeID = 9;
+            }
+            else if(nActionTypeID == 17 ||
+                    nActionTypeID == 18 ||
+                    nActionTypeID == 19)
+            {
+                nActionTypeID = 4;
+            }
+            else if(nActionTypeID == 16 ||
+                    nActionTypeID == 15)
+            {
+                nActionTypeID = 2;
+            }
+
+            return nActionTypeID;
+        }
+
         public static void CreatePopup(String strTitle, String strMessage, int nOpenScreenID)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -163,8 +214,12 @@ namespace HeretPreWorkControl
 
             Utilities.GetAllActionToDeptList();
 
+            int nActionTypeID = 
+                Utilities.ConvertIfNeeded
+                       (int.Parse(selectedOrder.action_type_id.ToString()));
+
             tbl_action_to_dept MovementData = Globals.AllActionToDept
-                                    .Where(a => a.action_ID == selectedOrder.action_type_id)
+                                    .Where(a => a.action_ID == nActionTypeID)
                                             .Single<tbl_action_to_dept>();
 
             selectedOrder.curr_departnent_id = MovementData.recieved_department_ID;
@@ -340,7 +395,7 @@ namespace HeretPreWorkControl
                     MyDeclinedJobs =
                           context.tbl_orders
                              .Where(o => o.current_status_id == Globals.StatusInWork &&
-                                         o.action_type_id == Globals.ActionTypeIDRecieveClientOrder &&
+                                         o.action_type_id == Globals.ActionTypeRecieveClientOrder &&
                                          o.dep_recieve_date <= dtTwoWeeksBeforeToday
                                              ).ToList<tbl_orders>();
 
@@ -370,6 +425,56 @@ namespace HeretPreWorkControl
         public static void SetMainForm(NotSalesMainForm instance)
         {
             Globals.NotSalesFormInstance = instance;
+        }
+
+        public static int GetActionTypeIDFormWork(int nUserID, string strWork)
+        {
+            int nActionType = -1;
+
+            if (nUserID == Globals.KadasUserID)
+            {
+                if (strWork.Equals(Globals.KadasApprovePDF))
+                {
+                    nActionType = Globals.ActionTypeKadasApprovePDF;
+                }
+                else if (strWork.Equals(Globals.KadasGraphicUpdate))
+                {
+                    nActionType = Globals.ActionTypeKadasGraphicUpdate;
+                }
+                else if (strWork.Equals(Globals.KadasNewPDF))
+                {
+                    nActionType = Globals.ActionTypeKadasNewPDF;
+                }
+                else if (strWork.Equals(Globals.KadasSunCopyNew))
+                {
+                    nActionType = Globals.ActionTypeKadasSunCopyNew;
+                }
+            }
+            else if(nUserID == Globals.StudioUserID)
+            {
+                if (strWork.Equals(Globals.StudioCutModel))
+                {
+                    nActionType = Globals.ActionTypeStudioCutModel; 
+                }
+                else if(strWork.Equals(Globals.StudioOnlyModel))
+                {
+                    nActionType = Globals.ActionTypeStudioOnlyModel;
+                }
+                else if(strWork.Equals(Globals.StudioOnlyPrisa))
+                {
+                    nActionType = Globals.ActionTypeStudioOnlyPrisa;
+                }
+                else if(strWork.Equals(Globals.StudioPrisaAndModel))
+                {
+                    nActionType = Globals.ActionTypeStudioPrisaAndModel;
+                }
+                else if(strWork.Equals(Globals.StudioPrisaForOffer))
+                {
+                    nActionType = Globals.ActionTypeStudioPrisaForOffer;
+                }
+            }
+
+            return nActionType;
         }
     }
 }

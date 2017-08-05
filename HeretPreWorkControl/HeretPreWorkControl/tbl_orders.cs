@@ -18,6 +18,7 @@ namespace HeretPreWorkControl
         public tbl_orders()
         {
             this.tbl_sla_data = new HashSet<tbl_sla_data>();
+            this.tbl_offers = new HashSet<tbl_offers>();
         }
     
         public int ID { get; set; }
@@ -46,6 +47,7 @@ namespace HeretPreWorkControl
         public Nullable<System.DateTime> dep_recieve_date { get; set; }
         public Nullable<System.TimeSpan> dep_recieve_hour { get; set; }
         public Nullable<int> client_order_id { get; set; }
+        public string kadas_work { get; set; }
     
         public virtual tbl_client_response tbl_client_response { get; set; }
         public virtual tbl_clients tbl_clients { get; set; }
@@ -57,5 +59,7 @@ namespace HeretPreWorkControl
         public virtual tbl_users tbl_users2 { get; set; }
         public virtual tbl_user_groups tbl_user_groups1 { get; set; }
         public virtual tbl_sla_actions tbl_sla_actions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_offers> tbl_offers { get; set; }
     }
 }

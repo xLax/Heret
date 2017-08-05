@@ -159,7 +159,6 @@
             // 
             this.ID.HeaderText = "מס\"ד עבודה";
             this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
             this.ID.Width = 70;
             // 
             // Client_Name
@@ -167,20 +166,17 @@
             this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Client_Name.HeaderText = "שם לקוח";
             this.Client_Name.Name = "Client_Name";
-            this.Client_Name.ReadOnly = true;
             // 
             // No_Files
             // 
             this.No_Files.HeaderText = "מספר קבצים";
             this.No_Files.Name = "No_Files";
-            this.No_Files.ReadOnly = true;
             this.No_Files.Width = 60;
             // 
             // Project_Desc
             // 
             this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ תיאור פרויקט";
             this.Project_Desc.Name = "Project_Desc";
-            this.Project_Desc.ReadOnly = true;
             this.Project_Desc.Width = 132;
             // 
             // Sla
@@ -188,14 +184,12 @@
             this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Sla.HeaderText = "סטטוס SLA";
             this.Sla.Name = "Sla";
-            this.Sla.ReadOnly = true;
             // 
             // Action_Type
             // 
-            this.Action_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Action_Type.HeaderText = "סוג פעולה";
             this.Action_Type.Name = "Action_Type";
-            this.Action_Type.ReadOnly = true;
+            this.Action_Type.Width = 200;
             // 
             // MyJobsForm
             // 

@@ -119,6 +119,12 @@
     <Compile Include="InsertOrderIDForm.Designer.cs">
       <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovementsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovementsForm.Designer.cs">
+      <DependentUpon>MovementsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyJobsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     <Compile Include="tbl_client_response.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_offers.cs">
+      <DependentUpon>DB Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_orders.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
@@ -188,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InsertOrderIDForm.resx">
       <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovementsForm.resx">
+      <DependentUpon>MovementsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyJobsForm.resx">
       <DependentUpon>MyJobsForm.cs</DependentUpon>
@@ -247,6 +259,7 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\MovementTitle.png" />
     <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\InsertOrderNumberTitle.png" />
     <None Include="Resources\LoginTitle.png" />

@@ -33,6 +33,19 @@ namespace HeretPreWorkControl
         public const string DelayReason = "דחיית פרויקט";
         public const string OtherReason = "אחר";
 
+        public const string KadasApprovePDF = "PDF לאישור";
+        public const string KadasNewPDF = "עבודה חדשה ( PDF )";
+        public const string KadasSunCopyNew = "עבודה חדשה ( העתק שמש )";
+        public const string KadasGraphicUpdate = "עדכון גרפי";
+
+        public const string StudioOnlyPrisa = "פריסה בלבד";
+        public const string StudioPrisaForOffer = "הערכת פריסה להצעת מחיר";
+        public const string StudioOnlyModel = "דגם בלבד";
+        public const string StudioPrisaAndModel = "פריסה ודגם";
+        public const string StudioCutModel = "חיתוך דגמים";
+
+        // public const string UnnecessaryWork = "לא נדרש";
+
         // על העבודה להתבצע עד השעה 12 של היום או מחר (תלוי מתי התקבלה) חשוב
         public const int SlaUntil12 = 0;
         // ערך שמסמן ביצוע מיידי
@@ -47,10 +60,22 @@ namespace HeretPreWorkControl
         // Amount of milliseconds in one day ( for the decline timer )
         public const long MillInDay = 86400000;
 
-        // Meaning that the next step is to recieve the order from the client
-        public const int ActionTypeIDRecieveClientOrder = 5;
+        // Action Type constants
+        public const int ActionTypeRecieveClientOrder = 5;
         public const int ActionTypeInsertOrderID = 10;
-        // public const int ActionTypeOnlyPrisa
+        public const int ActionTypeSetAndSendOffer = 3;
+        public const int ActionTypeKadasApprovePDF = 20;
+        public const int ActionTypeKadasGraphicUpdate = 23;
+        public const int ActionTypeKadasNewPDF = 21;
+        public const int ActionTypeKadasSunCopyNew = 22;
+        public const int ActionTypeStudioCutModel = 19;
+        public const int ActionTypeStudioOnlyModel = 17;
+        public const int ActionTypeStudioOnlyPrisa = 15;
+        public const int ActionTypeStudioPrisaAndModel = 18;
+        public const int ActionTypeStudioPrisaForOffer = 16;
+        public const int ActionTypeStudioWaitClient = 11;
+        public const int ActionTypeKadasWaitClient = 12;
+
 
         public static int UserID;
         public static String UserName;
@@ -61,6 +86,7 @@ namespace HeretPreWorkControl
         public static List<tbl_clients> AllClients;
         public static List<tbl_sla_actions> AllActions;
         public static List<tbl_action_to_dept> AllActionToDept;
+        public static List<tbl_user_groups> AllUserGroups;
 
         public static List<tbl_orders> MyDeclinedOrders;
         public static List<tbl_orders> MyJobs;

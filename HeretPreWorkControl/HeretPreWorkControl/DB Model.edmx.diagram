@@ -27,6 +27,8 @@
         <AssociationConnector Association="DB_Model.action" />
         <AssociationConnector Association="DB_Model.dept" />
         <AssociationConnector Association="DB_Model.next_dept_action" />
+        <EntityTypeShape EntityType="DB_Model.tbl_offers" Width="1.5" PointX="2.625" PointY="7.875" />
+        <AssociationConnector Association="DB_Model.order" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

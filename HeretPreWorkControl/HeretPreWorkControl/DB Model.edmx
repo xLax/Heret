@@ -31,6 +31,14 @@
           <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="person_responsible" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_offers">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="offer_date" Type="date" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_orders">
           <Key>
             <PropertyRef Name="ID" />
@@ -61,6 +69,7 @@
           <Property Name="current_status_id" Type="int" Nullable="false" />
           <Property Name="dep_recieve_date" Type="date" />
           <Property Name="dep_recieve_hour" Type="time" Precision="0" />
+          <Property Name="kadas_work" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -208,6 +217,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="order">
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
+          <End Role="tbl_offers" Type="Self.tbl_offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_offers">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="order_id">
           <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
           <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
@@ -272,6 +293,7 @@
           <EntitySet Name="tbl_action_to_dept" EntityType="Self.tbl_action_to_dept" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_offers" EntityType="Self.tbl_offers" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_sla_actions" EntityType="Self.tbl_sla_actions" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_sla_data" EntityType="Self.tbl_sla_data" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
@@ -312,6 +334,10 @@
           <AssociationSet Name="next_dept_action" Association="Self.next_dept_action">
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
+          </AssociationSet>
+          <AssociationSet Name="order" Association="Self.order">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_offers" EntitySet="tbl_offers" />
           </AssociationSet>
           <AssociationSet Name="order_id" Association="Self.order_id">
             <End Role="tbl_orders" EntitySet="tbl_orders" />
@@ -396,6 +422,8 @@
           <Property Name="dep_recieve_date" Type="DateTime" />
           <Property Name="dep_recieve_hour" Type="Time" />
           <Property Name="client_order_id" Type="Int32" />
+          <NavigationProperty Name="tbl_offers" Relationship="DB_Model.order" FromRole="tbl_orders" ToRole="tbl_offers" />
+          <Property Name="kadas_work" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_sla_data">
           <Key>
@@ -622,6 +650,11 @@
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
           </AssociationSet>
+          <EntitySet Name="tbl_offers" EntityType="DB_Model.tbl_offers" />
+          <AssociationSet Name="order" Association="DB_Model.order">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_offers" EntitySet="tbl_offers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -695,6 +728,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbl_offers">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="String" Nullable="false" />
+          <Property Name="offer_date" Type="DateTime" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="DB_Model.order" FromRole="tbl_offers" ToRole="tbl_orders" />
+        </EntityType>
+        <Association Name="order">
+          <End Type="DB_Model.tbl_orders" Role="tbl_orders" Multiplicity="1" />
+          <End Type="DB_Model.tbl_offers" Role="tbl_offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_offers">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -723,6 +777,7 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="kadas_work" ColumnName="kadas_work" />
                 <ScalarProperty Name="client_order_id" ColumnName="client_order_id" />
                 <ScalarProperty Name="dep_recieve_hour" ColumnName="dep_recieve_hour" />
                 <ScalarProperty Name="dep_recieve_date" ColumnName="dep_recieve_date" />
@@ -799,6 +854,15 @@
                 <ScalarProperty Name="recieved_department_ID" ColumnName="recieved_department_ID" />
                 <ScalarProperty Name="action_ID" ColumnName="action_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_offers">
+            <EntityTypeMapping TypeName="DB_Model.tbl_offers">
+              <MappingFragment StoreEntitySet="tbl_offers">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="offer_date" ColumnName="offer_date" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

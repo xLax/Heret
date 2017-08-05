@@ -74,13 +74,13 @@
             // 
             // tbPassword
             // 
-            this.tbPassword.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbPassword.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPassword.Location = new System.Drawing.Point(230, 146);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
             this.tbPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbPassword.Size = new System.Drawing.Size(153, 31);
+            this.tbPassword.Size = new System.Drawing.Size(153, 28);
             this.tbPassword.TabIndex = 5;
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
             // label3
             // 
