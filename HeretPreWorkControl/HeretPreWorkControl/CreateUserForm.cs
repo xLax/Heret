@@ -12,7 +12,8 @@ namespace HeretPreWorkControl
 {
     public partial class CreateUserForm : Form
     {
-        public static int ChosenUserTypeID = 0;
+        private int ChosenUserTypeID;
+        private tbl_users usrNewUser;
 
         public CreateUserForm()
         {
@@ -22,28 +23,33 @@ namespace HeretPreWorkControl
             lbUserType.Items.Add(Globals.StudioUserType);
             lbUserType.Items.Add(Globals.KadasUserType);
             lbUserType.Items.Add(Globals.OrdersUserType);
+
+            this.usrNewUser = new tbl_users();
+            this.ChosenUserTypeID = 0;
         }
 
         private void InsertButton_Click(object sender, EventArgs e)
         {
+            string strUserName = tbUserName.Text.Trim(' ');
+
             if (tbWorkerName.Text == "")
             {
                 tbPanel.Text = "לא הוזן שם עובד !";
                 tbWorkerName.BackColor = Color.Tomato;
             }
-            else if(tbUserName.Text == "")
+            else if (tbUserName.Text == "")
             {
                 tbWorkerName.BackColor = Color.White;
                 tbPanel.Text = "לא הוזן שם משתמש !";
                 tbUserName.BackColor = Color.Tomato;
             }
-            else if(tbPassword.Text == "")
+            else if (tbPassword.Text == "")
             {
                 tbUserName.BackColor = Color.White;
                 tbPanel.Text = "לא הוזנה סיסמא !";
                 tbPassword.BackColor = Color.Tomato;
             }
-            else if(lbUserType.SelectedText == "")
+            else if (lbUserType.SelectedText == "")
             {
                 tbPassword.BackColor = Color.White;
                 tbPanel.Text = "לא נבחר סוג משתמש !";
@@ -52,14 +58,42 @@ namespace HeretPreWorkControl
             else
             {
                 lbUserType.BackColor = Color.White;
-                // Add check if the user name or worker name already exists
-                // add saving the data in the db
+
+                // Set the info of the new user
+                this.usrNewUser.name = tbWorkerName.Text;
+                this.usrNewUser.user_group_id = ChosenUserTypeID;
+                this.usrNewUser.user_name = tbUserName.Text;
+                this.usrNewUser.password = tbPassword.Text;
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        var userData = context.tbl_users
+                                        .Where(s => s.user_name == strUserName)
+                                                        .FirstOrDefault<tbl_users>();
+                        if (userData != null)
+                        {
+                            tbPanel.Text = "שם המשתמש שהוזן קיים כבר במערכת ! יש להזין שם משתמש אחר";
+                        }
+                        else
+                        {
+                            context.tbl_users.Add(this.usrNewUser);
+                            context.SaveChanges();
+                            tbPanel.Text = "המשתמש נוצר בהצלחה !";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
             }
         }
 
         private void lbUserType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (lbUserType.SelectedText)
+            switch (lbUserType.SelectedItem)
             {
                 case Globals.SalesUserType:
                     ChosenUserTypeID = Globals.SalesUserID;

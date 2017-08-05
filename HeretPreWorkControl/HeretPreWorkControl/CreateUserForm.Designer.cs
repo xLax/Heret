@@ -85,7 +85,6 @@
             this.tbUserName.Location = new System.Drawing.Point(347, 200);
             this.tbUserName.Margin = new System.Windows.Forms.Padding(4);
             this.tbUserName.Name = "tbUserName";
-            this.tbUserName.PasswordChar = '*';
             this.tbUserName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbUserName.Size = new System.Drawing.Size(311, 37);
             this.tbUserName.TabIndex = 9;
@@ -141,6 +140,7 @@
             this.tbPassword.Location = new System.Drawing.Point(347, 255);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbPassword.Size = new System.Drawing.Size(311, 37);
             this.tbPassword.TabIndex = 11;
