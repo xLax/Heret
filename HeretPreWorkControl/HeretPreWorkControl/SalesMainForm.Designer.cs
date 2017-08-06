@@ -54,10 +54,9 @@
             // 
             this.lblHello.AutoSize = true;
             this.lblHello.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHello.Location = new System.Drawing.Point(41, 41);
-            this.lblHello.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHello.Location = new System.Drawing.Point(31, 33);
             this.lblHello.Name = "lblHello";
-            this.lblHello.Size = new System.Drawing.Size(235, 33);
+            this.lblHello.Size = new System.Drawing.Size(184, 27);
             this.lblHello.TabIndex = 10;
             this.lblHello.Text = "שלום <שם עובד>";
             this.lblHello.Click += new System.EventHandler(this.lblHello_Click);
@@ -67,11 +66,10 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(48, 497);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Location = new System.Drawing.Point(36, 404);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(641, 35);
+            this.tbPanel.Size = new System.Drawing.Size(482, 29);
             this.tbPanel.TabIndex = 9;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -79,10 +77,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(101, 226);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(76, 184);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(193, 33);
+            this.label1.Size = new System.Drawing.Size(154, 27);
             this.label1.TabIndex = 12;
             this.label1.Text = "עבודות לביצוע";
             // 
@@ -95,10 +92,9 @@
             // pbMyJobs
             // 
             this.pbMyJobs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMyJobs.Location = new System.Drawing.Point(136, 102);
-            this.pbMyJobs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbMyJobs.Location = new System.Drawing.Point(102, 83);
             this.pbMyJobs.Name = "pbMyJobs";
-            this.pbMyJobs.Size = new System.Drawing.Size(136, 121);
+            this.pbMyJobs.Size = new System.Drawing.Size(102, 98);
             this.pbMyJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMyJobs.TabIndex = 11;
             this.pbMyJobs.TabStop = false;
@@ -108,10 +104,9 @@
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(384, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(288, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(307, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(230, 65);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -119,10 +114,9 @@
             // pbEnterDeclinedOrder
             // 
             this.pbEnterDeclinedOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbEnterDeclinedOrder.Location = new System.Drawing.Point(479, 102);
-            this.pbEnterDeclinedOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbEnterDeclinedOrder.Location = new System.Drawing.Point(359, 83);
             this.pbEnterDeclinedOrder.Name = "pbEnterDeclinedOrder";
-            this.pbEnterDeclinedOrder.Size = new System.Drawing.Size(136, 121);
+            this.pbEnterDeclinedOrder.Size = new System.Drawing.Size(102, 98);
             this.pbEnterDeclinedOrder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEnterDeclinedOrder.TabIndex = 13;
             this.pbEnterDeclinedOrder.TabStop = false;
@@ -132,10 +126,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(443, 226);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(332, 184);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 33);
+            this.label2.Size = new System.Drawing.Size(156, 27);
             this.label2.TabIndex = 14;
             this.label2.Text = "הזנת הצעה לא";
             // 
@@ -143,22 +136,21 @@
             // 
             this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
-            this.pbAddUser.Location = new System.Drawing.Point(136, 325);
-            this.pbAddUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbAddUser.Location = new System.Drawing.Point(102, 264);
             this.pbAddUser.Name = "pbAddUser";
-            this.pbAddUser.Size = new System.Drawing.Size(136, 121);
+            this.pbAddUser.Size = new System.Drawing.Size(102, 98);
             this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAddUser.TabIndex = 15;
             this.pbAddUser.TabStop = false;
+            this.pbAddUser.Click += new System.EventHandler(this.pbAddUser_Click);
             // 
             // pictureBox3
             // 
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Image = global::HeretPreWorkControl.Properties.Resources.New_Order;
-            this.pictureBox3.Location = new System.Drawing.Point(479, 325);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Location = new System.Drawing.Point(359, 264);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(136, 121);
+            this.pictureBox3.Size = new System.Drawing.Size(102, 98);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 16;
             this.pictureBox3.TabStop = false;
@@ -167,10 +159,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(125, 449);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(94, 365);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 33);
+            this.label3.Size = new System.Drawing.Size(121, 27);
             this.label3.TabIndex = 17;
             this.label3.Text = "הוסף לקוח";
             // 
@@ -178,10 +169,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(471, 449);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(353, 365);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(146, 33);
+            this.label4.Size = new System.Drawing.Size(116, 27);
             this.label4.TabIndex = 18;
             this.label4.Text = "צור הזמנה";
             // 
@@ -195,19 +185,18 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(483, 260);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(362, 211);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(122, 33);
+            this.label5.Size = new System.Drawing.Size(97, 27);
             this.label5.TabIndex = 19;
             this.label5.Text = "מאושרת";
             // 
             // SalesMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(740, 548);
+            this.ClientSize = new System.Drawing.Size(555, 445);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -221,7 +210,6 @@
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "SalesMainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

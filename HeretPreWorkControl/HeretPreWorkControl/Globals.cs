@@ -8,6 +8,7 @@ namespace HeretPreWorkControl
 {
     public class Globals
     {
+        public const int ResponsibleID = 0;
         public const int AdminID = 1;
         public const int SalesUserID = 2;
         public const int StudioUserID = 3;
@@ -44,6 +45,11 @@ namespace HeretPreWorkControl
         public const string StudioPrisaAndModel = "פריסה ודגם";
         public const string StudioCutModel = "חיתוך דגמים";
 
+        public const string StatusActiveClient = "פעיל";
+        public const string StatusBlockedClient = "אזהרת חסימה";
+        public const string StatusLimitedClient = "מוגבל";
+
+
         // public const string UnnecessaryWork = "לא נדרש";
 
         // על העבודה להתבצע עד השעה 12 של היום או מחר (תלוי מתי התקבלה) חשוב
@@ -64,15 +70,18 @@ namespace HeretPreWorkControl
         public const int ActionTypeRecieveClientOrder = 5;
         public const int ActionTypeInsertOrderID = 10;
         public const int ActionTypeSetAndSendOffer = 3;
+
         public const int ActionTypeKadasApprovePDF = 20;
-        public const int ActionTypeKadasGraphicUpdate = 23;
         public const int ActionTypeKadasNewPDF = 21;
         public const int ActionTypeKadasSunCopyNew = 22;
-        public const int ActionTypeStudioCutModel = 19;
-        public const int ActionTypeStudioOnlyModel = 17;
+        public const int ActionTypeKadasGraphicUpdate = 23;
+
         public const int ActionTypeStudioOnlyPrisa = 15;
-        public const int ActionTypeStudioPrisaAndModel = 18;
         public const int ActionTypeStudioPrisaForOffer = 16;
+        public const int ActionTypeStudioOnlyModel = 17;
+        public const int ActionTypeStudioPrisaAndModel = 18;
+        public const int ActionTypeStudioCutModel = 19;
+
         public const int ActionTypeStudioWaitClient = 11;
         public const int ActionTypeKadasWaitClient = 12;
 
@@ -83,10 +92,12 @@ namespace HeretPreWorkControl
         public static int UserGroupID;
         public static String UserGroup;
 
+        public static List<tbl_employees> AllEmployeesResp;
         public static List<tbl_clients> AllClients;
         public static List<tbl_sla_actions> AllActions;
         public static List<tbl_action_to_dept> AllActionToDept;
         public static List<tbl_user_groups> AllUserGroups;
+        public static List<tbl_employees> AllMyEmployees;
 
         public static List<tbl_orders> MyDeclinedOrders;
         public static List<tbl_orders> MyJobs;

@@ -17,22 +17,25 @@ namespace HeretPreWorkControl
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_user_groups()
         {
+            this.tbl_action_to_dept = new HashSet<tbl_action_to_dept>();
+            this.tbl_employees = new HashSet<tbl_employees>();
             this.tbl_orders = new HashSet<tbl_orders>();
             this.tbl_orders1 = new HashSet<tbl_orders>();
             this.tbl_users = new HashSet<tbl_users>();
-            this.tbl_action_to_dept = new HashSet<tbl_action_to_dept>();
         }
     
         public int ID { get; set; }
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_employees> tbl_employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_orders> tbl_orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_orders> tbl_orders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_users> tbl_users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept { get; set; }
     }
 }

@@ -12,22 +12,12 @@ namespace HeretPreWorkControl
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_users
+    public partial class tbl_employees
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_users()
-        {
-            this.tbl_sla_data = new HashSet<tbl_sla_data>();
-        }
-    
         public int ID { get; set; }
-        public string user_name { get; set; }
-        public string password { get; set; }
+        public int Department_id { get; set; }
         public string name { get; set; }
-        public int user_group_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_sla_data> tbl_sla_data { get; set; }
         public virtual tbl_user_groups tbl_user_groups { get; set; }
     }
 }

@@ -25,14 +25,15 @@ namespace HeretPreWorkControl
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tbl_action_to_dept> tbl_action_to_dept { get; set; }
         public virtual DbSet<tbl_client_response> tbl_client_response { get; set; }
         public virtual DbSet<tbl_clients> tbl_clients { get; set; }
+        public virtual DbSet<tbl_employees> tbl_employees { get; set; }
+        public virtual DbSet<tbl_offers> tbl_offers { get; set; }
         public virtual DbSet<tbl_orders> tbl_orders { get; set; }
+        public virtual DbSet<tbl_sla_actions> tbl_sla_actions { get; set; }
         public virtual DbSet<tbl_sla_data> tbl_sla_data { get; set; }
         public virtual DbSet<tbl_user_groups> tbl_user_groups { get; set; }
         public virtual DbSet<tbl_users> tbl_users { get; set; }
-        public virtual DbSet<tbl_sla_actions> tbl_sla_actions { get; set; }
-        public virtual DbSet<tbl_action_to_dept> tbl_action_to_dept { get; set; }
-        public virtual DbSet<tbl_offers> tbl_offers { get; set; }
     }
 }

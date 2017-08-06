@@ -37,6 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblEnterDeclined = new System.Windows.Forms.Label();
             this.pbSetDeclinedAndInsert = new System.Windows.Forms.PictureBox();
+            this.lblEmployee = new System.Windows.Forms.Label();
+            this.pbSetEmployee = new System.Windows.Forms.PictureBox();
+            this.lbEmployees = new System.Windows.Forms.ComboBox();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.No_Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSetDeclinedAndInsert)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSetEmployee)).BeginInit();
             this.SuspendLayout();
             // 
             // tbPanel
@@ -77,6 +81,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 12;
+            this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             // 
             // pbRefresh
             // 
@@ -155,10 +160,46 @@
             this.pbSetDeclinedAndInsert.TabStop = false;
             this.pbSetDeclinedAndInsert.Click += new System.EventHandler(this.pbSetDeclinedAndInsert_Click);
             // 
+            // lblEmployee
+            // 
+            this.lblEmployee.AutoSize = true;
+            this.lblEmployee.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmployee.Location = new System.Drawing.Point(402, 340);
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.Size = new System.Drawing.Size(125, 20);
+            this.lblEmployee.TabIndex = 18;
+            this.lblEmployee.Text = "מנה עובד מבצע";
+            this.lblEmployee.Visible = false;
+            // 
+            // pbSetEmployee
+            // 
+            this.pbSetEmployee.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbSetEmployee.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
+            this.pbSetEmployee.Location = new System.Drawing.Point(529, 335);
+            this.pbSetEmployee.Name = "pbSetEmployee";
+            this.pbSetEmployee.Size = new System.Drawing.Size(35, 31);
+            this.pbSetEmployee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSetEmployee.TabIndex = 17;
+            this.pbSetEmployee.TabStop = false;
+            this.pbSetEmployee.Visible = false;
+            this.pbSetEmployee.Click += new System.EventHandler(this.pbSetEmployee_Click);
+            // 
+            // lbEmployees
+            // 
+            this.lbEmployees.BackColor = System.Drawing.SystemColors.Window;
+            this.lbEmployees.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbEmployees.FormattingEnabled = true;
+            this.lbEmployees.Location = new System.Drawing.Point(207, 337);
+            this.lbEmployees.Name = "lbEmployees";
+            this.lbEmployees.Size = new System.Drawing.Size(189, 28);
+            this.lbEmployees.TabIndex = 30;
+            this.lbEmployees.Visible = false;
+            // 
             // ID
             // 
             this.ID.HeaderText = "מס\"ד עבודה";
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             this.ID.Width = 70;
             // 
             // Client_Name
@@ -166,17 +207,20 @@
             this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Client_Name.HeaderText = "שם לקוח";
             this.Client_Name.Name = "Client_Name";
+            this.Client_Name.ReadOnly = true;
             // 
             // No_Files
             // 
             this.No_Files.HeaderText = "מספר קבצים";
             this.No_Files.Name = "No_Files";
+            this.No_Files.ReadOnly = true;
             this.No_Files.Width = 60;
             // 
             // Project_Desc
             // 
             this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ תיאור פרויקט";
             this.Project_Desc.Name = "Project_Desc";
+            this.Project_Desc.ReadOnly = true;
             this.Project_Desc.Width = 132;
             // 
             // Sla
@@ -184,11 +228,13 @@
             this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Sla.HeaderText = "סטטוס SLA";
             this.Sla.Name = "Sla";
+            this.Sla.ReadOnly = true;
             // 
             // Action_Type
             // 
             this.Action_Type.HeaderText = "סוג פעולה";
             this.Action_Type.Name = "Action_Type";
+            this.Action_Type.ReadOnly = true;
             this.Action_Type.Width = 200;
             // 
             // MyJobsForm
@@ -197,6 +243,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(754, 424);
+            this.Controls.Add(this.lbEmployees);
+            this.Controls.Add(this.lblEmployee);
+            this.Controls.Add(this.pbSetEmployee);
             this.Controls.Add(this.lblEnterDeclined);
             this.Controls.Add(this.pbSetDeclinedAndInsert);
             this.Controls.Add(this.label3);
@@ -220,6 +269,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSetDeclinedAndInsert)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSetEmployee)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,6 +286,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblEnterDeclined;
         private System.Windows.Forms.PictureBox pbSetDeclinedAndInsert;
+        private System.Windows.Forms.Label lblEmployee;
+        private System.Windows.Forms.PictureBox pbSetEmployee;
+        private System.Windows.Forms.ComboBox lbEmployees;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn No_Files;

@@ -82,6 +82,29 @@ namespace HeretPreWorkControl
             Globals.AllActionToDept = lstActionsToDept;
         }
 
+        public static void AllEmployeesForResponsible()
+        {
+            List<tbl_employees> lstEmployees;
+
+            if (Globals.AllEmployeesResp == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstEmployees = context.tbl_employees.ToList<tbl_employees>();
+                        Utilities.SetAllEmployeesResp(lstEmployees);
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+        }
+
+        private static void SetAllEmployeesResp(List<tbl_employees> lstEmployees)
+        {
+            Globals.AllEmployeesResp = lstEmployees;
+        }
+
         public static void GetAllClientsList()
         {
             List<tbl_clients> lstClients;
@@ -475,6 +498,31 @@ namespace HeretPreWorkControl
             }
 
             return nActionType;
+        }
+
+        public static void GetAllMyEmployees()
+        {
+            List<tbl_employees> lstEmployees;
+
+            if (Globals.AllMyEmployees == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstEmployees = context.tbl_employees
+                                .Where( e => e.Department_id == Globals.UserGroupID)
+                                            .ToList<tbl_employees>();
+                        Utilities.SetMyEmployeesList(lstEmployees);
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+        }
+
+        private static void SetMyEmployeesList(List<tbl_employees> lstEmployees)
+        {
+            Globals.AllMyEmployees = lstEmployees;
         }
     }
 }

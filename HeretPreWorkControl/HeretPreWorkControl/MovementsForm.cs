@@ -88,6 +88,10 @@ namespace HeretPreWorkControl
         {
             Boolean isSucceded = false;
 
+            if(dataGridView.SelectedRows.Count > 1)
+            {
+                tbPanel.Text = "אנא בחר מחלקה אחת";
+            }
             if(nSelectedDepartID == 0)
             {
                 tbPanel.Text = "אנא בחר מחלקה להעברת העבודה";
@@ -197,7 +201,8 @@ namespace HeretPreWorkControl
         {
             HideAllInputFields();
 
-            if(dataGridView.SelectedRows.Count == 1)
+            if(dataGridView.SelectedRows.Count == 1 &&
+               dataGridView.SelectedRows[0].Cells[0].Value != null)
             {
                 string strCellValue = dataGridView.SelectedRows[0].Cells[0].Value.ToString();
                 int nDepartID = dcAllData.Where(a => a.Value.Equals(strCellValue)).Single().Key;
@@ -214,6 +219,16 @@ namespace HeretPreWorkControl
                     }
                 }
             }      
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

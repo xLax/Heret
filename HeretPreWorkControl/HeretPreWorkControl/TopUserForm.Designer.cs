@@ -41,6 +41,7 @@
             this.pbAddUser = new System.Windows.Forms.PictureBox();
             this.pbStatus = new System.Windows.Forms.PictureBox();
             this.pbHeret = new System.Windows.Forms.PictureBox();
+            this.btnGetClientsFromExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
@@ -172,7 +173,7 @@
             // 
             this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
             this.pbStatus.Location = new System.Drawing.Point(153, 130);
-            this.pbStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbStatus.Margin = new System.Windows.Forms.Padding(2);
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(98, 103);
             this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -190,12 +191,24 @@
             this.pbHeret.TabIndex = 1;
             this.pbHeret.TabStop = false;
             // 
+            // btnGetClientsFromExcel
+            // 
+            /*
+            this.btnGetClientsFromExcel.Location = new System.Drawing.Point(12, 101);
+            this.btnGetClientsFromExcel.Name = "btnGetClientsFromExcel";
+            this.btnGetClientsFromExcel.Size = new System.Drawing.Size(56, 83);
+            this.btnGetClientsFromExcel.TabIndex = 28;
+            this.btnGetClientsFromExcel.Text = "יבא לקוחות מאקסל";
+            this.btnGetClientsFromExcel.UseVisualStyleBackColor = true;
+            this.btnGetClientsFromExcel.Click += new System.EventHandler(this.btnGetClientsFromExcel_Click); */
+            // 
             // TopUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(646, 480);
+            // this.Controls.Add(this.btnGetClientsFromExcel);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.lblStatistics);
             this.Controls.Add(this.pbStatistics);
@@ -209,11 +222,12 @@
             this.Controls.Add(this.pbStatus);
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.pbHeret);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TopUserForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "מסך מנהל מערכת";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUserForm_FormClosing);
             this.Load += new System.EventHandler(this.TopUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).EndInit();
@@ -241,5 +255,6 @@
         private System.Windows.Forms.Label lblStatistics;
         private System.Windows.Forms.PictureBox pbStatistics;
         private System.Windows.Forms.TextBox tbPanel;
+        private System.Windows.Forms.Button btnGetClientsFromExcel;
     }
 }

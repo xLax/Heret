@@ -17,9 +17,9 @@ namespace HeretPreWorkControl
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_sla_actions()
         {
-            this.tbl_orders = new HashSet<tbl_orders>();
             this.tbl_action_to_dept = new HashSet<tbl_action_to_dept>();
             this.tbl_action_to_dept1 = new HashSet<tbl_action_to_dept>();
+            this.tbl_orders = new HashSet<tbl_orders>();
         }
     
         public int ID { get; set; }
@@ -28,10 +28,10 @@ namespace HeretPreWorkControl
         public string desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_orders> tbl_orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_orders> tbl_orders { get; set; }
     }
 }

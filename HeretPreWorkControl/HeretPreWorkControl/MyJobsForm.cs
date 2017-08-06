@@ -13,6 +13,8 @@ namespace HeretPreWorkControl
         private List<tbl_orders> MyJobs = new List<tbl_orders>();
         private Boolean isLoadSucceeded = true;
 
+        private tbl_orders ListSelectedOrder;
+
         public MyJobsForm()
         {
             InitializeComponent();
@@ -27,6 +29,12 @@ namespace HeretPreWorkControl
             }
 
             Utilities.GetAllActionToDeptList();
+            Utilities.GetAllMyEmployees();
+
+            foreach (tbl_employees employee in Globals.AllMyEmployees)
+            {
+                lbEmployees.Items.Add(employee.name);
+            }
 
             LoadRelevantData();
             SetZebraMode();
@@ -101,7 +109,7 @@ namespace HeretPreWorkControl
 
         private void pbExecute_Click(object sender, EventArgs e)
         {
-            tbl_orders SelectedOrder = this.GetSelectedOrder();
+            tbl_orders SelectedOrder = this.GetSelectedOrder(false);
 
             // Calculate who you can transfer the job to and what department and shit like this
             // and open ניתוב עבודות with the data
@@ -170,7 +178,7 @@ namespace HeretPreWorkControl
 
                                         context.SaveChanges();
 
-                                        pbRefresh_Click(new object(), new EventArgs());
+                                        this.SilentRefresh();
                                     }
                                 }
                                 catch (Exception ex)
@@ -213,7 +221,7 @@ namespace HeretPreWorkControl
 
                                         context.SaveChanges();
 
-                                        pbRefresh_Click(new object(), new EventArgs());
+                                        this.SilentRefresh();
                                     }
                                 }
                                 catch (Exception ex)
@@ -221,6 +229,15 @@ namespace HeretPreWorkControl
                                     tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                                 }
                             }
+                        }
+                        else if((SelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                                 SelectedOrder.action_type_id <= Globals.ActionTypeKadasGraphicUpdate &&
+                                 SelectedOrder.kadas_agent_name == null ) ||
+                                (SelectedOrder.action_type_id >= Globals.ActionTypeStudioOnlyPrisa &&
+                                 SelectedOrder.action_type_id <= Globals.ActionTypeStudioCutModel &&
+                                 SelectedOrder.studio_agent_name == null ))
+                        {
+                            tbPanel.Text = "שים לב! עליך למנות עובד לביצוע לפני ביצוע העבודה";
                         }
                         else
                         { 
@@ -258,7 +275,11 @@ namespace HeretPreWorkControl
             {
                 tbPanel.Text = "רענון בוצע בהצלחה !";
 
-                if(Globals.MyJobs == null || Globals.MyJobs.Count == 0)
+                pbSetEmployee.Visible = false;
+                lblEmployee.Visible = false;
+                lbEmployees.Visible = false;
+
+                if (Globals.MyJobs == null || Globals.MyJobs.Count == 0)
                 {
                     tbPanel.Text += " אין עבודות לביצוע";
                 }
@@ -272,7 +293,7 @@ namespace HeretPreWorkControl
 
         private void pbSetDeclinedAndInsert_Click(object sender, EventArgs e)
         {
-            tbl_orders selectedOrder = this.GetSelectedOrder();
+            tbl_orders selectedOrder = this.GetSelectedOrder(false);
 
             if (selectedOrder != null)
             {
@@ -280,13 +301,16 @@ namespace HeretPreWorkControl
             }
         }
 
-        private tbl_orders GetSelectedOrder()
+        private tbl_orders GetSelectedOrder(Boolean isSelectionChanged)
         {
             tbl_orders selectedOrder = null;
 
             if(dataGridView.SelectedRows.Count == 0)
             {
-                tbPanel.Text = "שגיאה! עליך לסמן את אחת השורות";
+                if(!isSelectionChanged)
+                {
+                    tbPanel.Text = "שגיאה! עליך לסמן את אחת השורות";
+                }
             }
             else if (dataGridView.SelectedRows.Count > 1)
             {
@@ -294,52 +318,150 @@ namespace HeretPreWorkControl
             }
             else
             {
-                // Get all the data about the selected row
-                int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
-                string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
-                Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[2].Value;
-                string strThirdCol = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
-
-                int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
-
-                Nullable<int> nPrisaID = null, nTemplateID = null;
-                string strProjectDesc = null;
-
-                try
+                if (dataGridView.SelectedRows[0].Cells[0].Value != null)
                 {
-                    nPrisaID = int.Parse(strThirdCol);
-                }
-                catch (Exception ex)
-                {
+                    // Get all the data about the selected row
+                    int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
+                    string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
+                    Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[2].Value;
+                    string strThirdCol = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
+
+                    int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
+
+                    Nullable<int> nPrisaID = null, nTemplateID = null;
+                    string strProjectDesc = null;
+
                     try
                     {
-                        nTemplateID = int.Parse(strThirdCol);
+                        nPrisaID = int.Parse(strThirdCol);
                     }
-                    catch (Exception ex2)
+                    catch (Exception ex)
                     {
-                        strProjectDesc = strThirdCol;
+                        try
+                        {
+                            nTemplateID = int.Parse(strThirdCol);
+                        }
+                        catch (Exception ex2)
+                        {
+                            strProjectDesc = strThirdCol;
+                        }
                     }
-                }
 
-                tbl_orders SelectedOrder =
-                        Globals.MyJobs.Where(m => m.ID == nOrderID &&
-                                                  m.client_id == nClientID &&
-                                                  m.files_number == NoFiles &&
-                                                  (m.prisa_id == nPrisaID ||
-                                                   m.template_id == nTemplateID ||
-                                                   m.project_desc == strProjectDesc)).SingleOrDefault<tbl_orders>();
+                    tbl_orders SelectedOrder =
+                            Globals.MyJobs.Where(m => m.ID == nOrderID &&
+                                                      m.client_id == nClientID &&
+                                                      m.files_number == NoFiles &&
+                                                      (m.prisa_id == nPrisaID ||
+                                                       m.template_id == nTemplateID ||
+                                                       m.project_desc == strProjectDesc)).SingleOrDefault<tbl_orders>();
 
-                if (SelectedOrder == null)
-                {
-                    tbPanel.Text = "שגיאה! יש תקלה באמינות הנתונים אנא רענן ונסה שוב";
-                }
-                else
-                {
-                    selectedOrder = SelectedOrder;
+                    if (SelectedOrder == null)
+                    {
+                        tbPanel.Text = "שגיאה! יש תקלה באמינות הנתונים אנא רענן ונסה שוב";
+                    }
+                    else
+                    {
+                        selectedOrder = SelectedOrder;
+                    }
                 }
             }
 
             return selectedOrder;
+        }
+
+        private void pbSetEmployee_Click(object sender, EventArgs e)
+        {
+            string strEmployeeName = String.Empty;
+
+            if(lbEmployees.SelectedItem == null)
+            {
+                tbPanel.Text = "שגיאה! עליך לבחור בעובד לביצוע העבודה";
+            }
+            else if(this.ListSelectedOrder != null)
+            {
+                if (this.ListSelectedOrder.curr_departnent_id == Globals.StudioUserID)
+                {
+                    this.ListSelectedOrder.studio_agent_name = lbEmployees.SelectedItem.ToString(); 
+                }
+                else if(this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
+                {
+                    this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                }
+
+                strEmployeeName = lbEmployees.SelectedItem.ToString();
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        context.tbl_orders.Attach(this.ListSelectedOrder);
+                        var Entry = context.Entry(this.ListSelectedOrder);
+
+                        Entry.Property(o => o.kadas_agent_name).IsModified = true;
+                        Entry.Property(o => o.studio_agent_name).IsModified = true;
+
+                        context.SaveChanges();
+
+                        tbPanel.Text = "העובד " + strEmployeeName + " מונה בהצלחה לעבודה";
+
+                        this.SilentRefresh();
+                    }
+                    catch(Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
+            }
+        }
+
+        private void SilentRefresh()
+        {
+            if (Globals.MyJobs != null)
+            {
+                Globals.MyJobs.Clear();
+            }
+
+            dataGridView.Rows.Clear();
+            LoadRelevantData();
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            this.ListSelectedOrder = GetSelectedOrder(true);
+
+            if (this.ListSelectedOrder != null)
+            {
+                if (this.ListSelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                    this.ListSelectedOrder.action_type_id <= Globals.ActionTypeKadasGraphicUpdate)
+                {
+                    pbSetEmployee.Visible = true;
+                    lblEmployee.Visible = true;
+                    lbEmployees.Visible = true;
+
+                    if(this.ListSelectedOrder.kadas_agent_name != null)
+                    {
+                        lbEmployees.SelectedItem = this.ListSelectedOrder.kadas_agent_name;
+                    }
+                }
+                else if (this.ListSelectedOrder.action_type_id >= Globals.ActionTypeStudioOnlyPrisa &&
+                         this.ListSelectedOrder.action_type_id <= Globals.ActionTypeStudioCutModel)
+                {
+                    pbSetEmployee.Visible = true;
+                    lblEmployee.Visible = true;
+                    lbEmployees.Visible = true;
+
+                    if (this.ListSelectedOrder.studio_agent_name != null)
+                    {
+                        lbEmployees.SelectedItem = this.ListSelectedOrder.studio_agent_name;
+                    }
+                }
+                else
+                {
+                    pbSetEmployee.Visible = false;
+                    lblEmployee.Visible = false;
+                    lbEmployees.Visible = false;
+                }
+            }
         }
     }
 }
