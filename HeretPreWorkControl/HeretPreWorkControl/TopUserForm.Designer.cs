@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopUserForm));
             this.lblHello = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblCreateUser = new System.Windows.Forms.Label();
@@ -122,7 +123,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 495);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(828, 35);
@@ -141,7 +142,7 @@
             this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
             this.pbStatistics.Location = new System.Drawing.Point(653, 325);
-            this.pbStatistics.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbStatistics.Margin = new System.Windows.Forms.Padding(4);
             this.pbStatistics.Name = "pbStatistics";
             this.pbStatistics.Size = new System.Drawing.Size(136, 121);
             this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -153,7 +154,7 @@
             this.pbUnapprovedJobs.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbUnapprovedJobs.Image = global::HeretPreWorkControl.Properties.Resources.Unapproved_Jobs;
             this.pbUnapprovedJobs.Location = new System.Drawing.Point(381, 325);
-            this.pbUnapprovedJobs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbUnapprovedJobs.Margin = new System.Windows.Forms.Padding(4);
             this.pbUnapprovedJobs.Name = "pbUnapprovedJobs";
             this.pbUnapprovedJobs.Size = new System.Drawing.Size(136, 121);
             this.pbUnapprovedJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -165,7 +166,7 @@
             this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
             this.pbSpecialApprove.Location = new System.Drawing.Point(89, 325);
-            this.pbSpecialApprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbSpecialApprove.Margin = new System.Windows.Forms.Padding(4);
             this.pbSpecialApprove.Name = "pbSpecialApprove";
             this.pbSpecialApprove.Size = new System.Drawing.Size(136, 121);
             this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -177,7 +178,7 @@
             this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
             this.pbAddUser.Location = new System.Drawing.Point(557, 135);
-            this.pbAddUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbAddUser.Margin = new System.Windows.Forms.Padding(4);
             this.pbAddUser.Name = "pbAddUser";
             this.pbAddUser.Size = new System.Drawing.Size(136, 121);
             this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -201,7 +202,7 @@
             this.pbHeret.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pbHeret.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pbHeret.Location = new System.Drawing.Point(457, 36);
-            this.pbHeret.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbHeret.Margin = new System.Windows.Forms.Padding(4);
             this.pbHeret.Name = "pbHeret";
             this.pbHeret.Size = new System.Drawing.Size(307, 80);
             this.pbHeret.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -228,6 +229,7 @@
             this.Controls.Add(this.lblHello);
             this.Controls.Add(this.pbHeret);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "TopUserForm";

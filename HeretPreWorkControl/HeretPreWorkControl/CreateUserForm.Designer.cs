@@ -62,7 +62,7 @@
             // 
             this.tbUserName.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbUserName.Location = new System.Drawing.Point(241, 166);
-            this.tbUserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUserName.Margin = new System.Windows.Forms.Padding(4);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbUserName.Size = new System.Drawing.Size(311, 37);
@@ -84,7 +84,7 @@
             this.tbWorkerName.BackColor = System.Drawing.SystemColors.Window;
             this.tbWorkerName.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbWorkerName.Location = new System.Drawing.Point(241, 111);
-            this.tbWorkerName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbWorkerName.Margin = new System.Windows.Forms.Padding(4);
             this.tbWorkerName.Name = "tbWorkerName";
             this.tbWorkerName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbWorkerName.Size = new System.Drawing.Size(311, 37);
@@ -117,7 +117,7 @@
             this.tbPassword.BackColor = System.Drawing.SystemColors.Window;
             this.tbPassword.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPassword.Location = new System.Drawing.Point(241, 222);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -130,7 +130,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(21, 400);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(549, 35);
@@ -143,7 +143,7 @@
             this.lbUserType.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbUserType.FormattingEnabled = true;
             this.lbUserType.Location = new System.Drawing.Point(241, 277);
-            this.lbUserType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbUserType.Margin = new System.Windows.Forms.Padding(4);
             this.lbUserType.Name = "lbUserType";
             this.lbUserType.Size = new System.Drawing.Size(311, 33);
             this.lbUserType.TabIndex = 30;

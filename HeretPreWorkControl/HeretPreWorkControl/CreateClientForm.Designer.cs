@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateClientForm));
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tbClientNumber = new System.Windows.Forms.TextBox();
@@ -52,9 +53,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox2.Location = new System.Drawing.Point(231, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(308, 15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(209, 55);
+            this.pictureBox2.Size = new System.Drawing.Size(279, 68);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
@@ -62,9 +64,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.AddClientTitle;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(201, 55);
+            this.pictureBox1.Size = new System.Drawing.Size(268, 68);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -73,10 +76,11 @@
             // 
             this.tbClientNumber.BackColor = System.Drawing.SystemColors.Window;
             this.tbClientNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbClientNumber.Location = new System.Drawing.Point(227, 89);
+            this.tbClientNumber.Location = new System.Drawing.Point(303, 110);
+            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbClientNumber.Name = "tbClientNumber";
             this.tbClientNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbClientNumber.Size = new System.Drawing.Size(213, 31);
+            this.tbClientNumber.Size = new System.Drawing.Size(283, 37);
             this.tbClientNumber.TabIndex = 15;
             this.tbClientNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbClientNumber.Leave += new System.EventHandler(this.tbClientNumber_Leave);
@@ -85,9 +89,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 94);
+            this.label4.Location = new System.Drawing.Point(47, 116);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 20);
+            this.label4.Size = new System.Drawing.Size(158, 27);
             this.label4.TabIndex = 14;
             this.label4.Text = "* מספר לקוח :";
             // 
@@ -95,10 +100,11 @@
             // 
             this.tbClientName.BackColor = System.Drawing.SystemColors.Window;
             this.tbClientName.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbClientName.Location = new System.Drawing.Point(227, 126);
+            this.tbClientName.Location = new System.Drawing.Point(303, 155);
+            this.tbClientName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbClientName.Size = new System.Drawing.Size(213, 31);
+            this.tbClientName.Size = new System.Drawing.Size(283, 37);
             this.tbClientName.TabIndex = 17;
             this.tbClientName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -106,9 +112,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 132);
+            this.label1.Location = new System.Drawing.Point(47, 162);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 20);
+            this.label1.Size = new System.Drawing.Size(133, 27);
             this.label1.TabIndex = 16;
             this.label1.Text = "* שם לקוח :";
             // 
@@ -116,10 +123,11 @@
             // 
             this.tbEnglishClientName.BackColor = System.Drawing.SystemColors.Window;
             this.tbEnglishClientName.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbEnglishClientName.Location = new System.Drawing.Point(227, 165);
+            this.tbEnglishClientName.Location = new System.Drawing.Point(303, 203);
+            this.tbEnglishClientName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbEnglishClientName.Name = "tbEnglishClientName";
             this.tbEnglishClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbEnglishClientName.Size = new System.Drawing.Size(213, 31);
+            this.tbEnglishClientName.Size = new System.Drawing.Size(283, 37);
             this.tbEnglishClientName.TabIndex = 19;
             this.tbEnglishClientName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -127,9 +135,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 171);
+            this.label2.Location = new System.Drawing.Point(47, 210);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 20);
+            this.label2.Size = new System.Drawing.Size(173, 27);
             this.label2.TabIndex = 18;
             this.label2.Text = "שם לקוח לועזי :";
             // 
@@ -137,9 +146,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 208);
+            this.label3.Location = new System.Drawing.Point(47, 256);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 20);
+            this.label3.Size = new System.Drawing.Size(173, 27);
             this.label3.TabIndex = 20;
             this.label3.Text = "* סטטוס לקוח :";
             // 
@@ -147,9 +157,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 245);
+            this.label5.Location = new System.Drawing.Point(49, 302);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(127, 20);
+            this.label5.Size = new System.Drawing.Size(164, 27);
             this.label5.TabIndex = 22;
             this.label5.Text = "* עובד אחראי :";
             // 
@@ -158,9 +169,10 @@
             this.lbStatusClient.BackColor = System.Drawing.SystemColors.Window;
             this.lbStatusClient.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbStatusClient.FormattingEnabled = true;
-            this.lbStatusClient.Location = new System.Drawing.Point(227, 205);
+            this.lbStatusClient.Location = new System.Drawing.Point(303, 252);
+            this.lbStatusClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lbStatusClient.Name = "lbStatusClient";
-            this.lbStatusClient.Size = new System.Drawing.Size(213, 28);
+            this.lbStatusClient.Size = new System.Drawing.Size(283, 33);
             this.lbStatusClient.TabIndex = 30;
             // 
             // lbResponsibleEmployee
@@ -168,9 +180,10 @@
             this.lbResponsibleEmployee.BackColor = System.Drawing.SystemColors.Window;
             this.lbResponsibleEmployee.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbResponsibleEmployee.FormattingEnabled = true;
-            this.lbResponsibleEmployee.Location = new System.Drawing.Point(227, 242);
+            this.lbResponsibleEmployee.Location = new System.Drawing.Point(303, 298);
+            this.lbResponsibleEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lbResponsibleEmployee.Name = "lbResponsibleEmployee";
-            this.lbResponsibleEmployee.Size = new System.Drawing.Size(213, 28);
+            this.lbResponsibleEmployee.Size = new System.Drawing.Size(283, 33);
             this.lbResponsibleEmployee.TabIndex = 31;
             // 
             // tbPanel
@@ -178,10 +191,11 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(12, 317);
+            this.tbPanel.Location = new System.Drawing.Point(16, 390);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(428, 29);
+            this.tbPanel.Size = new System.Drawing.Size(569, 35);
             this.tbPanel.TabIndex = 34;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -189,9 +203,10 @@
             // 
             this.InsertButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.InsertButton.Image = global::HeretPreWorkControl.Properties.Resources.Plus_icon;
-            this.InsertButton.Location = new System.Drawing.Point(402, 276);
+            this.InsertButton.Location = new System.Drawing.Point(536, 340);
+            this.InsertButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.InsertButton.Name = "InsertButton";
-            this.InsertButton.Size = new System.Drawing.Size(38, 35);
+            this.InsertButton.Size = new System.Drawing.Size(51, 43);
             this.InsertButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.InsertButton.TabIndex = 32;
             this.InsertButton.TabStop = false;
@@ -201,9 +216,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(276, 284);
+            this.label6.Location = new System.Drawing.Point(368, 350);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 20);
+            this.label6.Size = new System.Drawing.Size(162, 27);
             this.label6.TabIndex = 35;
             this.label6.Text = "צור\\ עדכן לקוח";
             // 
@@ -212,18 +228,19 @@
             this.lblSalesNote.AutoSize = true;
             this.lblSalesNote.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSalesNote.ForeColor = System.Drawing.Color.Red;
-            this.lblSalesNote.Location = new System.Drawing.Point(12, 287);
+            this.lblSalesNote.Location = new System.Drawing.Point(16, 353);
+            this.lblSalesNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSalesNote.Name = "lblSalesNote";
-            this.lblSalesNote.Size = new System.Drawing.Size(85, 16);
+            this.lblSalesNote.Size = new System.Drawing.Size(100, 20);
             this.lblSalesNote.TabIndex = 36;
             this.lblSalesNote.Text = "* שדות חובה";
             // 
-            // CreateOrderForm
+            // CreateClientForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(452, 350);
+            this.ClientSize = new System.Drawing.Size(603, 431);
             this.Controls.Add(this.lblSalesNote);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbPanel);
@@ -241,7 +258,9 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "CreateClientForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

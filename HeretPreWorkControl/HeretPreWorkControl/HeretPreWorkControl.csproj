@@ -280,7 +280,6 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Icon1.ico" />
     <None Include="Resources\CreateOrderTitle.png" />
     <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\AddClientTitle.png" />
