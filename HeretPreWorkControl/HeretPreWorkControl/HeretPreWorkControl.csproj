@@ -272,6 +272,7 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\Heret Icon.ico" />
     <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\AddClientTitle.png" />
     <None Include="Resources\MovementTitle.png" />
