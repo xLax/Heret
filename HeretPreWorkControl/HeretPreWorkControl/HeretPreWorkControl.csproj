@@ -272,9 +272,9 @@
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
     <Content Include="Icon1.ico" />
+    <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\AddClientTitle.png" />
     <None Include="Resources\MovementTitle.png" />
-    <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\InsertOrderNumberTitle.png" />
     <None Include="Resources\LoginTitle.png" />
     <None Include="Resources\Delay Icon.png" />

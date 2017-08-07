@@ -35,13 +35,13 @@
             this.lblUnapprovedJobs = new System.Windows.Forms.Label();
             this.lblStatistics = new System.Windows.Forms.Label();
             this.tbPanel = new System.Windows.Forms.TextBox();
+            this.btnGetClientsFromExcel = new System.Windows.Forms.Button();
             this.pbStatistics = new System.Windows.Forms.PictureBox();
             this.pbUnapprovedJobs = new System.Windows.Forms.PictureBox();
             this.pbSpecialApprove = new System.Windows.Forms.PictureBox();
             this.pbAddUser = new System.Windows.Forms.PictureBox();
             this.pbStatus = new System.Windows.Forms.PictureBox();
             this.pbHeret = new System.Windows.Forms.PictureBox();
-            this.btnGetClientsFromExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
@@ -65,7 +65,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(122, 236);
+            this.lblStatus.Location = new System.Drawing.Point(145, 211);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(167, 27);
@@ -76,7 +76,7 @@
             // 
             this.lblCreateUser.AutoSize = true;
             this.lblCreateUser.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreateUser.Location = new System.Drawing.Point(388, 236);
+            this.lblCreateUser.Location = new System.Drawing.Point(404, 211);
             this.lblCreateUser.Name = "lblCreateUser";
             this.lblCreateUser.Size = new System.Drawing.Size(132, 27);
             this.lblCreateUser.TabIndex = 19;
@@ -86,7 +86,7 @@
             // 
             this.lblSpecialApprove.AutoSize = true;
             this.lblSpecialApprove.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpecialApprove.Location = new System.Drawing.Point(33, 394);
+            this.lblSpecialApprove.Location = new System.Drawing.Point(12, 365);
             this.lblSpecialApprove.Name = "lblSpecialApprove";
             this.lblSpecialApprove.Size = new System.Drawing.Size(216, 27);
             this.lblSpecialApprove.TabIndex = 21;
@@ -96,7 +96,7 @@
             // 
             this.lblUnapprovedJobs.AutoSize = true;
             this.lblUnapprovedJobs.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnapprovedJobs.Location = new System.Drawing.Point(268, 394);
+            this.lblUnapprovedJobs.Location = new System.Drawing.Point(267, 365);
             this.lblUnapprovedJobs.Name = "lblUnapprovedJobs";
             this.lblUnapprovedJobs.Size = new System.Drawing.Size(142, 27);
             this.lblUnapprovedJobs.TabIndex = 23;
@@ -106,7 +106,7 @@
             // 
             this.lblStatistics.AutoSize = true;
             this.lblStatistics.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatistics.Location = new System.Drawing.Point(468, 394);
+            this.lblStatistics.Location = new System.Drawing.Point(467, 365);
             this.lblStatistics.Name = "lblStatistics";
             this.lblStatistics.Size = new System.Drawing.Size(148, 27);
             this.lblStatistics.TabIndex = 25;
@@ -117,20 +117,27 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(10, 441);
+            this.tbPanel.Location = new System.Drawing.Point(12, 402);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(627, 29);
+            this.tbPanel.Size = new System.Drawing.Size(622, 29);
             this.tbPanel.TabIndex = 26;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnGetClientsFromExcel
+            // 
+            this.btnGetClientsFromExcel.Location = new System.Drawing.Point(0, 0);
+            this.btnGetClientsFromExcel.Name = "btnGetClientsFromExcel";
+            this.btnGetClientsFromExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnGetClientsFromExcel.TabIndex = 0;
             // 
             // pbStatistics
             // 
             this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
-            this.pbStatistics.Location = new System.Drawing.Point(481, 288);
+            this.pbStatistics.Location = new System.Drawing.Point(490, 264);
             this.pbStatistics.Name = "pbStatistics";
-            this.pbStatistics.Size = new System.Drawing.Size(113, 103);
+            this.pbStatistics.Size = new System.Drawing.Size(102, 98);
             this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStatistics.TabIndex = 24;
             this.pbStatistics.TabStop = false;
@@ -139,9 +146,9 @@
             // 
             this.pbUnapprovedJobs.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbUnapprovedJobs.Image = global::HeretPreWorkControl.Properties.Resources.Unapproved_Jobs;
-            this.pbUnapprovedJobs.Location = new System.Drawing.Point(284, 288);
+            this.pbUnapprovedJobs.Location = new System.Drawing.Point(286, 264);
             this.pbUnapprovedJobs.Name = "pbUnapprovedJobs";
-            this.pbUnapprovedJobs.Size = new System.Drawing.Size(104, 103);
+            this.pbUnapprovedJobs.Size = new System.Drawing.Size(102, 98);
             this.pbUnapprovedJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbUnapprovedJobs.TabIndex = 22;
             this.pbUnapprovedJobs.TabStop = false;
@@ -150,9 +157,9 @@
             // 
             this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
-            this.pbSpecialApprove.Location = new System.Drawing.Point(79, 288);
+            this.pbSpecialApprove.Location = new System.Drawing.Point(67, 264);
             this.pbSpecialApprove.Name = "pbSpecialApprove";
-            this.pbSpecialApprove.Size = new System.Drawing.Size(113, 103);
+            this.pbSpecialApprove.Size = new System.Drawing.Size(102, 98);
             this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbSpecialApprove.TabIndex = 20;
             this.pbSpecialApprove.TabStop = false;
@@ -161,9 +168,9 @@
             // 
             this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
-            this.pbAddUser.Location = new System.Drawing.Point(395, 130);
+            this.pbAddUser.Location = new System.Drawing.Point(418, 110);
             this.pbAddUser.Name = "pbAddUser";
-            this.pbAddUser.Size = new System.Drawing.Size(113, 103);
+            this.pbAddUser.Size = new System.Drawing.Size(102, 98);
             this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAddUser.TabIndex = 18;
             this.pbAddUser.TabStop = false;
@@ -172,10 +179,10 @@
             // pbStatus
             // 
             this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
-            this.pbStatus.Location = new System.Drawing.Point(153, 130);
+            this.pbStatus.Location = new System.Drawing.Point(177, 110);
             this.pbStatus.Margin = new System.Windows.Forms.Padding(2);
             this.pbStatus.Name = "pbStatus";
-            this.pbStatus.Size = new System.Drawing.Size(98, 103);
+            this.pbStatus.Size = new System.Drawing.Size(102, 98);
             this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStatus.TabIndex = 12;
             this.pbStatus.TabStop = false;
@@ -191,24 +198,12 @@
             this.pbHeret.TabIndex = 1;
             this.pbHeret.TabStop = false;
             // 
-            // btnGetClientsFromExcel
-            // 
-            /*
-            this.btnGetClientsFromExcel.Location = new System.Drawing.Point(12, 101);
-            this.btnGetClientsFromExcel.Name = "btnGetClientsFromExcel";
-            this.btnGetClientsFromExcel.Size = new System.Drawing.Size(56, 83);
-            this.btnGetClientsFromExcel.TabIndex = 28;
-            this.btnGetClientsFromExcel.Text = "יבא לקוחות מאקסל";
-            this.btnGetClientsFromExcel.UseVisualStyleBackColor = true;
-            this.btnGetClientsFromExcel.Click += new System.EventHandler(this.btnGetClientsFromExcel_Click); */
-            // 
             // TopUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(646, 480);
-            // this.Controls.Add(this.btnGetClientsFromExcel);
+            this.ClientSize = new System.Drawing.Size(646, 443);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.lblStatistics);
             this.Controls.Add(this.pbStatistics);

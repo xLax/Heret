@@ -49,7 +49,7 @@ namespace HeretPreWorkControl
                 tbPanel.Text = "לא הוזנה סיסמא !";
                 tbPassword.BackColor = Color.Tomato;
             }
-            else if (lbUserType.SelectedText == "")
+            else if (lbUserType.SelectedItem == null)
             {
                 tbPassword.BackColor = Color.White;
                 tbPanel.Text = "לא נבחר סוג משתמש !";
@@ -74,7 +74,7 @@ namespace HeretPreWorkControl
                                                         .FirstOrDefault<tbl_users>();
                         if (userData != null)
                         {
-                            tbPanel.Text = "שם המשתמש שהוזן קיים כבר במערכת ! יש להזין שם משתמש אחר";
+                            tbPanel.Text = "שם המשתמש קיים במערכת ! אנא הזן שם משתמש אחר";
                         }
                         else
                         {
