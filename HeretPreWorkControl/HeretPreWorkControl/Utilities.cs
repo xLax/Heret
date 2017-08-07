@@ -178,6 +178,26 @@ namespace HeretPreWorkControl
             return nActionTypeID;
         }
 
+        public static int GetNextOrderID()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    nMaxID = context.tbl_orders.OrderByDescending(u => u.ID).FirstOrDefault<tbl_orders>().ID;
+                    nMaxID++;
+                }
+                catch(Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
+        }
+
         public static void CreatePopup(String strTitle, String strMessage, int nOpenScreenID)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -199,13 +219,11 @@ namespace HeretPreWorkControl
         {
             string strToReturn = String.Empty;
 
-            if (Order.template_id != 0 &&
-                Order.template_id != null)
+            if (Order.template_id != null)
             {
                 strToReturn = Order.template_id.ToString();
             }
-            else if (Order.prisa_id != 0 &&
-                    Order.prisa_id != null)
+            else if (Order.prisa_id != null)
             {
                 strToReturn = Order.prisa_id.ToString();
             }

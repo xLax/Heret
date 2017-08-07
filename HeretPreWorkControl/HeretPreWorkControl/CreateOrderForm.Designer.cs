@@ -46,7 +46,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.InsertButton = new System.Windows.Forms.PictureBox();
             this.tbPanel = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbMoveToManager = new System.Windows.Forms.CheckBox();
             this.tbClientName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -56,10 +56,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox2.Location = new System.Drawing.Point(395, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(296, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(279, 68);
+            this.pictureBox2.Size = new System.Drawing.Size(209, 55);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
@@ -67,10 +66,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.CreateOrderTitle;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(289, 68);
+            this.pictureBox1.Size = new System.Drawing.Size(217, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -78,20 +76,20 @@
             // dtContactDate
             // 
             this.dtContactDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.dtContactDate.Location = new System.Drawing.Point(352, 220);
-            this.dtContactDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtContactDate.Location = new System.Drawing.Point(264, 179);
+            this.dtContactDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
             this.dtContactDate.Name = "dtContactDate";
-            this.dtContactDate.Size = new System.Drawing.Size(289, 31);
+            this.dtContactDate.Size = new System.Drawing.Size(218, 26);
             this.dtContactDate.TabIndex = 28;
+            this.dtContactDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 222);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(27, 180);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 27);
+            this.label1.Size = new System.Drawing.Size(161, 20);
             this.label1.TabIndex = 27;
             this.label1.Text = "תאריך יצירת קשר :";
             // 
@@ -99,11 +97,10 @@
             // 
             this.tbClientNumber.BackColor = System.Drawing.SystemColors.Window;
             this.tbClientNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbClientNumber.Location = new System.Drawing.Point(205, 156);
-            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientNumber.Location = new System.Drawing.Point(154, 127);
             this.tbClientNumber.Name = "tbClientNumber";
             this.tbClientNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbClientNumber.Size = new System.Drawing.Size(133, 37);
+            this.tbClientNumber.Size = new System.Drawing.Size(101, 31);
             this.tbClientNumber.TabIndex = 30;
             this.tbClientNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbClientNumber.Leave += new System.EventHandler(this.tbClientNumber_Leave);
@@ -112,23 +109,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 164);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(26, 133);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(158, 27);
+            this.label4.Size = new System.Drawing.Size(109, 20);
             this.label4.TabIndex = 29;
-            this.label4.Text = "* מספר לקוח :";
+            this.label4.Text = "מספר לקוח :";
             // 
             // tbSalesAgent
             // 
             this.tbSalesAgent.BackColor = System.Drawing.SystemColors.Info;
             this.tbSalesAgent.Enabled = false;
             this.tbSalesAgent.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbSalesAgent.Location = new System.Drawing.Point(352, 96);
-            this.tbSalesAgent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSalesAgent.Location = new System.Drawing.Point(264, 78);
             this.tbSalesAgent.Name = "tbSalesAgent";
             this.tbSalesAgent.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbSalesAgent.Size = new System.Drawing.Size(289, 37);
+            this.tbSalesAgent.Size = new System.Drawing.Size(218, 31);
             this.tbSalesAgent.TabIndex = 33;
             this.tbSalesAgent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -136,22 +131,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(36, 103);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(27, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(227, 27);
+            this.label2.Size = new System.Drawing.Size(174, 20);
             this.label2.TabIndex = 32;
             this.label2.Text = "סוכן מכירות אחראי :";
             // 
             // tbFilesNo
             // 
-            this.tbFilesNo.BackColor = System.Drawing.SystemColors.Window;
+            this.tbFilesNo.BackColor = System.Drawing.SystemColors.Info;
+            this.tbFilesNo.Enabled = false;
             this.tbFilesNo.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbFilesNo.Location = new System.Drawing.Point(352, 263);
-            this.tbFilesNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbFilesNo.Location = new System.Drawing.Point(264, 214);
             this.tbFilesNo.Name = "tbFilesNo";
             this.tbFilesNo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbFilesNo.Size = new System.Drawing.Size(289, 37);
+            this.tbFilesNo.Size = new System.Drawing.Size(218, 31);
             this.tbFilesNo.TabIndex = 35;
             this.tbFilesNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -159,45 +153,45 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(36, 271);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(27, 220);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(157, 27);
+            this.label3.Size = new System.Drawing.Size(121, 20);
             this.label3.TabIndex = 34;
             this.label3.Text = "מספר קבצים :";
             // 
             // lbPriseTempDesc
             // 
-            this.lbPriseTempDesc.BackColor = System.Drawing.SystemColors.Window;
+            this.lbPriseTempDesc.BackColor = System.Drawing.SystemColors.Info;
+            this.lbPriseTempDesc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbPriseTempDesc.Enabled = false;
             this.lbPriseTempDesc.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbPriseTempDesc.FormattingEnabled = true;
-            this.lbPriseTempDesc.Location = new System.Drawing.Point(41, 316);
-            this.lbPriseTempDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbPriseTempDesc.Location = new System.Drawing.Point(31, 257);
             this.lbPriseTempDesc.Name = "lbPriseTempDesc";
-            this.lbPriseTempDesc.Size = new System.Drawing.Size(185, 33);
+            this.lbPriseTempDesc.Size = new System.Drawing.Size(140, 28);
             this.lbPriseTempDesc.TabIndex = 37;
             // 
             // tbPrisaTempDesc
             // 
-            this.tbPrisaTempDesc.BackColor = System.Drawing.SystemColors.Window;
-            this.tbPrisaTempDesc.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPrisaTempDesc.Location = new System.Drawing.Point(352, 313);
-            this.tbPrisaTempDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPrisaTempDesc.BackColor = System.Drawing.SystemColors.Info;
+            this.tbPrisaTempDesc.Enabled = false;
+            this.tbPrisaTempDesc.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbPrisaTempDesc.Location = new System.Drawing.Point(264, 254);
             this.tbPrisaTempDesc.Name = "tbPrisaTempDesc";
             this.tbPrisaTempDesc.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbPrisaTempDesc.Size = new System.Drawing.Size(289, 37);
+            this.tbPrisaTempDesc.Size = new System.Drawing.Size(218, 28);
             this.tbPrisaTempDesc.TabIndex = 36;
             this.tbPrisaTempDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbAmount
             // 
-            this.tbAmount.BackColor = System.Drawing.SystemColors.Window;
+            this.tbAmount.BackColor = System.Drawing.SystemColors.Info;
+            this.tbAmount.Enabled = false;
             this.tbAmount.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbAmount.Location = new System.Drawing.Point(352, 362);
-            this.tbAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAmount.Location = new System.Drawing.Point(264, 294);
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbAmount.Size = new System.Drawing.Size(289, 37);
+            this.tbAmount.Size = new System.Drawing.Size(218, 31);
             this.tbAmount.TabIndex = 39;
             this.tbAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -205,10 +199,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(36, 369);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(27, 300);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 27);
+            this.label7.Size = new System.Drawing.Size(62, 20);
             this.label7.TabIndex = 38;
             this.label7.Text = "כמות :";
             // 
@@ -216,21 +209,20 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(469, 425);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(352, 345);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(116, 27);
+            this.label6.Size = new System.Drawing.Size(90, 20);
             this.label6.TabIndex = 41;
             this.label6.Text = "צור הזמנה";
             // 
             // InsertButton
             // 
             this.InsertButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.InsertButton.Enabled = false;
             this.InsertButton.Image = global::HeretPreWorkControl.Properties.Resources.Plus_icon;
-            this.InsertButton.Location = new System.Drawing.Point(592, 416);
-            this.InsertButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.InsertButton.Location = new System.Drawing.Point(444, 338);
             this.InsertButton.Name = "InsertButton";
-            this.InsertButton.Size = new System.Drawing.Size(51, 43);
+            this.InsertButton.Size = new System.Drawing.Size(38, 35);
             this.InsertButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.InsertButton.TabIndex = 40;
             this.InsertButton.TabStop = false;
@@ -241,48 +233,46 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(16, 484);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Location = new System.Drawing.Point(12, 393);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(656, 35);
+            this.tbPanel.Size = new System.Drawing.Size(493, 29);
             this.tbPanel.TabIndex = 42;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // checkBox1
+            // cbMoveToManager
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.checkBox1.Location = new System.Drawing.Point(41, 428);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(340, 28);
-            this.checkBox1.TabIndex = 43;
-            this.checkBox1.Text = "הזמנה חוזרת ( העבר לאישור מנהל )";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbMoveToManager.AutoSize = true;
+            this.cbMoveToManager.Enabled = false;
+            this.cbMoveToManager.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.cbMoveToManager.Location = new System.Drawing.Point(31, 348);
+            this.cbMoveToManager.Name = "cbMoveToManager";
+            this.cbMoveToManager.Size = new System.Drawing.Size(277, 23);
+            this.cbMoveToManager.TabIndex = 43;
+            this.cbMoveToManager.Text = "הזמנה חוזרת ( העבר לאישור מנהל )";
+            this.cbMoveToManager.UseVisualStyleBackColor = true;
             // 
             // tbClientName
             // 
             this.tbClientName.BackColor = System.Drawing.SystemColors.Info;
             this.tbClientName.Enabled = false;
             this.tbClientName.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbClientName.Location = new System.Drawing.Point(352, 142);
-            this.tbClientName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientName.Location = new System.Drawing.Point(264, 115);
             this.tbClientName.Multiline = true;
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbClientName.Size = new System.Drawing.Size(289, 70);
+            this.tbClientName.Size = new System.Drawing.Size(218, 58);
             this.tbClientName.TabIndex = 44;
             this.tbClientName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CreateOrderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(689, 528);
+            this.ClientSize = new System.Drawing.Size(517, 429);
             this.Controls.Add(this.tbClientName);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbMoveToManager);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.InsertButton);
@@ -303,7 +293,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "CreateOrderForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -311,6 +300,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
             this.Load += new System.EventHandler(this.CreateOrderForm_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CreateOrderForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertButton)).EndInit();
@@ -338,7 +328,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox InsertButton;
         private System.Windows.Forms.TextBox tbPanel;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbMoveToManager;
         private System.Windows.Forms.TextBox tbClientName;
     }
 }

@@ -101,6 +101,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EnterOfferDataPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterOfferDataPopup.Designer.cs">
+      <DependentUpon>EnterOfferDataPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Excel.cs" />
     <Compile Include="CreateClientForm.cs">
       <SubType>Form</SubType>
@@ -165,6 +171,12 @@
     <Compile Include="SalesMainForm.Designer.cs">
       <DependentUpon>SalesMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchClientPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchClientPopup.Designer.cs">
+      <DependentUpon>SearchClientPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="tbl_action_to_dept.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
@@ -214,6 +226,9 @@
     <EmbeddedResource Include="EnterDeclinedOrdersForm.resx">
       <DependentUpon>EnterDeclinedOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EnterOfferDataPopup.resx">
+      <DependentUpon>EnterOfferDataPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InsertClientOrderIDForm.resx">
       <DependentUpon>InsertClientOrderIDForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -244,6 +259,9 @@
     </Compile>
     <EmbeddedResource Include="SalesMainForm.resx">
       <DependentUpon>SalesMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchClientPopup.resx">
+      <DependentUpon>SearchClientPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TopUserForm.resx">
       <DependentUpon>TopUserForm.cs</DependentUpon>
@@ -280,6 +298,8 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\EnterOfferTitle.png" />
+    <None Include="Resources\SearchClientTitle.png" />
     <None Include="Resources\CreateOrderTitle.png" />
     <None Include="Resources\CreateUserTitle.png" />
     <None Include="Resources\AddClientTitle.png" />

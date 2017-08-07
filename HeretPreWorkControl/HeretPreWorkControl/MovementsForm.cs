@@ -42,9 +42,16 @@ namespace HeretPreWorkControl
 
             dtSalesOfferDate.Format = DateTimePickerFormat.Custom;
             dtSalesOfferDate.CustomFormat = "dd/MM/yyyy";
+            dtSalesOfferDate.MaxDate = DateTime.Today;
 
             this.lstActionsToDepartments = lstActionsToDept;
             this.currentOrder = SelectedOrder;
+        }
+
+        private void SetZebraMode()
+        {
+            dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.AntiqueWhite;
         }
 
         private void MovementsForm_Load(object sender, EventArgs e)
@@ -64,6 +71,8 @@ namespace HeretPreWorkControl
                     dataGridView.Rows.Add(strRecievedDept);
                 }                
             }
+
+            SetZebraMode();
 
             HideAllInputFields();
         }
@@ -92,7 +101,11 @@ namespace HeretPreWorkControl
             {
                 tbPanel.Text = "אנא בחר מחלקה אחת";
             }
-            if(nSelectedDepartID == 0)
+            else if(dataGridView.SelectedRows.Count == 0)
+            {
+                tbPanel.Text = "אנא בחר מחלקה (סמן את כל השורה )";
+            }
+            else if(nSelectedDepartID == 0)
             {
                 tbPanel.Text = "אנא בחר מחלקה להעברת העבודה";
             }
@@ -109,7 +122,7 @@ namespace HeretPreWorkControl
                     {
                         using (var context = new DB_Entities())
                         {
-                            if (!strOfferID.Equals(String.Empty))
+                            if (!strOfferID.Trim(' ').Equals(String.Empty))
                             {
                                 tbl_offers currOffer = new tbl_offers();
                                 currOffer.offer_id = strOfferID;
@@ -148,7 +161,7 @@ namespace HeretPreWorkControl
                 {
                     if (lbStudioWork.SelectedItem == null)
                     {
-                        tbPanel.Text = "אנא בחר עבודה לביצוע של מחלקת קדם דפוס";
+                        tbPanel.Text = "אנא בחר עבודה לביצוע של מחלקת סטודיו";
                     }
                     else
                     {
@@ -219,16 +232,6 @@ namespace HeretPreWorkControl
                     }
                 }
             }      
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

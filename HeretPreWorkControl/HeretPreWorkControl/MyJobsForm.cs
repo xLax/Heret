@@ -146,7 +146,9 @@ namespace HeretPreWorkControl
                         // Studio model approve - קבלת אישור מהלקוח על דגם סטודיו
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeStudioWaitClient)
                         {
-                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo);
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+
+                            // DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
                             {
@@ -189,7 +191,9 @@ namespace HeretPreWorkControl
                         }
                         else if(lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
                         {
-                            DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+
+                            // DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
                             {
@@ -238,6 +242,56 @@ namespace HeretPreWorkControl
                                  SelectedOrder.studio_agent_name == null ))
                         {
                             tbPanel.Text = "שים לב! עליך למנות עובד לביצוע לפני ביצוע העבודה";
+                        }
+                        else if(SelectedOrder.action_type_id == Globals.ActionTypeSetAndSendOffer)
+                        {
+                            using (var context = new DB_Entities())
+                            {
+                                try
+                                {
+                                    tbl_offers currOffer = context.tbl_offers
+                                            .Where(o => o.order_id == SelectedOrder.ID)
+                                                        .SingleOrDefault<tbl_offers>();
+
+                                    if(currOffer == null)
+                                    {
+                                        DialogResult result = MessageBox.Show("שים לב! לא הזנת נתונים על הצעת מחיר האם ברצונך להזין כעת ?", "הצעת מחיר", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+
+                                        // DialogResult result = MessageBox.Show("שים לב! לא הזנת נתונים על הצעת מחיר האם ברצונך להזין כעת ?", "הצעת מחיר", MessageBoxButtons.YesNo);
+
+                                        if (result == DialogResult.Yes)
+                                        {
+                                            new EnterOfferDataPopup(SelectedOrder.ID).ShowDialog();
+                                        }
+                                        else if (result == DialogResult.No)
+                                        {
+                                            if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                            {
+                                                tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                            }
+                                            else
+                                            {
+                                                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                        {
+                                            tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                        }
+                                        else
+                                        {
+                                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                        }
+                                    }
+                                }
+                                catch(Exception ex)
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
                         }
                         else
                         { 
@@ -328,32 +382,10 @@ namespace HeretPreWorkControl
 
                     int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
 
-                    Nullable<int> nPrisaID = null, nTemplateID = null;
-                    string strProjectDesc = null;
-
-                    try
-                    {
-                        nPrisaID = int.Parse(strThirdCol);
-                    }
-                    catch (Exception ex)
-                    {
-                        try
-                        {
-                            nTemplateID = int.Parse(strThirdCol);
-                        }
-                        catch (Exception ex2)
-                        {
-                            strProjectDesc = strThirdCol;
-                        }
-                    }
-
                     tbl_orders SelectedOrder =
                             Globals.MyJobs.Where(m => m.ID == nOrderID &&
                                                       m.client_id == nClientID &&
-                                                      m.files_number == NoFiles &&
-                                                      (m.prisa_id == nPrisaID ||
-                                                       m.template_id == nTemplateID ||
-                                                       m.project_desc == strProjectDesc)).SingleOrDefault<tbl_orders>();
+                                                      m.files_number == NoFiles).SingleOrDefault<tbl_orders>();
 
                     if (SelectedOrder == null)
                     {

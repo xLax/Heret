@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5a395d85384a4580b2b1facf3d33a509" Name="Diagram1">
+      <Diagram DiagramId="5a395d85384a4580b2b1facf3d33a509" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_action_to_dept" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_client_response" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_clients" Width="1.5" PointX="3.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_clients" Width="1.5" PointX="3.625" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_employees" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_offers" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_orders" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_sla_actions" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_sla_data" Width="1.5" PointX="8.25" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_user_groups" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_users" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="heroku_8784ca4f43222c1Model.tbl_users" Width="1.5" PointX="1.875" PointY="13.5" IsExpanded="true" />
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.action" ManuallyRouted="false" />
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.dept" ManuallyRouted="false" />
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.next_dept_action" ManuallyRouted="false" />
@@ -28,6 +28,7 @@
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.special_department" ManuallyRouted="false" />
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.user_id" ManuallyRouted="false" />
         <AssociationConnector Association="heroku_8784ca4f43222c1Model.Id" ManuallyRouted="false" />
+        <AssociationConnector Association="heroku_8784ca4f43222c1Model.special_action_type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

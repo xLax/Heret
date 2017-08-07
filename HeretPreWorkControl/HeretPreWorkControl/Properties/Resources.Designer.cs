@@ -173,6 +173,16 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EnterOfferTitle {
+            get {
+                object obj = ResourceManager.GetObject("EnterOfferTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Go_icon {
             get {
                 object obj = ResourceManager.GetObject("Go_icon", resourceCulture);
@@ -316,6 +326,16 @@ namespace HeretPreWorkControl.Properties {
         internal static System.Drawing.Bitmap Refresh_icon {
             get {
                 object obj = ResourceManager.GetObject("Refresh_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchClientTitle {
+            get {
+                object obj = ResourceManager.GetObject("SearchClientTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

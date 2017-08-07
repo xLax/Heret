@@ -115,8 +115,7 @@ namespace HeretPreWorkControl
 
         private void LoginForm_KeyUp(object sender, KeyEventArgs e)
         {
-            // Key value of the key "Enter"
-            if (e.KeyValue == 13)
+            if (e.KeyValue == Globals.KeyValueEnter)
             {
                 this.Login_Button_Click(new object(), new EventArgs());
             }

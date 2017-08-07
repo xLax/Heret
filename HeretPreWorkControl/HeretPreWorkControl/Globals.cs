@@ -8,6 +8,11 @@ namespace HeretPreWorkControl
 {
     public class Globals
     {
+        // Keyboard Values
+        public const int KeyValueEnter = 13;
+        public const int KeyValueF6 = 117;
+
+        // User group ID
         public const int ResponsibleID = 0;
         public const int AdminID = 1;
         public const int SalesUserID = 2;
@@ -67,6 +72,7 @@ namespace HeretPreWorkControl
         public const long MillInDay = 86400000;
 
         // Action Type constants
+        public const int ActionTypeNewOrder = 0;
         public const int ActionTypeRecieveClientOrder = 5;
         public const int ActionTypeInsertOrderID = 10;
         public const int ActionTypeSetAndSendOffer = 3;

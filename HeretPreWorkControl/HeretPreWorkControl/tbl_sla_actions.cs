@@ -20,6 +20,7 @@ namespace HeretPreWorkControl
             this.tbl_action_to_dept = new HashSet<tbl_action_to_dept>();
             this.tbl_action_to_dept1 = new HashSet<tbl_action_to_dept>();
             this.tbl_orders = new HashSet<tbl_orders>();
+            this.tbl_orders1 = new HashSet<tbl_orders>();
         }
     
         public int ID { get; set; }
@@ -33,5 +34,7 @@ namespace HeretPreWorkControl
         public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_orders> tbl_orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_orders> tbl_orders1 { get; set; }
     }
 }

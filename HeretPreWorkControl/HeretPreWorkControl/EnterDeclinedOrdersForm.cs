@@ -88,14 +88,12 @@ namespace HeretPreWorkControl
             tbPrisaTempDesc.Text = Utilities.GetFilledDataFromOrder(DeclinedOrder);
 
             // Need to know which one for the drop down list
-            if (DeclinedOrder.template_id != 0 &&
-                DeclinedOrder.template_id != null)
+            if (DeclinedOrder.template_id != null)
             {
                 lbPriseTempDesc.SelectedItem = Globals.TemplateNumber;
                 tbPrisaTempDesc.Text = DeclinedOrder.template_id.ToString();
             }
-            else if (DeclinedOrder.prisa_id != 0 &&
-                     DeclinedOrder.prisa_id != null)
+            else if (DeclinedOrder.prisa_id != null)
             {
                 lbPriseTempDesc.SelectedItem = Globals.PrisaNumber;
                 tbPrisaTempDesc.Text = DeclinedOrder.prisa_id.ToString();

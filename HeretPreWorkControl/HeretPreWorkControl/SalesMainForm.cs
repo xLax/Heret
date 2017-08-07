@@ -141,7 +141,7 @@ namespace HeretPreWorkControl
 
         private void pbEnterDeclinedOrder_Click(object sender, EventArgs e)
         {
-            if(Globals.MyDeclinedOrders == null)
+            if(Globals.MyDeclinedOrders.Count == 0)
             {
                 tbPanel.Text = "אין הזמנות שנדחו שצריך להזין";
                 // new EnterDeclinedOrdersForm(new tbl_orders()).Show();
