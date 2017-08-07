@@ -186,8 +186,16 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    nMaxID = context.tbl_orders.OrderByDescending(u => u.ID).FirstOrDefault<tbl_orders>().ID;
-                    nMaxID++;
+                    tbl_orders order = context.tbl_orders.OrderByDescending(u => u.ID).FirstOrDefault<tbl_orders>();
+
+                    if(order == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = order.ID + 1;
+                    }
                 }
                 catch(Exception ex)
                 {

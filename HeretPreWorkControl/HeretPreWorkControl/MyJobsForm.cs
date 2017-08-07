@@ -409,39 +409,46 @@ namespace HeretPreWorkControl
             {
                 tbPanel.Text = "שגיאה! עליך לבחור בעובד לביצוע העבודה";
             }
-            else if(this.ListSelectedOrder != null)
+            else 
             {
-                if (this.ListSelectedOrder.curr_departnent_id == Globals.StudioUserID)
+                if (this.ListSelectedOrder != null)
                 {
-                    this.ListSelectedOrder.studio_agent_name = lbEmployees.SelectedItem.ToString(); 
-                }
-                else if(this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
-                {
-                    this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
-                }
-
-                strEmployeeName = lbEmployees.SelectedItem.ToString();
-
-                using (var context = new DB_Entities())
-                {
-                    try
+                    if (this.ListSelectedOrder.curr_departnent_id == Globals.StudioUserID)
                     {
-                        context.tbl_orders.Attach(this.ListSelectedOrder);
-                        var Entry = context.Entry(this.ListSelectedOrder);
-
-                        Entry.Property(o => o.kadas_agent_name).IsModified = true;
-                        Entry.Property(o => o.studio_agent_name).IsModified = true;
-
-                        context.SaveChanges();
-
-                        tbPanel.Text = "העובד " + strEmployeeName + " מונה בהצלחה לעבודה";
-
-                        this.SilentRefresh();
+                        this.ListSelectedOrder.studio_agent_name = lbEmployees.SelectedItem.ToString();
                     }
-                    catch(Exception ex)
+                    else if (this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
                     {
-                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                        this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
                     }
+
+                    strEmployeeName = lbEmployees.SelectedItem.ToString();
+
+                    using (var context = new DB_Entities())
+                    {
+                        try
+                        {
+                            context.tbl_orders.Attach(this.ListSelectedOrder);
+                            var Entry = context.Entry(this.ListSelectedOrder);
+
+                            Entry.Property(o => o.kadas_agent_name).IsModified = true;
+                            Entry.Property(o => o.studio_agent_name).IsModified = true;
+
+                            context.SaveChanges();
+
+                            tbPanel.Text = "העובד " + strEmployeeName + " מונה בהצלחה לעבודה";
+
+                            this.SilentRefresh();
+                        }
+                        catch (Exception ex)
+                        {
+                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                        }
+                    }
+                }
+                else
+                {
+                    tbPanel.Text = "שגיאה! עליך לסמן את אחת השורות";
                 }
             }
         }

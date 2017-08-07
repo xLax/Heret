@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="heroku_8784ca4f43222c1Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_action_to_dept">
           <Key>
             <PropertyRef Name="ID" />
@@ -92,12 +92,11 @@
         </EntityType>
         <EntityType Name="tbl_sla_data">
           <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="sla_id" />
-            <PropertyRef Name="user_id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="sla_id" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
@@ -251,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="sla_id">
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="sla_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="special_action_type">
           <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="0..1" />
           <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
@@ -287,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="heroku_8784ca4f43222c1ModelStoreContainer">
+        <EntityContainer Name="DB_ModelStoreContainer">
           <EntitySet Name="tbl_action_to_dept" EntityType="Self.tbl_action_to_dept" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
@@ -342,6 +353,10 @@
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
+          <AssociationSet Name="sla_id" Association="Self.sla_id">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
           <AssociationSet Name="special_action_type" Association="Self.special_action_type">
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_orders" EntitySet="tbl_orders" />
@@ -355,10 +370,11 @@
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="heroku_8784ca4f43222c1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tbl_action_to_dept">
           <Key>
             <PropertyRef Name="ID" />
@@ -376,7 +392,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.client_response" FromRole="tbl_client_response" ToRole="tbl_orders" />
         </EntityType>
         <EntityType Name="tbl_clients">
@@ -384,10 +400,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="english_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="person_responsible" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
+          <Property Name="english_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
+          <Property Name="person_responsible" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.client" FromRole="tbl_clients" ToRole="tbl_orders" />
         </EntityType>
         <EntityType Name="tbl_employees">
@@ -396,7 +412,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Department_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.departments" FromRole="tbl_employees" ToRole="tbl_user_groups" />
         </EntityType>
         <EntityType Name="tbl_offers">
@@ -413,42 +429,42 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="sales_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sales_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="client_id" Type="Int32" />
+          <Property Name="creation_date" Type="DateTime" />
           <Property Name="contact_date" Type="DateTime" />
           <Property Name="files_number" Type="Int32" />
           <Property Name="client_order_id" Type="Int32" />
-          <Property Name="template_id" Type="String" />
-          <Property Name="prisa_id" Type="String" />
-          <Property Name="project_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="template_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="prisa_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="project_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="amount" Type="Int32" />
-          <Property Name="studio_work" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="studio_work" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="reject_date" Type="DateTime" />
-          <Property Name="reject_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="comments" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="reject_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="comments" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="curr_departnent_id" Type="Int32" />
-          <Property Name="studio_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="kadas_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="orders_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="studio_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="kadas_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="orders_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="action_type_id" Type="Int32" />
           <Property Name="client_response_id" Type="Int32" />
           <Property Name="special_approve" Type="Int32" />
           <Property Name="special_department_id" Type="Int32" />
-          <Property Name="order_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="order_number" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="current_status_id" Type="Int32" Nullable="false" />
           <Property Name="dep_recieve_date" Type="DateTime" />
           <Property Name="dep_recieve_hour" Type="Time" />
-          <Property Name="kadas_work" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="kadas_work" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="special_action_type_id" Type="Int32" />
           <NavigationProperty Name="tbl_client_response" Relationship="Self.client_response" FromRole="tbl_orders" ToRole="tbl_client_response" />
           <NavigationProperty Name="tbl_clients" Relationship="Self.client" FromRole="tbl_orders" ToRole="tbl_clients" />
           <NavigationProperty Name="tbl_offers" Relationship="Self.order" FromRole="tbl_orders" ToRole="tbl_offers" />
           <NavigationProperty Name="tbl_sla_actions" Relationship="Self.action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.current_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
           <NavigationProperty Name="tbl_sla_data" Relationship="Self.order_id" FromRole="tbl_orders" ToRole="tbl_sla_data" />
+          <NavigationProperty Name="tbl_sla_actions1" Relationship="Self.special_action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups1" Relationship="Self.special_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
-          <Property Name="creation_date" Type="DateTime" />
-          <Property Name="special_action_type_id" Type="Int32" />
-          <NavigationProperty Name="tbl_sla_actions1" Relationship="heroku_8784ca4f43222c1Model.special_action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -457,24 +473,25 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sla_hours" Type="Int32" Nullable="false" />
-          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_action_to_dept" Relationship="Self.action" FromRole="tbl_sla_actions" ToRole="tbl_action_to_dept" />
           <NavigationProperty Name="tbl_action_to_dept1" Relationship="Self.next_dept_action" FromRole="tbl_sla_actions" ToRole="tbl_action_to_dept" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.action_type" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
-          <NavigationProperty Name="tbl_orders1" Relationship="heroku_8784ca4f43222c1Model.special_action_type" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_orders1" Relationship="Self.special_action_type" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_sla_data" Relationship="Self.sla_id" FromRole="tbl_sla_actions" ToRole="tbl_sla_data" />
         </EntityType>
         <EntityType Name="tbl_sla_data">
           <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="sla_id" />
-            <PropertyRef Name="user_id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="sla_id" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.order_id" FromRole="tbl_sla_data" ToRole="tbl_orders" />
+          <NavigationProperty Name="tbl_sla_actions" Relationship="Self.sla_id" FromRole="tbl_sla_data" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_users" Relationship="Self.user_id" FromRole="tbl_sla_data" ToRole="tbl_users" />
         </EntityType>
         <EntityType Name="tbl_user_groups">
@@ -482,7 +499,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_action_to_dept" Relationship="Self.dept" FromRole="tbl_user_groups" ToRole="tbl_action_to_dept" />
           <NavigationProperty Name="tbl_employees" Relationship="Self.departments" FromRole="tbl_user_groups" ToRole="tbl_employees" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.current_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
@@ -494,9 +511,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Nullable="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="65535" FixedLength="false" Nullable="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_group_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_sla_data" Relationship="Self.user_id" FromRole="tbl_users" ToRole="tbl_sla_data" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.Id" FromRole="tbl_users" ToRole="tbl_user_groups" />
@@ -621,6 +638,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="special_action_type">
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="0..1" />
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders">
+              <PropertyRef Name="special_action_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="special_department">
           <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
           <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
@@ -630,6 +659,18 @@
             </Principal>
             <Dependent Role="tbl_orders">
               <PropertyRef Name="special_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sla_id">
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="1" />
+          <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_sla_actions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="sla_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -708,9 +749,17 @@
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
+          <AssociationSet Name="special_action_type" Association="Self.special_action_type">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
           <AssociationSet Name="special_department" Association="Self.special_department">
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_orders" EntitySet="tbl_orders" />
+          </AssociationSet>
+          <AssociationSet Name="sla_id" Association="Self.sla_id">
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
           <AssociationSet Name="user_id" Association="Self.user_id">
             <End Role="tbl_users" EntitySet="tbl_users" />
@@ -720,31 +769,15 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_users" EntitySet="tbl_users" />
           </AssociationSet>
-          <AssociationSet Name="special_action_type" Association="heroku_8784ca4f43222c1Model.special_action_type">
-            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
-            <End Role="tbl_orders" EntitySet="tbl_orders" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="special_action_type">
-          <End Type="heroku_8784ca4f43222c1Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="0..1" />
-          <End Type="heroku_8784ca4f43222c1Model.tbl_orders" Role="tbl_orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_sla_actions">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbl_orders">
-              <PropertyRef Name="special_action_type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="heroku_8784ca4f43222c1ModelStoreContainer" CdmEntityContainer="DB_Entities">
+        <EntityContainerMapping StorageEntityContainer="DB_ModelStoreContainer" CdmEntityContainer="DB_Entities">
           <EntitySetMapping Name="tbl_action_to_dept">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_action_to_dept">
+            <EntityTypeMapping TypeName="DB_Model.tbl_action_to_dept">
               <MappingFragment StoreEntitySet="tbl_action_to_dept">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="action_ID" ColumnName="action_ID" />
@@ -754,7 +787,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_client_response">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_client_response">
+            <EntityTypeMapping TypeName="DB_Model.tbl_client_response">
               <MappingFragment StoreEntitySet="tbl_client_response">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="desc" ColumnName="desc" />
@@ -762,7 +795,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_clients">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_clients">
+            <EntityTypeMapping TypeName="DB_Model.tbl_clients">
               <MappingFragment StoreEntitySet="tbl_clients">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -773,7 +806,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_employees">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_employees">
+            <EntityTypeMapping TypeName="DB_Model.tbl_employees">
               <MappingFragment StoreEntitySet="tbl_employees">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Department_id" ColumnName="Department_id" />
@@ -782,7 +815,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_offers">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_offers">
+            <EntityTypeMapping TypeName="DB_Model.tbl_offers">
               <MappingFragment StoreEntitySet="tbl_offers">
                 <ScalarProperty Name="offer_id" ColumnName="offer_id" />
                 <ScalarProperty Name="offer_date" ColumnName="offer_date" />
@@ -791,13 +824,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_orders">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_orders">
+            <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
-                <ScalarProperty Name="special_action_type_id" ColumnName="special_action_type_id" />
-                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sales_agent_name" ColumnName="sales_agent_name" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
                 <ScalarProperty Name="contact_date" ColumnName="contact_date" />
                 <ScalarProperty Name="files_number" ColumnName="files_number" />
                 <ScalarProperty Name="client_order_id" ColumnName="client_order_id" />
@@ -822,11 +854,12 @@
                 <ScalarProperty Name="dep_recieve_date" ColumnName="dep_recieve_date" />
                 <ScalarProperty Name="dep_recieve_hour" ColumnName="dep_recieve_hour" />
                 <ScalarProperty Name="kadas_work" ColumnName="kadas_work" />
+                <ScalarProperty Name="special_action_type_id" ColumnName="special_action_type_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_sla_actions">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_sla_actions">
+            <EntityTypeMapping TypeName="DB_Model.tbl_sla_actions">
               <MappingFragment StoreEntitySet="tbl_sla_actions">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -836,10 +869,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_sla_data">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_sla_data">
+            <EntityTypeMapping TypeName="DB_Model.tbl_sla_data">
               <MappingFragment StoreEntitySet="tbl_sla_data">
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sla_id" ColumnName="sla_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -847,7 +881,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_user_groups">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_user_groups">
+            <EntityTypeMapping TypeName="DB_Model.tbl_user_groups">
               <MappingFragment StoreEntitySet="tbl_user_groups">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -855,7 +889,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_users">
-            <EntityTypeMapping TypeName="heroku_8784ca4f43222c1Model.tbl_users">
+            <EntityTypeMapping TypeName="DB_Model.tbl_users">
               <MappingFragment StoreEntitySet="tbl_users">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />

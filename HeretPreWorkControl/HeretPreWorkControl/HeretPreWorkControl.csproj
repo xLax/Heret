@@ -288,16 +288,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB Model.edmx</DependentUpon>
-      <LastGenOutput>DB Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DB Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB Model.edmx</DependentUpon>
-      <LastGenOutput>DB Model.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\EnterOfferTitle.png" />
     <None Include="Resources\SearchClientTitle.png" />
     <None Include="Resources\CreateOrderTitle.png" />
@@ -373,6 +363,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB Model.edmx</DependentUpon>
+      <LastGenOutput>DB Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DB Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB Model.edmx</DependentUpon>
+      <LastGenOutput>DB Model.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,6 +24,7 @@ namespace HeretPreWorkControl
         public int ID { get; set; }
         public string sales_agent_name { get; set; }
         public Nullable<int> client_id { get; set; }
+        public Nullable<System.DateTime> creation_date { get; set; }
         public Nullable<System.DateTime> contact_date { get; set; }
         public Nullable<int> files_number { get; set; }
         public Nullable<int> client_order_id { get; set; }
@@ -48,7 +49,6 @@ namespace HeretPreWorkControl
         public Nullable<System.DateTime> dep_recieve_date { get; set; }
         public Nullable<System.TimeSpan> dep_recieve_hour { get; set; }
         public string kadas_work { get; set; }
-        public Nullable<System.DateTime> creation_date { get; set; }
         public Nullable<int> special_action_type_id { get; set; }
     
         public virtual tbl_client_response tbl_client_response { get; set; }
@@ -59,7 +59,7 @@ namespace HeretPreWorkControl
         public virtual tbl_user_groups tbl_user_groups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_sla_data> tbl_sla_data { get; set; }
-        public virtual tbl_user_groups tbl_user_groups1 { get; set; }
         public virtual tbl_sla_actions tbl_sla_actions1 { get; set; }
+        public virtual tbl_user_groups tbl_user_groups1 { get; set; }
     }
 }

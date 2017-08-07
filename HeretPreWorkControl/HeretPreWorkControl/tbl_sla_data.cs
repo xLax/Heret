@@ -14,13 +14,15 @@ namespace HeretPreWorkControl
     
     public partial class tbl_sla_data
     {
-        public int order_id { get; set; }
+        public int ID { get; set; }
         public int sla_id { get; set; }
+        public int order_id { get; set; }
         public int user_id { get; set; }
         public System.DateTime date { get; set; }
         public string status { get; set; }
     
         public virtual tbl_orders tbl_orders { get; set; }
+        public virtual tbl_sla_actions tbl_sla_actions { get; set; }
         public virtual tbl_users tbl_users { get; set; }
     }
 }
