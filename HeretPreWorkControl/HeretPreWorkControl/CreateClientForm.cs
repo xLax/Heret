@@ -93,7 +93,7 @@ namespace HeretPreWorkControl
 
         private void InsertButton_Click(object sender, EventArgs e)
         {
-            if (!tbClientNumber.Text.ToString().Equals(String.Empty))
+            if (!tbClientNumber.Text.ToString().Equals(String.Empty)) 
             {
                 int nClientNumber;
                 Boolean isConvertionOk = int.TryParse(tbClientNumber.Text.ToString(), out nClientNumber);
