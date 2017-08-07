@@ -103,6 +103,16 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CreateOrderTitle {
+            get {
+                object obj = ResourceManager.GetObject("CreateOrderTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreateUserTitle {
             get {
                 object obj = ResourceManager.GetObject("CreateUserTitle", resourceCulture);
