@@ -167,6 +167,11 @@ namespace HeretPreWorkControl
 
         private void pbAddUser_Click(object sender, EventArgs e)
         {
+            new CreateClientForm().Show();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
             new CreateOrderForm().Show();
         }
     }
