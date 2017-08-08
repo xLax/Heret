@@ -158,6 +158,9 @@ namespace HeretPreWorkControl
                                 NewOrder.client_id = int.Parse(tbClientNumber.Text.ToString());
                                 NewOrder.sales_agent_name = Globals.Name;
 
+                                NewOrder.dep_recieve_date = DateTime.Today.Date;
+                                NewOrder.dep_recieve_hour = DateTime.Now.TimeOfDay;
+
                                 NewOrder.contact_date = dtContactDate.Value;
                                 NewOrder.creation_date = DateTime.Today.Date;
 
@@ -180,13 +183,22 @@ namespace HeretPreWorkControl
                                     NewOrder.project_desc = tbPrisaTempDesc.Text.ToString();
                                 }
 
+                                string strPromoteMessage = String.Empty;
+
                                 if (cbMoveToManager.Checked)
                                 {
                                     // Shit you mother fucker
+                                    NewOrder.special_department_id = Globals.AdminID;
+                                    strPromoteMessage = "ובקשת קידום נשלחה";
                                 }
                                 else
                                 {
                                     // Keep calm
+                                }
+
+                                if(NewOrder.creation_date.Value.AddDays(-2) >= NewOrder.contact_date)
+                                {
+                                    NewOrder.alert_creation_date = Globals.AlertNow;
                                 }
 
                                 using (var context = new DB_Entities())
@@ -196,7 +208,7 @@ namespace HeretPreWorkControl
                                         context.tbl_orders.Add(NewOrder);
                                         context.SaveChanges();
 
-                                        tbPanel.Text = "ההזמנה נוצרה בהצלחה !";
+                                        tbPanel.Text = "ההזמנה נוצרה בהצלחה ! " + strPromoteMessage;
 
                                         isSucceeded = true;
                                     }

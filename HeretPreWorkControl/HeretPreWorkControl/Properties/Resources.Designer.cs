@@ -353,6 +353,16 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Special_Approval_Icon_Note {
+            get {
+                object obj = ResourceManager.GetObject("Special_Approval_Icon_Note", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Statistics_Icon {
             get {
                 object obj = ResourceManager.GetObject("Statistics_Icon", resourceCulture);

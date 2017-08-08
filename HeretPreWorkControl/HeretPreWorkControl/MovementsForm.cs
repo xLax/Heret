@@ -51,7 +51,7 @@ namespace HeretPreWorkControl
         private void SetZebraMode()
         {
             dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.AntiqueWhite;
+            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.GhostWhite;
         }
 
         private void MovementsForm_Load(object sender, EventArgs e)

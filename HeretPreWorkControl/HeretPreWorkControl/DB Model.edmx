@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_action_to_dept">
           <Key>
             <PropertyRef Name="ID" />
@@ -80,6 +80,7 @@
           <Property Name="dep_recieve_hour" Type="time" Precision="0" />
           <Property Name="kadas_work" Type="varchar" MaxLength="45" />
           <Property Name="special_action_type_id" Type="int" />
+          <Property Name="alert_creation_date" Type="int" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -370,8 +371,7 @@
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -465,6 +465,7 @@
           <NavigationProperty Name="tbl_sla_data" Relationship="Self.order_id" FromRole="tbl_orders" ToRole="tbl_sla_data" />
           <NavigationProperty Name="tbl_sla_actions1" Relationship="Self.special_action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups1" Relationship="Self.special_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
+          <Property Name="alert_creation_date" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -826,6 +827,7 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="alert_creation_date" ColumnName="alert_creation_date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sales_agent_name" ColumnName="sales_agent_name" />
                 <ScalarProperty Name="client_id" ColumnName="client_id" />

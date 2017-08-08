@@ -13,7 +13,7 @@ namespace HeretPreWorkControl
 {
     public partial class TopUserForm : Form
     {
-        private DataSet Result;
+        // private DataSet Result;
 
         public TopUserForm()
         {
@@ -23,6 +23,8 @@ namespace HeretPreWorkControl
         private void TopUserForm_Load(object sender, EventArgs e)
         {
             lblHello.Text = "שלום " + Globals.Name;
+
+            tmrSpecialApproveTimer_Tick(new object(), new EventArgs());
         }
 
         private void pbAddUser_Click(object sender, EventArgs e)
@@ -71,6 +73,88 @@ namespace HeretPreWorkControl
                         tbPanel.Text = "שגיאה נסה שוב";
                     }
                 }*/
+        }
+
+        private void tmrLateOrdersInsertTimer_Tick(object sender, EventArgs e)
+        {
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    List<tbl_orders> lstLateOrders = context.tbl_orders
+                                .Where(o => o.alert_creation_date == Globals.AlertNow).ToList<tbl_orders>();
+
+                    foreach (tbl_orders order in lstLateOrders)
+                    {
+                        Utilities.CreatePopup("הזמנה הוזנה באיחור", "הזמנה מספר " + order.ID +
+                                              " הוזנה באיחור למערכת .\n לחץ על התראה זו בכדי לצפות בה במסך תמונת מצב",
+                                              Globals.ToTamatz);
+
+                        order.alert_creation_date = Globals.Alerted;
+
+                        context.tbl_orders.Attach(order);
+                        var Entry = context.Entry(order);
+
+                        Entry.Property(o => o.alert_creation_date).IsModified = true;
+
+                        context.SaveChanges();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                }
+            }
+        }
+
+        // תדירות האירוע - פעם בהרבה זמן
+        private void tmrSpecialApproveTimer_Tick(object sender, EventArgs e)
+        {
+            int nPrevCount = 0;
+
+            if(Globals.SpecialApprovedJobs != null)
+            {
+                nPrevCount = Globals.SpecialApprovedJobs.Count;
+            }
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    List<tbl_orders> lstSpecialApprovedOrders = context.tbl_orders
+                                .Where(o => o.special_department_id == Globals.AdminID).ToList<tbl_orders>();
+
+                    int nCurrCount = lstSpecialApprovedOrders.Count;
+
+                    if (nCurrCount > nPrevCount)
+                    {
+                        Utilities.CreatePopup("אישור קידום עבודה", "הזמנה חוזרת התקבלה, ונוצרה בקשה לקידום העבודה " +
+                                              "לחץ על התראה זו כדי להכנס למסך קידום עבודות להמשך תהליך",
+                                              Globals.ToSpecialApprove);
+
+                        Utilities.SetSpecialApprovedJobs(lstSpecialApprovedOrders);
+
+                        pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon_Note;
+                    }
+                    else if(nCurrCount > 0)
+                    {
+                        pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon_Note;
+                    }
+                    else
+                    {
+                        pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                }
+            }
+        }
+
+        private void pbSpecialApprove_Click(object sender, EventArgs e)
+        {
+            new SpecialApprovedJobsForm().Show();
         }
     }
 }

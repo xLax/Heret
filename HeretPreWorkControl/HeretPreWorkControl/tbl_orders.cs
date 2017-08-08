@@ -50,6 +50,7 @@ namespace HeretPreWorkControl
         public Nullable<System.TimeSpan> dep_recieve_hour { get; set; }
         public string kadas_work { get; set; }
         public Nullable<int> special_action_type_id { get; set; }
+        public Nullable<int> alert_creation_date { get; set; }
     
         public virtual tbl_client_response tbl_client_response { get; set; }
         public virtual tbl_clients tbl_clients { get; set; }

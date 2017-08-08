@@ -180,6 +180,7 @@
             this.label3.Size = new System.Drawing.Size(38, 20);
             this.label3.TabIndex = 14;
             this.label3.Text = "בצע";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblEnterDeclined
             // 
@@ -190,6 +191,7 @@
             this.lblEnterDeclined.Size = new System.Drawing.Size(86, 20);
             this.lblEnterDeclined.TabIndex = 16;
             this.lblEnterDeclined.Text = "הזן דחייה";
+            this.lblEnterDeclined.Click += new System.EventHandler(this.lblEnterDeclined_Click);
             // 
             // pbSetDeclinedAndInsert
             // 

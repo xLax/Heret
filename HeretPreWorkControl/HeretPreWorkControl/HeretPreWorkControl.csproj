@@ -177,6 +177,12 @@
     <Compile Include="SearchClientPopup.Designer.cs">
       <DependentUpon>SearchClientPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="SpecialApprovedJobsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpecialApprovedJobsForm.Designer.cs">
+      <DependentUpon>SpecialApprovedJobsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="tbl_action_to_dept.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchClientPopup.resx">
       <DependentUpon>SearchClientPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpecialApprovedJobsForm.resx">
+      <DependentUpon>SpecialApprovedJobsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TopUserForm.resx">
       <DependentUpon>TopUserForm.cs</DependentUpon>
@@ -375,6 +384,7 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Special Approval Icon Note.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

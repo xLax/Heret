@@ -502,5 +502,15 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEnterDeclined_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -32,6 +32,15 @@ namespace HeretPreWorkControl
                     new EnterDeclinedOrdersForm(Order).Show();
                 }
             }
+            else if(Globals.OpenScreenID == Globals.ToTamatz)
+            {
+                // Open תמונת מצב
+            }
+            else if(Globals.OpenScreenID == Globals.ToSpecialApprove)
+            {
+                // Open מסך אישור בקשות קידום עבודה
+                new SpecialApprovedJobsForm().Show();
+            }
 
             currPopup.Hide();
         }
@@ -139,6 +148,11 @@ namespace HeretPreWorkControl
                     catch (Exception ex) { }
                 }
             }
+        }
+
+        public static void SetSpecialApprovedJobs(List<tbl_orders> lstSpecialApprovedOrders)
+        {
+            Globals.SpecialApprovedJobs = lstSpecialApprovedOrders;
         }
 
         public static string GetDateInNormalFormat(DateTime date)

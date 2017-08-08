@@ -27,6 +27,8 @@ namespace HeretPreWorkControl
 
         public const int ToMyJobs = 1;
         public const int ToDeclinedOrders = 2;
+        public const int ToTamatz = 3;
+        public const int ToSpecialApprove = 4;
         public static int OpenScreenID;
 
         // Data for drop downs and shit
@@ -107,9 +109,13 @@ namespace HeretPreWorkControl
 
         public static List<tbl_orders> MyDeclinedOrders;
         public static List<tbl_orders> MyJobs;
+        public static List<tbl_orders> SpecialApprovedJobs;
 
         public static TopUserForm TopUserFormInstance;
         public static SalesMainForm SalesFormInstance;
         public static NotSalesMainForm NotSalesFormInstance;
+
+        public static int AlertNow = 1;
+        public static int Alerted = 2;
     }
 }
