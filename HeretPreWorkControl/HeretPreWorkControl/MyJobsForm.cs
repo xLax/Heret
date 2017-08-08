@@ -12,6 +12,7 @@ namespace HeretPreWorkControl
         private DataTable dtTable = new DataTable();
         private List<tbl_orders> MyJobs = new List<tbl_orders>();
         private Boolean isLoadSucceeded = true;
+        private Boolean isSpecial = false;
 
         private tbl_orders ListSelectedOrder;
 
@@ -26,6 +27,40 @@ namespace HeretPreWorkControl
             {
                 pbSetDeclinedAndInsert.Visible = false;
                 lblEnterDeclined.Visible = false;
+            }
+            else
+            {
+                Utilities.GetAllClientsList();
+                Utilities.GetAllActionsList();
+
+                foreach (tbl_orders order in Globals.MyJobs)
+                {
+                    if (order.special_department_id != null &&
+                        order.special_department_id == Globals.SalesUserID)
+                    {
+                        string strClientName = Globals.AllClients.Where(c => c.ID == order.client_id).Single<tbl_clients>().name;
+
+                        string strFilesNo = order.files_number.ToString();
+
+                        // Fourth Col
+                        string strThirdCol = Utilities.GetFilledDataFromOrder(order);
+
+                        // Fifth Col - Getting sla status
+                        tbl_sla_actions ActionData =
+                            Globals.AllActions.Where(a => a.ID == order.special_action_type_id)
+                                                            .Single<tbl_sla_actions>();
+
+                        Nullable<System.DateTime> recievedDate = order.dep_recieve_date;
+                        Nullable<System.TimeSpan> recievedHour = order.dep_recieve_hour;
+
+                        string strSlaStatus = Utilities.CalculateSlaStatus(recievedDate, recievedHour, ActionData.sla_hours);
+
+                        // Last Col
+                        string strAction = ActionData.desc;
+
+                        dataGridView.Rows.Add(order.ID.ToString(), strClientName, strFilesNo, strThirdCol, strSlaStatus, strAction);
+                    }
+                }
             }
 
             Utilities.GetAllActionToDeptList();
@@ -84,12 +119,27 @@ namespace HeretPreWorkControl
                     string strThirdCol = Utilities.GetFilledDataFromOrder(Order);
 
                     // Fifth Col - Getting sla status
-                    tbl_sla_actions ActionData =
-                        Globals.AllActions.Where(a => a.ID == Order.action_type_id)
+                    tbl_sla_actions ActionData;
+                    Nullable<System.DateTime> recievedDate;
+                    Nullable<System.TimeSpan> recievedHour;
+
+                    if (Order.special_department_id != null &&
+                       Globals.UserGroupID == Globals.KadasUserID)
+                    {
+                        ActionData = Globals.AllActions.Where(a => a.ID == Order.special_action_type_id)
                                                         .Single<tbl_sla_actions>();
 
-                    Nullable<System.DateTime> recievedDate = Order.dep_recieve_date;
-                    Nullable<System.TimeSpan> recievedHour = Order.dep_recieve_hour;
+                        recievedDate = Order.special_recieved_date;
+                        recievedHour = Order.special_recieved_hour;
+                    }
+                    else
+                    {
+                        ActionData = Globals.AllActions.Where(a => a.ID == Order.action_type_id)
+                                                        .Single<tbl_sla_actions>();
+
+                        recievedDate = Order.dep_recieve_date;
+                        recievedHour = Order.dep_recieve_hour;
+                    }
 
                     string strSlaStatus = Utilities.CalculateSlaStatus(recievedDate, recievedHour, ActionData.sla_hours);
 
@@ -120,9 +170,22 @@ namespace HeretPreWorkControl
             {
                 List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
 
-                int nActionTypeID = 
+                int nActionTypeBeforeConvertion = 0;
+
+                if((Globals.UserGroupID == Globals.KadasUserID &&
+                   SelectedOrder.special_department_id != null) ||
+                   isSpecial)
+                {
+                    nActionTypeBeforeConvertion = int.Parse(SelectedOrder.special_action_type_id.Value.ToString());
+                }
+                else
+                {
+                    nActionTypeBeforeConvertion = int.Parse(SelectedOrder.action_type_id.ToString());
+                }
+
+                int nActionTypeID =
                     Utilities.ConvertIfNeeded
-                        (int.Parse(SelectedOrder.action_type_id.ToString()));
+                        (nActionTypeBeforeConvertion);
 
                 lstActionsToDept =
                         Globals.AllActionToDept
@@ -133,7 +196,87 @@ namespace HeretPreWorkControl
                 {
                     if (lstActionsToDept.Count == 1)
                     {
-                        if (lstActionsToDept[0].action_ID == Globals.ActionTypeInsertOrderID)
+                        if(isSpecial)
+                        {
+                            if(Utilities.TransferJobAndActionToNext(SelectedOrder, isSpecial))
+                            {
+                                tbPanel.Text = "העברת העבודה התבצעה בהצלחה";
+                            }
+                            else
+                            {
+                                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                            }
+                        }
+                        else if(Globals.UserGroupID == Globals.KadasUserID &&
+                                SelectedOrder.special_department_id != null)
+                        {
+                            if (lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
+                            {
+                                DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+
+                                // DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
+
+                                if (result == DialogResult.Yes)
+                                {
+                                    if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                    {
+                                        tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                    }
+                                    else
+                                    {
+                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                    }
+                                }
+                                else if (result == DialogResult.No)
+                                {
+                                    SelectedOrder.special_action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, SelectedOrder.kadas_work);
+                                    SelectedOrder.special_recieved_date = System.DateTime.Now.Date;
+                                    SelectedOrder.special_recieved_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+
+                                    try
+                                    {
+                                        using (var context = new DB_Entities())
+                                        {
+                                            context.tbl_orders.Attach(SelectedOrder);
+                                            var Entry = context.Entry(SelectedOrder);
+
+                                            Entry.Property(o => o.action_type_id).IsModified = true;
+                                            Entry.Property(o => o.dep_recieve_date).IsModified = true;
+                                            Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+                                            Entry.Property(o => o.special_action_type_id).IsModified = true;
+                                            Entry.Property(o => o.special_recieved_date).IsModified = true;
+                                            Entry.Property(o => o.special_recieved_hour).IsModified = true;
+
+                                            context.SaveChanges();
+
+                                            this.SilentRefresh();
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                    }
+                                }
+                            }
+                            else if (SelectedOrder.special_action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                                     SelectedOrder.special_action_type_id <= Globals.ActionTypeKadasGraphicUpdate &&
+                                     SelectedOrder.kadas_agent_name == null)
+                            {
+                                tbPanel.Text = "שים לב! עליך למנות עובד לביצוע לפני ביצוע העבודה";
+                            }
+                            else
+                            {
+                                if (Utilities.TransferJobAndActionToNext(SelectedOrder))
+                                {
+                                    tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                }
+                                else
+                                {
+                                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                }
+                            }
+                        }
+                        else if (lstActionsToDept[0].action_ID == Globals.ActionTypeInsertOrderID)
                         {
                             // Insert order number
                             new InsertOrderIDForm(SelectedOrder).Show();
@@ -222,6 +365,9 @@ namespace HeretPreWorkControl
                                         Entry.Property(o => o.action_type_id).IsModified = true;
                                         Entry.Property(o => o.dep_recieve_date).IsModified = true;
                                         Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+                                        Entry.Property(o => o.special_action_type_id).IsModified = true;
+                                        Entry.Property(o => o.special_recieved_date).IsModified = true;
+                                        Entry.Property(o => o.special_recieved_hour).IsModified = true;
 
                                         context.SaveChanges();
 
@@ -377,15 +523,14 @@ namespace HeretPreWorkControl
                     // Get all the data about the selected row
                     int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
                     string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
-                    Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[2].Value;
-                    string strThirdCol = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
+
+                    string strActionDesc = dataGridView.SelectedRows[0].Cells[5].Value.ToString();
 
                     int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
 
                     tbl_orders SelectedOrder =
                             Globals.MyJobs.Where(m => m.ID == nOrderID &&
-                                                      m.client_id == nClientID &&
-                                                      m.files_number == NoFiles).SingleOrDefault<tbl_orders>();
+                                                      m.client_id == nClientID).SingleOrDefault<tbl_orders>();
 
                     if (SelectedOrder == null)
                     {
@@ -393,7 +538,18 @@ namespace HeretPreWorkControl
                     }
                     else
                     {
+                        if(SelectedOrder.special_department_id != null &&
+                           strActionDesc.Equals(Globals.AcitonMoveCheckListToOrders))
+                        {
+                            isSpecial = true;
+                        }
+                        else
+                        {
+                            isSpecial = false;
+                        }
+                        
                         selectedOrder = SelectedOrder;
+                        
                     }
                 }
             }
@@ -413,13 +569,24 @@ namespace HeretPreWorkControl
             {
                 if (this.ListSelectedOrder != null)
                 {
-                    if (this.ListSelectedOrder.curr_departnent_id == Globals.StudioUserID)
+                    if(this.ListSelectedOrder.special_department_id != null &&
+                       Globals.UserGroupID == Globals.KadasUserID)
                     {
-                        this.ListSelectedOrder.studio_agent_name = lbEmployees.SelectedItem.ToString();
+                        if (this.ListSelectedOrder.special_department_id == Globals.KadasUserID)
+                        {
+                            this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                        }
                     }
-                    else if (this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
+                    else
                     {
-                        this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                        if (this.ListSelectedOrder.curr_departnent_id == Globals.StudioUserID)
+                        {
+                            this.ListSelectedOrder.studio_agent_name = lbEmployees.SelectedItem.ToString();
+                        }
+                        else if (this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
+                        {
+                            this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                        }
                     }
 
                     strEmployeeName = lbEmployees.SelectedItem.ToString();
@@ -470,8 +637,12 @@ namespace HeretPreWorkControl
 
             if (this.ListSelectedOrder != null)
             {
-                if (this.ListSelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
-                    this.ListSelectedOrder.action_type_id <= Globals.ActionTypeKadasGraphicUpdate)
+                if ((this.ListSelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                     this.ListSelectedOrder.action_type_id <= Globals.ActionTypeKadasGraphicUpdate) ||
+                    (this.ListSelectedOrder.special_department_id != null &&
+                     Globals.UserGroupID == Globals.KadasUserID &&
+                     this.ListSelectedOrder.special_action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                     this.ListSelectedOrder.special_action_type_id <= Globals.ActionTypeKadasGraphicUpdate))
                 {
                     pbSetEmployee.Visible = true;
                     lblEmployee.Visible = true;

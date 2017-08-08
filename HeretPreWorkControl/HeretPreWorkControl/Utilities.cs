@@ -277,19 +277,45 @@ namespace HeretPreWorkControl
 
             Utilities.GetAllActionToDeptList();
 
-            int nActionTypeID = 
+            List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
+
+            int nActionTypeBeforeConvertion = 0;
+
+            if(selectedOrder.special_department_id != null &&
+               Globals.UserGroupID == Globals.KadasUserID)
+            {
+                nActionTypeBeforeConvertion = int.Parse(selectedOrder.special_action_type_id.Value.ToString());
+            }
+            else
+            {
+                nActionTypeBeforeConvertion = int.Parse(selectedOrder.action_type_id.ToString());
+            }
+
+            int nActionTypeID =
                 Utilities.ConvertIfNeeded
-                       (int.Parse(selectedOrder.action_type_id.ToString()));
+                    (nActionTypeBeforeConvertion);
 
             tbl_action_to_dept MovementData = Globals.AllActionToDept
                                     .Where(a => a.action_ID == nActionTypeID)
                                             .Single<tbl_action_to_dept>();
 
-            selectedOrder.curr_departnent_id = MovementData.recieved_department_ID;
-            selectedOrder.action_type_id = MovementData.recieved_department_action_id;
+            if (selectedOrder.special_department_id != null &&
+                Globals.UserGroupID == Globals.KadasUserID)
+            {
+                selectedOrder.special_department_id = MovementData.recieved_department_ID;
+                selectedOrder.special_action_type_id = MovementData.recieved_department_action_id;
 
-            selectedOrder.dep_recieve_date = System.DateTime.Now.Date;
-            selectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+                selectedOrder.special_recieved_date = System.DateTime.Now.Date;
+                selectedOrder.special_recieved_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+            }
+            else
+            {
+                selectedOrder.curr_departnent_id = MovementData.recieved_department_ID;
+                selectedOrder.action_type_id = MovementData.recieved_department_action_id;
+
+                selectedOrder.dep_recieve_date = System.DateTime.Now.Date;
+                selectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+            }
 
             try
             {
@@ -302,6 +328,56 @@ namespace HeretPreWorkControl
                     Entry.Property(o => o.curr_departnent_id).IsModified = true;
                     Entry.Property(o => o.dep_recieve_date).IsModified = true;
                     Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+                    Entry.Property(o => o.special_action_type_id).IsModified = true;
+                    Entry.Property(o => o.special_department_id).IsModified = true;
+                    Entry.Property(o => o.special_recieved_date).IsModified = true;
+                    Entry.Property(o => o.special_recieved_hour).IsModified = true;
+                    // context.tbl_orders.AddOrUpdate(DeclinedOrder);
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                isSucceeded = false;
+            }
+
+            return isSucceeded;
+        }
+
+        public static Boolean TransferJobAndActionToNext(tbl_orders selectedOrder, Boolean isSpecial)
+        {
+            Boolean isSucceeded = true;
+
+            Utilities.GetAllActionToDeptList();
+
+            List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
+
+            int nActionTypeID =
+                Utilities.ConvertIfNeeded
+                    (selectedOrder.special_action_type_id.Value);
+
+            tbl_action_to_dept MovementData = Globals.AllActionToDept
+                                    .Where(a => a.action_ID == nActionTypeID)
+                                            .Single<tbl_action_to_dept>();
+
+            selectedOrder.special_department_id = MovementData.recieved_department_ID;
+            selectedOrder.special_action_type_id = MovementData.recieved_department_action_id;
+
+            selectedOrder.special_recieved_date = System.DateTime.Now.Date;
+            selectedOrder.special_recieved_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+
+            try
+            {
+                using (var context = new DB_Entities())
+                {
+                    context.tbl_orders.Attach(selectedOrder);
+                    var Entry = context.Entry(selectedOrder);
+
+                    Entry.Property(o => o.special_action_type_id).IsModified = true;
+                    Entry.Property(o => o.special_department_id).IsModified = true;
+                    Entry.Property(o => o.special_recieved_date).IsModified = true;
+                    Entry.Property(o => o.special_recieved_hour).IsModified = true;
                     // context.tbl_orders.AddOrUpdate(DeclinedOrder);
 
                     context.SaveChanges();

@@ -93,6 +93,7 @@ namespace HeretPreWorkControl
         public const int ActionTypeStudioWaitClient = 11;
         public const int ActionTypeKadasWaitClient = 12;
 
+        public const string AcitonMoveCheckListToOrders = "העברת צ'ק ליסט מכירות + קד\"ס להזמנות";
 
         public static int UserID;
         public static String UserName;

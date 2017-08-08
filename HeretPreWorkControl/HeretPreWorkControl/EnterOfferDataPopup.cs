@@ -27,6 +27,7 @@ namespace HeretPreWorkControl
             dtSalesOfferDate.Format = DateTimePickerFormat.Custom;
             dtSalesOfferDate.CustomFormat = "dd/MM/yyyy";
             dtSalesOfferDate.MaxDate = DateTime.Today;
+            dtSalesOfferDate.Value = DateTime.Today.Date;
         }
 
         private void pbInsertButton_Click(object sender, EventArgs e)

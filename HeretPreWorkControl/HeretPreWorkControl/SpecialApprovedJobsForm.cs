@@ -62,7 +62,17 @@ namespace HeretPreWorkControl
         {
             tbl_orders SelectedOrder = this.GetSelectedOrder();
 
-            this.SelectedOrder
+            SelectedOrder.special_department_id = Globals.KadasUserID;
+            Utilities.GetAllActionToDeptList();
+
+            List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
+
+            lstActionsToDept =
+                    Globals.AllActionToDept
+                        .Where(ad => ad.action_ID == 7)
+                                    .ToList<tbl_action_to_dept>();
+
+            new MovementsForm(lstActionsToDept, SelectedOrder).Show();
         }
 
         private tbl_orders GetSelectedOrder()
@@ -84,15 +94,12 @@ namespace HeretPreWorkControl
                     // Get all the data about the selected row
                     int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
                     string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
-                    Nullable<int> NoFiles = (Nullable<int>)dataGridView.SelectedRows[0].Cells[2].Value;
-                    string strThirdCol = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
 
                     int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
 
                     tbl_orders SelectedOrder =
-                            Globals.MyJobs.Where(m => m.ID == nOrderID &&
-                                                      m.client_id == nClientID &&
-                                                      m.files_number == NoFiles).SingleOrDefault<tbl_orders>();
+                            Globals.SpecialApprovedJobs.Where(m => m.ID == nOrderID &&
+                                                      m.client_id == nClientID).SingleOrDefault<tbl_orders>();
 
                     if (SelectedOrder == null)
                     {

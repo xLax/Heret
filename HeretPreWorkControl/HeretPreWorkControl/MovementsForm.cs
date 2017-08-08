@@ -43,6 +43,7 @@ namespace HeretPreWorkControl
             dtSalesOfferDate.Format = DateTimePickerFormat.Custom;
             dtSalesOfferDate.CustomFormat = "dd/MM/yyyy";
             dtSalesOfferDate.MaxDate = DateTime.Today;
+            dtSalesOfferDate.Value = DateTime.Today.Date;
 
             this.lstActionsToDepartments = lstActionsToDept;
             this.currentOrder = SelectedOrder;
@@ -151,7 +152,18 @@ namespace HeretPreWorkControl
                     else
                     {
                         string strKadasWork = lbKadasWork.SelectedItem.ToString();
-                        currentOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, strKadasWork);
+
+                        if (currentOrder.special_department_id != null)
+                        {
+                            currentOrder.special_action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, strKadasWork);
+                            currentOrder.special_recieved_date = System.DateTime.Now.Date;
+                            currentOrder.special_recieved_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+                        }
+                        else
+                        {
+                            currentOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, strKadasWork);
+                        }
+
                         currentOrder.kadas_work = strKadasWork;
 
                         isSucceded = true;
@@ -180,9 +192,13 @@ namespace HeretPreWorkControl
 
                 if(isSucceded)
                 {
-                    currentOrder.curr_departnent_id = nSelectedDepartID;
-                    currentOrder.dep_recieve_date = System.DateTime.Now.Date;
-                    currentOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+                    if(currentOrder.special_department_id == null ||
+                       nSelectedDepartID != Globals.KadasUserID)
+                    {
+                        currentOrder.curr_departnent_id = nSelectedDepartID;
+                        currentOrder.dep_recieve_date = System.DateTime.Now.Date;
+                        currentOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
+                    }
 
                     try
                     {
@@ -195,6 +211,12 @@ namespace HeretPreWorkControl
                             Entry.Property(o => o.curr_departnent_id).IsModified = true;
                             Entry.Property(o => o.dep_recieve_date).IsModified = true;
                             Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+
+                            Entry.Property(o => o.special_action_type_id).IsModified = true;
+                            Entry.Property(o => o.special_department_id).IsModified = true;
+                            Entry.Property(o => o.special_recieved_date).IsModified = true;
+                            Entry.Property(o => o.special_recieved_hour).IsModified = true;
+
                             Entry.Property(o => o.kadas_work).IsModified = true;
                             Entry.Property(o => o.studio_work).IsModified = true;
                             context.SaveChanges();

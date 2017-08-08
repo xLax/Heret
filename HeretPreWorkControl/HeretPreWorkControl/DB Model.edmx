@@ -81,6 +81,8 @@
           <Property Name="kadas_work" Type="varchar" MaxLength="45" />
           <Property Name="special_action_type_id" Type="int" />
           <Property Name="alert_creation_date" Type="int" />
+          <Property Name="special_recieved_date" Type="date" />
+          <Property Name="special_recieved_hour" Type="time" Precision="0" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -466,6 +468,8 @@
           <NavigationProperty Name="tbl_sla_actions1" Relationship="Self.special_action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups1" Relationship="Self.special_department" FromRole="tbl_orders" ToRole="tbl_user_groups" />
           <Property Name="alert_creation_date" Type="Int32" />
+          <Property Name="special_recieved_date" Type="DateTime" />
+          <Property Name="special_recieved_hour" Type="Time" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -827,6 +831,8 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="special_recieved_hour" ColumnName="special_recieved_hour" />
+                <ScalarProperty Name="special_recieved_date" ColumnName="special_recieved_date" />
                 <ScalarProperty Name="alert_creation_date" ColumnName="alert_creation_date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sales_agent_name" ColumnName="sales_agent_name" />

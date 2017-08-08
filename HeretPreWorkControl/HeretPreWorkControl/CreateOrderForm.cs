@@ -22,6 +22,7 @@ namespace HeretPreWorkControl
             dtContactDate.Format = DateTimePickerFormat.Custom;
             dtContactDate.CustomFormat = "dd/MM/yyyy";
             dtContactDate.MaxDate = DateTime.Today;
+            dtContactDate.Value = DateTime.Today.Date;
 
             lbPriseTempDesc.Items.Add(Globals.PrisaNumber);
             lbPriseTempDesc.Items.Add(Globals.TemplateNumber);
@@ -238,6 +239,13 @@ namespace HeretPreWorkControl
                 List<tbl_action_to_dept> lstActionsToDept = Globals.AllActionToDept
                                             .Where(ad => ad.action_ID == NewOrder.action_type_id)
                                                         .ToList<tbl_action_to_dept>();
+
+                if(cbMoveToManager.Checked)
+                {
+                    lstActionsToDept.RemoveAt(3);
+                    lstActionsToDept.RemoveAt(4);
+                    lstActionsToDept.RemoveAt(4);
+                }
 
                 // פתח מסך ניתוב עבודה לפי ID של מחלקה
                 new MovementsForm(lstActionsToDept, NewOrder).Show();
