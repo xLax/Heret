@@ -512,5 +512,15 @@ namespace HeretPreWorkControl
         {
 
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            tbl_orders selectedOrder = this.GetSelectedOrder(false);
+
+            if (selectedOrder != null)
+            {
+                new UpdateOrderForm(selectedOrder).Show();
+            }
+        }
     }
 }

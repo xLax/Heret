@@ -62,7 +62,7 @@ namespace HeretPreWorkControl
         {
             tbl_orders SelectedOrder = this.GetSelectedOrder();
 
-            this.SelectedOrder
+            //this.SelectedOrder
         }
 
         private tbl_orders GetSelectedOrder()

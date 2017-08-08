@@ -267,5 +267,10 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void lbPriseTempDesc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
