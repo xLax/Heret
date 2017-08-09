@@ -232,6 +232,12 @@
       <DependentUpon>UpdateOrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
+    <Compile Include="ViewAllOrderDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewAllOrderDetails.Designer.cs">
+      <DependentUpon>ViewAllOrderDetails.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminOverviewForm.resx">
       <DependentUpon>AdminOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateOrderForm.resx">
       <DependentUpon>UpdateOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewAllOrderDetails.resx">
+      <DependentUpon>ViewAllOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DB Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -402,6 +411,8 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Save Icon.png" />
+    <None Include="Resources\ViewDetailsTitle.png" />
     <None Include="Resources\Current Situation.png" />
     <None Include="Resources\ApprovedJobsTitle.png" />
     <None Include="Resources\Update Icon.png" />
