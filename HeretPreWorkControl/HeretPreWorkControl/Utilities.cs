@@ -27,7 +27,9 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    Globals.AllJobs = context.tbl_orders.ToList<tbl_orders>();
+                    Globals.AllJobs = context.tbl_orders
+                        .Where( o => o.current_status_id != Globals.StatusDenied)
+                                    .ToList<tbl_orders>();
                 }
                 catch(Exception ex)
                 {
@@ -60,6 +62,22 @@ namespace HeretPreWorkControl
             }
 
             currPopup.Hide();
+        }
+
+        public static string GetStatusDesc(int nStatusID)
+        {
+            string strStatusDesc = String.Empty;
+
+            if(nStatusID == Globals.StatusInWork)
+            {
+                strStatusDesc = Globals.StatusJobInWork;
+            }
+            else if(nStatusID == Globals.StatusClosed)
+            {
+                strStatusDesc = Globals.StatusJobClosed;
+            }
+
+            return strStatusDesc;
         }
 
         public static void GetAllUserGroupList()

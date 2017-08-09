@@ -32,6 +32,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JobStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curr_Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sla_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.lblEnterDeclined = new System.Windows.Forms.Label();
             this.pbEditOrderInfo = new System.Windows.Forms.PictureBox();
@@ -39,12 +45,6 @@
             this.pbReminder = new System.Windows.Forms.PictureBox();
             this.lbJobStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JobStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Curr_Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agent_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sla_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.dtFromDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -86,6 +86,7 @@
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRefresh.TabIndex = 19;
             this.pbRefresh.TabStop = false;
+            this.pbRefresh.Click += new System.EventHandler(this.pbRefresh_Click);
             // 
             // dataGridView
             // 
@@ -96,13 +97,53 @@
             this.Client_Name,
             this.JobStatus,
             this.Curr_Dept,
-            this.Agent_Name,
+            this.Creation_date,
             this.Sla_Status});
             this.dataGridView.Location = new System.Drawing.Point(12, 150);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 20;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "מס\"ד עבודה";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 70;
+            // 
+            // Client_Name
+            // 
+            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Client_Name.HeaderText = "שם לקוח";
+            this.Client_Name.Name = "Client_Name";
+            this.Client_Name.ReadOnly = true;
+            // 
+            // JobStatus
+            // 
+            this.JobStatus.HeaderText = "סטטוס עבודה";
+            this.JobStatus.Name = "JobStatus";
+            this.JobStatus.ReadOnly = true;
+            this.JobStatus.Width = 120;
+            // 
+            // Curr_Dept
+            // 
+            this.Curr_Dept.HeaderText = "מחלקה נוכחית";
+            this.Curr_Dept.Name = "Curr_Dept";
+            this.Curr_Dept.ReadOnly = true;
+            this.Curr_Dept.Width = 90;
+            // 
+            // Creation_date
+            // 
+            this.Creation_date.HeaderText = "תאריך יצירת הזמנה";
+            this.Creation_date.Name = "Creation_date";
+            this.Creation_date.ReadOnly = true;
+            // 
+            // Sla_Status
+            // 
+            this.Sla_Status.HeaderText = "סטטוס SLA";
+            this.Sla_Status.Name = "Sla_Status";
+            this.Sla_Status.ReadOnly = true;
             // 
             // tbPanel
             // 
@@ -141,11 +182,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(617, 392);
+            this.label3.Location = new System.Drawing.Point(614, 392);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 20);
+            this.label3.Size = new System.Drawing.Size(93, 20);
             this.label3.TabIndex = 23;
-            this.label3.Text = "תזכר עובד";
+            this.label3.Text = "תזכר מנהל";
             // 
             // pbReminder
             // 
@@ -168,6 +209,7 @@
             this.lbJobStatus.Name = "lbJobStatus";
             this.lbJobStatus.Size = new System.Drawing.Size(163, 28);
             this.lbJobStatus.TabIndex = 32;
+            this.lbJobStatus.SelectedIndexChanged += new System.EventHandler(this.lbJobStatus_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -178,46 +220,6 @@
             this.label1.Size = new System.Drawing.Size(104, 20);
             this.label1.TabIndex = 31;
             this.label1.Text = "הצג עבודות:";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "מס\"ד עבודה";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 70;
-            // 
-            // Client_Name
-            // 
-            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Client_Name.HeaderText = "שם לקוח";
-            this.Client_Name.Name = "Client_Name";
-            this.Client_Name.ReadOnly = true;
-            // 
-            // JobStatus
-            // 
-            this.JobStatus.HeaderText = "סטטוס עבודה";
-            this.JobStatus.Name = "JobStatus";
-            this.JobStatus.ReadOnly = true;
-            this.JobStatus.Width = 120;
-            // 
-            // Curr_Dept
-            // 
-            this.Curr_Dept.HeaderText = "מחלקה נוכחית";
-            this.Curr_Dept.Name = "Curr_Dept";
-            this.Curr_Dept.ReadOnly = true;
-            this.Curr_Dept.Width = 90;
-            // 
-            // Agent_Name
-            // 
-            this.Agent_Name.HeaderText = "סוכן אחראי";
-            this.Agent_Name.Name = "Agent_Name";
-            this.Agent_Name.ReadOnly = true;
-            // 
-            // Sla_Status
-            // 
-            this.Sla_Status.HeaderText = "סטטוס SLA";
-            this.Sla_Status.Name = "Sla_Status";
-            this.Sla_Status.ReadOnly = true;
             // 
             // label2
             // 
@@ -238,6 +240,7 @@
             this.dtFromDate.Size = new System.Drawing.Size(161, 26);
             this.dtFromDate.TabIndex = 34;
             this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
             // 
             // AdminOverviewForm
             // 
@@ -290,13 +293,13 @@
         private System.Windows.Forms.PictureBox pbReminder;
         private System.Windows.Forms.ComboBox lbJobStatus;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn JobStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curr_Dept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Agent_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Creation_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla_Status;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtFromDate;
     }
 }
