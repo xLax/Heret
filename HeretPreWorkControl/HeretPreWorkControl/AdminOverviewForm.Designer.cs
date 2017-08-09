@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminOverviewForm));
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
@@ -37,7 +36,7 @@
             this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.JobStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Curr_Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agent_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sla_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.lblEnterDeclined = new System.Windows.Forms.Label();
@@ -59,10 +58,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.Current_Situation;
-            this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(395, 86);
+            this.pictureBox2.Size = new System.Drawing.Size(296, 70);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 18;
             this.pictureBox2.TabStop = false;
@@ -71,10 +69,9 @@
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(501, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(376, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(364, 86);
+            this.pictureBox1.Size = new System.Drawing.Size(273, 70);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
@@ -83,13 +80,13 @@
             // 
             this.pbRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbRefresh.Image = global::HeretPreWorkControl.Properties.Resources.Refresh_icon;
-            this.pbRefresh.Location = new System.Drawing.Point(917, 55);
-            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbRefresh.Location = new System.Drawing.Point(688, 45);
             this.pbRefresh.Name = "pbRefresh";
-            this.pbRefresh.Size = new System.Drawing.Size(72, 46);
+            this.pbRefresh.Size = new System.Drawing.Size(54, 37);
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRefresh.TabIndex = 19;
             this.pbRefresh.TabStop = false;
+            this.pbRefresh.Click += new System.EventHandler(this.pbRefresh_Click);
             // 
             // dataGridView
             // 
@@ -100,13 +97,12 @@
             this.Client_Name,
             this.JobStatus,
             this.Curr_Dept,
-            this.Agent_Name,
+            this.Creation_date,
             this.Sla_Status});
-            this.dataGridView.Location = new System.Drawing.Point(16, 185);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView.Location = new System.Drawing.Point(12, 150);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            this.dataGridView.Size = new System.Drawing.Size(973, 284);
+            this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 20;
             // 
             // ID
@@ -137,11 +133,11 @@
             this.Curr_Dept.ReadOnly = true;
             this.Curr_Dept.Width = 90;
             // 
-            // Agent_Name
+            // Creation_date
             // 
-            this.Agent_Name.HeaderText = "סוכן אחראי";
-            this.Agent_Name.Name = "Agent_Name";
-            this.Agent_Name.ReadOnly = true;
+            this.Creation_date.HeaderText = "תאריך יצירת הזמנה";
+            this.Creation_date.Name = "Creation_date";
+            this.Creation_date.ReadOnly = true;
             // 
             // Sla_Status
             // 
@@ -154,11 +150,10 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(16, 522);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Location = new System.Drawing.Point(12, 424);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(972, 35);
+            this.tbPanel.Size = new System.Drawing.Size(730, 29);
             this.tbPanel.TabIndex = 21;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -166,10 +161,9 @@
             // 
             this.lblEnterDeclined.AutoSize = true;
             this.lblEnterDeclined.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnterDeclined.Location = new System.Drawing.Point(19, 482);
-            this.lblEnterDeclined.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEnterDeclined.Location = new System.Drawing.Point(14, 392);
             this.lblEnterDeclined.Name = "lblEnterDeclined";
-            this.lblEnterDeclined.Size = new System.Drawing.Size(183, 27);
+            this.lblEnterDeclined.Size = new System.Drawing.Size(141, 20);
             this.lblEnterDeclined.TabIndex = 25;
             this.lblEnterDeclined.Text = "ערוך פרטי הזמנה";
             // 
@@ -177,10 +171,9 @@
             // 
             this.pbEditOrderInfo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbEditOrderInfo.Image = global::HeretPreWorkControl.Properties.Resources.Update_Icon;
-            this.pbEditOrderInfo.Location = new System.Drawing.Point(204, 476);
-            this.pbEditOrderInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbEditOrderInfo.Location = new System.Drawing.Point(153, 387);
             this.pbEditOrderInfo.Name = "pbEditOrderInfo";
-            this.pbEditOrderInfo.Size = new System.Drawing.Size(47, 38);
+            this.pbEditOrderInfo.Size = new System.Drawing.Size(35, 31);
             this.pbEditOrderInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEditOrderInfo.TabIndex = 24;
             this.pbEditOrderInfo.TabStop = false;
@@ -189,21 +182,19 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(823, 482);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(614, 392);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 27);
+            this.label3.Size = new System.Drawing.Size(93, 20);
             this.label3.TabIndex = 23;
-            this.label3.Text = "תזכר עובד";
+            this.label3.Text = "תזכר מנהל";
             // 
             // pbReminder
             // 
             this.pbReminder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbReminder.Image = global::HeretPreWorkControl.Properties.Resources.Notify;
-            this.pbReminder.Location = new System.Drawing.Point(943, 476);
-            this.pbReminder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbReminder.Location = new System.Drawing.Point(707, 387);
             this.pbReminder.Name = "pbReminder";
-            this.pbReminder.Size = new System.Drawing.Size(47, 38);
+            this.pbReminder.Size = new System.Drawing.Size(35, 31);
             this.pbReminder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbReminder.TabIndex = 22;
             this.pbReminder.TabStop = false;
@@ -214,20 +205,19 @@
             this.lbJobStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lbJobStatus.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbJobStatus.FormattingEnabled = true;
-            this.lbJobStatus.Location = new System.Drawing.Point(193, 126);
-            this.lbJobStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbJobStatus.Location = new System.Drawing.Point(145, 102);
             this.lbJobStatus.Name = "lbJobStatus";
-            this.lbJobStatus.Size = new System.Drawing.Size(216, 33);
+            this.lbJobStatus.Size = new System.Drawing.Size(163, 28);
             this.lbJobStatus.TabIndex = 32;
+            this.lbJobStatus.SelectedIndexChanged += new System.EventHandler(this.lbJobStatus_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 129);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(8, 105);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 27);
+            this.label1.Size = new System.Drawing.Size(104, 20);
             this.label1.TabIndex = 31;
             this.label1.Text = "הצג עבודות:";
             // 
@@ -235,30 +225,29 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(496, 129);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(372, 105);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 27);
+            this.label2.Size = new System.Drawing.Size(117, 20);
             this.label2.TabIndex = 33;
             this.label2.Text = "החל מתאריך:";
             // 
             // dtFromDate
             // 
             this.dtFromDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.dtFromDate.Location = new System.Drawing.Point(651, 123);
-            this.dtFromDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtFromDate.Location = new System.Drawing.Point(488, 100);
             this.dtFromDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
             this.dtFromDate.Name = "dtFromDate";
-            this.dtFromDate.Size = new System.Drawing.Size(213, 31);
+            this.dtFromDate.Size = new System.Drawing.Size(161, 26);
             this.dtFromDate.TabIndex = 34;
             this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
             // 
             // AdminOverviewForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1005, 572);
+            this.ClientSize = new System.Drawing.Size(754, 465);
             this.Controls.Add(this.dtFromDate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbJobStatus);
@@ -273,8 +262,6 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "AdminOverviewForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -306,13 +293,13 @@
         private System.Windows.Forms.PictureBox pbReminder;
         private System.Windows.Forms.ComboBox lbJobStatus;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn JobStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Curr_Dept;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Agent_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Creation_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla_Status;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtFromDate;
     }
 }
