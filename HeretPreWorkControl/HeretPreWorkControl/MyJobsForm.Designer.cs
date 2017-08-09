@@ -265,6 +265,7 @@
             this.pbSetEmployee.TabIndex = 35;
             this.pbSetEmployee.TabStop = false;
             this.pbSetEmployee.Visible = false;
+            this.pbSetEmployee.Click += new System.EventHandler(this.pbSetEmployee_Click);
             // 
             // MyJobsForm
             // 

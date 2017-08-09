@@ -183,6 +183,7 @@
             // 
             // pbStatus
             // 
+            this.pbStatus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
             this.pbStatus.Location = new System.Drawing.Point(177, 110);
             this.pbStatus.Margin = new System.Windows.Forms.Padding(2);
@@ -191,6 +192,7 @@
             this.pbStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStatus.TabIndex = 12;
             this.pbStatus.TabStop = false;
+            this.pbStatus.Click += new System.EventHandler(this.pbStatus_Click);
             // 
             // pbHeret
             // 

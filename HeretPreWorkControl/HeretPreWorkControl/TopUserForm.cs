@@ -156,5 +156,10 @@ namespace HeretPreWorkControl
         {
             new SpecialApprovedJobsForm().Show();
         }
+
+        private void pbStatus_Click(object sender, EventArgs e)
+        {
+            new AdminOverviewForm().Show();
+        }
     }
 }

@@ -19,6 +19,23 @@ namespace HeretPreWorkControl
             popup.Popup();
         }
 
+        public static void GetAllJobsInWork()
+        {
+            Globals.AllJobs = new List<tbl_orders>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    Globals.AllJobs = context.tbl_orders.ToList<tbl_orders>();
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
+
         public static void Popup_Clicked(object sender, System.EventArgs e)
         {
             if(Globals.OpenScreenID == Globals.ToMyJobs)

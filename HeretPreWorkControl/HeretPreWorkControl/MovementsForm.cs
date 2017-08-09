@@ -272,6 +272,7 @@ namespace HeretPreWorkControl
                             currentOrder.special_department_id != Globals.AdminID)
                         {
                             currentOrder.curr_departnent_id = currentOrder.special_department_id;
+                            currentOrder.special_department_id = null;
 
                             using (var context = new DB_Entities())
                             {
@@ -281,6 +282,7 @@ namespace HeretPreWorkControl
                                     var Entry = context.Entry(currentOrder);
 
                                     Entry.Property(o => o.curr_departnent_id).IsModified = true;
+                                    Entry.Property(o => o.special_department_id).IsModified = true;
 
                                     context.SaveChanges();
 

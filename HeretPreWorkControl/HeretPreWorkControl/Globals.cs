@@ -56,6 +56,9 @@ namespace HeretPreWorkControl
         public const string StatusBlockedClient = "אזהרת חסימה";
         public const string StatusLimitedClient = "מוגבל";
 
+        public const string StatusJobClosed = "סגור";
+        public const string StatusJobInWork = "בתהליך";
+        public const string StatusJobAll = "הכל";
 
         // public const string UnnecessaryWork = "לא נדרש";
 
@@ -111,6 +114,7 @@ namespace HeretPreWorkControl
         public static List<tbl_orders> MyDeclinedOrders;
         public static List<tbl_orders> MyJobs;
         public static List<tbl_orders> SpecialApprovedJobs;
+        public static List<tbl_orders> AllJobs;
 
         public static TopUserForm TopUserFormInstance;
         public static SalesMainForm SalesFormInstance;

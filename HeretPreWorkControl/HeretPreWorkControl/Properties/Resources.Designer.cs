@@ -133,6 +133,16 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Current_Situation {
+            get {
+                object obj = ResourceManager.GetObject("Current_Situation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Decline_Icon {
             get {
                 object obj = ResourceManager.GetObject("Decline_Icon", resourceCulture);
