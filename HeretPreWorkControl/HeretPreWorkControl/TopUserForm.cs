@@ -132,8 +132,6 @@ namespace HeretPreWorkControl
                                               "לחץ על התראה זו כדי להכנס למסך קידום עבודות להמשך תהליך",
                                               Globals.ToSpecialApprove);
 
-                        Utilities.SetSpecialApprovedJobs(lstSpecialApprovedOrders);
-
                         pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon_Note;
                     }
                     else if(nCurrCount > 0)
@@ -144,6 +142,8 @@ namespace HeretPreWorkControl
                     {
                         pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
                     }
+
+                    Utilities.SetSpecialApprovedJobs(lstSpecialApprovedOrders);
                 }
                 catch (Exception ex)
                 {

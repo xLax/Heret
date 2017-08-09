@@ -123,8 +123,11 @@ namespace HeretPreWorkControl
                     Nullable<System.DateTime> recievedDate;
                     Nullable<System.TimeSpan> recievedHour;
 
-                    if (Order.special_department_id != null &&
-                       Globals.UserGroupID == Globals.KadasUserID)
+                    if ((Order.special_department_id != null &&
+                        Globals.UserGroupID == Globals.KadasUserID) ||
+                       (Globals.UserGroupID == Globals.OrdersUserID &&
+                        Order.special_department_id != null &&
+                        Order.special_department_id == Globals.OrdersUserID))
                     {
                         ActionData = Globals.AllActions.Where(a => a.ID == Order.special_action_type_id)
                                                         .Single<tbl_sla_actions>();
@@ -159,6 +162,8 @@ namespace HeretPreWorkControl
 
         private void pbExecute_Click(object sender, EventArgs e)
         {
+            tbPanel.Clear();
+
             tbl_orders SelectedOrder = this.GetSelectedOrder(false);
 
             // Calculate who you can transfer the job to and what department and shit like this
@@ -172,7 +177,8 @@ namespace HeretPreWorkControl
 
                 int nActionTypeBeforeConvertion = 0;
 
-                if((Globals.UserGroupID == Globals.KadasUserID &&
+                if(((Globals.UserGroupID == Globals.KadasUserID ||
+                     Globals.UserGroupID == Globals.OrdersUserID) &&
                    SelectedOrder.special_department_id != null) ||
                    isSpecial)
                 {
@@ -454,8 +460,8 @@ namespace HeretPreWorkControl
                     }
                     else if(lstActionsToDept.Count > 1)
                     {
-                        // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                        new MovementsForm(lstActionsToDept, SelectedOrder).Show();
+                            // פתח מסך ניתוב עבודה לפי ID של מחלקה
+                            new MovementsForm(lstActionsToDept, SelectedOrder, nActionTypeID).Show();
                     }
                 }
             }
@@ -648,7 +654,7 @@ namespace HeretPreWorkControl
                     lblEmployee.Visible = true;
                     lbEmployees.Visible = true;
 
-                    if(this.ListSelectedOrder.kadas_agent_name != null)
+                    if (this.ListSelectedOrder.kadas_agent_name != null)
                     {
                         lbEmployees.SelectedItem = this.ListSelectedOrder.kadas_agent_name;
                     }
@@ -674,17 +680,7 @@ namespace HeretPreWorkControl
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEnterDeclined_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void pbSalesUpdate_Click(object sender, EventArgs e)
         {
             tbl_orders selectedOrder = this.GetSelectedOrder(false);
 

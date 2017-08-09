@@ -393,8 +393,9 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\UpdateOrder.png" />
+    <None Include="Resources\ApprovedJobsTitle.png" />
     <None Include="Resources\Update Icon.png" />
+    <None Include="Resources\UpdateOrder.png" />
     <None Include="Resources\Special Approval Icon Note.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

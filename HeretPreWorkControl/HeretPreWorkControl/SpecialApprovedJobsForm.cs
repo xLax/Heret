@@ -12,6 +12,8 @@ namespace HeretPreWorkControl
 {
     public partial class SpecialApprovedJobsForm : Form
     {
+        Boolean isSucceeded = false;
+
         public SpecialApprovedJobsForm()
         {
             InitializeComponent();
@@ -62,7 +64,6 @@ namespace HeretPreWorkControl
         {
             tbl_orders SelectedOrder = this.GetSelectedOrder();
 
-            SelectedOrder.special_department_id = Globals.KadasUserID;
             Utilities.GetAllActionToDeptList();
 
             List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
@@ -72,7 +73,7 @@ namespace HeretPreWorkControl
                         .Where(ad => ad.action_ID == 7)
                                     .ToList<tbl_action_to_dept>();
 
-            new MovementsForm(lstActionsToDept, SelectedOrder).Show();
+            new MovementsForm(lstActionsToDept, SelectedOrder, 7).Show();
         }
 
         private tbl_orders GetSelectedOrder()
@@ -113,6 +114,78 @@ namespace HeretPreWorkControl
             }
 
             return selectedOrder;
+        }
+
+        private void pbRefresh_Click(object sender, EventArgs e)
+        {
+            if (Globals.SpecialApprovedJobs != null)
+            {
+                Globals.SpecialApprovedJobs.Clear();
+            }
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    Globals.SpecialApprovedJobs = context.tbl_orders
+                                    .Where(o => o.special_department_id == Globals.AdminID).ToList<tbl_orders>();
+
+                    isSucceeded = true;
+                }
+                catch(Exception ex)
+                {
+                    isSucceeded = false;
+                }
+                
+            }
+                
+            dataGridView.Rows.Clear();
+            LoadRelevantData();
+
+            if (isSucceeded)
+            {
+                tbPanel.Text = "רענון בוצע בהצלחה !";
+
+                if (Globals.SpecialApprovedJobs == null || Globals.SpecialApprovedJobs.Count == 0)
+                {
+                    tbPanel.Text += " אין קידום עבודות לאישור";
+                }
+            }
+            else
+            {
+                isSucceeded = true;
+            }
+
+        }
+
+        private void pbDecline_Click(object sender, EventArgs e)
+        {
+            tbl_orders SelectedOrder = this.GetSelectedOrder();
+
+            if (SelectedOrder != null)
+            {
+                SelectedOrder.special_department_id = null;
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        context.tbl_orders.Attach(SelectedOrder);
+                        var Entry = context.Entry(SelectedOrder);
+
+                        Entry.Property(o => o.special_department_id).IsModified = true;
+
+                        context.SaveChanges();
+
+                        tbPanel.Text = "סירוב קידום העבודה בוצע! אנא רענן לנתונים עדכניים";
+
+                    }
+                    catch(Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
+            }
         }
     }
 }

@@ -248,7 +248,7 @@ namespace HeretPreWorkControl
                 }
 
                 // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                new MovementsForm(lstActionsToDept, NewOrder).Show();
+                new MovementsForm(lstActionsToDept, NewOrder, NewOrder.action_type_id.Value).Show();
             }
         }
 

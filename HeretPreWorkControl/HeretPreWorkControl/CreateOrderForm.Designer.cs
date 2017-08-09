@@ -180,7 +180,7 @@
             this.lbPriseTempDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lbPriseTempDesc.Name = "lbPriseTempDesc";
             this.lbPriseTempDesc.Size = new System.Drawing.Size(185, 33);
-            this.lbPriseTempDesc.TabIndex = 37;
+            this.lbPriseTempDesc.TabIndex = 36;
             this.lbPriseTempDesc.SelectedIndexChanged += new System.EventHandler(this.lbPriseTempDesc_SelectedIndexChanged);
             // 
             // tbPrisaTempDesc
@@ -193,7 +193,7 @@
             this.tbPrisaTempDesc.Name = "tbPrisaTempDesc";
             this.tbPrisaTempDesc.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbPrisaTempDesc.Size = new System.Drawing.Size(289, 33);
-            this.tbPrisaTempDesc.TabIndex = 36;
+            this.tbPrisaTempDesc.TabIndex = 37;
             this.tbPrisaTempDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbAmount

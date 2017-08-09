@@ -125,13 +125,14 @@
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRefresh.TabIndex = 13;
             this.pbRefresh.TabStop = false;
+            this.pbRefresh.Click += new System.EventHandler(this.pbRefresh_Click);
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.MyJobsTitle;
+            this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.ApprovedJobsTitle;
             this.pictureBox2.Location = new System.Drawing.Point(12, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(290, 70);
+            this.pictureBox2.Size = new System.Drawing.Size(314, 70);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
@@ -179,6 +180,7 @@
             this.pbDecline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbDecline.TabIndex = 20;
             this.pbDecline.TabStop = false;
+            this.pbDecline.Click += new System.EventHandler(this.pbDecline_Click);
             // 
             // label3
             // 
