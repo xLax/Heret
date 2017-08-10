@@ -47,59 +47,10 @@ namespace HeretPreWorkControl
 
             if(client != null)
             {
-                tbClientName.Text = "";
+                tbClientName.Text = client.name;
             }
 
-            switch(this.order.action_type_id)
-            {
-                case Globals.ActionTypeNewOrder:
-                    break;
-
-                case Globals.ActionTypeRecieveClientOrder:
-                    break;
-
-                case Globals.ActionTypeInsertOrderID:
-                    break;
-
-                case Globals.ActionTypeSetAndSendOffer:
-                    break;
-
-                case Globals.ActionTypeKadasApprovePDF:
-                    break;
-
-                case Globals.ActionTypeKadasNewPDF:
-                    break;
-
-                case Globals.ActionTypeKadasSunCopyNew:
-                    break;
-
-                case Globals.ActionTypeKadasGraphicUpdate:
-                    break;
-
-                case Globals.ActionTypeStudioOnlyPrisa:
-                    break;
-
-                case Globals.ActionTypeStudioPrisaForOffer:
-                    break;
-
-                case Globals.ActionTypeStudioOnlyModel:
-                    break;
-
-                case Globals.ActionTypeStudioPrisaAndModel:
-                    break;
-
-                case Globals.ActionTypeStudioCutModel:
-                    break;
-
-                case Globals.ActionTypeStudioWaitClient:
-                    break;
-
-                case Globals.ActionTypeKadasWaitClient:
-                    break;
-
-                default:
-                    break;
-            }
+            tbActionType.Text = Globals.getActionTypeText(order.action_type_id);
             
             using (var context = new DB_Entities())
             {
@@ -122,7 +73,7 @@ namespace HeretPreWorkControl
             }
 
             
-            tbActionType.Text = "";
+            
             tbWorkStatus.Text = "";
             
 

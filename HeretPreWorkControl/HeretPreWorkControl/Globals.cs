@@ -47,6 +47,12 @@ namespace HeretPreWorkControl
         public const string KadasGraphicUpdate = "עדכון גרפי";
 
         public const string StudioOnlyPrisa = "פריסה בלבד";
+
+        internal static string getActionTypeText(int? action_type_id)
+        {
+            throw new NotImplementedException();
+        }
+
         public const string StudioPrisaForOffer = "הערכת פריסה להצעת מחיר";
         public const string StudioOnlyModel = "דגם בלבד";
         public const string StudioPrisaAndModel = "פריסה ודגם";
@@ -59,6 +65,14 @@ namespace HeretPreWorkControl
         public const string StatusJobClosed = "סגור";
         public const string StatusJobInWork = "בתהליך";
         public const string StatusJobAll = "הכל";
+
+        public const string NewOrder = "הזמנה חדשה";
+        public const string RecieveClientOrder = "קבלת הזמנת לקוח";
+        public const string InsertOrderID = "הכנסת מספר הזמנה";
+        public const string SetAndSendOffer = "הכנסת הצעת מחיר ושליחה ללקוח";
+
+        public const string StudioWaitClient = "המתנת סטודיו לאישור לקוח";
+        public const string KadasWaitClient = "המתנת קד\"ס לאישור הלקוח";
 
         // public const string UnnecessaryWork = "לא נדרש";
 
@@ -122,5 +136,78 @@ namespace HeretPreWorkControl
 
         public static int AlertNow = 1;
         public static int Alerted = 2;
+
+        public static string getActionTypeText(int action)
+        {
+            string text = "";
+
+            switch (action)
+            {
+                case Globals.ActionTypeNewOrder:
+                    text = Globals.NewOrder;
+                    break;
+
+                case Globals.ActionTypeRecieveClientOrder:
+                    text = Globals.RecieveClientOrder;
+                    break;
+
+                case Globals.ActionTypeInsertOrderID:
+                    text = Globals.InsertOrderID;
+                    break;
+
+                case Globals.ActionTypeSetAndSendOffer:
+                    text = Globals.SetAndSendOffer;
+                    break;
+
+                case Globals.ActionTypeKadasApprovePDF:
+                    text = Globals.KadasApprovePDF;
+                    break;
+
+                case Globals.ActionTypeKadasNewPDF:
+                    text = Globals.KadasNewPDF;
+                    break;
+
+                case Globals.ActionTypeKadasSunCopyNew:
+                    text = Globals.KadasSunCopyNew;
+                    break;
+
+                case Globals.ActionTypeKadasGraphicUpdate:
+                    text = Globals.KadasGraphicUpdate;
+                    break;
+
+                case Globals.ActionTypeStudioOnlyPrisa:
+                    text = Globals.StudioOnlyPrisa;
+                    break;
+
+                case Globals.ActionTypeStudioPrisaForOffer:
+                    text = Globals.StudioPrisaForOffer;
+                    break;
+
+                case Globals.ActionTypeStudioOnlyModel:
+                    text = Globals.StudioOnlyModel;
+                    break;
+
+                case Globals.ActionTypeStudioPrisaAndModel:
+                    text = Globals.StudioPrisaAndModel;
+                    break;
+
+                case Globals.ActionTypeStudioCutModel:
+                    text = Globals.StudioCutModel;
+                    break;
+
+                case Globals.ActionTypeStudioWaitClient:
+                    text = Globals.StudioWaitClient;
+                    break;
+
+                case Globals.ActionTypeKadasWaitClient:
+                    text = Globals.KadasWaitClient;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return text;
+        }
     }
 }
