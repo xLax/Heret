@@ -280,6 +280,39 @@ namespace HeretPreWorkControl
             return orderToReturn;
         }
 
+        private int GetSelectedDepartmentID()
+        {
+            int nSelectedDepartID = -1;
+
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                tbPanel.Text = "שגיאה! עליך לסמן את אחת השורות";
+            }
+            else if (dataGridView.SelectedRows.Count > 1)
+            {
+                tbPanel.Text = "שגיאה! עליך לבחור עבודה אחת בכל פעם";
+            }
+            else
+            {
+                if (dataGridView.SelectedRows[0].Cells[0].Value != null)
+                {
+                    string strDeptName = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
+                    tbl_user_groups userGroup = Globals.AllUserGroups.Where(u => u.name.Equals(strDeptName)).SingleOrDefault<tbl_user_groups>();
+
+                    if(userGroup == null)
+                    {
+                        tbPanel.Text = "שגיאה! יש תקלה באמינות הנתונים אנא צא וכנס למערכת";
+                    }
+                    else
+                    {
+                        nSelectedDepartID = userGroup.ID;
+                    }
+                }
+            }
+
+            return nSelectedDepartID;
+        }
+
         private void pbEditOrderInfo_Click(object sender, EventArgs e)
         {
             tbl_orders selectedOrder = this.GetSelectedOrder();
@@ -287,6 +320,16 @@ namespace HeretPreWorkControl
             if (selectedOrder != null)
             {
                 new ViewAllOrderDetails(selectedOrder).Show();
+            }
+        }
+
+        private void pbReminder_Click(object sender, EventArgs e)
+        {
+            int nDepartToNotify = this.GetSelectedDepartmentID();
+
+            if(nDepartToNotify != -1)
+            {
+                // TODO: add to notification table;
             }
         }
     }

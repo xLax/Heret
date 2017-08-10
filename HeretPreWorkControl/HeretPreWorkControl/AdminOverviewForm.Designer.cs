@@ -199,6 +199,7 @@
             this.pbReminder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbReminder.TabIndex = 22;
             this.pbReminder.TabStop = false;
+            this.pbReminder.Click += new System.EventHandler(this.pbReminder_Click);
             // 
             // lbJobStatus
             // 
