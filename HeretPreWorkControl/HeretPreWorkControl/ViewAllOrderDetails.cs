@@ -43,9 +43,85 @@ namespace HeretPreWorkControl
             tbStudioWork.Text = this.order.studio_work;
             tbKadasWork.Text = this.order.kadas_work;
 
-            tbClientName.Text = "";
+            tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
+
+            if(client != null)
+            {
+                tbClientName.Text = "";
+            }
+
+            switch(this.order.action_type_id)
+            {
+                case Globals.ActionTypeNewOrder:
+                    break;
+
+                case Globals.ActionTypeRecieveClientOrder:
+                    break;
+
+                case Globals.ActionTypeInsertOrderID:
+                    break;
+
+                case Globals.ActionTypeSetAndSendOffer:
+                    break;
+
+                case Globals.ActionTypeKadasApprovePDF:
+                    break;
+
+                case Globals.ActionTypeKadasNewPDF:
+                    break;
+
+                case Globals.ActionTypeKadasSunCopyNew:
+                    break;
+
+                case Globals.ActionTypeKadasGraphicUpdate:
+                    break;
+
+                case Globals.ActionTypeStudioOnlyPrisa:
+                    break;
+
+                case Globals.ActionTypeStudioPrisaForOffer:
+                    break;
+
+                case Globals.ActionTypeStudioOnlyModel:
+                    break;
+
+                case Globals.ActionTypeStudioPrisaAndModel:
+                    break;
+
+                case Globals.ActionTypeStudioCutModel:
+                    break;
+
+                case Globals.ActionTypeStudioWaitClient:
+                    break;
+
+                case Globals.ActionTypeKadasWaitClient:
+                    break;
+
+                default:
+                    break;
+            }
             
-            tbCurrentDepartment.Text = "";
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_user_groups userGroup = context.tbl_user_groups
+                                    .Where(s => s.ID == order.curr_departnent_id)
+                                                    .FirstOrDefault<tbl_user_groups>();
+
+                    if (userGroup != null)
+                    {
+                        tbCurrentDepartment.Text = userGroup.name;
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                }
+            }
+
+            
             tbActionType.Text = "";
             tbWorkStatus.Text = "";
             
@@ -83,7 +159,7 @@ namespace HeretPreWorkControl
             tbAmount.Enabled = this.isEnabled;
             tbStudioWork.Enabled = this.isEnabled;
             tbCurrentDepartment.Enabled = this.isEnabled;
-            tbActionType.Enabled = this.isEnabled;
+            //tbActionType.Enabled = this.isEnabled;
             tbOrderNumber.Enabled = this.isEnabled;
             //tbWorkStatus.Enabled = this.isEnabled;
             tbKadasWork.Enabled = this.isEnabled;
@@ -100,7 +176,7 @@ namespace HeretPreWorkControl
             tbAmount.BackColor = color;
             tbStudioWork.BackColor = color;
             tbCurrentDepartment.BackColor = color;
-            tbActionType.BackColor = color;
+            //tbActionType.BackColor = color;
             tbOrderNumber.BackColor = color;
             //tbWorkStatus.BackColor = color;
             tbKadasWork.BackColor = color;
