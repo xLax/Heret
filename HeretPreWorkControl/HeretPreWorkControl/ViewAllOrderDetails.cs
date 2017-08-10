@@ -19,6 +19,10 @@ namespace HeretPreWorkControl
         {
             InitializeComponent();
 
+            dtContactDate.Format = DateTimePickerFormat.Custom;
+            dtContactDate.CustomFormat = "dd/MM/yyyy";
+            dtContactDate.MaxDate = DateTime.Today;
+
             this.order = selectedOrder;
             this.isEnabled = false;
             ChangeScreenUI();
@@ -29,7 +33,7 @@ namespace HeretPreWorkControl
         {
             tbSalesAgent.Text = this.order.sales_agent_name;
             tbClientNumber.Text = this.order.client_id + "";
-            dtContactDate.Value = this.order.contact_date.Value;
+            dtContactDate.Value = this.order.contact_date.Value.Date;
             tbFilesNo.Text = this.order.files_number + "";
             tbTemplateNumber.Text = this.order.template_id;
             tbPrisaNumber.Text = this.order.prisa_id;

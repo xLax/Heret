@@ -22,6 +22,8 @@ namespace HeretPreWorkControl
 
     public partial class AdminOverviewForm : Form
     {
+        Boolean isLoadSucceeded = false;
+
         private List<RowData> lstAllViewData = new List<RowData>();
 
         public AdminOverviewForm()
@@ -31,7 +33,7 @@ namespace HeretPreWorkControl
 
         private void AdminOverviewForm_Load(object sender, EventArgs e)
         {
-            Utilities.GetAllJobsInWork();
+            isLoadSucceeded = Utilities.GetAllJobsInWork();
             Utilities.GetAllClientsList();
             Utilities.GetAllUserGroupList();
             Utilities.GetAllActionsList();
@@ -39,8 +41,8 @@ namespace HeretPreWorkControl
             dtFromDate.Format = DateTimePickerFormat.Custom;
             dtFromDate.CustomFormat = "dd/MM/yyyy";
             dtFromDate.MaxDate = DateTime.Today;
-            dtFromDate.MinDate = DateTime.Today.Date.AddYears(-12);
-            dtFromDate.Value = DateTime.Today.Date.AddYears(-12);
+            dtFromDate.MinDate = DateTime.Today.Date.AddMonths(-3);
+            dtFromDate.Value = DateTime.Today.Date.AddMonths(-3);
 
             lbJobStatus.Items.Add(Globals.StatusJobAll);
             lbJobStatus.Items.Add(Globals.StatusJobInWork);
@@ -50,7 +52,7 @@ namespace HeretPreWorkControl
 
             foreach (tbl_orders order in Globals.AllJobs)
             {
-                if(order.creation_date.Value >= dtFromDate.Value)
+                if (order.creation_date.Value >= dtFromDate.Value)
                 {
                     if (order.special_department_id != null &&
                    order.special_department_id != Globals.AdminID)
@@ -59,7 +61,7 @@ namespace HeretPreWorkControl
                     }
 
                     InsertRowFromOrder(order, true);
-                }    
+                }
             }
         }
 
@@ -104,7 +106,7 @@ namespace HeretPreWorkControl
             dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
                                   strCurrDepartment, strCreationDate, strSlaStatus);
 
-            if(isLoading)
+            if (isLoading)
             {
                 RowData row = new RowData();
                 row.OrderID = order.ID;
@@ -156,7 +158,7 @@ namespace HeretPreWorkControl
 
             string strFifthCol = Utilities.GetDateInNormalFormat(order.creation_date.Value);
 
-            dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus, 
+            dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
                                   strCurrDepartment, strCreationDate, strSlaStatus);
 
             if (isLoading)
@@ -175,7 +177,7 @@ namespace HeretPreWorkControl
 
         private void dtFromDate_ValueChanged(object sender, EventArgs e)
         {
-            if(lstAllViewData != null)
+            if (lstAllViewData != null)
             {
                 dataGridView.Rows.Clear();
 
@@ -228,7 +230,64 @@ namespace HeretPreWorkControl
 
             AdminOverviewForm_Load(new object(), new EventArgs());
 
-            tbPanel.Text = "גיטלר";
+            if (isLoadSucceeded)
+            {
+                tbPanel.Text = "ריענון בוצע בהצלחה";
+            }
+            else
+            {
+                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+            }
+        }
+
+        private tbl_orders GetSelectedOrder()
+        {
+            tbl_orders orderToReturn = null;
+
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                tbPanel.Text = "שגיאה! עליך לסמן את אחת השורות";
+            }
+            else if (dataGridView.SelectedRows.Count > 1)
+            {
+                tbPanel.Text = "שגיאה! עליך לבחור עבודה אחת בכל פעם";
+            }
+            else
+            {
+                if (dataGridView.SelectedRows[0].Cells[0].Value != null)
+                {
+                    // Get all the data about the selected row
+                    int nOrderID = int.Parse(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
+                    string strClientName = dataGridView.SelectedRows[0].Cells[1].Value.ToString();
+
+                    int nClientID = Globals.AllClients.Where(a => a.name == strClientName).First<tbl_clients>().ID;
+
+                    tbl_orders SelectedOrder =
+                            Globals.AllJobs.Where(m => m.ID == nOrderID &&
+                                                      m.client_id == nClientID).SingleOrDefault<tbl_orders>();
+
+                    if (SelectedOrder == null)
+                    {
+                        tbPanel.Text = "שגיאה! יש תקלה באמינות הנתונים אנא רענן ונסה שוב";
+                    }
+                    else
+                    {
+                        orderToReturn = SelectedOrder;
+                    }
+                }
+            }
+
+            return orderToReturn;
+        }
+
+        private void pbEditOrderInfo_Click(object sender, EventArgs e)
+        {
+            tbl_orders selectedOrder = this.GetSelectedOrder();
+
+            if (selectedOrder != null)
+            {
+                new ViewAllOrderDetails(selectedOrder).Show();
+            }
         }
     }
 }

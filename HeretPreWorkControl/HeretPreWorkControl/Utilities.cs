@@ -19,9 +19,10 @@ namespace HeretPreWorkControl
             popup.Popup();
         }
 
-        public static void GetAllJobsInWork()
+        public static Boolean GetAllJobsInWork()
         {
             Globals.AllJobs = new List<tbl_orders>();
+            Boolean isLoadSucceeded = true;
 
             using (var context = new DB_Entities())
             {
@@ -33,9 +34,11 @@ namespace HeretPreWorkControl
                 }
                 catch(Exception ex)
                 {
-
+                    isLoadSucceeded = false;
                 }
             }
+
+            return isLoadSucceeded;
         }
 
         public static void Popup_Clicked(object sender, System.EventArgs e)

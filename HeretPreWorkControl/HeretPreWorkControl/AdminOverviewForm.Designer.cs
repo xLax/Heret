@@ -177,6 +177,7 @@
             this.pbEditOrderInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEditOrderInfo.TabIndex = 24;
             this.pbEditOrderInfo.TabStop = false;
+            this.pbEditOrderInfo.Click += new System.EventHandler(this.pbEditOrderInfo_Click);
             // 
             // label3
             // 
