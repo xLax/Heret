@@ -50,7 +50,7 @@ namespace HeretPreWorkControl
                 tbClientName.Text = client.name;
             }
 
-            tbActionType.Text = Globals.getActionTypeText(order.action_type_id);
+            tbActionType.Text = Globals.AllActions.Where(a => a.ID == order.action_type_id).Single<tbl_sla_actions>().desc;
             
             using (var context = new DB_Entities())
             {
@@ -72,11 +72,19 @@ namespace HeretPreWorkControl
                 }
             }
 
-            
-            
-            tbWorkStatus.Text = "";
-            
+            switch(this.order.current_status_id)
+            {
+                case Globals.StatusInWork:
+                    tbWorkStatus.Text = Globals.StatusJobInWork;
+                    break;
 
+                case Globals.StatusClosed:
+                    tbWorkStatus.Text = Globals.StatusJobClosed;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void pbSalesUpdate_Click(object sender, EventArgs e)
