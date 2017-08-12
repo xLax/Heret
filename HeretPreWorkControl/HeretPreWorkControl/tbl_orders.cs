@@ -19,6 +19,7 @@ namespace HeretPreWorkControl
         {
             this.tbl_offers = new HashSet<tbl_offers>();
             this.tbl_sla_data = new HashSet<tbl_sla_data>();
+            this.tbl_notifications = new HashSet<tbl_notifications>();
         }
     
         public int ID { get; set; }
@@ -64,5 +65,7 @@ namespace HeretPreWorkControl
         public virtual ICollection<tbl_sla_data> tbl_sla_data { get; set; }
         public virtual tbl_sla_actions tbl_sla_actions1 { get; set; }
         public virtual tbl_user_groups tbl_user_groups1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_notifications> tbl_notifications { get; set; }
     }
 }

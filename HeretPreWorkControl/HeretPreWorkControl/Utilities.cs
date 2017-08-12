@@ -19,7 +19,7 @@ namespace HeretPreWorkControl
             popup.Popup();
         }
 
-        public static Boolean GetAllJobsInWork()
+        public static Boolean GetAllJobs()
         {
             Globals.AllJobs = new List<tbl_orders>();
             Boolean isLoadSucceeded = true;
@@ -29,7 +29,6 @@ namespace HeretPreWorkControl
                 try
                 {
                     Globals.AllJobs = context.tbl_orders
-                        .Where( o => o.current_status_id != Globals.StatusDenied)
                                     .ToList<tbl_orders>();
                 }
                 catch(Exception ex)
@@ -81,6 +80,33 @@ namespace HeretPreWorkControl
             }
 
             return strStatusDesc;
+        }
+
+        public static Boolean GetMyNotifications()
+        {
+            List<tbl_notifications> notes;
+            Boolean isSucceeded = true;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    notes = context.tbl_notifications.ToList<tbl_notifications>();
+
+                    foreach (tbl_notifications Note in notes)
+                    {
+                        Utilities.CreatePopup("תזכורת מנהל", "מנהל המערכת מתזכר אותך לבצע את עבודתך בהזמנה מספר " + Note.order_id);
+                    }
+
+                    context.tbl_notifications.RemoveRange(notes);
+
+                    context.SaveChanges();
+                }
+                catch (Exception ex) { isSucceeded = false; }
+            }
+
+            return isSucceeded;
+
         }
 
         public static void GetAllUserGroupList()
@@ -427,6 +453,34 @@ namespace HeretPreWorkControl
             }
 
             return isSucceeded;
+        }
+
+        public static int GetNextNotificationID()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_notifications note = context.tbl_notifications.OrderByDescending(u => u.ID).FirstOrDefault<tbl_notifications>();
+
+                    if (note == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = note.ID + 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
         }
 
         public static void SetActionsList(List<tbl_sla_actions> Actions)

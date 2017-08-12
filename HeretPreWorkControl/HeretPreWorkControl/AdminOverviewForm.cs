@@ -33,39 +33,102 @@ namespace HeretPreWorkControl
 
         private void AdminOverviewForm_Load(object sender, EventArgs e)
         {
-            isLoadSucceeded = Utilities.GetAllJobsInWork();
-            Utilities.GetAllClientsList();
-            Utilities.GetAllUserGroupList();
-            Utilities.GetAllActionsList();
+            isLoadSucceeded = Utilities.GetAllJobs();
 
-            dtFromDate.Format = DateTimePickerFormat.Custom;
-            dtFromDate.CustomFormat = "dd/MM/yyyy";
-            dtFromDate.MaxDate = DateTime.Today;
-            dtFromDate.MinDate = DateTime.Today.Date.AddMonths(-3);
-            dtFromDate.Value = DateTime.Today.Date.AddMonths(-3);
-
-            lbJobStatus.Items.Add(Globals.StatusJobAll);
-            lbJobStatus.Items.Add(Globals.StatusJobInWork);
-            lbJobStatus.Items.Add(Globals.StatusJobClosed);
-
-            lbJobStatus.SelectedIndex = 0;
-
-            foreach (tbl_orders order in Globals.AllJobs)
-            {
-                if (order.creation_date.Value >= dtFromDate.Value)
+            if(isLoadSucceeded)
+            { 
+                if(Globals.AllJobs.Count == 0)
                 {
-                    if (order.special_department_id != null &&
-                   order.special_department_id != Globals.AdminID)
-                    {
-                        InsertSpecialRow(order, true);
-                    }
-
-                    InsertRowFromOrder(order, true);
+                    tbPanel.Text = "אין עבודות התואמות את נתוני החיפוש";
                 }
+                else
+                {
+                    Utilities.GetAllClientsList();
+                    Utilities.GetAllUserGroupList();
+                    Utilities.GetAllActionsList();
+
+                    dtFromDate.Format = DateTimePickerFormat.Custom;
+                    dtFromDate.CustomFormat = "dd/MM/yyyy";
+                    dtFromDate.MaxDate = DateTime.Today;
+                    dtFromDate.MinDate = DateTime.Today.Date.AddYears(-1);
+                    dtFromDate.Value = DateTime.Today.Date.AddMonths(-1);
+
+                    lbJobStatus.Items.Add(Globals.StatusJobAll);
+                    lbJobStatus.Items.Add(Globals.StatusJobInWork);
+                    lbJobStatus.Items.Add(Globals.StatusJobClosed);
+                    lbJobStatus.Items.Add(Globals.StatusJobDenied);
+
+                    lbJobStatus.SelectedIndex = 0;
+
+                    foreach (tbl_orders order in Globals.AllJobs)
+                    {
+                        if (order.creation_date.Value >= dtFromDate.Value)
+                        {
+                            if (order.special_department_id != null &&
+                           order.special_department_id != Globals.AdminID)
+                            {
+                                InsertSpecialRow(order);
+                            }
+
+                            InsertRowFromOrder(order);
+                        }
+
+                        AddToInternalTable(order);
+                    }
+                }
+            }
+            else
+            {
+                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
             }
         }
 
-        private void InsertSpecialRow(tbl_orders order, Boolean isLoading)
+        private void AddToInternalTable(tbl_orders order)
+        {
+            string strJobStatus = Utilities.GetStatusDesc(order.current_status_id);
+
+            string strClientName = Globals.AllClients
+               .Where(c => c.ID == order.client_id.Value).Single<tbl_clients>().name;
+
+            string strCreationDate = Utilities.GetDateInNormalFormat(order.creation_date.Value.Date);
+
+            string strCurrDepartment = String.Empty;
+            string strSlaStatus = String.Empty;
+
+            if (order.current_status_id == Globals.StatusInWork)
+            {
+                strCurrDepartment = Globals.AllUserGroups
+                    .Where(u => u.ID == order.special_department_id)
+                                .Single<tbl_user_groups>().name;
+
+                // Fifth Col - Getting sla status
+                tbl_sla_actions ActionData =
+                    Globals.AllActions.Where(a => a.ID == order.special_action_type_id)
+                                                    .Single<tbl_sla_actions>();
+
+                Nullable<System.DateTime> recievedDate = order.dep_recieve_date;
+                Nullable<System.TimeSpan> recievedHour = order.dep_recieve_hour;
+
+                strSlaStatus = Utilities.CalculateSlaStatus(recievedDate, recievedHour, ActionData.sla_hours);
+            }
+            else
+            {
+                strCurrDepartment = "---";
+                strSlaStatus = "---";
+            }
+
+            RowData row = new RowData();
+            row.OrderID = order.ID;
+            row.JobStatus = strJobStatus;
+            row.SlaStatus = strSlaStatus;
+            row.CreationDate = order.creation_date.Value.Date;
+            row.CurrentDepartment = strCurrDepartment;
+            row.ClientName = strClientName;
+
+            lstAllViewData.Add(row);
+        }
+
+        private void InsertSpecialRow(tbl_orders order)
         {
             string strOrderID = order.ID.ToString();
 
@@ -105,22 +168,9 @@ namespace HeretPreWorkControl
 
             dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
                                   strCurrDepartment, strCreationDate, strSlaStatus);
-
-            if (isLoading)
-            {
-                RowData row = new RowData();
-                row.OrderID = order.ID;
-                row.JobStatus = strJobStatus;
-                row.SlaStatus = strSlaStatus;
-                row.CreationDate = order.creation_date.Value.Date;
-                row.CurrentDepartment = strCurrDepartment;
-                row.ClientName = strClientName;
-
-                lstAllViewData.Add(row);
-            }
         }
 
-        private void InsertRowFromOrder(tbl_orders order, Boolean isLoading)
+        private void InsertRowFromOrder(tbl_orders order)
         {
             string strOrderID = order.ID.ToString();
 
@@ -160,19 +210,6 @@ namespace HeretPreWorkControl
 
             dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
                                   strCurrDepartment, strCreationDate, strSlaStatus);
-
-            if (isLoading)
-            {
-                RowData row = new RowData();
-                row.OrderID = order.ID;
-                row.JobStatus = strJobStatus;
-                row.SlaStatus = strSlaStatus;
-                row.CreationDate = order.creation_date.Value.Date;
-                row.CurrentDepartment = strCurrDepartment;
-                row.ClientName = strClientName;
-
-                lstAllViewData.Add(row);
-            }
         }
 
         private void dtFromDate_ValueChanged(object sender, EventArgs e)
@@ -194,6 +231,11 @@ namespace HeretPreWorkControl
                     {
                         lstTempList = lstAllViewData.Where(a => a.CreationDate >= dtFromDate.Value &&
                                                            a.JobStatus == Globals.StatusJobInWork).ToList<RowData>();
+                    }
+                    else if(lbJobStatus.SelectedItem.Equals(Globals.StatusJobDenied))
+                    {
+                        lstTempList = lstAllViewData.Where(a => a.CreationDate >= dtFromDate.Value &&
+                                                           a.JobStatus == Globals.StatusJobDenied).ToList<RowData>();
                     }
                     else
                     {
@@ -330,6 +372,25 @@ namespace HeretPreWorkControl
             if(nDepartToNotify != -1)
             {
                 // TODO: add to notification table;
+                tbl_notifications currNotification = new tbl_notifications();
+                currNotification.ID = Utilities.GetNextNotificationID();
+                currNotification.Deparment_id = nDepartToNotify;
+                currNotification.is_notified = 0;
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        context.tbl_notifications.Add(currNotification);
+                        context.SaveChanges();
+
+                        tbPanel.Text = "ההתראה נשלחה בהצלחה";
+                    }
+                    catch(Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ namespace HeretPreWorkControl
             this.tbl_orders = new HashSet<tbl_orders>();
             this.tbl_orders1 = new HashSet<tbl_orders>();
             this.tbl_users = new HashSet<tbl_users>();
+            this.tbl_notifications = new HashSet<tbl_notifications>();
         }
     
         public int ID { get; set; }
@@ -37,5 +38,7 @@ namespace HeretPreWorkControl
         public virtual ICollection<tbl_orders> tbl_orders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_users> tbl_users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_notifications> tbl_notifications { get; set; }
     }
 }

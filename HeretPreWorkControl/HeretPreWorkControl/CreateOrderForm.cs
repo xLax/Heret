@@ -28,6 +28,8 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.Items.Add(Globals.TemplateNumber);
             lbPriseTempDesc.Items.Add(Globals.ProjectDesc);
 
+            lbPriseTempDesc.SelectedIndex = 2;
+
             tbSalesAgent.Text = Globals.Name;
 
             Utilities.GetAllClientsList();
@@ -274,11 +276,6 @@ namespace HeretPreWorkControl
                     this.tbClientNumber_Leave(new object(), new EventArgs());
                 }
             }
-        }
-
-        private void lbPriseTempDesc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

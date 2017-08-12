@@ -30,6 +30,9 @@
         <AssociationConnector Association="DB_Model.sla_id" ManuallyRouted="false" />
         <AssociationConnector Association="DB_Model.user_id" ManuallyRouted="false" />
         <AssociationConnector Association="DB_Model.Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_Model.tbl_notifications" Width="1.5" PointX="4" PointY="12.875" />
+        <AssociationConnector Association="DB_Model.department_id" />
+        <AssociationConnector Association="DB_Model.ord_id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

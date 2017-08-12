@@ -39,6 +39,15 @@
           <Property Name="Department_id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Deparment_id" Type="int" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="is_notified" Type="int" />
+        </EntityType>
         <EntityType Name="tbl_offers">
           <Key>
             <PropertyRef Name="offer_id" />
@@ -181,6 +190,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="dep_id">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="0..1" />
+          <End Role="tbl_notifications" Type="Self.tbl_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_notifications">
+              <PropertyRef Name="Deparment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="departments">
           <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="1" />
           <End Role="tbl_employees" Type="Self.tbl_employees" Multiplicity="*" />
@@ -226,6 +247,18 @@
             </Principal>
             <Dependent Role="tbl_action_to_dept">
               <PropertyRef Name="recieved_department_action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ord_id">
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="0..1" />
+          <End Role="tbl_notifications" Type="Self.tbl_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_notifications">
+              <PropertyRef Name="order_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -306,6 +339,7 @@
           <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_employees" EntityType="Self.tbl_employees" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_notifications" EntityType="Self.tbl_notifications" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_offers" EntityType="Self.tbl_offers" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_sla_actions" EntityType="Self.tbl_sla_actions" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
@@ -332,6 +366,10 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_orders" EntitySet="tbl_orders" />
           </AssociationSet>
+          <AssociationSet Name="dep_id" Association="Self.dep_id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_notifications" EntitySet="tbl_notifications" />
+          </AssociationSet>
           <AssociationSet Name="departments" Association="Self.departments">
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_employees" EntitySet="tbl_employees" />
@@ -347,6 +385,10 @@
           <AssociationSet Name="next_dept_action" Association="Self.next_dept_action">
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
+          </AssociationSet>
+          <AssociationSet Name="ord_id" Association="Self.ord_id">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_notifications" EntitySet="tbl_notifications" />
           </AssociationSet>
           <AssociationSet Name="order" Association="Self.order">
             <End Role="tbl_orders" EntitySet="tbl_orders" />
@@ -470,6 +512,7 @@
           <Property Name="alert_creation_date" Type="Int32" />
           <Property Name="special_recieved_date" Type="DateTime" />
           <Property Name="special_recieved_hour" Type="Time" />
+          <NavigationProperty Name="tbl_notifications" Relationship="DB_Model.ord_id" FromRole="tbl_orders" ToRole="tbl_notifications" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -510,6 +553,7 @@
           <NavigationProperty Name="tbl_orders" Relationship="Self.current_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_orders1" Relationship="Self.special_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_users" Relationship="Self.Id" FromRole="tbl_user_groups" ToRole="tbl_users" />
+          <NavigationProperty Name="tbl_notifications" Relationship="DB_Model.department_id" FromRole="tbl_user_groups" ToRole="tbl_notifications" />
         </EntityType>
         <EntityType Name="tbl_users">
           <Key>
@@ -774,7 +818,51 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_users" EntitySet="tbl_users" />
           </AssociationSet>
+          <EntitySet Name="tbl_notifications" EntityType="DB_Model.tbl_notifications" />
+          <AssociationSet Name="department_id" Association="DB_Model.department_id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_notifications" EntitySet="tbl_notifications" />
+          </AssociationSet>
+          <AssociationSet Name="ord_id" Association="DB_Model.ord_id">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_notifications" EntitySet="tbl_notifications" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tbl_notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Deparment_id" Type="Int32" />
+          <Property Name="is_notified" Type="Int32" />
+          <NavigationProperty Name="tbl_user_groups" Relationship="DB_Model.department_id" FromRole="tbl_notifications" ToRole="tbl_user_groups" />
+          <Property Name="order_id" Type="Int32" />
+          <NavigationProperty Name="tbl_orders" Relationship="DB_Model.ord_id" FromRole="tbl_notifications" ToRole="tbl_orders" />
+        </EntityType>
+        <Association Name="department_id">
+          <End Type="DB_Model.tbl_user_groups" Role="tbl_user_groups" Multiplicity="0..1" />
+          <End Type="DB_Model.tbl_notifications" Role="tbl_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_notifications">
+              <PropertyRef Name="Deparment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ord_id">
+          <End Type="DB_Model.tbl_orders" Role="tbl_orders" Multiplicity="0..1" />
+          <End Type="DB_Model.tbl_notifications" Role="tbl_notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_notifications">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -904,6 +992,16 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="user_group_id" ColumnName="user_group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_notifications">
+            <EntityTypeMapping TypeName="DB_Model.tbl_notifications">
+              <MappingFragment StoreEntitySet="tbl_notifications">
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="is_notified" ColumnName="is_notified" />
+                <ScalarProperty Name="Deparment_id" ColumnName="Deparment_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

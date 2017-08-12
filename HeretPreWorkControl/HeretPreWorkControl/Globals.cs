@@ -64,6 +64,7 @@ namespace HeretPreWorkControl
 
         public const string StatusJobClosed = "סגור";
         public const string StatusJobInWork = "בתהליך";
+        public const string StatusJobDenied = "סירוב לקוח";
         public const string StatusJobAll = "הכל";
 
         public const string NewOrder = "הזמנה חדשה";

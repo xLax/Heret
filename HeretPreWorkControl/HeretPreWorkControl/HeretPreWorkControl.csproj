@@ -201,6 +201,9 @@
     <Compile Include="tbl_employees.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_notifications.cs">
+      <DependentUpon>DB Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_offers.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>

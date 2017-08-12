@@ -35,5 +35,6 @@ namespace HeretPreWorkControl
         public virtual DbSet<tbl_sla_data> tbl_sla_data { get; set; }
         public virtual DbSet<tbl_user_groups> tbl_user_groups { get; set; }
         public virtual DbSet<tbl_users> tbl_users { get; set; }
+        public virtual DbSet<tbl_notifications> tbl_notifications { get; set; }
     }
 }
