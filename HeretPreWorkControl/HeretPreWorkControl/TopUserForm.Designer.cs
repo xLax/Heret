@@ -208,13 +208,13 @@
             // tmrLateOrdersInsertTimer
             // 
             this.tmrLateOrdersInsertTimer.Enabled = true;
-            this.tmrLateOrdersInsertTimer.Interval = 10000;
+            this.tmrLateOrdersInsertTimer.Interval = 500000;
             this.tmrLateOrdersInsertTimer.Tick += new System.EventHandler(this.tmrLateOrdersInsertTimer_Tick);
             // 
             // tmrSpecialApproveTimer
             // 
             this.tmrSpecialApproveTimer.Enabled = true;
-            this.tmrSpecialApproveTimer.Interval = 10000;
+            this.tmrSpecialApproveTimer.Interval = 180000;
             this.tmrSpecialApproveTimer.Tick += new System.EventHandler(this.tmrSpecialApproveTimer_Tick);
             // 
             // TopUserForm

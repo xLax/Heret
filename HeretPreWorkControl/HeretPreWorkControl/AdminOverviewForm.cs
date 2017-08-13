@@ -65,7 +65,7 @@ namespace HeretPreWorkControl
                         if (order.creation_date.Value >= dtFromDate.Value)
                         {
                             if (order.special_department_id != null &&
-                           order.special_department_id != Globals.AdminID)
+                                order.special_department_id != Globals.AdminID)
                             {
                                 InsertSpecialRow(order);
                             }
@@ -73,7 +73,14 @@ namespace HeretPreWorkControl
                             InsertRowFromOrder(order);
                         }
 
+                        if (order.special_department_id != null &&
+                           order.special_department_id != Globals.AdminID)
+                        {
+                            AddSpecialToInternalTable(order);
+                        }
+
                         AddToInternalTable(order);
+
                     }
                 }
             }
@@ -81,6 +88,49 @@ namespace HeretPreWorkControl
             {
                 tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
             }
+        }
+
+        private void AddSpecialToInternalTable(tbl_orders order)
+        {
+            string strClientName = Globals.AllClients
+                .Where(c => c.ID == order.client_id.Value).Single<tbl_clients>().name;
+
+            string strJobStatus = Utilities.GetStatusDesc(order.current_status_id);
+
+            string strCurrDepartment = String.Empty;
+            string strSlaStatus = String.Empty;
+
+            if (order.current_status_id == Globals.StatusInWork)
+            {
+                strCurrDepartment = Globals.AllUserGroups
+                    .Where(u => u.ID == order.special_department_id)
+                                .Single<tbl_user_groups>().name;
+
+                // Fifth Col - Getting sla status
+                tbl_sla_actions ActionData =
+                    Globals.AllActions.Where(a => a.ID == order.special_action_type_id)
+                                                    .Single<tbl_sla_actions>();
+
+                Nullable<System.DateTime> recievedDate = order.dep_recieve_date;
+                Nullable<System.TimeSpan> recievedHour = order.dep_recieve_hour;
+
+                strSlaStatus = Utilities.CalculateSlaStatus(recievedDate, recievedHour, ActionData.sla_hours);
+            }
+            else
+            {
+                strCurrDepartment = "---";
+                strSlaStatus = "---";
+            }
+
+            RowData row = new RowData();
+            row.OrderID = order.ID;
+            row.JobStatus = strJobStatus;
+            row.SlaStatus = strSlaStatus;
+            row.CreationDate = order.creation_date.Value.Date;
+            row.CurrentDepartment = strCurrDepartment;
+            row.ClientName = strClientName;
+
+            lstAllViewData.Add(row);
         }
 
         private void AddToInternalTable(tbl_orders order)
@@ -98,12 +148,12 @@ namespace HeretPreWorkControl
             if (order.current_status_id == Globals.StatusInWork)
             {
                 strCurrDepartment = Globals.AllUserGroups
-                    .Where(u => u.ID == order.special_department_id)
+                    .Where(u => u.ID == order.curr_departnent_id)
                                 .Single<tbl_user_groups>().name;
 
                 // Fifth Col - Getting sla status
                 tbl_sla_actions ActionData =
-                    Globals.AllActions.Where(a => a.ID == order.special_action_type_id)
+                    Globals.AllActions.Where(a => a.ID == order.action_type_id)
                                                     .Single<tbl_sla_actions>();
 
                 Nullable<System.DateTime> recievedDate = order.dep_recieve_date;
@@ -371,24 +421,33 @@ namespace HeretPreWorkControl
 
             if(nDepartToNotify != -1)
             {
-                // TODO: add to notification table;
-                tbl_notifications currNotification = new tbl_notifications();
-                currNotification.ID = Utilities.GetNextNotificationID();
-                currNotification.Deparment_id = nDepartToNotify;
-                currNotification.is_notified = 0;
+                tbl_orders order = this.GetSelectedOrder();
 
-                using (var context = new DB_Entities())
+                if(order == null)
                 {
-                    try
-                    {
-                        context.tbl_notifications.Add(currNotification);
-                        context.SaveChanges();
+                    tbPanel.Text = "שגיאה באמינות הנתונים אנא צא וכנס מהמערכת";
+                }
+                else
+                {
+                    tbl_notifications currNotification = new tbl_notifications();
+                    currNotification.ID = Utilities.GetNextNotificationID();
+                    currNotification.order_id = order.ID;
+                    currNotification.Deparment_id = nDepartToNotify;
+                    currNotification.is_notified = 0;
 
-                        tbPanel.Text = "ההתראה נשלחה בהצלחה";
-                    }
-                    catch(Exception ex)
+                    using (var context = new DB_Entities())
                     {
-                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                        try
+                        {
+                            context.tbl_notifications.Add(currNotification);
+                            context.SaveChanges();
+
+                            tbPanel.Text = "ההתראה נשלחה בהצלחה";
+                        }
+                        catch (Exception ex)
+                        {
+                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                        }
                     }
                 }
             }

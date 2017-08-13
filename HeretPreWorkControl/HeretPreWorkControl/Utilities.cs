@@ -91,7 +91,9 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    notes = context.tbl_notifications.ToList<tbl_notifications>();
+                    notes = context.tbl_notifications.
+                            Where(n => n.Deparment_id == Globals.UserGroupID)
+                                        .ToList<tbl_notifications>();
 
                     foreach (tbl_notifications Note in notes)
                     {
