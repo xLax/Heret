@@ -14,6 +14,8 @@ namespace HeretPreWorkControl
         private Boolean isLoadSucceeded = true;
         private Boolean isSpecial = false;
 
+        public static Boolean isJobSucceeded = false;
+
         private tbl_orders ListSelectedOrder;
 
         public MyJobsForm()
@@ -72,7 +74,7 @@ namespace HeretPreWorkControl
             }
 
             LoadRelevantData();
-            SetZebraMode();
+            Utilities.SetZebraMode(dataGridView);
         }
 
         private void LoadRelevantData()
@@ -154,15 +156,10 @@ namespace HeretPreWorkControl
             }
         }
 
-        private void SetZebraMode()
-        {
-            dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.AntiqueWhite;
-        }
-
         private void pbExecute_Click(object sender, EventArgs e)
         {
             tbPanel.Clear();
+            MyJobsForm.isJobSucceeded = false;
 
             tbl_orders SelectedOrder = this.GetSelectedOrder(false);
 
@@ -174,21 +171,44 @@ namespace HeretPreWorkControl
             if(SelectedOrder != null)
             {
                 List<tbl_action_to_dept> lstActionsToDept = new List<tbl_action_to_dept>();
+                string strSlaStatus = String.Empty;
+                DateTime dtBeginDate;
 
                 int nActionTypeBeforeConvertion = 0;
+                tbl_sla_actions ActionData;
 
-                if(((Globals.UserGroupID == Globals.KadasUserID ||
+                if (((Globals.UserGroupID == Globals.KadasUserID ||
                      Globals.UserGroupID == Globals.OrdersUserID) &&
                    SelectedOrder.special_department_id != null) ||
                    isSpecial)
                 {
                     nActionTypeBeforeConvertion = int.Parse(SelectedOrder.special_action_type_id.Value.ToString());
+
+
+                    ActionData = Globals.AllActions.Where(a => a.ID == SelectedOrder.special_action_type_id)
+                                                            .Single<tbl_sla_actions>();
+
+                    strSlaStatus = Utilities.CalculateSlaStatus(SelectedOrder.special_recieved_date,
+                                                                SelectedOrder.special_recieved_hour,
+                                                                ActionData.sla_hours);
+
+                    dtBeginDate = SelectedOrder.special_recieved_date.Value;
                 }
                 else
                 {
                     nActionTypeBeforeConvertion = int.Parse(SelectedOrder.action_type_id.ToString());
+                    ActionData = Globals.AllActions.Where(a => a.ID == SelectedOrder.action_type_id)
+                                                            .Single<tbl_sla_actions>();
+
+                    strSlaStatus = Utilities.CalculateSlaStatus(SelectedOrder.dep_recieve_date,
+                                                                SelectedOrder.dep_recieve_hour,
+                                                                ActionData.sla_hours);
+
+                    dtBeginDate = SelectedOrder.dep_recieve_date.Value;
                 }
 
+                int nSlaStatusID = Utilities.ConvertSlaStatusToNumber(strSlaStatus);
+                
                 int nActionTypeID =
                     Utilities.ConvertIfNeeded
                         (nActionTypeBeforeConvertion);
@@ -207,6 +227,7 @@ namespace HeretPreWorkControl
                             if(Utilities.TransferJobAndActionToNext(SelectedOrder, isSpecial))
                             {
                                 tbPanel.Text = "העברת העבודה התבצעה בהצלחה";
+                                MyJobsForm.isJobSucceeded = true;
                             }
                             else
                             {
@@ -227,6 +248,7 @@ namespace HeretPreWorkControl
                                     if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                     {
                                         tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                        MyJobsForm.isJobSucceeded = true;
                                     }
                                     else
                                     {
@@ -254,7 +276,7 @@ namespace HeretPreWorkControl
                                             Entry.Property(o => o.special_recieved_hour).IsModified = true;
 
                                             context.SaveChanges();
-
+                                            MyJobsForm.isJobSucceeded = true;
                                             this.SilentRefresh();
                                         }
                                     }
@@ -275,6 +297,7 @@ namespace HeretPreWorkControl
                                 if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                 {
                                     tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                    MyJobsForm.isJobSucceeded = true;
                                 }
                                 else
                                 {
@@ -285,12 +308,12 @@ namespace HeretPreWorkControl
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeInsertOrderID)
                         {
                             // Insert order number
-                            new InsertOrderIDForm(SelectedOrder).Show();
+                            new InsertOrderIDForm(SelectedOrder).ShowDialog();
                         }
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeRecieveClientOrder)
                         {
                             // Insert Client order number
-                            new InsertClientOrderIDForm(SelectedOrder).Show();
+                            new InsertClientOrderIDForm(SelectedOrder).ShowDialog();
                         }
                         // Studio model approve - קבלת אישור מהלקוח על דגם סטודיו
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeStudioWaitClient)
@@ -304,6 +327,7 @@ namespace HeretPreWorkControl
                                 if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                 {
                                     tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                    MyJobsForm.isJobSucceeded = true;
                                 }
                                 else
                                 {
@@ -328,7 +352,7 @@ namespace HeretPreWorkControl
                                         Entry.Property(o => o.dep_recieve_hour).IsModified = true;
 
                                         context.SaveChanges();
-
+                                        MyJobsForm.isJobSucceeded = true;
                                         this.SilentRefresh();
                                     }
                                 }
@@ -349,6 +373,7 @@ namespace HeretPreWorkControl
                                 if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                 {
                                     tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                    MyJobsForm.isJobSucceeded = true;
                                 }
                                 else
                                 {
@@ -376,7 +401,7 @@ namespace HeretPreWorkControl
                                         Entry.Property(o => o.special_recieved_hour).IsModified = true;
 
                                         context.SaveChanges();
-
+                                        MyJobsForm.isJobSucceeded = true;
                                         this.SilentRefresh();
                                     }
                                 }
@@ -420,6 +445,7 @@ namespace HeretPreWorkControl
                                             if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                             {
                                                 tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                                MyJobsForm.isJobSucceeded = true;
                                             }
                                             else
                                             {
@@ -432,6 +458,7 @@ namespace HeretPreWorkControl
                                         if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                         {
                                             tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                            MyJobsForm.isJobSucceeded = true;
                                         }
                                         else
                                         {
@@ -451,18 +478,92 @@ namespace HeretPreWorkControl
                             if(Utilities.TransferJobAndActionToNext(SelectedOrder))
                             {
                                 tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
+                                MyJobsForm.isJobSucceeded = true;
                             }
                             else
                             {
                                 tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                             }
                         }
+
+                        if(MyJobsForm.isJobSucceeded &&
+                           nSlaStatusID != 0)
+                        {
+                            tbl_sla_data currSlaData = new tbl_sla_data();
+
+                            currSlaData.ID = Utilities.GetNextSlaDataID();
+                            currSlaData.order_id = SelectedOrder.ID;
+                            currSlaData.sla_id = nActionTypeBeforeConvertion;
+                            currSlaData.user_id = Globals.UserID;
+                            currSlaData.begin_date = dtBeginDate;
+                            currSlaData.end_date = DateTime.Today;
+                            currSlaData.status_id = nSlaStatusID;
+                            
+                            // Get the agent name if needed
+                            if(nActionTypeID == 2 ||
+                               nActionTypeID == 4)
+                            {
+                                currSlaData.employee_name = SelectedOrder.studio_agent_name;
+                            }
+                            else if(nActionTypeID == 8 ||
+                                    nActionTypeID == 9)
+                            {
+                                currSlaData.employee_name = SelectedOrder.kadas_agent_name;
+                            }
+
+                            this.InsertIntoSlaData(currSlaData);
+                        }                        
                     }
                     else if(lstActionsToDept.Count > 1)
                     {
-                            // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                            new MovementsForm(lstActionsToDept, SelectedOrder, nActionTypeID).Show();
+                        // פתח מסך ניתוב עבודה לפי ID של מחלקה
+                        new MovementsForm(lstActionsToDept, SelectedOrder, nActionTypeID).ShowDialog();
+
+                        if(MyJobsForm.isJobSucceeded &&
+                           nSlaStatusID != 0)
+                        {
+                            tbl_sla_data currSlaData = new tbl_sla_data();
+
+                            currSlaData.ID = Utilities.GetNextSlaDataID();
+                            currSlaData.order_id = SelectedOrder.ID;
+                            currSlaData.sla_id = nActionTypeBeforeConvertion;
+                            currSlaData.user_id = Globals.UserID;
+                            currSlaData.begin_date = dtBeginDate;
+                            currSlaData.end_date = DateTime.Today;
+                            currSlaData.status_id = nSlaStatusID;
+
+                            // Get the agent name if needed
+                            if (nActionTypeID == 2 ||
+                               nActionTypeID == 4)
+                            {
+                                currSlaData.employee_name = SelectedOrder.studio_agent_name;
+                            }
+                            else if (nActionTypeID == 8 ||
+                                    nActionTypeID == 9)
+                            {
+                                currSlaData.employee_name = SelectedOrder.kadas_agent_name;
+                            }
+
+                            this.InsertIntoSlaData(currSlaData);
+                        }
                     }
+                }
+            }
+        }
+
+        private void InsertIntoSlaData(tbl_sla_data currSlaData)
+        {
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    context.tbl_sla_data.Add(currSlaData);
+
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                 }
             }
         }

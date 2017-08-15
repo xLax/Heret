@@ -45,6 +45,7 @@ namespace HeretPreWorkControl
 
                         context.SaveChanges();
 
+                        MyJobsForm.isJobSucceeded = true;
                         tbPanel.Text = "מספר ההזמנה הוכנס למערכת בהצלחה !";
                     }
                 }

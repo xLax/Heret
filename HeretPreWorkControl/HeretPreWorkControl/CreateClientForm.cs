@@ -188,5 +188,22 @@ namespace HeretPreWorkControl
                 tbPanel.Text = "שגיאה ! אנא הזן ספרות בשדה מספר לקוח";
             }
         }
+
+        private void CreateClientForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueF6)
+            {
+                using (var form = new SearchClientPopup())
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        tbClientNumber.Text = form.IDToReturn.ToString();
+
+                        this.tbClientNumber_Leave(new object(), new EventArgs());
+                    }
+                }
+            }
+        }
     }
 }

@@ -253,6 +253,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
             this.Load += new System.EventHandler(this.CreateClientForm_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CreateClientForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InsertButton)).EndInit();

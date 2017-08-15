@@ -46,6 +46,7 @@ namespace HeretPreWorkControl
                     Utilities.GetAllClientsList();
                     Utilities.GetAllUserGroupList();
                     Utilities.GetAllActionsList();
+                    Utilities.SetZebraMode(dataGridView);
 
                     dtFromDate.Format = DateTimePickerFormat.Custom;
                     dtFromDate.CustomFormat = "dd/MM/yyyy";
@@ -74,7 +75,7 @@ namespace HeretPreWorkControl
                         }
 
                         if (order.special_department_id != null &&
-                           order.special_department_id != Globals.AdminID)
+                            order.special_department_id != Globals.AdminID)
                         {
                             AddSpecialToInternalTable(order);
                         }

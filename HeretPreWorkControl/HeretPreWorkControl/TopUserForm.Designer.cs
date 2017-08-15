@@ -34,12 +34,10 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblCreateUser = new System.Windows.Forms.Label();
             this.lblSpecialApprove = new System.Windows.Forms.Label();
-            this.lblUnapprovedJobs = new System.Windows.Forms.Label();
             this.lblStatistics = new System.Windows.Forms.Label();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.btnGetClientsFromExcel = new System.Windows.Forms.Button();
             this.pbStatistics = new System.Windows.Forms.PictureBox();
-            this.pbUnapprovedJobs = new System.Windows.Forms.PictureBox();
             this.pbSpecialApprove = new System.Windows.Forms.PictureBox();
             this.pbAddUser = new System.Windows.Forms.PictureBox();
             this.pbStatus = new System.Windows.Forms.PictureBox();
@@ -47,7 +45,6 @@
             this.tmrLateOrdersInsertTimer = new System.Windows.Forms.Timer(this.components);
             this.tmrSpecialApproveTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
@@ -58,7 +55,7 @@
             // 
             this.lblHello.AutoSize = true;
             this.lblHello.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHello.Location = new System.Drawing.Point(74, 49);
+            this.lblHello.Location = new System.Drawing.Point(77, 32);
             this.lblHello.Name = "lblHello";
             this.lblHello.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblHello.Size = new System.Drawing.Size(184, 27);
@@ -69,7 +66,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(145, 211);
+            this.lblStatus.Location = new System.Drawing.Point(124, 211);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(167, 27);
@@ -80,7 +77,7 @@
             // 
             this.lblCreateUser.AutoSize = true;
             this.lblCreateUser.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreateUser.Location = new System.Drawing.Point(404, 211);
+            this.lblCreateUser.Location = new System.Drawing.Point(410, 211);
             this.lblCreateUser.Name = "lblCreateUser";
             this.lblCreateUser.Size = new System.Drawing.Size(132, 27);
             this.lblCreateUser.TabIndex = 19;
@@ -90,27 +87,17 @@
             // 
             this.lblSpecialApprove.AutoSize = true;
             this.lblSpecialApprove.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpecialApprove.Location = new System.Drawing.Point(12, 365);
+            this.lblSpecialApprove.Location = new System.Drawing.Point(101, 365);
             this.lblSpecialApprove.Name = "lblSpecialApprove";
             this.lblSpecialApprove.Size = new System.Drawing.Size(216, 27);
             this.lblSpecialApprove.TabIndex = 21;
             this.lblSpecialApprove.Text = "אישור קידום עבודות";
             // 
-            // lblUnapprovedJobs
-            // 
-            this.lblUnapprovedJobs.AutoSize = true;
-            this.lblUnapprovedJobs.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnapprovedJobs.Location = new System.Drawing.Point(267, 365);
-            this.lblUnapprovedJobs.Name = "lblUnapprovedJobs";
-            this.lblUnapprovedJobs.Size = new System.Drawing.Size(142, 27);
-            this.lblUnapprovedJobs.TabIndex = 23;
-            this.lblUnapprovedJobs.Text = "הצעות שנדחו";
-            // 
             // lblStatistics
             // 
             this.lblStatistics.AutoSize = true;
             this.lblStatistics.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatistics.Location = new System.Drawing.Point(467, 365);
+            this.lblStatistics.Location = new System.Drawing.Point(400, 365);
             this.lblStatistics.Name = "lblStatistics";
             this.lblStatistics.Size = new System.Drawing.Size(148, 27);
             this.lblStatistics.TabIndex = 25;
@@ -139,29 +126,19 @@
             // 
             this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
-            this.pbStatistics.Location = new System.Drawing.Point(490, 264);
+            this.pbStatistics.Location = new System.Drawing.Point(424, 264);
             this.pbStatistics.Name = "pbStatistics";
             this.pbStatistics.Size = new System.Drawing.Size(102, 98);
             this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStatistics.TabIndex = 24;
             this.pbStatistics.TabStop = false;
-            // 
-            // pbUnapprovedJobs
-            // 
-            this.pbUnapprovedJobs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbUnapprovedJobs.Image = global::HeretPreWorkControl.Properties.Resources.Unapproved_Jobs;
-            this.pbUnapprovedJobs.Location = new System.Drawing.Point(286, 264);
-            this.pbUnapprovedJobs.Name = "pbUnapprovedJobs";
-            this.pbUnapprovedJobs.Size = new System.Drawing.Size(102, 98);
-            this.pbUnapprovedJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbUnapprovedJobs.TabIndex = 22;
-            this.pbUnapprovedJobs.TabStop = false;
+            this.pbStatistics.Click += new System.EventHandler(this.pbStatistics_Click);
             // 
             // pbSpecialApprove
             // 
             this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
-            this.pbSpecialApprove.Location = new System.Drawing.Point(67, 264);
+            this.pbSpecialApprove.Location = new System.Drawing.Point(156, 264);
             this.pbSpecialApprove.Name = "pbSpecialApprove";
             this.pbSpecialApprove.Size = new System.Drawing.Size(102, 98);
             this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -173,7 +150,7 @@
             // 
             this.pbAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbAddUser.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
-            this.pbAddUser.Location = new System.Drawing.Point(418, 110);
+            this.pbAddUser.Location = new System.Drawing.Point(424, 110);
             this.pbAddUser.Name = "pbAddUser";
             this.pbAddUser.Size = new System.Drawing.Size(102, 98);
             this.pbAddUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -185,7 +162,7 @@
             // 
             this.pbStatus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatus.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
-            this.pbStatus.Location = new System.Drawing.Point(177, 110);
+            this.pbStatus.Location = new System.Drawing.Point(156, 110);
             this.pbStatus.Margin = new System.Windows.Forms.Padding(2);
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(102, 98);
@@ -198,7 +175,7 @@
             // 
             this.pbHeret.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pbHeret.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pbHeret.Location = new System.Drawing.Point(343, 29);
+            this.pbHeret.Location = new System.Drawing.Point(346, 12);
             this.pbHeret.Name = "pbHeret";
             this.pbHeret.Size = new System.Drawing.Size(230, 65);
             this.pbHeret.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -226,8 +203,6 @@
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.lblStatistics);
             this.Controls.Add(this.pbStatistics);
-            this.Controls.Add(this.lblUnapprovedJobs);
-            this.Controls.Add(this.pbUnapprovedJobs);
             this.Controls.Add(this.lblSpecialApprove);
             this.Controls.Add(this.pbSpecialApprove);
             this.Controls.Add(this.lblCreateUser);
@@ -248,7 +223,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUserForm_FormClosing);
             this.Load += new System.EventHandler(this.TopUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUnapprovedJobs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
@@ -268,8 +242,6 @@
         private System.Windows.Forms.PictureBox pbAddUser;
         private System.Windows.Forms.Label lblSpecialApprove;
         private System.Windows.Forms.PictureBox pbSpecialApprove;
-        private System.Windows.Forms.Label lblUnapprovedJobs;
-        private System.Windows.Forms.PictureBox pbUnapprovedJobs;
         private System.Windows.Forms.Label lblStatistics;
         private System.Windows.Forms.PictureBox pbStatistics;
         private System.Windows.Forms.TextBox tbPanel;

@@ -161,5 +161,10 @@ namespace HeretPreWorkControl
         {
             new AdminOverviewForm().Show();
         }
+
+        private void pbStatistics_Click(object sender, EventArgs e)
+        {
+            new ManagerReportForm().Show();
+        }
     }
 }

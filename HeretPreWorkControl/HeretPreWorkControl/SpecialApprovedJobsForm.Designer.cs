@@ -64,10 +64,9 @@
             this.Project_Desc,
             this.Amount,
             this.Agent_Name});
-            this.dataGridView.Location = new System.Drawing.Point(16, 133);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView.Location = new System.Drawing.Point(12, 108);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(973, 284);
+            this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 14;
             // 
             // ID
@@ -121,10 +120,9 @@
             // 
             this.pbRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbRefresh.Image = global::HeretPreWorkControl.Properties.Resources.Refresh_icon;
-            this.pbRefresh.Location = new System.Drawing.Point(917, 55);
-            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbRefresh.Location = new System.Drawing.Point(688, 45);
             this.pbRefresh.Name = "pbRefresh";
-            this.pbRefresh.Size = new System.Drawing.Size(72, 46);
+            this.pbRefresh.Size = new System.Drawing.Size(54, 37);
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbRefresh.TabIndex = 13;
             this.pbRefresh.TabStop = false;
@@ -133,10 +131,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.ApprovedJobsTitle;
-            this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(419, 86);
+            this.pictureBox2.Size = new System.Drawing.Size(314, 70);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
@@ -145,10 +142,9 @@
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(495, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(371, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(340, 86);
+            this.pictureBox1.Size = new System.Drawing.Size(255, 70);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
@@ -158,11 +154,10 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(16, 480);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Location = new System.Drawing.Point(12, 390);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(972, 35);
+            this.tbPanel.Size = new System.Drawing.Size(730, 29);
             this.tbPanel.TabIndex = 17;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -170,10 +165,9 @@
             // 
             this.lblEnterDeclined.AutoSize = true;
             this.lblEnterDeclined.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnterDeclined.Location = new System.Drawing.Point(13, 441);
-            this.lblEnterDeclined.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEnterDeclined.Location = new System.Drawing.Point(10, 358);
             this.lblEnterDeclined.Name = "lblEnterDeclined";
-            this.lblEnterDeclined.Size = new System.Drawing.Size(121, 27);
+            this.lblEnterDeclined.Size = new System.Drawing.Size(95, 20);
             this.lblEnterDeclined.TabIndex = 21;
             this.lblEnterDeclined.Text = "דחה בקשה";
             // 
@@ -181,10 +175,9 @@
             // 
             this.pbDecline.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbDecline.Image = global::HeretPreWorkControl.Properties.Resources.Decline_Icon;
-            this.pbDecline.Location = new System.Drawing.Point(140, 434);
-            this.pbDecline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbDecline.Location = new System.Drawing.Point(105, 353);
             this.pbDecline.Name = "pbDecline";
-            this.pbDecline.Size = new System.Drawing.Size(47, 38);
+            this.pbDecline.Size = new System.Drawing.Size(35, 31);
             this.pbDecline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbDecline.TabIndex = 20;
             this.pbDecline.TabStop = false;
@@ -194,10 +187,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(729, 441);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(547, 358);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(206, 27);
+            this.label3.Size = new System.Drawing.Size(159, 20);
             this.label3.TabIndex = 19;
             this.label3.Text = "אשר העברה לקד\"ס";
             // 
@@ -205,10 +197,9 @@
             // 
             this.pbApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbApprove.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
-            this.pbApprove.Location = new System.Drawing.Point(943, 434);
-            this.pbApprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbApprove.Location = new System.Drawing.Point(707, 353);
             this.pbApprove.Name = "pbApprove";
-            this.pbApprove.Size = new System.Drawing.Size(47, 38);
+            this.pbApprove.Size = new System.Drawing.Size(35, 31);
             this.pbApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbApprove.TabIndex = 18;
             this.pbApprove.TabStop = false;
@@ -216,10 +207,10 @@
             // 
             // SpecialApprovedJobsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1005, 527);
+            this.ClientSize = new System.Drawing.Size(754, 428);
             this.Controls.Add(this.lblEnterDeclined);
             this.Controls.Add(this.pbDecline);
             this.Controls.Add(this.label3);
@@ -231,7 +222,6 @@
             this.Controls.Add(this.pbRefresh);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "SpecialApprovedJobsForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

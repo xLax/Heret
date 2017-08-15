@@ -110,8 +110,10 @@
           <Property Name="sla_id" Type="int" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="date" Type="date" Nullable="false" />
-          <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="begin_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="employee_name" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tbl_user_groups">
           <Key>
@@ -536,11 +538,13 @@
           <Property Name="sla_id" Type="Int32" Nullable="false" />
           <Property Name="order_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.order_id" FromRole="tbl_sla_data" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_sla_actions" Relationship="Self.sla_id" FromRole="tbl_sla_data" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_users" Relationship="Self.user_id" FromRole="tbl_sla_data" ToRole="tbl_users" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="employee_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="begin_date" Type="DateTime" Nullable="false" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_user_groups">
           <Key>
@@ -967,12 +971,14 @@
           <EntitySetMapping Name="tbl_sla_data">
             <EntityTypeMapping TypeName="DB_Model.tbl_sla_data">
               <MappingFragment StoreEntitySet="tbl_sla_data">
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="begin_date" ColumnName="begin_date" />
+                <ScalarProperty Name="employee_name" ColumnName="employee_name" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sla_id" ColumnName="sla_id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

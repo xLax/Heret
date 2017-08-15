@@ -95,6 +95,10 @@ namespace HeretPreWorkControl
                 {
                     nPrevJobCount = nCurrJobCount;
                 }
+                else
+                {
+                    Utilities.GetMyNotifications();
+                }
 
                 pbMyJobs.Image = Properties.Resources.My_Jobs_Note;
             }
@@ -160,11 +164,6 @@ namespace HeretPreWorkControl
         private void SalesMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void lblHello_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pbAddUser_Click(object sender, EventArgs e)

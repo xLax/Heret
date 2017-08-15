@@ -19,6 +19,7 @@ namespace HeretPreWorkControl
         {
             InitializeComponent();
 
+            Utilities.GetAllClientsList();
             this.ActiveControl = tbClientName;
         }
 
@@ -75,7 +76,11 @@ namespace HeretPreWorkControl
             lstclients = Globals.AllClients.
                         Where(a => a.name.Contains(tbClientName.Text.ToString())).ToList<tbl_clients>();
 
-            if (lstclients.Count == 1)
+            if(tbClientName.Text.ToString().Equals(String.Empty))
+            {
+                tbPanel.Clear();
+            }
+            else if (lstclients.Count == 1)
             {
                 tbClientNumber.Text = lstclients[0].ID.ToString();
                 tbPanel.Text = "נמצאה התאמה";

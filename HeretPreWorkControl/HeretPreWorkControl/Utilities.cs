@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 
 namespace HeretPreWorkControl
@@ -286,6 +288,22 @@ namespace HeretPreWorkControl
             return nMaxID;
         }
 
+        public static int ConvertSlaStatusToNumber(string strSlaStatus)
+        {
+            int nStatusID = 0;
+
+            if(strSlaStatus.Equals(Globals.SlaStatusLate))
+            {
+                nStatusID = Globals.SlaLate;
+            }
+            else if(strSlaStatus.Equals(Globals.SlaStatusInWork))
+            {
+                nStatusID = Globals.SlaInTime;
+            }
+
+            return nStatusID;
+        }
+
         public static void CreatePopup(String strTitle, String strMessage, int nOpenScreenID)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -321,6 +339,12 @@ namespace HeretPreWorkControl
             }
 
             return strToReturn;
+        }
+
+        public static void SetZebraMode(DataGridView dataGridView)
+        {
+            dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.GhostWhite;
         }
 
         public static void SetGlobalUserData(int nUserID, String strUserName, String strName, int nUserGroupID, String strUserGroup)
@@ -502,7 +526,7 @@ namespace HeretPreWorkControl
                 }
                 else
                 {
-                    strSlaStatus = "מאחר";
+                    strSlaStatus = Globals.SlaStatusLate;
                 }
             }
             else if(nSlaHours == Globals.SlaUntil12)
@@ -511,22 +535,22 @@ namespace HeretPreWorkControl
                 {
                     if( (int)(System.DateTime.Now.Date - recievedDate).Value.TotalDays >= 1 )
                     {
-                        strSlaStatus = "מאחר";
+                        strSlaStatus = Globals.SlaStatusLate;
                     }
                     else
                     {
-                        strSlaStatus = "בתהליך";
+                        strSlaStatus = Globals.SlaStatusInWork;
                     }
                 }
                 else
                 {
                     if (System.DateTime.Now.Hour >= 12)
                     {
-                        strSlaStatus = "מאחר";
+                        strSlaStatus = Globals.SlaStatusLate;
                     }
                     else
                     {
-                        strSlaStatus = "בתהליך";
+                        strSlaStatus = Globals.SlaStatusInWork;
                     }
                 }
             }
@@ -541,11 +565,11 @@ namespace HeretPreWorkControl
 
                 if (nSlaHours > (nElapsedDaysHours + nElapsedHours))
                 {
-                    strSlaStatus = "בתהליך";
+                    strSlaStatus = Globals.SlaStatusInWork;
                 }
                 else
                 {
-                    strSlaStatus = "מאחר";
+                    strSlaStatus = Globals.SlaStatusLate;
                 }
             }
 
@@ -728,6 +752,34 @@ namespace HeretPreWorkControl
                     catch (Exception ex) { }
                 }
             }
+        }
+
+        public static int GetNextSlaDataID()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_sla_data slaData = context.tbl_sla_data.OrderByDescending(u => u.ID).FirstOrDefault<tbl_sla_data>();
+
+                    if (slaData == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = slaData.ID + 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
         }
 
         private static void SetMyEmployeesList(List<tbl_employees> lstEmployees)

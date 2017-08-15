@@ -60,7 +60,6 @@
             this.lblHello.Size = new System.Drawing.Size(184, 27);
             this.lblHello.TabIndex = 10;
             this.lblHello.Text = "שלום <שם עובד>";
-            this.lblHello.Click += new System.EventHandler(this.lblHello_Click);
             // 
             // tbPanel
             // 

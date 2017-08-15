@@ -52,12 +52,6 @@ namespace HeretPreWorkControl
             this.nActionTypeID = nActionType;
         }
 
-        private void SetZebraMode()
-        {
-            dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.GhostWhite;
-        }
-
         private void MovementsForm_Load(object sender, EventArgs e)
         {
             Utilities.GetAllUserGroupList();
@@ -76,7 +70,7 @@ namespace HeretPreWorkControl
                 }                
             }
 
-            SetZebraMode();
+            Utilities.SetZebraMode(dataGridView);
 
             HideAllInputFields();
         }
@@ -225,8 +219,10 @@ namespace HeretPreWorkControl
 
                 if(isSucceded)
                 {
-                    if(currentOrder.special_department_id == null ||
-                       nSelectedDepartID != Globals.KadasUserID)
+                    MyJobsForm.isJobSucceeded = true;
+
+                    if (currentOrder.special_department_id == null ||
+                        nSelectedDepartID != Globals.KadasUserID)
                     {
                         currentOrder.curr_departnent_id = nSelectedDepartID;
                         currentOrder.dep_recieve_date = System.DateTime.Now.Date;
@@ -285,7 +281,7 @@ namespace HeretPreWorkControl
                                     Entry.Property(o => o.special_department_id).IsModified = true;
 
                                     context.SaveChanges();
-
+                                    MyJobsForm.isJobSucceeded = true;
                                     tbPanel.Text = "העבודה כבר התקבלה אצל קד\"ס, ונמצאת בתהליך, רענן להמשך תהליך";
                                 }
                                 catch (Exception ex)

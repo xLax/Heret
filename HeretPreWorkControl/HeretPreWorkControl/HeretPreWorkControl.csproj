@@ -144,6 +144,12 @@
     <Compile Include="InsertOrderIDForm.Designer.cs">
       <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagerReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagerReportForm.Designer.cs">
+      <DependentUpon>ManagerReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MovementsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InsertOrderIDForm.resx">
       <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagerReportForm.resx">
+      <DependentUpon>ManagerReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MovementsForm.resx">
       <DependentUpon>MovementsForm.cs</DependentUpon>
@@ -414,6 +423,7 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\ManagerReportTitle.png" />
     <None Include="Resources\Save Icon.png" />
     <None Include="Resources\ViewDetailsTitle.png" />
     <None Include="Resources\Current Situation.png" />

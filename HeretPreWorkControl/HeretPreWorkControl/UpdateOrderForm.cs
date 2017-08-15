@@ -23,6 +23,8 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.Items.Add(Globals.ProjectDesc);
 
             this.order = selectedOrder;
+
+            lbPriseTempDesc.SelectedIndex = 0;
         }
 
         private void lbPriseTempDesc_SelectedIndexChanged(object sender, EventArgs e)

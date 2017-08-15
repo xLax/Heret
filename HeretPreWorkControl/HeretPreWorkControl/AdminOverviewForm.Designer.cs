@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminOverviewForm));
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
@@ -163,15 +164,15 @@
             this.lblEnterDeclined.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnterDeclined.Location = new System.Drawing.Point(14, 392);
             this.lblEnterDeclined.Name = "lblEnterDeclined";
-            this.lblEnterDeclined.Size = new System.Drawing.Size(141, 20);
+            this.lblEnterDeclined.Size = new System.Drawing.Size(135, 20);
             this.lblEnterDeclined.TabIndex = 25;
-            this.lblEnterDeclined.Text = "ערוך פרטי הזמנה";
+            this.lblEnterDeclined.Text = "הגצ פרטי הזמנה";
             // 
             // pbEditOrderInfo
             // 
             this.pbEditOrderInfo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbEditOrderInfo.Image = global::HeretPreWorkControl.Properties.Resources.Update_Icon;
-            this.pbEditOrderInfo.Location = new System.Drawing.Point(153, 387);
+            this.pbEditOrderInfo.Location = new System.Drawing.Point(145, 387);
             this.pbEditOrderInfo.Name = "pbEditOrderInfo";
             this.pbEditOrderInfo.Size = new System.Drawing.Size(35, 31);
             this.pbEditOrderInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -264,6 +265,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AdminOverviewForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

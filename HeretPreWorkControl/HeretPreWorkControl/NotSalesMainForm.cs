@@ -44,6 +44,8 @@ namespace HeretPreWorkControl
             {
                 tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
             }
+
+            Utilities.GetMyNotifications();
         }
 
         private void tmrCheckNewJobsTimer_Tick(object sender, EventArgs e)
@@ -70,6 +72,10 @@ namespace HeretPreWorkControl
                 else if (nCurrJobCount < nPrevJobCount)
                 {
                     nPrevJobCount = nCurrJobCount;
+                }
+                else
+                {
+                    Utilities.GetMyNotifications();
                 }
 
                 pbMyJobs.Image = Properties.Resources.My_Jobs_Note;

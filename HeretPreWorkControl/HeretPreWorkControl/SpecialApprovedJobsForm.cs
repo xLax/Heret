@@ -21,13 +21,7 @@ namespace HeretPreWorkControl
             Utilities.GetAllClientsList();
 
             LoadRelevantData();
-            SetZebraMode();
-        }
-
-        private void SetZebraMode()
-        {
-            dataGridView.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.GhostWhite;
+            Utilities.SetZebraMode(dataGridView);
         }
 
         private void LoadRelevantData()
