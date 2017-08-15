@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerReportForm));
             this.pbHeret = new System.Windows.Forms.PictureBox();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -39,11 +42,13 @@
             this.lblEmployee = new System.Windows.Forms.Label();
             this.tbTrackBar = new System.Windows.Forms.TrackBar();
             this.lblPeriod = new System.Windows.Forms.Label();
+            this.chartWorkers = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
             this.tabControl.SuspendLayout();
             this.TabEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).BeginInit();
             this.SuspendLayout();
             // 
             // pbHeret
@@ -66,7 +71,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.RightToLeftLayout = true;
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(622, 338);
+            this.tabControl.Size = new System.Drawing.Size(622, 391);
             this.tabControl.TabIndex = 14;
             // 
             // TabStation
@@ -78,10 +83,10 @@
             this.TabStation.TabIndex = 0;
             this.TabStation.Text = "דוח תחנות";
             this.TabStation.UseVisualStyleBackColor = true;
-            this.TabStation.Enter += new System.EventHandler(this.TabStation_Enter);
             // 
             // TabEmployees
             // 
+            this.TabEmployees.Controls.Add(this.chartWorkers);
             this.TabEmployees.Controls.Add(this.lblPeriod);
             this.TabEmployees.Controls.Add(this.tbTrackBar);
             this.TabEmployees.Controls.Add(this.lblEmployee);
@@ -89,18 +94,17 @@
             this.TabEmployees.Location = new System.Drawing.Point(4, 29);
             this.TabEmployees.Name = "TabEmployees";
             this.TabEmployees.Padding = new System.Windows.Forms.Padding(3);
-            this.TabEmployees.Size = new System.Drawing.Size(614, 305);
+            this.TabEmployees.Size = new System.Drawing.Size(614, 358);
             this.TabEmployees.TabIndex = 1;
             this.TabEmployees.Text = "דוח עובדים";
             this.TabEmployees.UseVisualStyleBackColor = true;
-            this.TabEmployees.Enter += new System.EventHandler(this.TabEmployees_Enter);
             // 
             // tbPanel
             // 
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(16, 437);
+            this.tbPanel.Location = new System.Drawing.Point(16, 490);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(614, 29);
@@ -128,6 +132,7 @@
             this.lbEmployees.Name = "lbEmployees";
             this.lbEmployees.Size = new System.Drawing.Size(180, 28);
             this.lbEmployees.TabIndex = 38;
+            this.lbEmployees.SelectedIndexChanged += new System.EventHandler(this.lbEmployees_SelectedIndexChanged);
             // 
             // lblEmployee
             // 
@@ -160,12 +165,37 @@
             this.lblPeriod.TabIndex = 41;
             this.lblPeriod.Text = "הצג לעובד:";
             // 
+            // chartWorkers
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartWorkers.ChartAreas.Add(chartArea1);
+            this.chartWorkers.Location = new System.Drawing.Point(6, 68);
+            this.chartWorkers.Name = "chartWorkers";
+            series1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series1.BorderColor = System.Drawing.Color.Black;
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.Lime;
+            series1.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.MarkerColor = System.Drawing.Color.Transparent;
+            series1.Name = "InWork";
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.Red;
+            series2.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series2.MarkerColor = System.Drawing.Color.Transparent;
+            series2.Name = "Late";
+            this.chartWorkers.Series.Add(series1);
+            this.chartWorkers.Series.Add(series2);
+            this.chartWorkers.Size = new System.Drawing.Size(593, 284);
+            this.chartWorkers.TabIndex = 42;
+            this.chartWorkers.Text = "נתוני עובד";
+            // 
             // ManagerReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(646, 472);
+            this.ClientSize = new System.Drawing.Size(646, 531);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.tabControl);
@@ -185,6 +215,7 @@
             this.TabEmployees.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,5 +232,6 @@
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.TrackBar tbTrackBar;
         private System.Windows.Forms.Label lblPeriod;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartWorkers;
     }
 }

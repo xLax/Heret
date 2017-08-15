@@ -80,8 +80,27 @@ namespace HeretPreWorkControl
             {
                 strStatusDesc = Globals.StatusJobClosed;
             }
+            else if(nStatusID == Globals.StatusDenied)
+            {
+                strStatusDesc = Globals.StatusJobDenied;
+            }
 
             return strStatusDesc;
+        }
+
+        public static void GetAllSlaData()
+        {
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    Globals.AllSlaData = context.tbl_sla_data.ToList<tbl_sla_data>();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         public static Boolean GetMyNotifications()

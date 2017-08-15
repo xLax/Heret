@@ -132,6 +132,8 @@ namespace HeretPreWorkControl
         public static SalesMainForm SalesFormInstance;
         public static NotSalesMainForm NotSalesFormInstance;
 
+        public static List<tbl_sla_data> AllSlaData;
+
         public static int AlertNow = 1;
         public static int Alerted = 2;
 
