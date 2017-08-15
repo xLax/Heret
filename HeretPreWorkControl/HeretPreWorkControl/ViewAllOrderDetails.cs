@@ -23,6 +23,17 @@ namespace HeretPreWorkControl
             dtContactDate.CustomFormat = "dd/MM/yyyy";
             dtContactDate.MaxDate = DateTime.Today;
 
+            lbKadasWork.Items.Add(Globals.KadasApprovePDF);
+            lbKadasWork.Items.Add(Globals.KadasNewPDF);
+            lbKadasWork.Items.Add(Globals.KadasSunCopyNew);
+            lbKadasWork.Items.Add(Globals.KadasGraphicUpdate);
+
+            lbStudioWork.Items.Add(Globals.StudioOnlyPrisa);
+            lbStudioWork.Items.Add(Globals.StudioPrisaForOffer);
+            lbStudioWork.Items.Add(Globals.StudioOnlyModel);
+            lbStudioWork.Items.Add(Globals.StudioPrisaAndModel);
+            lbStudioWork.Items.Add(Globals.StudioCutModel);
+
             this.order = selectedOrder;
             this.isEnabled = false;
             ChangeScreenUI();
@@ -40,8 +51,8 @@ namespace HeretPreWorkControl
             tbProjDesc.Text = this.order.project_desc;
             tbAmount.Text = this.order.amount + "";
             tbOrderNumber.Text = this.order.order_number;
-            tbStudioWork.Text = this.order.studio_work;
-            tbKadasWork.Text = this.order.kadas_work;
+            lbStudioWork.SelectedItem = this.order.studio_work;
+            lbKadasWork.SelectedItem = this.order.kadas_work;
 
             tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
 
@@ -107,8 +118,8 @@ namespace HeretPreWorkControl
             }
 
             // Change The availability of the item
-            tbSalesAgent.Enabled = this.isEnabled;
-            tbClientName.Enabled = this.isEnabled;
+            //tbSalesAgent.Enabled = this.isEnabled;
+            //tbClientName.Enabled = this.isEnabled;
             tbClientNumber.Enabled = this.isEnabled;
             dtContactDate.Enabled = this.isEnabled;
             tbFilesNo.Enabled = this.isEnabled;
@@ -116,16 +127,16 @@ namespace HeretPreWorkControl
             tbPrisaNumber.Enabled = this.isEnabled;
             tbProjDesc.Enabled = this.isEnabled;
             tbAmount.Enabled = this.isEnabled;
-            tbStudioWork.Enabled = this.isEnabled;
+            lbStudioWork.Enabled = this.isEnabled;
             tbCurrentDepartment.Enabled = this.isEnabled;
             //tbActionType.Enabled = this.isEnabled;
             tbOrderNumber.Enabled = this.isEnabled;
             //tbWorkStatus.Enabled = this.isEnabled;
-            tbKadasWork.Enabled = this.isEnabled;
+            lbKadasWork.Enabled = this.isEnabled;
 
             // Change the color of the item
-            tbSalesAgent.BackColor = color;
-            tbClientName.BackColor = color;
+            //tbSalesAgent.BackColor = color;
+            //tbClientName.BackColor = color;
             tbClientNumber.BackColor = color;
             dtContactDate.BackColor = color;
             tbFilesNo.BackColor = color;
@@ -133,12 +144,12 @@ namespace HeretPreWorkControl
             tbPrisaNumber.BackColor = color;
             tbProjDesc.BackColor = color;
             tbAmount.BackColor = color;
-            tbStudioWork.BackColor = color;
+            lbStudioWork.BackColor = color;
             tbCurrentDepartment.BackColor = color;
             //tbActionType.BackColor = color;
             tbOrderNumber.BackColor = color;
             //tbWorkStatus.BackColor = color;
-            tbKadasWork.BackColor = color;
+            lbKadasWork.BackColor = color;
 
             // Button save ui properties change
             lblSave.Visible = this.isEnabled;
@@ -151,14 +162,14 @@ namespace HeretPreWorkControl
             int nAmount, nClientID, nFilesNo;
             string strToConvert;
 
-            this.order.sales_agent_name = tbSalesAgent.Text;
+            //this.order.sales_agent_name = tbSalesAgent.Text;
             this.order.contact_date = dtContactDate.Value.Date;
             this.order.template_id = tbTemplateNumber.Text;
             this.order.prisa_id = tbPrisaNumber.Text;
             this.order.project_desc = tbProjDesc.Text;
             this.order.order_number = tbOrderNumber.Text;
-            this.order.studio_work = tbStudioWork.Text;
-            this.order.kadas_work = tbKadasWork.Text;
+            this.order.studio_work = lbStudioWork.SelectedItem.ToString();
+            this.order.kadas_work = lbKadasWork.SelectedItem.ToString();
 
             tbClientNumber.Text = this.order.client_id + "";
 
@@ -212,6 +223,37 @@ namespace HeretPreWorkControl
                                 {
                                     tbClientNumber.BackColor = Color.White;
                                     this.order.client_id = nClientID;
+
+                                    // Save the changes in the db
+                                    try
+                                    {
+                                        using (var context = new DB_Entities())
+                                        {
+                                            context.tbl_orders.Attach(order);
+                                            var Entry = context.Entry(order);
+
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+                                            //Entry.Property(o => o.prisa_id).IsModified = true;
+
+                                            context.SaveChanges();
+
+                                            tbPanel.Text = "ההזמנה עודכנה בהצלחה !";
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                    }
                                 }
                             }
                             else
