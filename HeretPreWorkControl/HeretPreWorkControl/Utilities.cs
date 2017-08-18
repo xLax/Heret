@@ -178,6 +178,18 @@ namespace HeretPreWorkControl
             Globals.AllActionToDept = lstActionsToDept;
         }
 
+        public static bool CalculateSlaStatus(DateTime begin_date, TimeSpan begin_hour, int sla_hours, DateTime currCalcDate)
+        {
+            if((currCalcDate - begin_date).TotalHours + (new TimeSpan(13,0,0) - begin_hour).TotalHours >= sla_hours)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public static void AllEmployeesForResponsible()
         {
             List<tbl_employees> lstEmployees;
