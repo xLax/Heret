@@ -75,7 +75,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.ViewDetailsTitle;
             this.pictureBox2.Location = new System.Drawing.Point(131, 14);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(277, 80);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -87,7 +87,7 @@
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.Location = new System.Drawing.Point(837, 14);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(307, 80);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -100,7 +100,7 @@
             this.tbClientName.Enabled = false;
             this.tbClientName.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbClientName.Location = new System.Drawing.Point(327, 162);
-            this.tbClientName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientName.Margin = new System.Windows.Forms.Padding(4);
             this.tbClientName.Multiline = true;
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -114,7 +114,7 @@
             this.tbPrisaNumber.Enabled = false;
             this.tbPrisaNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPrisaNumber.Location = new System.Drawing.Point(327, 370);
-            this.tbPrisaNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPrisaNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbPrisaNumber.Name = "tbPrisaNumber";
             this.tbPrisaNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbPrisaNumber.Size = new System.Drawing.Size(289, 37);
@@ -138,7 +138,7 @@
             this.tbTemplateNumber.Enabled = false;
             this.tbTemplateNumber.Font = new System.Drawing.Font("David", 18F);
             this.tbTemplateNumber.Location = new System.Drawing.Point(327, 325);
-            this.tbTemplateNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbTemplateNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbTemplateNumber.Name = "tbTemplateNumber";
             this.tbTemplateNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbTemplateNumber.Size = new System.Drawing.Size(289, 37);
@@ -151,7 +151,7 @@
             this.tbFilesNo.Enabled = false;
             this.tbFilesNo.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbFilesNo.Location = new System.Drawing.Point(327, 281);
-            this.tbFilesNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbFilesNo.Margin = new System.Windows.Forms.Padding(4);
             this.tbFilesNo.Name = "tbFilesNo";
             this.tbFilesNo.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbFilesNo.Size = new System.Drawing.Size(289, 37);
@@ -175,7 +175,7 @@
             this.tbSalesAgent.Enabled = false;
             this.tbSalesAgent.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbSalesAgent.Location = new System.Drawing.Point(327, 117);
-            this.tbSalesAgent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSalesAgent.Margin = new System.Windows.Forms.Padding(4);
             this.tbSalesAgent.Name = "tbSalesAgent";
             this.tbSalesAgent.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbSalesAgent.Size = new System.Drawing.Size(289, 37);
@@ -199,12 +199,14 @@
             this.tbClientNumber.Enabled = false;
             this.tbClientNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbClientNumber.Location = new System.Drawing.Point(180, 177);
-            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbClientNumber.Name = "tbClientNumber";
             this.tbClientNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbClientNumber.Size = new System.Drawing.Size(133, 37);
             this.tbClientNumber.TabIndex = 48;
             this.tbClientNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbClientNumber.TextChanged += new System.EventHandler(this.tbClientNumber_Leave);
+            this.tbClientNumber.Leave += new System.EventHandler(this.tbClientNumber_Leave);
             // 
             // lblCostumerNumber
             // 
@@ -223,7 +225,7 @@
             this.dtContactDate.Enabled = false;
             this.dtContactDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.dtContactDate.Location = new System.Drawing.Point(327, 241);
-            this.dtContactDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtContactDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtContactDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
             this.dtContactDate.Name = "dtContactDate";
             this.dtContactDate.Size = new System.Drawing.Size(289, 31);
@@ -258,7 +260,7 @@
             this.tbProjDesc.Enabled = false;
             this.tbProjDesc.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbProjDesc.Location = new System.Drawing.Point(327, 417);
-            this.tbProjDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbProjDesc.Margin = new System.Windows.Forms.Padding(4);
             this.tbProjDesc.Name = "tbProjDesc";
             this.tbProjDesc.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbProjDesc.Size = new System.Drawing.Size(289, 37);
@@ -282,7 +284,7 @@
             this.tbAmount.Enabled = false;
             this.tbAmount.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbAmount.Location = new System.Drawing.Point(965, 118);
-            this.tbAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAmount.Margin = new System.Windows.Forms.Padding(4);
             this.tbAmount.Name = "tbAmount";
             this.tbAmount.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbAmount.Size = new System.Drawing.Size(289, 37);
@@ -317,7 +319,7 @@
             this.tbCurrentDepartment.Enabled = false;
             this.tbCurrentDepartment.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbCurrentDepartment.Location = new System.Drawing.Point(965, 258);
-            this.tbCurrentDepartment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCurrentDepartment.Margin = new System.Windows.Forms.Padding(4);
             this.tbCurrentDepartment.Name = "tbCurrentDepartment";
             this.tbCurrentDepartment.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbCurrentDepartment.Size = new System.Drawing.Size(289, 37);
@@ -341,7 +343,7 @@
             this.tbActionType.Enabled = false;
             this.tbActionType.Font = new System.Drawing.Font("David", 15F);
             this.tbActionType.Location = new System.Drawing.Point(965, 305);
-            this.tbActionType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbActionType.Margin = new System.Windows.Forms.Padding(4);
             this.tbActionType.Multiline = true;
             this.tbActionType.Name = "tbActionType";
             this.tbActionType.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -366,7 +368,7 @@
             this.tbOrderNumber.Enabled = false;
             this.tbOrderNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbOrderNumber.Location = new System.Drawing.Point(965, 373);
-            this.tbOrderNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbOrderNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbOrderNumber.Name = "tbOrderNumber";
             this.tbOrderNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbOrderNumber.Size = new System.Drawing.Size(289, 37);
@@ -390,7 +392,7 @@
             this.tbWorkStatus.Enabled = false;
             this.tbWorkStatus.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbWorkStatus.Location = new System.Drawing.Point(965, 420);
-            this.tbWorkStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbWorkStatus.Margin = new System.Windows.Forms.Padding(4);
             this.tbWorkStatus.Name = "tbWorkStatus";
             this.tbWorkStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbWorkStatus.Size = new System.Drawing.Size(289, 37);
@@ -425,7 +427,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 543);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(1239, 35);
@@ -448,7 +450,7 @@
             this.pbSalesUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSalesUpdate.Image = global::HeretPreWorkControl.Properties.Resources.Update_Icon;
             this.pbSalesUpdate.Location = new System.Drawing.Point(667, 39);
-            this.pbSalesUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbSalesUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.pbSalesUpdate.Name = "pbSalesUpdate";
             this.pbSalesUpdate.Size = new System.Drawing.Size(47, 38);
             this.pbSalesUpdate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -472,7 +474,7 @@
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Image = global::HeretPreWorkControl.Properties.Resources.Save_Icon;
             this.btnSave.Location = new System.Drawing.Point(1213, 480);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(41, 37);
             this.btnSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -547,13 +549,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "ViewAllOrderDetails";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewAllOrderDetails";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ViewAllOrderDetails_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSalesUpdate)).EndInit();

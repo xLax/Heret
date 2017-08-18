@@ -100,9 +100,16 @@ namespace HeretPreWorkControl
 
         private void pbSalesUpdate_Click(object sender, EventArgs e)
         {
-            this.isEnabled = !this.isEnabled;
+            if (this.order.current_status_id == Globals.StatusClosed)
+            {
+                tbPanel.Text = "שגיאה ! הזמנה זו סגורה אין באפשרותך לערוך את פרטיה";
+            }
+            else
+            {
+                this.isEnabled = !this.isEnabled;
 
-            ChangeScreenUI();
+                ChangeScreenUI();
+            }
         }
 
         private void ChangeScreenUI()
@@ -128,9 +135,9 @@ namespace HeretPreWorkControl
             tbProjDesc.Enabled = this.isEnabled;
             tbAmount.Enabled = this.isEnabled;
             lbStudioWork.Enabled = this.isEnabled;
-            tbCurrentDepartment.Enabled = this.isEnabled;
+            //tbCurrentDepartment.Enabled = this.isEnabled;
             //tbActionType.Enabled = this.isEnabled;
-            tbOrderNumber.Enabled = this.isEnabled;
+            //tbOrderNumber.Enabled = this.isEnabled;
             //tbWorkStatus.Enabled = this.isEnabled;
             lbKadasWork.Enabled = this.isEnabled;
 
@@ -145,9 +152,9 @@ namespace HeretPreWorkControl
             tbProjDesc.BackColor = color;
             tbAmount.BackColor = color;
             lbStudioWork.BackColor = color;
-            tbCurrentDepartment.BackColor = color;
+            //tbCurrentDepartment.BackColor = color;
             //tbActionType.BackColor = color;
-            tbOrderNumber.BackColor = color;
+            //tbOrderNumber.BackColor = color;
             //tbWorkStatus.BackColor = color;
             lbKadasWork.BackColor = color;
 
@@ -167,211 +174,180 @@ namespace HeretPreWorkControl
             this.order.template_id = tbTemplateNumber.Text;
             this.order.prisa_id = tbPrisaNumber.Text;
             this.order.project_desc = tbProjDesc.Text;
-            this.order.order_number = tbOrderNumber.Text;
-            this.order.studio_work = lbStudioWork.SelectedItem.ToString();
-            this.order.kadas_work = lbKadasWork.SelectedItem.ToString();
-
-            tbClientNumber.Text = this.order.client_id + "";
-
-            // Convert Files Number
-            strToConvert = tbFilesNo.Text.ToString().Trim(' ');
-
-            if (!strToConvert.Equals(String.Empty))
+            //this.order.order_number = tbOrderNumber.Text;
+            if (lbStudioWork.SelectedItem != null)
             {
-                isConvertionOk = int.TryParse(strToConvert, out nFilesNo);
+                this.order.studio_work = lbStudioWork.SelectedItem.ToString();
+            }
+            
+            if (lbKadasWork.SelectedItem != null)
+            {
+                this.order.kadas_work = lbKadasWork.SelectedItem.ToString();
+            }
+            
+            if (tbClientName.Text == "")
+            {
+                tbPanel.Text = "שגיאה ! מספר הלקוח שהוכנס אינו קיים במערכת";
+            }
+            else
+            {
+                // Convert Files Number
+                strToConvert = tbFilesNo.Text.ToString().Trim(' ');
 
-                if (!isConvertionOk)
+                if (!strToConvert.Equals(String.Empty))
                 {
-                    tbFilesNo.BackColor = Color.Tomato;
-                    tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה מספר קבצים";
-                }
-                else
-                {
-                    tbFilesNo.BackColor = Color.White;
-                    this.order.files_number = nFilesNo;
+                    isConvertionOk = int.TryParse(strToConvert, out nFilesNo);
 
-                    // Convert amount
-                    strToConvert = tbAmount.Text.ToString().Trim(' ');
-
-                    if (!strToConvert.Equals(String.Empty))
+                    if (!isConvertionOk)
                     {
-                        isConvertionOk = int.TryParse(strToConvert, out nAmount);
-
-                        if (!isConvertionOk)
-                        {
-                            tbAmount.BackColor = Color.Tomato;
-                            tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה כמות";
-                        }
-                        else
-                        {
-                            tbAmount.BackColor = Color.White;
-                            this.order.amount = nAmount;
-
-                            // Convert the client number
-                            strToConvert = tbClientNumber.Text.ToString().Trim(' ');
-
-                            if (!strToConvert.Equals(String.Empty))
-                            {
-                                isConvertionOk = int.TryParse(strToConvert, out nClientID);
-
-                                if (!isConvertionOk)
-                                {
-                                    tbClientNumber.BackColor = Color.Tomato;
-                                    tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה מספר לקוח";
-                                }
-                                else
-                                {
-                                    tbClientNumber.BackColor = Color.White;
-                                    this.order.client_id = nClientID;
-
-                                    // Save the changes in the db
-                                    try
-                                    {
-                                        using (var context = new DB_Entities())
-                                        {
-                                            context.tbl_orders.Attach(order);
-                                            var Entry = context.Entry(order);
-
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-                                            //Entry.Property(o => o.prisa_id).IsModified = true;
-
-                                            context.SaveChanges();
-
-                                            tbPanel.Text = "ההזמנה עודכנה בהצלחה !";
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                tbPanel.Text = "עליך למלא את השדה מספר לקוח";
-                            }
-                        }
+                        tbFilesNo.BackColor = Color.Tomato;
+                        tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה מספר קבצים";
                     }
                     else
                     {
-                        tbPanel.Text = "עליך למלא את השדה כמות";
+                        tbFilesNo.BackColor = Color.White;
+                        this.order.files_number = nFilesNo;
+
+                        // Convert amount
+                        strToConvert = tbAmount.Text.ToString().Trim(' ');
+
+                        if (!strToConvert.Equals(String.Empty))
+                        {
+                            isConvertionOk = int.TryParse(strToConvert, out nAmount);
+
+                            if (!isConvertionOk)
+                            {
+                                tbAmount.BackColor = Color.Tomato;
+                                tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה כמות";
+                            }
+                            else
+                            {
+                                tbAmount.BackColor = Color.White;
+                                this.order.amount = nAmount;
+
+                                // Convert the client number
+                                strToConvert = tbClientNumber.Text.ToString().Trim(' ');
+
+                                if (!strToConvert.Equals(String.Empty))
+                                {
+                                    isConvertionOk = int.TryParse(strToConvert, out nClientID);
+
+                                    if (!isConvertionOk)
+                                    {
+                                        tbClientNumber.BackColor = Color.Tomato;
+                                        tbPanel.Text = "שגיאה ! אנא הזן ספרות בלבד בשדה מספר לקוח";
+                                    }
+                                    else
+                                    {
+                                        tbClientNumber.BackColor = Color.White;
+                                        this.order.client_id = nClientID;
+
+                                        // Save the changes in the db
+                                        try
+                                        {
+                                            using (var context = new DB_Entities())
+                                            {
+                                                context.tbl_orders.Attach(order);
+                                                var Entry = context.Entry(order);
+
+                                                Entry.Property(o => o.contact_date).IsModified = true;
+                                                Entry.Property(o => o.template_id).IsModified = true;
+                                                Entry.Property(o => o.prisa_id).IsModified = true;
+                                                Entry.Property(o => o.project_desc).IsModified = true;
+                                                //Entry.Property(o => o.order_number).IsModified = true;
+                                                Entry.Property(o => o.studio_work).IsModified = true;
+                                                Entry.Property(o => o.kadas_work).IsModified = true;
+                                                Entry.Property(o => o.files_number).IsModified = true;
+                                                Entry.Property(o => o.amount).IsModified = true;
+                                                Entry.Property(o => o.client_id).IsModified = true;
+
+                                                context.SaveChanges();
+
+                                                tbPanel.Text = "ההזמנה עודכנה בהצלחה !";
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    tbPanel.Text = "עליך למלא את השדה מספר לקוח";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            tbPanel.Text = "עליך למלא את השדה כמות";
+                        }
+                    }
+                }
+                else
+                {
+                    tbPanel.Text = "עליך למלא את השדה מספר קבצים";
+                }
+            }
+        }
+
+        private void tbClientNumber_Leave(object sender, EventArgs e)
+        {
+            if (!tbClientNumber.Text.ToString().Trim(' ').Equals(String.Empty))
+            {
+                int nClientNumber;
+                Boolean isConvertionOk = int.TryParse(tbClientNumber.Text.ToString(), out nClientNumber);
+
+                if (!isConvertionOk)
+                {
+                    tbClientNumber.BackColor = Color.Tomato;
+                    tbPanel.Text = "שגיאה ! אנא הזן ספרות בשדה מספר לקוח";
+                }
+                else
+                {
+                    tbClientNumber.BackColor = Color.White;
+
+                    tbl_clients client = Globals.AllClients.Where(a => a.ID == nClientNumber).SingleOrDefault<tbl_clients>();
+
+                    if (client != null)
+                    {
+                        tbClientName.Text = client.name;
+                    }
+                    else
+                    {
+                        tbClientName.Text = String.Empty;
+                        tbPanel.Text = "מספר לקוח לא זוהה במערכת";
                     }
                 }
             }
             else
             {
-                tbPanel.Text = "עליך למלא את השדה מספר קבצים";
+                tbClientName.Clear();
             }
         }
-        //if (lbPriseTempDesc.SelectedItem == null)
-        //{
-        //    tbPanel.Text = "שגיאה ! יש לבחור באחת האופציות מהרשימה";
-        //}
-        //else if (tbPrisaTempDesc.Text.ToString().Trim(' ').Equals(String.Empty))
-        //{
-        //    tbPrisaTempDesc.BackColor = Color.Tomato;
-        //    tbPanel.Text = "שגיאה ! השדה " + lbPriseTempDesc.SelectedItem.ToString() + " ריק!";
-        //}
-        //// נשאר רק השדרה כמות
-        //else
-        //{
-        //    tbPrisaTempDesc.BackColor = Color.White;
-        //    strToConvert = tbAmount.Text.ToString().Trim(' ');
-        //    isConvertionOk = int.TryParse(strToConvert, out nAmount);
 
-        //    if (!isConvertionOk)
-        //    {
-        //        tbAmount.BackColor = Color.Tomato;
-        //        tbPanel.Text = "שגיאה ! אנא הזן ספרות בשדה כמות";
-        //    }
-        //    else
-        //    {
-        //        tbAmount.BackColor = Color.White;
+        private void ViewAllOrderDetails_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueF6)
+            {
+                using (var form = new SearchClientPopup())
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        tbClientNumber.Text = form.IDToReturn.ToString();
 
-        //        // הכל טוב
-        //        NewOrder.ID = Utilities.GetNextOrderID();
-
-        //        if (NewOrder.ID != -1)
-        //        {
-        //            NewOrder.client_id = int.Parse(tbClientNumber.Text.ToString());
-        //            NewOrder.sales_agent_name = Globals.Name;
-
-        //            NewOrder.dep_recieve_date = DateTime.Today.Date;
-        //            NewOrder.dep_recieve_hour = DateTime.Now.TimeOfDay;
-
-        //            NewOrder.contact_date = dtContactDate.Value;
-        //            NewOrder.creation_date = DateTime.Today.Date;
-
-        //            NewOrder.action_type_id = Globals.ActionTypeNewOrder;
-        //            NewOrder.amount = nAmount;
-        //            NewOrder.files_number = nFilesNo;
-
-        //            NewOrder.current_status_id = Globals.StatusInWork;
-
-        //            if (lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.TemplateNumber))
-        //            {
-        //                NewOrder.template_id = tbPrisaTempDesc.Text.ToString();
-        //            }
-        //            else if (lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.PrisaNumber))
-        //            {
-        //                NewOrder.prisa_id = tbPrisaTempDesc.Text.ToString();
-        //            }
-        //            else if (lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.ProjectDesc))
-        //            {
-        //                NewOrder.project_desc = tbPrisaTempDesc.Text.ToString();
-        //            }
-
-        //            string strPromoteMessage = String.Empty;
-
-        //            if (cbMoveToManager.Checked)
-        //            {
-        //                // Shit you mother fucker
-        //                NewOrder.special_department_id = Globals.AdminID;
-        //                strPromoteMessage = "ובקשת קידום נשלחה";
-        //            }
-        //            else
-        //            {
-        //                // Keep calm
-        //            }
-
-        //            if (NewOrder.creation_date.Value.AddDays(-2) >= NewOrder.contact_date)
-        //            {
-        //                NewOrder.alert_creation_date = Globals.AlertNow;
-        //            }
-
-        //            using (var context = new DB_Entities())
-        //            {
-        //                try
-        //                {
-        //                    context.tbl_orders.Add(NewOrder);
-        //                    context.SaveChanges();
-
-        //                    tbPanel.Text = "ההזמנה נוצרה בהצלחה ! " + strPromoteMessage;
-
-        //                    isSucceeded = true;
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-        //        }
-        //    }
-        //}
-
+                        this.tbClientNumber_Leave(new object(), new EventArgs());
+                    }
+                }
+            }
+            else if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                if (tbClientNumber.Focused)
+                {
+                    this.tbClientNumber_Leave(new object(), new EventArgs());
+                }
+            }
+        }
     }
 }
