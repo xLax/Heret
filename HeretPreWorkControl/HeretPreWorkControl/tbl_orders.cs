@@ -20,6 +20,7 @@ namespace HeretPreWorkControl
             this.tbl_offers = new HashSet<tbl_offers>();
             this.tbl_sla_data = new HashSet<tbl_sla_data>();
             this.tbl_notifications = new HashSet<tbl_notifications>();
+            this.tbl_orders_id = new HashSet<tbl_orders_id>();
         }
     
         public int ID { get; set; }
@@ -42,7 +43,6 @@ namespace HeretPreWorkControl
         public string kadas_agent_name { get; set; }
         public string orders_agent_name { get; set; }
         public Nullable<int> action_type_id { get; set; }
-        public Nullable<int> client_response_id { get; set; }
         public Nullable<int> special_approve { get; set; }
         public Nullable<int> special_department_id { get; set; }
         public string order_number { get; set; }
@@ -54,8 +54,8 @@ namespace HeretPreWorkControl
         public Nullable<int> alert_creation_date { get; set; }
         public Nullable<System.DateTime> special_recieved_date { get; set; }
         public Nullable<System.TimeSpan> special_recieved_hour { get; set; }
+        public string model_id { get; set; }
     
-        public virtual tbl_client_response tbl_client_response { get; set; }
         public virtual tbl_clients tbl_clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_offers> tbl_offers { get; set; }
@@ -67,5 +67,7 @@ namespace HeretPreWorkControl
         public virtual tbl_user_groups tbl_user_groups1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_notifications> tbl_notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_orders_id> tbl_orders_id { get; set; }
     }
 }

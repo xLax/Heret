@@ -12,18 +12,12 @@ namespace HeretPreWorkControl
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_client_response
+    public partial class tbl_orders_id
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_client_response()
-        {
-            this.tbl_orders = new HashSet<tbl_orders>();
-        }
-    
         public int ID { get; set; }
-        public string desc { get; set; }
+        public int order_id { get; set; }
+        public string heret_order_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_orders> tbl_orders { get; set; }
+        public virtual tbl_orders tbl_orders { get; set; }
     }
 }
