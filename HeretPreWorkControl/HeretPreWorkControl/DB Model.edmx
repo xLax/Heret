@@ -14,13 +14,6 @@
           <Property Name="recieved_department_ID" Type="int" Nullable="false" />
           <Property Name="recieved_department_action_id" Type="int" />
         </EntityType>
-        <EntityType Name="tbl_client_response">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="desc" Type="varchar" MaxLength="45" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbl_clients">
           <Key>
             <PropertyRef Name="ID" />
@@ -69,6 +62,7 @@
           <Property Name="client_order_id" Type="int" />
           <Property Name="template_id" Type="varchar" MaxLength="45" />
           <Property Name="prisa_id" Type="varchar" MaxLength="45" />
+          <Property Name="model_id" Type="varchar" MaxLength="45" />
           <Property Name="project_desc" Type="varchar" MaxLength="45" />
           <Property Name="amount" Type="int" />
           <Property Name="studio_work" Type="varchar" MaxLength="45" />
@@ -80,7 +74,6 @@
           <Property Name="kadas_agent_name" Type="varchar" MaxLength="45" />
           <Property Name="orders_agent_name" Type="varchar" MaxLength="45" />
           <Property Name="action_type_id" Type="int" />
-          <Property Name="client_response_id" Type="int" />
           <Property Name="special_approve" Type="int" />
           <Property Name="special_department_id" Type="int" />
           <Property Name="order_number" Type="varchar" MaxLength="45" />
@@ -92,6 +85,14 @@
           <Property Name="alert_creation_date" Type="int" />
           <Property Name="special_recieved_date" Type="date" />
           <Property Name="special_recieved_hour" Type="time" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbl_orders_id">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="heret_order_id" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -165,18 +166,6 @@
             </Principal>
             <Dependent Role="tbl_orders">
               <PropertyRef Name="client_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="client_response">
-          <End Role="tbl_client_response" Type="Self.tbl_client_response" Multiplicity="0..1" />
-          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_client_response">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbl_orders">
-              <PropertyRef Name="client_response_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,6 +277,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="orders">
+          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="1" />
+          <End Role="tbl_orders_id" Type="Self.tbl_orders_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders_id">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="sla_id">
           <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="1" />
           <End Role="tbl_sla_data" Type="Self.tbl_sla_data" Multiplicity="*" />
@@ -338,12 +339,12 @@
         </Association>
         <EntityContainer Name="DB_ModelStoreContainer">
           <EntitySet Name="tbl_action_to_dept" EntityType="Self.tbl_action_to_dept" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
-          <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_employees" EntityType="Self.tbl_employees" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_notifications" EntityType="Self.tbl_notifications" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_offers" EntityType="Self.tbl_offers" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
+          <EntitySet Name="tbl_orders_id" EntityType="Self.tbl_orders_id" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_sla_actions" EntityType="Self.tbl_sla_actions" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_sla_data" EntityType="Self.tbl_sla_data" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
           <EntitySet Name="tbl_user_groups" EntityType="Self.tbl_user_groups" Schema="heroku_8784ca4f43222c1" store:Type="Tables" />
@@ -358,10 +359,6 @@
           </AssociationSet>
           <AssociationSet Name="client" Association="Self.client">
             <End Role="tbl_clients" EntitySet="tbl_clients" />
-            <End Role="tbl_orders" EntitySet="tbl_orders" />
-          </AssociationSet>
-          <AssociationSet Name="client_response" Association="Self.client_response">
-            <End Role="tbl_client_response" EntitySet="tbl_client_response" />
             <End Role="tbl_orders" EntitySet="tbl_orders" />
           </AssociationSet>
           <AssociationSet Name="current_department" Association="Self.current_department">
@@ -400,6 +397,10 @@
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
           </AssociationSet>
+          <AssociationSet Name="orders" Association="Self.orders">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_orders_id" EntitySet="tbl_orders_id" />
+          </AssociationSet>
           <AssociationSet Name="sla_id" Association="Self.sla_id">
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
@@ -432,14 +433,6 @@
           <NavigationProperty Name="tbl_sla_actions" Relationship="Self.action" FromRole="tbl_action_to_dept" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.dept" FromRole="tbl_action_to_dept" ToRole="tbl_user_groups" />
           <NavigationProperty Name="tbl_sla_actions1" Relationship="Self.next_dept_action" FromRole="tbl_action_to_dept" ToRole="tbl_sla_actions" />
-        </EntityType>
-        <EntityType Name="tbl_client_response">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="desc" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
-          <NavigationProperty Name="tbl_orders" Relationship="Self.client_response" FromRole="tbl_client_response" ToRole="tbl_orders" />
         </EntityType>
         <EntityType Name="tbl_clients">
           <Key>
@@ -494,7 +487,6 @@
           <Property Name="kadas_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="orders_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="action_type_id" Type="Int32" />
-          <Property Name="client_response_id" Type="Int32" />
           <Property Name="special_approve" Type="Int32" />
           <Property Name="special_department_id" Type="Int32" />
           <Property Name="order_number" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
@@ -503,7 +495,6 @@
           <Property Name="dep_recieve_hour" Type="Time" />
           <Property Name="kadas_work" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="special_action_type_id" Type="Int32" />
-          <NavigationProperty Name="tbl_client_response" Relationship="Self.client_response" FromRole="tbl_orders" ToRole="tbl_client_response" />
           <NavigationProperty Name="tbl_clients" Relationship="Self.client" FromRole="tbl_orders" ToRole="tbl_clients" />
           <NavigationProperty Name="tbl_offers" Relationship="Self.order" FromRole="tbl_orders" ToRole="tbl_offers" />
           <NavigationProperty Name="tbl_sla_actions" Relationship="Self.action_type" FromRole="tbl_orders" ToRole="tbl_sla_actions" />
@@ -515,6 +506,8 @@
           <Property Name="special_recieved_date" Type="DateTime" />
           <Property Name="special_recieved_hour" Type="Time" />
           <NavigationProperty Name="tbl_notifications" Relationship="DB_Model.ord_id" FromRole="tbl_orders" ToRole="tbl_notifications" />
+          <NavigationProperty Name="tbl_orders_id" Relationship="DB_Model.orders" FromRole="tbl_orders" ToRole="tbl_orders_id" />
+          <Property Name="model_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -604,18 +597,6 @@
             </Principal>
             <Dependent Role="tbl_action_to_dept">
               <PropertyRef Name="recieved_department_action_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="client_response">
-          <End Role="tbl_client_response" Type="Self.tbl_client_response" Multiplicity="0..1" />
-          <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_client_response">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbl_orders">
-              <PropertyRef Name="client_response_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -753,7 +734,6 @@
         </Association>
         <EntityContainer Name="DB_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_action_to_dept" EntityType="Self.tbl_action_to_dept" />
-          <EntitySet Name="tbl_client_response" EntityType="Self.tbl_client_response" />
           <EntitySet Name="tbl_clients" EntityType="Self.tbl_clients" />
           <EntitySet Name="tbl_employees" EntityType="Self.tbl_employees" />
           <EntitySet Name="tbl_offers" EntityType="Self.tbl_offers" />
@@ -773,10 +753,6 @@
           <AssociationSet Name="next_dept_action" Association="Self.next_dept_action">
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
-          </AssociationSet>
-          <AssociationSet Name="client_response" Association="Self.client_response">
-            <End Role="tbl_client_response" EntitySet="tbl_client_response" />
-            <End Role="tbl_orders" EntitySet="tbl_orders" />
           </AssociationSet>
           <AssociationSet Name="client" Association="Self.client">
             <End Role="tbl_clients" EntitySet="tbl_clients" />
@@ -831,6 +807,11 @@
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_notifications" EntitySet="tbl_notifications" />
           </AssociationSet>
+          <EntitySet Name="tbl_orders_id" EntityType="DB_Model.tbl_orders_id" />
+          <AssociationSet Name="orders" Association="DB_Model.orders">
+            <End Role="tbl_orders" EntitySet="tbl_orders" />
+            <End Role="tbl_orders_id" EntitySet="tbl_orders_id" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_notifications">
           <Key>
@@ -867,6 +848,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbl_orders_id">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="heret_order_id" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_orders" Relationship="DB_Model.orders" FromRole="tbl_orders_id" ToRole="tbl_orders" />
+        </EntityType>
+        <Association Name="orders">
+          <End Type="DB_Model.tbl_orders" Role="tbl_orders" Multiplicity="1" />
+          <End Type="DB_Model.tbl_orders_id" Role="tbl_orders_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_orders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_orders_id">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -880,14 +882,6 @@
                 <ScalarProperty Name="action_ID" ColumnName="action_ID" />
                 <ScalarProperty Name="recieved_department_ID" ColumnName="recieved_department_ID" />
                 <ScalarProperty Name="recieved_department_action_id" ColumnName="recieved_department_action_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_client_response">
-            <EntityTypeMapping TypeName="DB_Model.tbl_client_response">
-              <MappingFragment StoreEntitySet="tbl_client_response">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="desc" ColumnName="desc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -923,6 +917,7 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="model_id" ColumnName="model_id" />
                 <ScalarProperty Name="special_recieved_hour" ColumnName="special_recieved_hour" />
                 <ScalarProperty Name="special_recieved_date" ColumnName="special_recieved_date" />
                 <ScalarProperty Name="alert_creation_date" ColumnName="alert_creation_date" />
@@ -946,7 +941,6 @@
                 <ScalarProperty Name="kadas_agent_name" ColumnName="kadas_agent_name" />
                 <ScalarProperty Name="orders_agent_name" ColumnName="orders_agent_name" />
                 <ScalarProperty Name="action_type_id" ColumnName="action_type_id" />
-                <ScalarProperty Name="client_response_id" ColumnName="client_response_id" />
                 <ScalarProperty Name="special_approve" ColumnName="special_approve" />
                 <ScalarProperty Name="special_department_id" ColumnName="special_department_id" />
                 <ScalarProperty Name="order_number" ColumnName="order_number" />
@@ -1007,6 +1001,15 @@
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="is_notified" ColumnName="is_notified" />
                 <ScalarProperty Name="Deparment_id" ColumnName="Deparment_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_orders_id">
+            <EntityTypeMapping TypeName="DB_Model.tbl_orders_id">
+              <MappingFragment StoreEntitySet="tbl_orders_id">
+                <ScalarProperty Name="heret_order_id" ColumnName="heret_order_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

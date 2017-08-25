@@ -202,9 +202,6 @@
     <Compile Include="tbl_clients.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="tbl_client_response.cs">
-      <DependentUpon>DB Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="tbl_employees.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
@@ -215,6 +212,9 @@
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_orders.cs">
+      <DependentUpon>DB Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_orders_id.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_sla_actions.cs">

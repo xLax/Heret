@@ -26,7 +26,6 @@ namespace HeretPreWorkControl
         }
     
         public virtual DbSet<tbl_action_to_dept> tbl_action_to_dept { get; set; }
-        public virtual DbSet<tbl_client_response> tbl_client_response { get; set; }
         public virtual DbSet<tbl_clients> tbl_clients { get; set; }
         public virtual DbSet<tbl_employees> tbl_employees { get; set; }
         public virtual DbSet<tbl_offers> tbl_offers { get; set; }
@@ -36,5 +35,6 @@ namespace HeretPreWorkControl
         public virtual DbSet<tbl_user_groups> tbl_user_groups { get; set; }
         public virtual DbSet<tbl_users> tbl_users { get; set; }
         public virtual DbSet<tbl_notifications> tbl_notifications { get; set; }
+        public virtual DbSet<tbl_orders_id> tbl_orders_id { get; set; }
     }
 }
