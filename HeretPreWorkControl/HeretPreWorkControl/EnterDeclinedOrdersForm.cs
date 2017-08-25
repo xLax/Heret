@@ -19,6 +19,7 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.Items.Add(Globals.PrisaNumber);
             lbPriseTempDesc.Items.Add(Globals.TemplateNumber);
             lbPriseTempDesc.Items.Add(Globals.ProjectDesc);
+            lbPriseTempDesc.Items.Add(Globals.ModelNumber);
 
             lbRejectReason.Items.Add(Globals.PriceReason);
             lbRejectReason.Items.Add(Globals.TimeReason);
@@ -97,6 +98,11 @@ namespace HeretPreWorkControl
             {
                 lbPriseTempDesc.SelectedItem = Globals.PrisaNumber;
                 tbPrisaTempDesc.Text = DeclinedOrder.prisa_id.ToString();
+            }
+            else if(DeclinedOrder.model_id != null)
+            {
+                lbPriseTempDesc.SelectedItem = Globals.ModelNumber;
+                tbPrisaTempDesc.Text = DeclinedOrder.model_id.ToString();
             }
             else
             {

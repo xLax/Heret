@@ -24,7 +24,7 @@ namespace HeretPreWorkControl
         private Dictionary<int, string> dcEmployees;
         private Dictionary<DateTime, WorkerData> dcWorkerData = new Dictionary<DateTime, WorkerData>();
 
-        private DateTime dateToSearch;
+        public List<tbl_orders> AllMyJobs;
 
         public ManagerReportForm()
         {
@@ -50,9 +50,21 @@ namespace HeretPreWorkControl
                 lbEmployees.SelectedIndex = 0;
             }
 
+            dtFromDate.Format = DateTimePickerFormat.Custom;
+            dtFromDate.CustomFormat = "dd/MM/yyyy";
+            dtFromDate.MaxDate = DateTime.Today;
+            dtFromDate.MinDate = DateTime.Today.Date.AddYears(-1);
+            DateTime tempLastWeekDate = DateTime.Today.Date.AddDays(-7);
+            dtFromDate.Value = tempLastWeekDate.StartOfWeek(DayOfWeek.Sunday);
+
+            dtToDate.Format = DateTimePickerFormat.Custom;
+            dtToDate.CustomFormat = "dd/MM/yyyy";
+            dtToDate.MaxDate = DateTime.Today;
+            dtToDate.MinDate = DateTime.Today.Date.AddYears(-1);
+            dtToDate.Value = dtFromDate.Value.AddDays(6);
+
             tbTrackBar.Value = 0;
-            lblPeriod.Text = "שבוע";
-            this.dateToSearch = DateTime.Today.AddDays(-7);
+            lblPeriod.Text = "עבודות סגורות";
 
             this.PerformWorkersSearch();
         }
@@ -61,18 +73,11 @@ namespace HeretPreWorkControl
         {
             if(tbTrackBar.Value == 0)
             {
-                lblPeriod.Text = "שבוע";
-                this.dateToSearch = DateTime.Today.AddDays(-7);
+                lblPeriod.Text = "עבודות סגורות";
             }
             else if (tbTrackBar.Value == 1)
             {
-                lblPeriod.Text = "חודש";
-                this.dateToSearch = DateTime.Today.AddMonths(-1);
-            }
-            else if (tbTrackBar.Value == 2)
-            {
-                lblPeriod.Text = "חצי שנה";
-                this.dateToSearch = DateTime.Today.AddMonths(-6);
+                lblPeriod.Text = "עבודות בתהליך";
             }
 
             this.PerformWorkersSearch();
@@ -82,7 +87,7 @@ namespace HeretPreWorkControl
         {
             List<WorkerData> lstToChart = new List<WorkerData>();
 
-            chartWorkers.Series["בתהליך"].Points.Clear();
+            chartWorkers.Series["בזמן"].Points.Clear();
             chartWorkers.Series["מאחר"].Points.Clear();
 
             if (Globals.AllSlaData == null)
@@ -93,24 +98,53 @@ namespace HeretPreWorkControl
             List<tbl_sla_data> lstSlaData = Globals.AllSlaData
                 .Where(a => a.employee_name != null &&
                             a.employee_name.Equals(lbEmployees.SelectedItem.ToString()) &&
-                                                   a.end_date >= this.dateToSearch)
+                                                   a.end_date >= this.dtFromDate.Value)
                             .ToList<tbl_sla_data>();
 
-            // לחפש שבוע אחרון
-            if(tbTrackBar.Value == 0 &&
-               this.dateToSearch.Year != 1)
+            // לחפש עבודות סגורות
+            if(tbTrackBar.Value == 0)
             {
-                lstToChart = this.SearchWeek(lstSlaData);
+                lstToChart = this.Search(lstSlaData, Globals.StatusClosed);
             }
-            // דוח לגבי חיפוש של חודש אחרון
+            // דוח לגבי עבודות בתהליך
             else if(tbTrackBar.Value == 1)
             {
+                lstToChart = this.Search(lstSlaData, Globals.StatusInWork);
+            }
+
+            foreach (var row in lstToChart)
+            {
+                chartWorkers.Series["בזמן"].Points.AddXY(row.DayName, row.workInProcess);
+                chartWorkers.Series["מאחר"].Points.AddXY(row.DayName, row.lateWorks);
+            }
+        }
+
+        private List<WorkerData> Search(List<tbl_sla_data> lstSlaData ,int nJobStatus)
+        {
+            List<WorkerData> lstToReturn = new List<WorkerData>();
+
+            // Search Calender Week
+            if ((dtToDate.Value - dtFromDate.Value).TotalDays == 6)
+            {
+                this.AllMyJobs = new List<tbl_orders>();
+                lstToReturn = this.SearchWeek(lstSlaData, nJobStatus);
+            }
+            
+            // Search Calender Month
+            else if ((dtToDate.Value - dtFromDate.Value).TotalDays > 27 &&
+                     (dtToDate.Value - dtFromDate.Value).TotalDays < 32 &&
+                      dtFromDate.Value.Day == 1)
+            {
+                this.AllMyJobs = new List<tbl_orders>();
+
+                DateTime OriginalValue = this.dtFromDate.Value;
+
                 for (int i = 0; i < 4; i++)
                 {
-                    List<WorkerData> lstTempCalc = this.SearchWeek(lstSlaData);
+                    List<WorkerData> lstTempCalc = this.SearchWeek(lstSlaData, nJobStatus);
 
                     WorkerData currWorkerData = new WorkerData();
-                    
+
                     currWorkerData.DayName = lstTempCalc[0].DayName.Substring(lstTempCalc[0].DayName.IndexOf('/') - 2);
 
                     foreach (var TempWorkerData in lstTempCalc)
@@ -119,14 +153,14 @@ namespace HeretPreWorkControl
                         currWorkerData.workInProcess += TempWorkerData.workInProcess;
                     }
 
-                    lstToChart.Add(currWorkerData);
+                    lstToReturn.Add(currWorkerData);
 
-                    this.dateToSearch = this.dateToSearch.AddDays(7);
+                    this.dtFromDate.Value = this.dtFromDate.Value.AddDays(7);
                 }
 
-                if (this.dateToSearch < DateTime.Today)
+                if (this.dtFromDate.Value < this.dtToDate.Value)
                 {
-                    int nDaysDifference = int.Parse((DateTime.Today - this.dateToSearch).TotalDays.ToString());
+                    int nDaysDifference = int.Parse((this.dtToDate.Value - this.dtFromDate.Value).TotalDays.ToString());
                     List<WorkerData> lstCalculatedList = new List<WorkerData>();
 
                     int nLateWorks = 0, nWorksInTime = 0;
@@ -136,7 +170,7 @@ namespace HeretPreWorkControl
                     {
                         if (i == 0)
                         {
-                            strDayName += " " + Utilities.GetDateInNormalFormat(this.dateToSearch);
+                            strDayName += " " + Utilities.GetDateInNormalFormat(this.dtFromDate.Value);
                         }
 
                         foreach (tbl_sla_data slaData in lstSlaData)
@@ -144,12 +178,12 @@ namespace HeretPreWorkControl
                             tbl_sla_actions ActionData = Globals.AllActions.Where(a => a.ID == slaData.sla_id)
                                                         .Single<tbl_sla_actions>();
 
-                            if (slaData.begin_date <= this.dateToSearch.AddDays(i) &&
-                                slaData.end_date >= this.dateToSearch.AddDays(i))
+                            if (slaData.begin_date <= this.dtFromDate.Value.AddDays(i) &&
+                                slaData.end_date >= this.dtFromDate.Value.AddDays(i))
                             {
                                 if (slaData.status_id == Globals.SlaLate)
                                 {
-                                    if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, this.dateToSearch.AddDays(i)))
+                                    if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, this.dtFromDate.Value.AddDays(i)))
                                     {
                                         nWorksInTime++;
                                     }
@@ -166,61 +200,65 @@ namespace HeretPreWorkControl
                         }
                     }
 
-                    lstToChart.Add(new WorkerData()
+                    lstToReturn.Add(new WorkerData()
                     {
                         DayName = strDayName,
                         lateWorks = nLateWorks,
                         workInProcess = nWorksInTime,
                     });
                 }
-                // TODO: half year calc
-                else if (tbTrackBar.Value == 2)
-                {
 
-                }
+                this.dtFromDate.Value = OriginalValue;
             }
 
-            foreach (var row in lstToChart)
-            {
-                chartWorkers.Series["בתהליך"].Points.AddXY(row.DayName, row.workInProcess);
-                chartWorkers.Series["מאחר"].Points.AddXY(row.DayName, row.lateWorks);
-            }
+
+            return lstToReturn;
         }
 
-        private List<WorkerData> SearchWeek(List<tbl_sla_data> lstSlaData)
+        private List<WorkerData> SearchWeek(List<tbl_sla_data> lstSlaData, int nJobStatus)
         {
             List<WorkerData> lstCalculatedList = new List<WorkerData>();
+
+            if (this.AllMyJobs.Count == 0)
+            {
+                this.GetAllMyJobs(nJobStatus);
+            }
 
             for (int i = 0; i < 7; i++)
             {
                 WorkerData currWorkerData = new WorkerData();
 
-                currWorkerData.Date = this.dateToSearch.AddDays(i);
+                currWorkerData.Date = this.dtFromDate.Value.AddDays(i);
                 currWorkerData.DayName = this.GetDayNameFormDate(currWorkerData.Date);
                 currWorkerData.DayName += " " + Utilities.GetDateInNormalFormat(currWorkerData.Date);
 
                 foreach (tbl_sla_data slaData in lstSlaData)
                 {
-                    tbl_sla_actions ActionData = Globals.AllActions.Where(a => a.ID == slaData.sla_id)
+                    tbl_orders isOrderFound = this.AllMyJobs.Where(a => a.ID == slaData.order_id).SingleOrDefault<tbl_orders>();
+
+                    if(isOrderFound != null)
+                    {
+                        tbl_sla_actions ActionData = Globals.AllActions.Where(a => a.ID == slaData.sla_id)
                                                         .Single<tbl_sla_actions>();
 
-                    if (slaData.begin_date <= currWorkerData.Date &&
-                        slaData.end_date >= currWorkerData.Date)
-                    {
-                        if (slaData.status_id == Globals.SlaLate)
+                        if (slaData.begin_date <= currWorkerData.Date &&
+                            slaData.end_date >= currWorkerData.Date)
                         {
-                            if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, this.dateToSearch.AddDays(i)))
+                            if (slaData.status_id == Globals.SlaLate)
                             {
-                                currWorkerData.workInProcess++; 
+                                if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, dtFromDate.Value.AddDays(i))) //this.dateToSearch.AddDays(i)))
+                                {
+                                    currWorkerData.workInProcess++;
+                                }
+                                else
+                                {
+                                    currWorkerData.lateWorks++;
+                                }
                             }
-                            else
+                            else if (slaData.status_id == Globals.SlaInTime)
                             {
-                                currWorkerData.lateWorks++;
+                                currWorkerData.workInProcess++;
                             }
-                        }
-                        else if (slaData.status_id == Globals.SlaInTime)
-                        {
-                            currWorkerData.workInProcess++;
                         }
                     }
                 }
@@ -229,6 +267,22 @@ namespace HeretPreWorkControl
             }
 
             return lstCalculatedList;
+        }
+
+        private void GetAllMyJobs(int nJobStatus)
+        {
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    this.AllMyJobs = context.tbl_orders.Where( a => (( a.kadas_agent_name != null &&
+                                                                      a.kadas_agent_name == lbEmployees.SelectedItem.ToString()) ||
+                                                                    ( a.studio_agent_name != null &&
+                                                                      a.studio_agent_name == lbEmployees.SelectedItem.ToString())) &&
+                                                                      a.current_status_id == nJobStatus).ToList<tbl_orders>();
+                }
+                catch(Exception ex){ }
+            }
         }
 
         private string GetDayNameFormDate(DateTime dateTime)
@@ -274,21 +328,46 @@ namespace HeretPreWorkControl
         {
             if (tbTrackBar.Value == 0)
             {
-                lblPeriod.Text = "שבוע";
-                this.dateToSearch = DateTime.Today.AddDays(-7);
+                lblPeriod.Text = "עבודות סגורות";
             }
             else if (tbTrackBar.Value == 1)
             {
-                lblPeriod.Text = "חודש";
-                this.dateToSearch = DateTime.Today.AddMonths(-1);
-            }
-            else if (tbTrackBar.Value == 2)
-            {
-                lblPeriod.Text = "חצי שנה";
-                this.dateToSearch = DateTime.Today.AddMonths(-6);
+                lblPeriod.Text = "עבודות בתהליך";
             }
 
             this.PerformWorkersSearch();
+        }
+
+        private void pbRefresh_Click(object sender, EventArgs e)
+        {
+            int nResult = Utilities.GetAllSlaData();
+            
+            if(nResult == 0)
+            {
+                tbPanel.Text = "רענון בוצע בהצלחה";
+            }
+            else
+            {
+                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+            }
+        }
+
+        private void dtToDate_ValueChanged(object sender, EventArgs e)
+        {
+            this.PerformWorkersSearch();
+        }
+    }
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 }

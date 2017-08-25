@@ -21,6 +21,7 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.Items.Add(Globals.PrisaNumber);
             lbPriseTempDesc.Items.Add(Globals.TemplateNumber);
             lbPriseTempDesc.Items.Add(Globals.ProjectDesc);
+            lbPriseTempDesc.Items.Add(Globals.ModelNumber);
 
             this.order = selectedOrder;
 
@@ -44,6 +45,14 @@ namespace HeretPreWorkControl
                     tbDescription.TextAlign = HorizontalAlignment.Center;
                     tbDescription.RightToLeft = RightToLeft.No;
                     tbDescription.Text = this.order.template_id;
+                    tbDescription.BackColor = Color.White;
+                    break;
+
+                case Globals.ModelNumber:
+                    tbDescription.Enabled = true;
+                    tbDescription.TextAlign = HorizontalAlignment.Center;
+                    tbDescription.RightToLeft = RightToLeft.No;
+                    tbDescription.Text = this.order.model_id;
                     tbDescription.BackColor = Color.White;
                     break;
 
@@ -80,6 +89,10 @@ namespace HeretPreWorkControl
                         this.order.template_id = tbDescription.Text;
                         break;
 
+                    case Globals.ModelNumber:
+                        this.order.model_id = tbDescription.Text;
+                        break;
+
                     case Globals.ProjectDesc:
                         this.order.project_desc = tbDescription.Text;
                         break;
@@ -103,6 +116,10 @@ namespace HeretPreWorkControl
 
                             case Globals.TemplateNumber:
                                 Entry.Property(o => o.template_id).IsModified = true;
+                                break;
+
+                            case Globals.ModelNumber:
+                                Entry.Property(o => o.model_id).IsModified = true;
                                 break;
 
                             case Globals.ProjectDesc:

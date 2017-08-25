@@ -88,8 +88,10 @@ namespace HeretPreWorkControl
             return strStatusDesc;
         }
 
-        public static void GetAllSlaData()
+        public static int GetAllSlaData()
         {
+            int nResult = 0;
+
             using (var context = new DB_Entities())
             {
                 try
@@ -98,9 +100,11 @@ namespace HeretPreWorkControl
                 }
                 catch (Exception ex)
                 {
-
+                    nResult = -1;
                 }
             }
+
+            return nResult;
         }
 
         public static Boolean GetMyNotifications()
@@ -363,6 +367,10 @@ namespace HeretPreWorkControl
             else if (Order.prisa_id != null)
             {
                 strToReturn = Order.prisa_id.ToString();
+            }
+            else if(Order.model_id != null)
+            {
+                strToReturn = Order.model_id.ToString();
             }
             else
             {

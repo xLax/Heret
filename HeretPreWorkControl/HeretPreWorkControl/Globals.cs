@@ -35,6 +35,7 @@ namespace HeretPreWorkControl
         public const string PrisaNumber = "מספר פריסה";
         public const string TemplateNumber = "מספר תבנית";
         public const string ProjectDesc = "תיאור פרויקט";
+        public const string ModelNumber = "מספר דגם";
 
         public const string PriceReason = "מחיר גבוה";
         public const string TimeReason = "זמן אספקה";

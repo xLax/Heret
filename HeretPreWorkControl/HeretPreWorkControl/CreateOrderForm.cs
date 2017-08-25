@@ -27,6 +27,7 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.Items.Add(Globals.PrisaNumber);
             lbPriseTempDesc.Items.Add(Globals.TemplateNumber);
             lbPriseTempDesc.Items.Add(Globals.ProjectDesc);
+            lbPriseTempDesc.Items.Add(Globals.ModelNumber);
 
             lbPriseTempDesc.SelectedIndex = 2;
 
@@ -180,6 +181,10 @@ namespace HeretPreWorkControl
                                 else if (lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.PrisaNumber))
                                 {
                                     NewOrder.prisa_id = tbPrisaTempDesc.Text.ToString();
+                                }
+                                else if(lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.ModelNumber))
+                                {
+                                    NewOrder.model_id = tbPrisaTempDesc.Text.ToString();
                                 }
                                 else if (lbPriseTempDesc.SelectedItem.ToString().Equals(Globals.ProjectDesc))
                                 {

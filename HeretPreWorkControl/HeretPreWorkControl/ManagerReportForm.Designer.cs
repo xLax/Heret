@@ -37,19 +37,25 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.TabStation = new System.Windows.Forms.TabPage();
             this.TabEmployees = new System.Windows.Forms.TabPage();
+            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
+            this.lblFromDate = new System.Windows.Forms.Label();
+            this.pbRefresh = new System.Windows.Forms.PictureBox();
+            this.lblEmployee = new System.Windows.Forms.Label();
+            this.lbEmployees = new System.Windows.Forms.ComboBox();
+            this.chartWorkers = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblPeriod = new System.Windows.Forms.Label();
             this.tbTrackBar = new System.Windows.Forms.TrackBar();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chartWorkers = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lblEmployee = new System.Windows.Forms.Label();
-            this.lbEmployees = new System.Windows.Forms.ComboBox();
+            this.dtToDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
             this.tabControl.SuspendLayout();
             this.TabEmployees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).BeginInit();
             this.SuspendLayout();
             // 
             // pbHeret
@@ -80,13 +86,18 @@
             this.TabStation.Location = new System.Drawing.Point(4, 29);
             this.TabStation.Name = "TabStation";
             this.TabStation.Padding = new System.Windows.Forms.Padding(3);
-            this.TabStation.Size = new System.Drawing.Size(614, 358);
+            this.TabStation.Size = new System.Drawing.Size(727, 368);
             this.TabStation.TabIndex = 0;
             this.TabStation.Text = "דוח תחנות";
             this.TabStation.UseVisualStyleBackColor = true;
             // 
             // TabEmployees
             // 
+            this.TabEmployees.Controls.Add(this.dtToDate);
+            this.TabEmployees.Controls.Add(this.label1);
+            this.TabEmployees.Controls.Add(this.dtFromDate);
+            this.TabEmployees.Controls.Add(this.lblFromDate);
+            this.TabEmployees.Controls.Add(this.pbRefresh);
             this.TabEmployees.Controls.Add(this.lblEmployee);
             this.TabEmployees.Controls.Add(this.lbEmployees);
             this.TabEmployees.Controls.Add(this.chartWorkers);
@@ -100,12 +111,91 @@
             this.TabEmployees.Text = "דוח עובדים";
             this.TabEmployees.UseVisualStyleBackColor = true;
             // 
+            // dtFromDate
+            // 
+            this.dtFromDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.dtFromDate.Location = new System.Drawing.Point(458, 62);
+            this.dtFromDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtFromDate.Name = "dtFromDate";
+            this.dtFromDate.Size = new System.Drawing.Size(161, 26);
+            this.dtFromDate.TabIndex = 47;
+            this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            // 
+            // lblFromDate
+            // 
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Location = new System.Drawing.Point(636, 67);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(79, 20);
+            this.lblFromDate.TabIndex = 46;
+            this.lblFromDate.Text = "מתאריך:";
+            // 
+            // pbRefresh
+            // 
+            this.pbRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbRefresh.Image = global::HeretPreWorkControl.Properties.Resources.Refresh_icon;
+            this.pbRefresh.Location = new System.Drawing.Point(16, 8);
+            this.pbRefresh.Name = "pbRefresh";
+            this.pbRefresh.Size = new System.Drawing.Size(54, 37);
+            this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbRefresh.TabIndex = 45;
+            this.pbRefresh.TabStop = false;
+            this.pbRefresh.Click += new System.EventHandler(this.pbRefresh_Click);
+            // 
+            // lblEmployee
+            // 
+            this.lblEmployee.AutoSize = true;
+            this.lblEmployee.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmployee.Location = new System.Drawing.Point(620, 20);
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.Size = new System.Drawing.Size(95, 20);
+            this.lblEmployee.TabIndex = 44;
+            this.lblEmployee.Text = "הצג לעובד:";
+            // 
+            // lbEmployees
+            // 
+            this.lbEmployees.BackColor = System.Drawing.SystemColors.Window;
+            this.lbEmployees.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbEmployees.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbEmployees.FormattingEnabled = true;
+            this.lbEmployees.Location = new System.Drawing.Point(439, 17);
+            this.lbEmployees.Name = "lbEmployees";
+            this.lbEmployees.Size = new System.Drawing.Size(180, 28);
+            this.lbEmployees.TabIndex = 43;
+            this.lbEmployees.SelectedIndexChanged += new System.EventHandler(this.lbEmployees_SelectedIndexChanged);
+            // 
+            // chartWorkers
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartWorkers.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartWorkers.Legends.Add(legend1);
+            this.chartWorkers.Location = new System.Drawing.Point(16, 102);
+            this.chartWorkers.Name = "chartWorkers";
+            series1.BorderColor = System.Drawing.Color.Black;
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.Lime;
+            series1.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.Legend = "Legend1";
+            series1.Name = "בזמן";
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "מאחר";
+            this.chartWorkers.Series.Add(series1);
+            this.chartWorkers.Series.Add(series2);
+            this.chartWorkers.Size = new System.Drawing.Size(695, 260);
+            this.chartWorkers.TabIndex = 42;
+            this.chartWorkers.Text = "chart1";
+            // 
             // lblPeriod
             // 
             this.lblPeriod.AutoSize = true;
             this.lblPeriod.BackColor = System.Drawing.Color.Transparent;
             this.lblPeriod.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriod.Location = new System.Drawing.Point(226, 20);
+            this.lblPeriod.Location = new System.Drawing.Point(297, 20);
             this.lblPeriod.Name = "lblPeriod";
             this.lblPeriod.Size = new System.Drawing.Size(47, 20);
             this.lblPeriod.TabIndex = 41;
@@ -114,8 +204,8 @@
             // tbTrackBar
             // 
             this.tbTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.tbTrackBar.Location = new System.Drawing.Point(6, 17);
-            this.tbTrackBar.Maximum = 2;
+            this.tbTrackBar.Location = new System.Drawing.Point(76, 17);
+            this.tbTrackBar.Maximum = 1;
             this.tbTrackBar.Name = "tbTrackBar";
             this.tbTrackBar.Size = new System.Drawing.Size(215, 45);
             this.tbTrackBar.TabIndex = 40;
@@ -144,52 +234,26 @@
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
-            // chartWorkers
+            // dtToDate
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartWorkers.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartWorkers.Legends.Add(legend1);
-            this.chartWorkers.Location = new System.Drawing.Point(16, 68);
-            this.chartWorkers.Name = "chartWorkers";
-            series1.BorderColor = System.Drawing.Color.Black;
-            series1.ChartArea = "ChartArea1";
-            series1.Color = System.Drawing.Color.Lime;
-            series1.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series1.Legend = "Legend1";
-            series1.Name = "בתהליך";
-            series2.BorderColor = System.Drawing.Color.Black;
-            series2.ChartArea = "ChartArea1";
-            series2.Color = System.Drawing.Color.Red;
-            series2.Legend = "Legend1";
-            series2.Name = "מאחר";
-            this.chartWorkers.Series.Add(series1);
-            this.chartWorkers.Series.Add(series2);
-            this.chartWorkers.Size = new System.Drawing.Size(695, 260);
-            this.chartWorkers.TabIndex = 42;
-            this.chartWorkers.Text = "chart1";
+            this.dtToDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.dtToDate.Location = new System.Drawing.Point(130, 61);
+            this.dtToDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtToDate.Name = "dtToDate";
+            this.dtToDate.Size = new System.Drawing.Size(161, 26);
+            this.dtToDate.TabIndex = 49;
+            this.dtToDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtToDate.ValueChanged += new System.EventHandler(this.dtToDate_ValueChanged);
             // 
-            // lblEmployee
+            // label1
             // 
-            this.lblEmployee.AutoSize = true;
-            this.lblEmployee.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmployee.Location = new System.Drawing.Point(620, 20);
-            this.lblEmployee.Name = "lblEmployee";
-            this.lblEmployee.Size = new System.Drawing.Size(95, 20);
-            this.lblEmployee.TabIndex = 44;
-            this.lblEmployee.Text = "הצג לעובד:";
-            // 
-            // lbEmployees
-            // 
-            this.lbEmployees.BackColor = System.Drawing.SystemColors.Window;
-            this.lbEmployees.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lbEmployees.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbEmployees.FormattingEnabled = true;
-            this.lbEmployees.Location = new System.Drawing.Point(439, 17);
-            this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(180, 28);
-            this.lbEmployees.TabIndex = 43;
-            this.lbEmployees.SelectedIndexChanged += new System.EventHandler(this.lbEmployees_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(308, 66);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 20);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "עד תאריך:";
             // 
             // ManagerReportForm
             // 
@@ -214,9 +278,10 @@
             this.tabControl.ResumeLayout(false);
             this.TabEmployees.ResumeLayout(false);
             this.TabEmployees.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartWorkers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +299,10 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartWorkers;
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.ComboBox lbEmployees;
+        private System.Windows.Forms.PictureBox pbRefresh;
+        private System.Windows.Forms.Label lblFromDate;
+        private System.Windows.Forms.DateTimePicker dtFromDate;
+        private System.Windows.Forms.DateTimePicker dtToDate;
+        private System.Windows.Forms.Label label1;
     }
 }
