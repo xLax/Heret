@@ -81,13 +81,18 @@ namespace HeretPreWorkControl
                         }
 
                         AddToInternalTable(order);
-
                     }
                 }
             }
             else
             {
                 tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+            }
+
+            if(Globals.UserGroupID == Globals.SalesUserID)
+            {
+                label3.Visible = false;
+                pbReminder.Visible = false;
             }
         }
 

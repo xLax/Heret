@@ -185,5 +185,10 @@ namespace HeretPreWorkControl
         {
             new ShowAllNotificationsForm().ShowDialog();
         }
+
+        private void pbMyOrders_Click(object sender, EventArgs e)
+        {
+            new AdminOverviewForm().Show();
+        }
     }
 }

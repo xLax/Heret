@@ -100,15 +100,18 @@ namespace HeretPreWorkControl
 
         private void pbSalesUpdate_Click(object sender, EventArgs e)
         {
-            if (this.order.current_status_id == Globals.StatusClosed)
+            if(Globals.UserGroupID == Globals.AdminID)
             {
-                tbPanel.Text = "שגיאה ! הזמנה זו סגורה אין באפשרותך לערוך את פרטיה";
-            }
-            else
-            {
-                this.isEnabled = !this.isEnabled;
+                if (this.order.current_status_id == Globals.StatusClosed)
+                {
+                    tbPanel.Text = "שגיאה ! הזמנה זו סגורה אין באפשרותך לערוך את פרטיה";
+                }
+                else
+                {
+                    this.isEnabled = !this.isEnabled;
 
-                ChangeScreenUI();
+                    ChangeScreenUI();
+                }
             }
         }
 
