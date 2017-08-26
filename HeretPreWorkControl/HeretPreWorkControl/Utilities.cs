@@ -46,8 +46,17 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    Globals.AllJobs = context.tbl_orders
+                    if(Globals.UserGroupID == Globals.AdminID)
+                    {
+                        Globals.AllJobs = context.tbl_orders
                                     .ToList<tbl_orders>();
+                    }
+                    else
+                    {
+                        Globals.AllJobs = context.tbl_orders
+                            .Where(a => a.sales_agent_name.Equals(Globals.Name))
+                                    .ToList<tbl_orders>();
+                    }
                 }
                 catch(Exception ex)
                 {

@@ -324,6 +324,8 @@ namespace HeretPreWorkControl
 
                             if (result == DialogResult.Yes)
                             {
+                                new InsertModelNumberForm(SelectedOrder).ShowDialog();
+
                                 if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                 {
                                     tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";

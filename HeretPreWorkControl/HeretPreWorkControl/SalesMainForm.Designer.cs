@@ -45,12 +45,15 @@
             this.tmrTimerDeclinedJob = new System.Windows.Forms.Timer(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.pbAllNotifications = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pbMyOrders = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyJobs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEnterDeclinedOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAllNotifications)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMyOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // lblHello
@@ -68,10 +71,10 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(36, 404);
+            this.tbPanel.Location = new System.Drawing.Point(12, 423);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
-            this.tbPanel.Size = new System.Drawing.Size(482, 29);
+            this.tbPanel.Size = new System.Drawing.Size(616, 29);
             this.tbPanel.TabIndex = 9;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -79,7 +82,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(76, 184);
+            this.label1.Location = new System.Drawing.Point(106, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 27);
             this.label1.TabIndex = 12;
@@ -94,7 +97,7 @@
             // pbMyJobs
             // 
             this.pbMyJobs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbMyJobs.Location = new System.Drawing.Point(102, 83);
+            this.pbMyJobs.Location = new System.Drawing.Point(132, 83);
             this.pbMyJobs.Name = "pbMyJobs";
             this.pbMyJobs.Size = new System.Drawing.Size(102, 98);
             this.pbMyJobs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -205,12 +208,36 @@
             this.pbAllNotifications.TabStop = false;
             this.pbAllNotifications.Click += new System.EventHandler(this.pbAllNotifications_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(231, 365);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(170, 27);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "הצג הזמנות שלי";
+            // 
+            // pbMyOrders
+            // 
+            this.pbMyOrders.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbMyOrders.Image = global::HeretPreWorkControl.Properties.Resources.Overview_Icon;
+            this.pbMyOrders.Location = new System.Drawing.Point(264, 264);
+            this.pbMyOrders.Name = "pbMyOrders";
+            this.pbMyOrders.Size = new System.Drawing.Size(102, 98);
+            this.pbMyOrders.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMyOrders.TabIndex = 23;
+            this.pbMyOrders.TabStop = false;
+            this.pbMyOrders.Click += new System.EventHandler(this.pbMyOrders_Click);
+            // 
             // SalesMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(633, 454);
+            this.ClientSize = new System.Drawing.Size(637, 464);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pbMyOrders);
             this.Controls.Add(this.pbAllNotifications);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -240,6 +267,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAllNotifications)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMyOrders)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +290,7 @@
         private System.Windows.Forms.Timer tmrTimerDeclinedJob;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.PictureBox pbAllNotifications;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pbMyOrders;
     }
 }
