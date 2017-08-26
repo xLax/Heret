@@ -83,6 +83,26 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap All_Notification_Icon {
+            get {
+                object obj = ResourceManager.GetObject("All_Notification_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap All_Notification_Icon_Note {
+            get {
+                object obj = ResourceManager.GetObject("All_Notification_Icon_Note", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ApprovedJobsTitle {
             get {
                 object obj = ResourceManager.GetObject("ApprovedJobsTitle", resourceCulture);
@@ -476,6 +496,16 @@ namespace HeretPreWorkControl.Properties {
         internal static System.Drawing.Bitmap ViewDetailsTitle {
             get {
                 object obj = ResourceManager.GetObject("ViewDetailsTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WatchNotesTitle {
+            get {
+                object obj = ResourceManager.GetObject("WatchNotesTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

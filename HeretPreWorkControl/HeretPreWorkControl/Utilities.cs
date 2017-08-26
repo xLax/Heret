@@ -19,6 +19,22 @@ namespace HeretPreWorkControl
             popup.TitleText = strTitle;
             popup.ContentText = strMessage;
             popup.Popup();
+
+            if (Globals.UserGroupID == Globals.SalesUserID)
+            {
+                Globals.SalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+            }
+            else if(Globals.UserGroupID != Globals.AdminID)
+            {
+                Globals.NotSalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+            }
+
+            if(Globals.lstAllNotifications == null)
+            {
+                Globals.lstAllNotifications = new List<string>();
+            }
+
+            Globals.lstAllNotifications.Add(strTitle + " - " + strMessage);
         }
 
         public static Boolean GetAllJobs()
@@ -58,6 +74,7 @@ namespace HeretPreWorkControl
             else if(Globals.OpenScreenID == Globals.ToTamatz)
             {
                 // Open תמונת מצב
+                new AdminOverviewForm().Show();
             }
             else if(Globals.OpenScreenID == Globals.ToSpecialApprove)
             {
@@ -123,6 +140,20 @@ namespace HeretPreWorkControl
                     foreach (tbl_notifications Note in notes)
                     {
                         Utilities.CreatePopup("תזכורת מנהל", "מנהל המערכת מתזכר אותך לבצע את עבודתך בהזמנה מספר " + Note.order_id);
+
+                        if (Globals.UserGroupID == Globals.SalesUserID)
+                        {
+                            Globals.SalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+                        }
+                        else if (Globals.UserGroupID != Globals.AdminID)
+                        {
+                            Globals.NotSalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+                        }
+
+                        if(Globals.lstAllNotifications == null)
+                        {
+                            Globals.lstAllNotifications = new List<string>();
+                        }
                     }
 
                     context.tbl_notifications.RemoveRange(notes);
@@ -352,6 +383,21 @@ namespace HeretPreWorkControl
             popup.ContentText = strMessage;
 
             currPopup = popup;
+
+            if (Globals.UserGroupID == Globals.SalesUserID)
+            {
+                Globals.SalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+            }
+            else if (Globals.UserGroupID != Globals.AdminID)
+            {
+                Globals.NotSalesFormInstance.pbAllNotifications.Image = Properties.Resources.All_Notification_Icon_Note;
+            }
+
+            if(Globals.lstAllNotifications == null)
+            {
+                Globals.lstAllNotifications = new List<string>();
+            }
+            Globals.lstAllNotifications.Add(strTitle + " - " + strMessage);
 
             popup.Popup();
         }

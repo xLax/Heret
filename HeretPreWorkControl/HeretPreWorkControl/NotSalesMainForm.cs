@@ -46,6 +46,11 @@ namespace HeretPreWorkControl
             }
 
             Utilities.GetMyNotifications();
+
+            if (pbAllNotifications.Image == null)
+            {
+                pbAllNotifications.Image = Properties.Resources.All_Notification_Icon;
+            }
         }
 
         private void tmrCheckNewJobsTimer_Tick(object sender, EventArgs e)
@@ -90,6 +95,11 @@ namespace HeretPreWorkControl
                 pbMyJobs.Image = Properties.Resources.My_Jobs;
                 tbPanel.Text = strNoJobsMessage;
             }
+        }
+
+        private void pbAllNotifications_Click(object sender, EventArgs e)
+        {
+            new ShowAllNotificationsForm().ShowDialog();
         }
     }
 }

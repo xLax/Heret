@@ -166,7 +166,7 @@
             this.lblEnterDeclined.Name = "lblEnterDeclined";
             this.lblEnterDeclined.Size = new System.Drawing.Size(135, 20);
             this.lblEnterDeclined.TabIndex = 25;
-            this.lblEnterDeclined.Text = "הגצ פרטי הזמנה";
+            this.lblEnterDeclined.Text = "הצג פרטי הזמנה";
             // 
             // pbEditOrderInfo
             // 

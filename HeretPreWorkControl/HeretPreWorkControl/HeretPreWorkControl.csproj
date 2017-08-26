@@ -196,6 +196,12 @@
     <Compile Include="SearchClientPopup.Designer.cs">
       <DependentUpon>SearchClientPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowAllNotificationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowAllNotificationsForm.Designer.cs">
+      <DependentUpon>ShowAllNotificationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpecialApprovedJobsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchClientPopup.resx">
       <DependentUpon>SearchClientPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowAllNotificationsForm.resx">
+      <DependentUpon>ShowAllNotificationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SpecialApprovedJobsForm.resx">
       <DependentUpon>SpecialApprovedJobsForm.cs</DependentUpon>
@@ -433,6 +442,9 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\WatchNotesTitle.png" />
+    <None Include="Resources\All Notification Icon.png" />
+    <None Include="Resources\All Notification Icon Note.png" />
     <None Include="Resources\EnterTemplateTitle.png" />
     <None Include="Resources\EnterModelTitle.png" />
     <None Include="Resources\ManagerReportTitle.png" />

@@ -244,4 +244,13 @@
   <data name="EnterTemplateTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EnterTemplateTitle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="All_Notification_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\All Notification Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="All_Notification_Icon_Note" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\All Notification Icon Note.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WatchNotesTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WatchNotesTitle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
