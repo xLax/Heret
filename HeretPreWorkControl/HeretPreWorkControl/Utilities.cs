@@ -356,6 +356,34 @@ namespace HeretPreWorkControl
             return nMaxID;
         }
 
+        public static int GetNextOrderIDForFiles()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_orders_id order = context.tbl_orders_id.OrderByDescending(u => u.ID).FirstOrDefault<tbl_orders_id>();
+
+                    if (order == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = order.ID + 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
+        }
+
         public static int ConvertSlaStatusToNumber(string strSlaStatus)
         {
             int nStatusID = 0;

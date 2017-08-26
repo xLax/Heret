@@ -33,7 +33,7 @@ namespace HeretPreWorkControl
 
 
         const int nStartY = 80;
-        private static int? nfilesno = 3;
+        private int? nfilesno = 0;
 
         // Consts for the flow layout size changes
         const int nTotalHeight = 74;
@@ -43,7 +43,12 @@ namespace HeretPreWorkControl
         public InsertOrderIDForm(tbl_orders CurrentOrder)
         {
             InitializeComponent();
-            //nfilesno = CurrentOrder.files_number;
+
+            if(CurrentOrder.files_number != null)
+            {
+                nfilesno = CurrentOrder.files_number;
+            }
+            
             if(nfilesno > 1)
             {
                 lblExecute.Text = "הזן מספרי הזמנות";
@@ -54,6 +59,7 @@ namespace HeretPreWorkControl
 
         private void pbExecute_Click(object sender, EventArgs e)
         {
+            // Check if all the orders id were filled
             bool isAllFilled = true;
             for (int i = 1; i <= nfilesno; i++)
             {
@@ -64,6 +70,7 @@ namespace HeretPreWorkControl
                 }
             }
 
+            // Save the order changes in the db
             if(isAllFilled)
             {
                 tbl_orders_id ordersId = new tbl_orders_id();
@@ -71,9 +78,9 @@ namespace HeretPreWorkControl
                 this.OrderToInsert.order_number = this.OrderToInsert.ID;
                 this.OrderToInsert.current_status_id = Globals.StatusClosed;
 
-                try
+                using (var context = new DB_Entities()) 
                 {
-                    using (var context = new DB_Entities())
+                    try
                     {
                         context.tbl_orders.Attach(this.OrderToInsert);
                         var Entry = context.Entry(this.OrderToInsert);
@@ -87,51 +94,38 @@ namespace HeretPreWorkControl
                         MyJobsForm.isJobSucceeded = true;
                         tbPanel.Text = "מספר ההזמנה הוכנס למערכת בהצלחה !";
                     }
-                }
-                catch (Exception ex)
-                {
-                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    catch (Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
                 }
 
-                ordersId.order_id = this.OrderToInsert.ID;
-                for (int i = 1; i <= nfilesno; i++)
+                // Create rows for the orders id in the db
+                int nId = Utilities.GetNextOrderIDForFiles();
+
+                using (var context = new DB_Entities())
                 {
-                    ordersId.heret_order_id = this.Controls.Find(strOrderIdInputName + i, false).Single<Control>().Text;
-                    
-                    
+                    try
+                    {
+                        for (int i = 1; i <= nfilesno; i++)
+                        {
+                            ordersId = new tbl_orders_id();
+                            ordersId.ID = nId + i - 1;
+                            ordersId.order_id = this.OrderToInsert.ID;
+                            ordersId.heret_order_id = this.Controls.Find(strOrderIdInputName + i, false).Single<Control>().Text;
+
+                            context.tbl_orders_id.Add(ordersId);
+                        }
+                        context.SaveChanges();
+
+                        tbPanel.Text = "ההזמנה נוצרה בהצלחה ! ";
+                    }
+                    catch (Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
                 }
             }
-            //if(tbOrderNum.Text == String.Empty)
-            //{
-            //    tbPanel.Text = "שגיאה! עליך להזין מספר הזמנה";
-            //}
-            //else
-            //{
-            //    this.OrderToInsert.order_number = tbOrderNum.Text;
-            //    this.OrderToInsert.current_status_id = Globals.StatusClosed;
-
-            //    try
-            //    {
-            //        using (var context = new DB_Entities())
-            //        {
-            //            context.tbl_orders.Attach(this.OrderToInsert);
-            //            var Entry = context.Entry(this.OrderToInsert);
-
-            //            Entry.Property(o => o.order_number).IsModified = true;
-            //            Entry.Property(o => o.current_status_id).IsModified = true;
-            //            // context.tbl_orders.AddOrUpdate(DeclinedOrder);
-
-            //            context.SaveChanges();
-
-            //            MyJobsForm.isJobSucceeded = true;
-            //            tbPanel.Text = "מספר ההזמנה הוכנס למערכת בהצלחה !";
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-            //    }
-            //}
         }
 
         private void initLayout()
