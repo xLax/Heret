@@ -494,7 +494,7 @@ namespace HeretPreWorkControl
                             currSlaData.ID = Utilities.GetNextSlaDataID();
                             currSlaData.order_id = SelectedOrder.ID;
                             currSlaData.sla_id = nActionTypeBeforeConvertion;
-                            currSlaData.user_id = Globals.UserID;
+                            currSlaData.user_id = Globals.UserGroupID;
                             currSlaData.begin_date = dtBeginDate;
                             currSlaData.end_date = DateTime.Today;
                             currSlaData.status_id = nSlaStatusID;
@@ -527,7 +527,7 @@ namespace HeretPreWorkControl
                             currSlaData.ID = Utilities.GetNextSlaDataID();
                             currSlaData.order_id = SelectedOrder.ID;
                             currSlaData.sla_id = nActionTypeBeforeConvertion;
-                            currSlaData.user_id = Globals.UserID;
+                            currSlaData.user_id = Globals.UserGroupID;
                             currSlaData.begin_date = dtBeginDate;
                             currSlaData.end_date = DateTime.Today;
                             currSlaData.status_id = nSlaStatusID;

@@ -57,11 +57,23 @@ namespace HeretPreWorkControl
             DateTime tempLastWeekDate = DateTime.Today.Date.AddDays(-7);
             dtFromDate.Value = tempLastWeekDate.StartOfWeek(DayOfWeek.Sunday);
 
+            dtFrom.Format = DateTimePickerFormat.Custom;
+            dtFrom.CustomFormat = "dd/MM/yyyy";
+            dtFrom.MaxDate = DateTime.Today;
+            dtFrom.MinDate = DateTime.Today.Date.AddYears(-1);
+            dtFrom.Value = tempLastWeekDate.StartOfWeek(DayOfWeek.Sunday);
+
             dtToDate.Format = DateTimePickerFormat.Custom;
             dtToDate.CustomFormat = "dd/MM/yyyy";
             dtToDate.MaxDate = DateTime.Today;
             dtToDate.MinDate = DateTime.Today.Date.AddYears(-1);
             dtToDate.Value = dtFromDate.Value.AddDays(6);
+
+            dtTo.Format = DateTimePickerFormat.Custom;
+            dtTo.CustomFormat = "dd/MM/yyyy";
+            dtTo.MaxDate = DateTime.Today;
+            dtTo.MinDate = DateTime.Today.Date.AddYears(-1);
+            dtTo.Value = dtFromDate.Value.AddDays(6);
 
             tbTrackBar.Value = 0;
             lblPeriod.Text = "עבודות סגורות";
@@ -341,7 +353,7 @@ namespace HeretPreWorkControl
         private void pbRefresh_Click(object sender, EventArgs e)
         {
             int nResult = Utilities.GetAllSlaData();
-            
+
             if(nResult == 0)
             {
                 tbPanel.Text = "רענון בוצע בהצלחה";
