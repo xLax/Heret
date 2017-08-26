@@ -29,29 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertOrderIDForm));
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblExecute = new System.Windows.Forms.Label();
             this.pbExecute = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbOrderNum = new System.Windows.Forms.TextBox();
             this.tbPanel = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // label3
+            // lblExecute
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(203, 211);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(178, 27);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "הזן מספר הזמנה";
+            this.lblExecute.AutoSize = true;
+            this.lblExecute.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExecute.Location = new System.Drawing.Point(187, 211);
+            this.lblExecute.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExecute.Name = "lblExecute";
+            this.lblExecute.Size = new System.Drawing.Size(178, 27);
+            this.lblExecute.TabIndex = 16;
+            this.lblExecute.Text = "הזן מספר הזמנה";
             // 
             // pbExecute
             // 
@@ -88,33 +85,11 @@
             this.pictureBox2.TabIndex = 17;
             this.pictureBox2.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 108);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 27);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "מספר הזמנה:";
-            // 
-            // tbOrderNum
-            // 
-            this.tbOrderNum.BackColor = System.Drawing.SystemColors.Window;
-            this.tbOrderNum.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbOrderNum.Location = new System.Drawing.Point(208, 101);
-            this.tbOrderNum.Margin = new System.Windows.Forms.Padding(4);
-            this.tbOrderNum.Name = "tbOrderNum";
-            this.tbOrderNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbOrderNum.Size = new System.Drawing.Size(228, 37);
-            this.tbOrderNum.TabIndex = 19;
-            // 
             // tbPanel
             // 
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
-            this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 249);
             this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
@@ -123,25 +98,15 @@
             this.tbPanel.TabIndex = 20;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 155);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(421, 41);
-            this.flowLayoutPanel1.TabIndex = 21;
-            // 
             // InsertOrderIDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(453, 300);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tbPanel);
-            this.Controls.Add(this.tbOrderNum);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblExecute);
             this.Controls.Add(this.pbExecute);
             this.Controls.Add(this.pbLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -165,12 +130,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbLogo;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblExecute;
         private System.Windows.Forms.PictureBox pbExecute;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbOrderNum;
         private System.Windows.Forms.TextBox tbPanel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

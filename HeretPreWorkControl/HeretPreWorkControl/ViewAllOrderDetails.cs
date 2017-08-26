@@ -50,7 +50,7 @@ namespace HeretPreWorkControl
             tbPrisaNumber.Text = this.order.prisa_id;
             tbProjDesc.Text = this.order.project_desc;
             tbAmount.Text = this.order.amount + "";
-            tbOrderNumber.Text = this.order.order_number;
+            tbOrderNumber.Text = this.order.order_number + "";
             lbStudioWork.SelectedItem = this.order.studio_work;
             lbKadasWork.SelectedItem = this.order.kadas_work;
 
