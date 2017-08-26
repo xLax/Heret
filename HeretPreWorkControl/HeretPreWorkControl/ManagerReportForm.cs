@@ -34,6 +34,7 @@ namespace HeretPreWorkControl
 
             Utilities.AllEmployeesForResponsible();
             Utilities.GetAllActionsList();
+            Utilities.GetAllUserGroupList();
 
             dcEmployees = new Dictionary<int, string>();
             allEmployees = Globals.AllEmployeesResp
@@ -43,6 +44,16 @@ namespace HeretPreWorkControl
             {
                 dcEmployees.Add(emp.ID, emp.name);
                 lbEmployees.Items.Add(emp.name);
+            }
+
+            foreach (tbl_user_groups userGroup in Globals.AllUserGroups)
+            {
+                // User group 0 is null
+                if(userGroup.ID != 0 &&
+                   userGroup.ID != Globals.AdminID)
+                {
+                    lbDepartment.Items.Add(userGroup.name);
+                }
             }
 
             if(allEmployees.Count > 0)

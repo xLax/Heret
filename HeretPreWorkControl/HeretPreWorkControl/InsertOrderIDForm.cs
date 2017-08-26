@@ -100,7 +100,7 @@ namespace HeretPreWorkControl
             for (int i = 1; i <= nFilesNumber; i++ )
             {
                 Label lbl = new Label();
-                lbl
+                //lbl
             }
 
 
