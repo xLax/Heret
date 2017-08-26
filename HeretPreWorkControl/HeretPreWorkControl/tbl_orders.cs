@@ -45,7 +45,7 @@ namespace HeretPreWorkControl
         public Nullable<int> action_type_id { get; set; }
         public Nullable<int> special_approve { get; set; }
         public Nullable<int> special_department_id { get; set; }
-        public string order_number { get; set; }
+        public Nullable<int> order_number { get; set; }
         public int current_status_id { get; set; }
         public Nullable<System.DateTime> dep_recieve_date { get; set; }
         public Nullable<System.TimeSpan> dep_recieve_hour { get; set; }

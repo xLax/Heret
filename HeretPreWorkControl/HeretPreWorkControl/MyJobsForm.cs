@@ -239,7 +239,7 @@ namespace HeretPreWorkControl
                         {
                             if (lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
                             {
-                                DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+                                DialogResult result = MessageBox.Show("האם הלקוח אישר ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
 
                                 // DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
 
@@ -318,7 +318,7 @@ namespace HeretPreWorkControl
                         // Studio model approve - קבלת אישור מהלקוח על דגם סטודיו
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeStudioWaitClient)
                         {
-                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
 
                             // DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo);
 
@@ -364,7 +364,7 @@ namespace HeretPreWorkControl
                         }
                         else if(lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
                         {
-                            DialogResult result = MessageBox.Show("האם הלקוח אישר את הדגם ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+                            DialogResult result = MessageBox.Show("האם הלקוח אישר  ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
 
                             // DialogResult result = MessageBox.Show("האם הלקוח אישר את העבודה ?", "אישור הלקוח", MessageBoxButtons.YesNo);
 

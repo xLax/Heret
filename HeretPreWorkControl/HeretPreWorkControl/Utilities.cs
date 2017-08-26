@@ -303,7 +303,8 @@ namespace HeretPreWorkControl
         {
             if(nActionTypeID == 20 ||
                nActionTypeID == 21 || 
-               nActionTypeID == 23)
+               nActionTypeID == 23 ||
+               nActionTypeID == 25)
             {
                 nActionTypeID = 8;
             }
@@ -318,7 +319,8 @@ namespace HeretPreWorkControl
                 nActionTypeID = 4;
             }
             else if(nActionTypeID == 16 ||
-                    nActionTypeID == 15)
+                    nActionTypeID == 15 ||
+                    nActionTypeID == 24)
             {
                 nActionTypeID = 2;
             }
@@ -791,28 +793,36 @@ namespace HeretPreWorkControl
                 {
                     nActionType = Globals.ActionTypeKadasSunCopyNew;
                 }
+                else if (strWork.Equals(Globals.KadasElse))
+                {
+                    nActionType = Globals.ActionTypeKadasElse;
+                }
             }
             else if(nUserID == Globals.StudioUserID)
             {
                 if (strWork.Equals(Globals.StudioCutModel))
                 {
-                    nActionType = Globals.ActionTypeStudioCutModel; 
+                    nActionType = Globals.ActionTypeStudioCutModel;
                 }
-                else if(strWork.Equals(Globals.StudioOnlyModel))
+                else if (strWork.Equals(Globals.StudioOnlyModel))
                 {
                     nActionType = Globals.ActionTypeStudioOnlyModel;
                 }
-                else if(strWork.Equals(Globals.StudioOnlyPrisa))
+                else if (strWork.Equals(Globals.StudioOnlyPrisa))
                 {
                     nActionType = Globals.ActionTypeStudioOnlyPrisa;
                 }
-                else if(strWork.Equals(Globals.StudioPrisaAndModel))
+                else if (strWork.Equals(Globals.StudioPrisaAndModel))
                 {
                     nActionType = Globals.ActionTypeStudioPrisaAndModel;
                 }
-                else if(strWork.Equals(Globals.StudioPrisaForOffer))
+                else if (strWork.Equals(Globals.StudioPrisaForOffer))
                 {
                     nActionType = Globals.ActionTypeStudioPrisaForOffer;
+                }
+                else if (strWork.Equals(Globals.StudioElse))
+                {
+                    nActionType = Globals.ActionTypeStudioElse;
                 }
             }
 

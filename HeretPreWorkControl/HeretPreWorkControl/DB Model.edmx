@@ -76,7 +76,7 @@
           <Property Name="action_type_id" Type="int" />
           <Property Name="special_approve" Type="int" />
           <Property Name="special_department_id" Type="int" />
-          <Property Name="order_number" Type="varchar" MaxLength="45" />
+          <Property Name="order_number" Type="int" />
           <Property Name="current_status_id" Type="int" Nullable="false" />
           <Property Name="dep_recieve_date" Type="date" />
           <Property Name="dep_recieve_hour" Type="time" Precision="0" />
@@ -489,7 +489,7 @@
           <Property Name="action_type_id" Type="Int32" />
           <Property Name="special_approve" Type="Int32" />
           <Property Name="special_department_id" Type="Int32" />
-          <Property Name="order_number" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="order_number" Type="Int32" />
           <Property Name="current_status_id" Type="Int32" Nullable="false" />
           <Property Name="dep_recieve_date" Type="DateTime" />
           <Property Name="dep_recieve_hour" Type="Time" />

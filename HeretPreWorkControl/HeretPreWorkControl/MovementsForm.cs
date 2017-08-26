@@ -30,12 +30,14 @@ namespace HeretPreWorkControl
             lbKadasWork.Items.Add(Globals.KadasGraphicUpdate);
             lbKadasWork.Items.Add(Globals.KadasNewPDF);
             lbKadasWork.Items.Add(Globals.KadasSunCopyNew);
+            lbKadasWork.Items.Add(Globals.KadasElse);
 
             lbStudioWork.Items.Add(Globals.StudioCutModel);
             lbStudioWork.Items.Add(Globals.StudioOnlyModel);
             lbStudioWork.Items.Add(Globals.StudioOnlyPrisa);
             lbStudioWork.Items.Add(Globals.StudioPrisaAndModel);
             lbStudioWork.Items.Add(Globals.StudioPrisaForOffer);
+            lbStudioWork.Items.Add(Globals.StudioElse);
 
             dcEnglishData.Add(Globals.SalesUserID, "Sales");
             dcEnglishData.Add(Globals.KadasUserID, "Kadas");

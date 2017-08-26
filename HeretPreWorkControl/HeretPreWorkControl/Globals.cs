@@ -46,12 +46,14 @@ namespace HeretPreWorkControl
         public const string KadasNewPDF = "עבודה חדשה ( PDF )";
         public const string KadasSunCopyNew = "עבודה חדשה ( העתק שמש )";
         public const string KadasGraphicUpdate = "עדכון גרפי";
+        public const string KadasElse = "אחר";
 
         public const string StudioOnlyPrisa = "פריסה בלבד";
         public const string StudioPrisaForOffer = "הערכת פריסה להצעת מחיר";
         public const string StudioOnlyModel = "דגם בלבד";
         public const string StudioPrisaAndModel = "פריסה ודגם";
         public const string StudioCutModel = "חיתוך דגמים";
+        public const string StudioElse = "אחר";
 
         public const string StatusActiveClient = "פעיל";
         public const string StatusBlockedClient = "אזהרת חסימה";
@@ -99,12 +101,14 @@ namespace HeretPreWorkControl
         public const int ActionTypeKadasNewPDF = 21;
         public const int ActionTypeKadasSunCopyNew = 22;
         public const int ActionTypeKadasGraphicUpdate = 23;
+        public const int ActionTypeKadasElse = 25;
 
         public const int ActionTypeStudioOnlyPrisa = 15;
         public const int ActionTypeStudioPrisaForOffer = 16;
         public const int ActionTypeStudioOnlyModel = 17;
         public const int ActionTypeStudioPrisaAndModel = 18;
         public const int ActionTypeStudioCutModel = 19;
+        public const int ActionTypeStudioElse = 24;
 
         public const int ActionTypeStudioWaitClient = 11;
         public const int ActionTypeKadasWaitClient = 12;
