@@ -53,7 +53,6 @@
             this.lblCurrentDepartment = new System.Windows.Forms.Label();
             this.tbActionType = new System.Windows.Forms.TextBox();
             this.lblActionType = new System.Windows.Forms.Label();
-            this.tbOrderNumber = new System.Windows.Forms.TextBox();
             this.lblOrderNumber = new System.Windows.Forms.Label();
             this.tbWorkStatus = new System.Windows.Forms.TextBox();
             this.lblWorkStatus = new System.Windows.Forms.Label();
@@ -65,6 +64,9 @@
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.lbStudioWork = new System.Windows.Forms.ComboBox();
             this.lbKadasWork = new System.Windows.Forms.ComboBox();
+            this.cbOrderNumbers = new System.Windows.Forms.ComboBox();
+            this.tbModelNumber = new System.Windows.Forms.TextBox();
+            this.lblModelNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSalesUpdate)).BeginInit();
@@ -362,19 +364,6 @@
             this.lblActionType.TabIndex = 67;
             this.lblActionType.Text = "סוג פעולה :";
             // 
-            // tbOrderNumber
-            // 
-            this.tbOrderNumber.BackColor = System.Drawing.SystemColors.Info;
-            this.tbOrderNumber.Enabled = false;
-            this.tbOrderNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbOrderNumber.Location = new System.Drawing.Point(965, 373);
-            this.tbOrderNumber.Margin = new System.Windows.Forms.Padding(4);
-            this.tbOrderNumber.Name = "tbOrderNumber";
-            this.tbOrderNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbOrderNumber.Size = new System.Drawing.Size(289, 37);
-            this.tbOrderNumber.TabIndex = 70;
-            this.tbOrderNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // lblOrderNumber
             // 
             this.lblOrderNumber.AutoSize = true;
@@ -382,9 +371,9 @@
             this.lblOrderNumber.Location = new System.Drawing.Point(649, 379);
             this.lblOrderNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrderNumber.Name = "lblOrderNumber";
-            this.lblOrderNumber.Size = new System.Drawing.Size(155, 27);
+            this.lblOrderNumber.Size = new System.Drawing.Size(172, 27);
             this.lblOrderNumber.TabIndex = 69;
-            this.lblOrderNumber.Text = "מספר הזמנה :";
+            this.lblOrderNumber.Text = "מספרי הזמנות :";
             // 
             // tbWorkStatus
             // 
@@ -504,12 +493,50 @@
             this.lbKadasWork.Size = new System.Drawing.Size(289, 32);
             this.lbKadasWork.TabIndex = 81;
             // 
+            // cbOrderNumbers
+            // 
+            this.cbOrderNumbers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrderNumbers.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.cbOrderNumbers.FormattingEnabled = true;
+            this.cbOrderNumbers.Location = new System.Drawing.Point(965, 375);
+            this.cbOrderNumbers.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOrderNumbers.Name = "cbOrderNumbers";
+            this.cbOrderNumbers.Size = new System.Drawing.Size(289, 32);
+            this.cbOrderNumbers.TabIndex = 82;
+            // 
+            // tbModelNumber
+            // 
+            this.tbModelNumber.BackColor = System.Drawing.SystemColors.Info;
+            this.tbModelNumber.Enabled = false;
+            this.tbModelNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbModelNumber.Location = new System.Drawing.Point(327, 464);
+            this.tbModelNumber.Margin = new System.Windows.Forms.Padding(4);
+            this.tbModelNumber.Name = "tbModelNumber";
+            this.tbModelNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbModelNumber.Size = new System.Drawing.Size(289, 37);
+            this.tbModelNumber.TabIndex = 84;
+            this.tbModelNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblModelNumber
+            // 
+            this.lblModelNumber.AutoSize = true;
+            this.lblModelNumber.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModelNumber.Location = new System.Drawing.Point(11, 470);
+            this.lblModelNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblModelNumber.Name = "lblModelNumber";
+            this.lblModelNumber.Size = new System.Drawing.Size(129, 27);
+            this.lblModelNumber.TabIndex = 83;
+            this.lblModelNumber.Text = "מספר דגם :";
+            // 
             // ViewAllOrderDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1269, 592);
+            this.Controls.Add(this.tbModelNumber);
+            this.Controls.Add(this.lblModelNumber);
+            this.Controls.Add(this.cbOrderNumbers);
             this.Controls.Add(this.lbKadasWork);
             this.Controls.Add(this.lbStudioWork);
             this.Controls.Add(this.lblSave);
@@ -520,7 +547,6 @@
             this.Controls.Add(this.lblKadasWork);
             this.Controls.Add(this.tbWorkStatus);
             this.Controls.Add(this.lblWorkStatus);
-            this.Controls.Add(this.tbOrderNumber);
             this.Controls.Add(this.lblOrderNumber);
             this.Controls.Add(this.tbActionType);
             this.Controls.Add(this.lblActionType);
@@ -592,7 +618,6 @@
         private System.Windows.Forms.Label lblCurrentDepartment;
         private System.Windows.Forms.TextBox tbActionType;
         private System.Windows.Forms.Label lblActionType;
-        private System.Windows.Forms.TextBox tbOrderNumber;
         private System.Windows.Forms.Label lblOrderNumber;
         private System.Windows.Forms.TextBox tbWorkStatus;
         private System.Windows.Forms.Label lblWorkStatus;
@@ -604,5 +629,8 @@
         private System.Windows.Forms.PictureBox btnSave;
         private System.Windows.Forms.ComboBox lbStudioWork;
         private System.Windows.Forms.ComboBox lbKadasWork;
+        private System.Windows.Forms.ComboBox cbOrderNumbers;
+        private System.Windows.Forms.TextBox tbModelNumber;
+        private System.Windows.Forms.Label lblModelNumber;
     }
 }

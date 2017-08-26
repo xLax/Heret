@@ -50,9 +50,9 @@ namespace HeretPreWorkControl
             tbPrisaNumber.Text = this.order.prisa_id;
             tbProjDesc.Text = this.order.project_desc;
             tbAmount.Text = this.order.amount + "";
-            tbOrderNumber.Text = this.order.order_number + "";
             lbStudioWork.SelectedItem = this.order.studio_work;
             lbKadasWork.SelectedItem = this.order.kadas_work;
+            tbModelNumber.Text = this.order.model_id;
 
             tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
 
@@ -75,7 +75,18 @@ namespace HeretPreWorkControl
                     {
                         tbCurrentDepartment.Text = userGroup.name;
                     }
-                    
+
+                    tbl_orders_id[] orderNumbers = context.tbl_orders_id
+                                    .Where(s => s.order_id == order.ID)
+                                                    .ToArray<tbl_orders_id>();
+
+                    if(orderNumbers != null)
+                    {
+                        for(int i = 0; i < orderNumbers.Length; i++)
+                        {
+                            cbOrderNumbers.Items.Add(orderNumbers[i].heret_order_id);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -131,6 +142,7 @@ namespace HeretPreWorkControl
             //tbSalesAgent.Enabled = this.isEnabled;
             //tbClientName.Enabled = this.isEnabled;
             tbClientNumber.Enabled = this.isEnabled;
+            tbModelNumber.Enabled = this.isEnabled;
             dtContactDate.Enabled = this.isEnabled;
             tbFilesNo.Enabled = this.isEnabled;
             tbTemplateNumber.Enabled = this.isEnabled;
@@ -148,6 +160,7 @@ namespace HeretPreWorkControl
             //tbSalesAgent.BackColor = color;
             //tbClientName.BackColor = color;
             tbClientNumber.BackColor = color;
+            tbModelNumber.BackColor = color;
             dtContactDate.BackColor = color;
             tbFilesNo.BackColor = color;
             tbTemplateNumber.BackColor = color;
@@ -177,6 +190,7 @@ namespace HeretPreWorkControl
             this.order.template_id = tbTemplateNumber.Text;
             this.order.prisa_id = tbPrisaNumber.Text;
             this.order.project_desc = tbProjDesc.Text;
+            this.order.model_id = tbModelNumber.Text;
             //this.order.order_number = tbOrderNumber.Text;
             if (lbStudioWork.SelectedItem != null)
             {
@@ -257,7 +271,7 @@ namespace HeretPreWorkControl
                                                 Entry.Property(o => o.template_id).IsModified = true;
                                                 Entry.Property(o => o.prisa_id).IsModified = true;
                                                 Entry.Property(o => o.project_desc).IsModified = true;
-                                                //Entry.Property(o => o.order_number).IsModified = true;
+                                                Entry.Property(o => o.model_id).IsModified = true;
                                                 Entry.Property(o => o.studio_work).IsModified = true;
                                                 Entry.Property(o => o.kadas_work).IsModified = true;
                                                 Entry.Property(o => o.files_number).IsModified = true;
