@@ -31,13 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertOrderIDForm));
             this.label3 = new System.Windows.Forms.Label();
             this.pbExecute = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbOrderNum = new System.Windows.Forms.TextBox();
             this.tbPanel = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(203, 159);
+            this.label3.Location = new System.Drawing.Point(203, 211);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(178, 27);
@@ -56,8 +57,8 @@
             // 
             this.pbExecute.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbExecute.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
-            this.pbExecute.Location = new System.Drawing.Point(391, 151);
-            this.pbExecute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbExecute.Location = new System.Drawing.Point(391, 203);
+            this.pbExecute.Margin = new System.Windows.Forms.Padding(4);
             this.pbExecute.Name = "pbExecute";
             this.pbExecute.Size = new System.Drawing.Size(47, 38);
             this.pbExecute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -65,22 +66,22 @@
             this.pbExecute.TabStop = false;
             this.pbExecute.Click += new System.EventHandler(this.pbExecute_Click);
             // 
-            // pictureBox1
+            // pbLogo
             // 
-            this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(233, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 62);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pbLogo.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
+            this.pbLogo.Location = new System.Drawing.Point(233, 15);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(4);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(204, 62);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLogo.TabIndex = 0;
+            this.pbLogo.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.InsertOrderNumberTitle;
             this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(207, 62);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -103,7 +104,7 @@
             this.tbOrderNum.BackColor = System.Drawing.SystemColors.Window;
             this.tbOrderNum.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbOrderNum.Location = new System.Drawing.Point(208, 101);
-            this.tbOrderNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbOrderNum.Margin = new System.Windows.Forms.Padding(4);
             this.tbOrderNum.Name = "tbOrderNum";
             this.tbOrderNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbOrderNum.Size = new System.Drawing.Size(228, 37);
@@ -114,31 +115,39 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(16, 197);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Location = new System.Drawing.Point(16, 249);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(420, 35);
             this.tbPanel.TabIndex = 20;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 155);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(421, 41);
+            this.flowLayoutPanel1.TabIndex = 21;
+            // 
             // InsertOrderIDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(453, 240);
+            this.ClientSize = new System.Drawing.Size(453, 300);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.tbOrderNum);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pbExecute);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "InsertOrderIDForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -146,7 +155,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,12 +164,13 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pbExecute;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbOrderNum;
         private System.Windows.Forms.TextBox tbPanel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
