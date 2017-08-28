@@ -89,7 +89,7 @@ namespace HeretPreWorkControl
             tbTrackBar.Value = 0;
             lblPeriod.Text = "עבודות סגורות";
 
-            this.PerformWorkersSearch();
+            // this.PerformWorkersSearch();
         }
 
         private void tbTrackBar_Scroll(object sender, EventArgs e)
@@ -298,11 +298,12 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    this.AllMyJobs = context.tbl_orders.Where( a => (( a.kadas_agent_name != null &&
-                                                                      a.kadas_agent_name == lbEmployees.SelectedItem.ToString()) ||
-                                                                    ( a.studio_agent_name != null &&
-                                                                      a.studio_agent_name == lbEmployees.SelectedItem.ToString())) &&
-                                                                      a.current_status_id == nJobStatus).ToList<tbl_orders>();
+                    this.AllMyJobs = context.tbl_orders
+                        .Where( a => (( a.kadas_agent_name != null &&
+                                        a.kadas_agent_name == lbEmployees.SelectedItem.ToString()) ||
+                                      ( a.studio_agent_name != null &&
+                                        a.studio_agent_name == lbEmployees.SelectedItem.ToString())) &&
+                                        a.current_status_id == nJobStatus).ToList<tbl_orders>();
                 }
                 catch(Exception ex){ }
             }
@@ -378,6 +379,11 @@ namespace HeretPreWorkControl
         private void dtToDate_ValueChanged(object sender, EventArgs e)
         {
             this.PerformWorkersSearch();
+        }
+
+        private void ManagerReportForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

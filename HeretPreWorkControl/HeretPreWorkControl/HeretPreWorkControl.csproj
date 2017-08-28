@@ -451,6 +451,7 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\TemplateNumberTitle.png" />
     <None Include="Resources\WatchNotesTitle.png" />
     <None Include="Resources\All Notification Icon.png" />
     <None Include="Resources\All Notification Icon Note.png" />
