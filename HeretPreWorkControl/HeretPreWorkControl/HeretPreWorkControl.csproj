@@ -241,6 +241,12 @@
     <Compile Include="tbl_user_groups.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="InsertTemplateNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertTemplateNumberForm.Designer.cs">
+      <DependentUpon>InsertTemplateNumberForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TopUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InsertOrderIDForm.resx">
       <DependentUpon>InsertOrderIDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InsertTemplateNumberForm.resx">
+      <DependentUpon>InsertTemplateNumberForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerReportForm.resx">
       <DependentUpon>ManagerReportForm.cs</DependentUpon>
