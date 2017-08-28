@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InsertTemplateNumberForm));
             this.tbPanel = new System.Windows.Forms.TextBox();
-            this.tbModelNum = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbTemplateNum = new System.Windows.Forms.TextBox();
+            this.lblTemplateNumber = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblExecute = new System.Windows.Forms.Label();
             this.pbExecute = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -54,49 +54,49 @@
             this.tbPanel.TabIndex = 34;
             this.tbPanel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tbModelNum
+            // tbTemplateNum
             // 
-            this.tbModelNum.BackColor = System.Drawing.SystemColors.Window;
-            this.tbModelNum.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbModelNum.Location = new System.Drawing.Point(144, 98);
-            this.tbModelNum.Margin = new System.Windows.Forms.Padding(4);
-            this.tbModelNum.Name = "tbModelNum";
-            this.tbModelNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbModelNum.Size = new System.Drawing.Size(313, 37);
-            this.tbModelNum.TabIndex = 33;
+            this.tbTemplateNum.BackColor = System.Drawing.SystemColors.Window;
+            this.tbTemplateNum.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbTemplateNum.Location = new System.Drawing.Point(167, 98);
+            this.tbTemplateNum.Margin = new System.Windows.Forms.Padding(4);
+            this.tbTemplateNum.Name = "tbTemplateNum";
+            this.tbTemplateNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbTemplateNum.Size = new System.Drawing.Size(290, 37);
+            this.tbTemplateNum.TabIndex = 33;
             // 
-            // label1
+            // lblTemplateNumber
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 105);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 27);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "מספר דגם:";
+            this.lblTemplateNumber.AutoSize = true;
+            this.lblTemplateNumber.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemplateNumber.Location = new System.Drawing.Point(13, 105);
+            this.lblTemplateNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTemplateNumber.Name = "lblTemplateNumber";
+            this.lblTemplateNumber.Size = new System.Drawing.Size(146, 27);
+            this.lblTemplateNumber.TabIndex = 32;
+            this.lblTemplateNumber.Text = "מספר תבנית:";
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.EnterModelTitle;
+            this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.TemplateNumberTitle;
             this.pictureBox2.Location = new System.Drawing.Point(13, 12);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(207, 62);
+            this.pictureBox2.Size = new System.Drawing.Size(223, 62);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 31;
             this.pictureBox2.TabStop = false;
             // 
-            // label3
+            // lblExecute
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(253, 155);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 27);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "הזן מספר דגם";
+            this.lblExecute.AutoSize = true;
+            this.lblExecute.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExecute.Location = new System.Drawing.Point(229, 155);
+            this.lblExecute.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExecute.Name = "lblExecute";
+            this.lblExecute.Size = new System.Drawing.Size(175, 27);
+            this.lblExecute.TabIndex = 30;
+            this.lblExecute.Text = "הזן מספר תבנית";
             // 
             // pbExecute
             // 
@@ -109,6 +109,7 @@
             this.pbExecute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbExecute.TabIndex = 29;
             this.pbExecute.TabStop = false;
+            this.pbExecute.Click += new System.EventHandler(this.pbExecute_Click);
             // 
             // pictureBox1
             // 
@@ -128,16 +129,16 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(472, 240);
             this.Controls.Add(this.tbPanel);
-            this.Controls.Add(this.tbModelNum);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbTemplateNum);
+            this.Controls.Add(this.lblTemplateNumber);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblExecute);
             this.Controls.Add(this.pbExecute);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "InsertTemplateNumberForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -155,10 +156,10 @@
         #endregion
 
         private System.Windows.Forms.TextBox tbPanel;
-        private System.Windows.Forms.TextBox tbModelNum;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbTemplateNum;
+        private System.Windows.Forms.Label lblTemplateNumber;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblExecute;
         private System.Windows.Forms.PictureBox pbExecute;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
