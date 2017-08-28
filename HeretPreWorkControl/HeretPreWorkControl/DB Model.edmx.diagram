@@ -33,6 +33,7 @@
         <AssociationConnector Association="DB_Model.ord_id" />
         <EntityTypeShape EntityType="DB_Model.tbl_orders_id" Width="1.5" PointX="8.25" PointY="10.5" />
         <AssociationConnector Association="DB_Model.orders" />
+        <AssociationConnector Association="DB_Model.dept_id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

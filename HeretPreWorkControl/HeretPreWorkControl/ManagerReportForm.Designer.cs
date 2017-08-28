@@ -49,6 +49,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbDepartment = new System.Windows.Forms.ComboBox();
             this.TabEmployees = new System.Windows.Forms.TabPage();
+            this.dtToDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
+            this.lblFromDate = new System.Windows.Forms.Label();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
             this.lblEmployee = new System.Windows.Forms.Label();
             this.lbEmployees = new System.Windows.Forms.ComboBox();
@@ -57,10 +61,8 @@
             this.tbTrackBar = new System.Windows.Forms.TrackBar();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dtToDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtFromDate = new System.Windows.Forms.DateTimePicker();
-            this.lblFromDate = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbStation = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
             this.tabControl.SuspendLayout();
             this.TabStation.SuspendLayout();
@@ -98,6 +100,8 @@
             // 
             // TabStation
             // 
+            this.TabStation.Controls.Add(this.label5);
+            this.TabStation.Controls.Add(this.lbStation);
             this.TabStation.Controls.Add(this.chartStations);
             this.TabStation.Controls.Add(this.dtTo);
             this.TabStation.Controls.Add(this.label2);
@@ -148,6 +152,7 @@
             this.dtTo.Size = new System.Drawing.Size(182, 26);
             this.dtTo.TabIndex = 58;
             this.dtTo.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtTo.ValueChanged += new System.EventHandler(this.dtTo_ValueChanged);
             // 
             // label2
             // 
@@ -210,6 +215,7 @@
             this.lbDepartment.Name = "lbDepartment";
             this.lbDepartment.Size = new System.Drawing.Size(180, 28);
             this.lbDepartment.TabIndex = 52;
+            this.lbDepartment.SelectedIndexChanged += new System.EventHandler(this.lbDepartment_SelectedIndexChanged);
             // 
             // TabEmployees
             // 
@@ -230,6 +236,46 @@
             this.TabEmployees.TabIndex = 1;
             this.TabEmployees.Text = "דוח עובדים";
             this.TabEmployees.UseVisualStyleBackColor = true;
+            // 
+            // dtToDate
+            // 
+            this.dtToDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.dtToDate.Location = new System.Drawing.Point(105, 18);
+            this.dtToDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtToDate.Name = "dtToDate";
+            this.dtToDate.Size = new System.Drawing.Size(181, 26);
+            this.dtToDate.TabIndex = 57;
+            this.dtToDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(303, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 20);
+            this.label1.TabIndex = 56;
+            this.label1.Text = "עד תאריך:";
+            // 
+            // dtFromDate
+            // 
+            this.dtFromDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.dtFromDate.Location = new System.Drawing.Point(434, 19);
+            this.dtFromDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtFromDate.Name = "dtFromDate";
+            this.dtFromDate.Size = new System.Drawing.Size(180, 26);
+            this.dtFromDate.TabIndex = 55;
+            this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            // 
+            // lblFromDate
+            // 
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Location = new System.Drawing.Point(631, 24);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(79, 20);
+            this.lblFromDate.TabIndex = 54;
+            this.lblFromDate.Text = "מתאריך:";
             // 
             // pbRefresh
             // 
@@ -295,7 +341,7 @@
             this.lblPeriod.AutoSize = true;
             this.lblPeriod.BackColor = System.Drawing.Color.Transparent;
             this.lblPeriod.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPeriod.Location = new System.Drawing.Point(326, 63);
+            this.lblPeriod.Location = new System.Drawing.Point(303, 63);
             this.lblPeriod.Name = "lblPeriod";
             this.lblPeriod.Size = new System.Drawing.Size(68, 20);
             this.lblPeriod.TabIndex = 41;
@@ -304,7 +350,7 @@
             // tbTrackBar
             // 
             this.tbTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.tbTrackBar.Location = new System.Drawing.Point(105, 60);
+            this.tbTrackBar.Location = new System.Drawing.Point(82, 60);
             this.tbTrackBar.Maximum = 1;
             this.tbTrackBar.Name = "tbTrackBar";
             this.tbTrackBar.Size = new System.Drawing.Size(215, 45);
@@ -334,45 +380,26 @@
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
-            // dtToDate
+            // label5
             // 
-            this.dtToDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.dtToDate.Location = new System.Drawing.Point(105, 18);
-            this.dtToDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
-            this.dtToDate.Name = "dtToDate";
-            this.dtToDate.Size = new System.Drawing.Size(181, 26);
-            this.dtToDate.TabIndex = 57;
-            this.dtToDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(333, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 61;
+            this.label5.Text = "תחנה:";
             // 
-            // label1
+            // lbStation
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(303, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 20);
-            this.label1.TabIndex = 56;
-            this.label1.Text = "עד תאריך:";
-            // 
-            // dtFromDate
-            // 
-            this.dtFromDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.dtFromDate.Location = new System.Drawing.Point(434, 19);
-            this.dtFromDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
-            this.dtFromDate.Name = "dtFromDate";
-            this.dtFromDate.Size = new System.Drawing.Size(180, 26);
-            this.dtFromDate.TabIndex = 55;
-            this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
-            // 
-            // lblFromDate
-            // 
-            this.lblFromDate.AutoSize = true;
-            this.lblFromDate.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFromDate.Location = new System.Drawing.Point(631, 24);
-            this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(79, 20);
-            this.lblFromDate.TabIndex = 54;
-            this.lblFromDate.Text = "מתאריך:";
+            this.lbStation.BackColor = System.Drawing.SystemColors.Window;
+            this.lbStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbStation.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbStation.FormattingEnabled = true;
+            this.lbStation.Location = new System.Drawing.Point(28, 53);
+            this.lbStation.Name = "lbStation";
+            this.lbStation.Size = new System.Drawing.Size(299, 28);
+            this.lbStation.TabIndex = 60;
             // 
             // ManagerReportForm
             // 
@@ -436,5 +463,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.Label lblFromDate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox lbStation;
     }
 }

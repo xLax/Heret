@@ -28,6 +28,7 @@ namespace HeretPreWorkControl
         public string name { get; set; }
         public int sla_hours { get; set; }
         public string desc { get; set; }
+        public int department_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_action_to_dept> tbl_action_to_dept { get; set; }
@@ -39,5 +40,6 @@ namespace HeretPreWorkControl
         public virtual ICollection<tbl_orders> tbl_orders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_sla_data> tbl_sla_data { get; set; }
+        public virtual tbl_user_groups tbl_user_groups { get; set; }
     }
 }

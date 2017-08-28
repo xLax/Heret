@@ -99,6 +99,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="sla_hours" Type="int" Nullable="false" />
           <Property Name="desc" Type="varchar" MaxLength="45" Nullable="false" />
@@ -214,6 +215,18 @@
             </Principal>
             <Dependent Role="tbl_action_to_dept">
               <PropertyRef Name="recieved_department_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dept_id">
+          <End Role="tbl_user_groups" Type="Self.tbl_user_groups" Multiplicity="1" />
+          <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_actions">
+              <PropertyRef Name="department_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -377,6 +390,10 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_action_to_dept" EntitySet="tbl_action_to_dept" />
           </AssociationSet>
+          <AssociationSet Name="dept_id" Association="Self.dept_id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+          </AssociationSet>
           <AssociationSet Name="Id" Association="Self.Id">
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_users" EntitySet="tbl_users" />
@@ -522,6 +539,8 @@
           <NavigationProperty Name="tbl_orders" Relationship="Self.action_type" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_orders1" Relationship="Self.special_action_type" FromRole="tbl_sla_actions" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_sla_data" Relationship="Self.sla_id" FromRole="tbl_sla_actions" ToRole="tbl_sla_data" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_user_groups" Relationship="DB_Model.dept_id" FromRole="tbl_sla_actions" ToRole="tbl_user_groups" />
         </EntityType>
         <EntityType Name="tbl_sla_data">
           <Key>
@@ -551,6 +570,7 @@
           <NavigationProperty Name="tbl_orders1" Relationship="Self.special_department" FromRole="tbl_user_groups" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_users" Relationship="Self.Id" FromRole="tbl_user_groups" ToRole="tbl_users" />
           <NavigationProperty Name="tbl_notifications" Relationship="DB_Model.department_id" FromRole="tbl_user_groups" ToRole="tbl_notifications" />
+          <NavigationProperty Name="tbl_sla_actions" Relationship="DB_Model.dept_id" FromRole="tbl_user_groups" ToRole="tbl_sla_actions" />
         </EntityType>
         <EntityType Name="tbl_users">
           <Key>
@@ -812,6 +832,10 @@
             <End Role="tbl_orders" EntitySet="tbl_orders" />
             <End Role="tbl_orders_id" EntitySet="tbl_orders_id" />
           </AssociationSet>
+          <AssociationSet Name="dept_id" Association="DB_Model.dept_id">
+            <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
+            <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_notifications">
           <Key>
@@ -866,6 +890,18 @@
             </Principal>
             <Dependent Role="tbl_orders_id">
               <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dept_id">
+          <End Type="DB_Model.tbl_user_groups" Role="tbl_user_groups" Multiplicity="1" />
+          <End Type="DB_Model.tbl_sla_actions" Role="tbl_sla_actions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user_groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_actions">
+              <PropertyRef Name="department_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -955,6 +991,7 @@
           <EntitySetMapping Name="tbl_sla_actions">
             <EntityTypeMapping TypeName="DB_Model.tbl_sla_actions">
               <MappingFragment StoreEntitySet="tbl_sla_actions">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="sla_hours" ColumnName="sla_hours" />

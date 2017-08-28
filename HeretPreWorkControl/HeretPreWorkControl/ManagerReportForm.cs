@@ -18,17 +18,27 @@ namespace HeretPreWorkControl
         public int lateWorks;
     }
 
+    struct StationData
+    {
+        public DateTime Date;
+        public string DayName;
+        //public int 
+    }
+
+
     public partial class ManagerReportForm : Form
     {
         private List<tbl_employees> allEmployees;
         private Dictionary<int, string> dcEmployees;
         private Dictionary<DateTime, WorkerData> dcWorkerData = new Dictionary<DateTime, WorkerData>();
+        private Dictionary<int, string> dcStationData = new Dictionary<int, string>();
 
         public List<tbl_orders> AllMyJobs;
 
         public ManagerReportForm()
         {
             Utilities.GetAllSlaData();
+            Utilities.GetAllActionsList();
 
             InitializeComponent();
 
@@ -56,7 +66,14 @@ namespace HeretPreWorkControl
                 }
             }
 
-            if(allEmployees.Count > 0)
+            if(lbDepartment.Items.Count > 0)
+            {
+                lbDepartment.SelectedIndex = 0;
+            }
+
+            PopulateStationList();
+
+            if (allEmployees.Count > 0)
             {
                 lbEmployees.SelectedIndex = 0;
             }
@@ -90,6 +107,29 @@ namespace HeretPreWorkControl
             lblPeriod.Text = "עבודות סגורות";
 
             // this.PerformWorkersSearch();
+        }
+
+        private void PopulateStationList()
+        {
+            lbStation.Items.Clear();
+            dcStationData.Clear();
+
+            tbl_user_groups currGroup = Globals.AllUserGroups
+                .Where(a => a.name.Equals(lbDepartment.SelectedItem.ToString())).Single<tbl_user_groups>();
+
+            foreach (tbl_sla_actions action in Globals.AllActions)
+            {
+                if (action.department_id == currGroup.ID)
+                {
+                    lbStation.Items.Add(action.desc);
+                    dcStationData.Add(action.ID, action.desc);
+                }
+            }
+            
+            if(lbStation.Items.Count > 0)
+            {
+                lbStation.SelectedIndex = 0;
+            }
         }
 
         private void tbTrackBar_Scroll(object sender, EventArgs e)
@@ -384,6 +424,21 @@ namespace HeretPreWorkControl
         private void ManagerReportForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dtTo_ValueChanged(object sender, EventArgs e)
+        {
+            this.PerformStationsSearch();
+        }
+
+        private void PerformStationsSearch()
+        {
+            
+        }
+
+        private void lbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateStationList();
         }
     }
 
