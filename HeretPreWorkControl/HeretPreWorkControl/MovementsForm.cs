@@ -18,13 +18,16 @@ namespace HeretPreWorkControl
         private Dictionary<int, string> dcAllData = new Dictionary<int, string>();
         private Dictionary<int, string> dcEnglishData = new Dictionary<int, string>();
 
+        private Boolean isNewOrder;
         private Boolean isSpecial = false;
         private int nActionTypeID = 0;
         private int nSelectedDepartID = 0;
 
-        public MovementsForm(List<tbl_action_to_dept> lstActionsToDept, tbl_orders SelectedOrder, int nActionType)
+        public MovementsForm(List<tbl_action_to_dept> lstActionsToDept, tbl_orders SelectedOrder, int nActionType, Boolean isNew)
         {
             InitializeComponent();
+
+            this.isNewOrder = isNew;
 
             lbKadasWork.Items.Add(Globals.KadasApprovePDF);
             lbKadasWork.Items.Add(Globals.KadasGraphicUpdate);
@@ -235,24 +238,35 @@ namespace HeretPreWorkControl
                     {
                         using (var context = new DB_Entities())
                         {
-                            context.tbl_orders.Attach(currentOrder);
-                            var Entry = context.Entry(currentOrder);
+                            if(this.isNewOrder)
+                            {
+                                context.tbl_orders.Add(currentOrder);
+                                context.SaveChanges();
 
-                            Entry.Property(o => o.action_type_id).IsModified = true;
-                            Entry.Property(o => o.curr_departnent_id).IsModified = true;
-                            Entry.Property(o => o.dep_recieve_date).IsModified = true;
-                            Entry.Property(o => o.dep_recieve_hour).IsModified = true;
+                                tbPanel.Text = "יצירת העבודה התבצעה בהצלחה";
+                            }
+                            else
+                            {
+                                context.tbl_orders.Attach(currentOrder);
+                                var Entry = context.Entry(currentOrder);
 
-                            Entry.Property(o => o.special_action_type_id).IsModified = true;
-                            Entry.Property(o => o.special_department_id).IsModified = true;
-                            Entry.Property(o => o.special_recieved_date).IsModified = true;
-                            Entry.Property(o => o.special_recieved_hour).IsModified = true;
+                                Entry.Property(o => o.action_type_id).IsModified = true;
+                                Entry.Property(o => o.curr_departnent_id).IsModified = true;
+                                Entry.Property(o => o.dep_recieve_date).IsModified = true;
+                                Entry.Property(o => o.dep_recieve_hour).IsModified = true;
 
-                            Entry.Property(o => o.kadas_work).IsModified = true;
-                            Entry.Property(o => o.studio_work).IsModified = true;
-                            context.SaveChanges();
+                                Entry.Property(o => o.special_action_type_id).IsModified = true;
+                                Entry.Property(o => o.special_department_id).IsModified = true;
+                                Entry.Property(o => o.special_recieved_date).IsModified = true;
+                                Entry.Property(o => o.special_recieved_hour).IsModified = true;
 
-                            tbPanel.Text = "העברת העבודה התבצעה בהצלחה";
+                                Entry.Property(o => o.kadas_work).IsModified = true;
+                                Entry.Property(o => o.studio_work).IsModified = true;
+
+                                context.SaveChanges();
+
+                                tbPanel.Text = "העברת העבודה התבצעה בהצלחה";
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -376,6 +390,10 @@ namespace HeretPreWorkControl
                     }
                 }
             }      
+            else
+            {
+                this.nSelectedDepartID = 0;
+            }
         }
     }
 }

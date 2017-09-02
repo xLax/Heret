@@ -20,11 +20,10 @@ namespace HeretPreWorkControl
 
     struct StationData
     {
-        public DateTime Date;
-        public string DayName;
-        //public int 
+        public string OrderID;
+        public double dDaysInTime;
+        public double dDaysLate;
     }
-
 
     public partial class ManagerReportForm : Form
     {
@@ -32,6 +31,10 @@ namespace HeretPreWorkControl
         private Dictionary<int, string> dcEmployees;
         private Dictionary<DateTime, WorkerData> dcWorkerData = new Dictionary<DateTime, WorkerData>();
         private Dictionary<int, string> dcStationData = new Dictionary<int, string>();
+        private tbl_sla_actions actionToSearch = new tbl_sla_actions();
+
+        private DateTime dtToDate = new DateTime();
+        private DateTime OriginalValue = new DateTime();
 
         public List<tbl_orders> AllMyJobs;
 
@@ -91,11 +94,11 @@ namespace HeretPreWorkControl
             dtFrom.MinDate = DateTime.Today.Date.AddYears(-1);
             dtFrom.Value = tempLastWeekDate.StartOfWeek(DayOfWeek.Sunday);
 
-            dtToDate.Format = DateTimePickerFormat.Custom;
-            dtToDate.CustomFormat = "dd/MM/yyyy";
-            dtToDate.MaxDate = DateTime.Today;
-            dtToDate.MinDate = DateTime.Today.Date.AddYears(-1);
-            dtToDate.Value = dtFromDate.Value.AddDays(6);
+            //dtToDate.Format = DateTimePickerFormat.Custom;
+            //dtToDate.CustomFormat = "dd/MM/yyyy";
+            //dtToDate.MaxDate = DateTime.Today;
+            //dtToDate.MinDate = DateTime.Today.Date.AddYears(-1);
+            //dtToDate.Value = dtFromDate.Value.AddDays(6);
 
             dtTo.Format = DateTimePickerFormat.Custom;
             dtTo.CustomFormat = "dd/MM/yyyy";
@@ -121,8 +124,11 @@ namespace HeretPreWorkControl
             {
                 if (action.department_id == currGroup.ID)
                 {
-                    lbStation.Items.Add(action.desc);
-                    dcStationData.Add(action.ID, action.desc);
+                    if(action.ID != 0)
+                    {
+                        lbStation.Items.Add(action.desc);
+                        dcStationData.Add(action.ID, action.desc);
+                    }
                 }
             }
             
@@ -148,6 +154,8 @@ namespace HeretPreWorkControl
 
         private void PerformWorkersSearch()
         {
+            this.OriginalValue = dtFromDate.Value;
+
             List<WorkerData> lstToChart = new List<WorkerData>();
 
             chartWorkers.Series["בזמן"].Points.Clear();
@@ -187,20 +195,24 @@ namespace HeretPreWorkControl
             List<WorkerData> lstToReturn = new List<WorkerData>();
 
             // Search Calender Week
-            if ((dtToDate.Value - dtFromDate.Value).TotalDays == 6)
+            if (rbWeek.Checked)
             {
+                tbPanel.Text = "";
                 this.AllMyJobs = new List<tbl_orders>();
                 lstToReturn = this.SearchWeek(lstSlaData, nJobStatus);
             }
             
             // Search Calender Month
-            else if ((dtToDate.Value - dtFromDate.Value).TotalDays > 27 &&
-                     (dtToDate.Value - dtFromDate.Value).TotalDays < 32 &&
-                      dtFromDate.Value.Day == 1)
+            else if (rbMonth.Checked &&
+                     this.OriginalValue.Day == 1)
             {
+                tbPanel.Text = "";
                 this.AllMyJobs = new List<tbl_orders>();
 
-                DateTime OriginalValue = this.dtFromDate.Value;
+                // Gets the last date of the month
+                dtToDate = new DateTime(dtFromDate.Value.Year,
+                                        this.dtFromDate.Value.Month,
+                                        DateTime.DaysInMonth(dtFromDate.Value.Year, this.dtFromDate.Value.Month));
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -218,12 +230,12 @@ namespace HeretPreWorkControl
 
                     lstToReturn.Add(currWorkerData);
 
-                    this.dtFromDate.Value = this.dtFromDate.Value.AddDays(7);
+                    this.OriginalValue = this.OriginalValue.AddDays(7);
                 }
 
-                if (this.dtFromDate.Value < this.dtToDate.Value)
+                if (this.dtFromDate.Value < this.dtToDate)
                 {
-                    int nDaysDifference = int.Parse((this.dtToDate.Value - this.dtFromDate.Value).TotalDays.ToString());
+                    int nDaysDifference = int.Parse((this.dtToDate - this.dtFromDate.Value).TotalDays.ToString());
                     List<WorkerData> lstCalculatedList = new List<WorkerData>();
 
                     int nLateWorks = 0, nWorksInTime = 0;
@@ -233,7 +245,7 @@ namespace HeretPreWorkControl
                     {
                         if (i == 0)
                         {
-                            strDayName += " " + Utilities.GetDateInNormalFormat(this.dtFromDate.Value);
+                            strDayName += " " + Utilities.GetDateInNormalFormat(this.OriginalValue);
                         }
 
                         foreach (tbl_sla_data slaData in lstSlaData)
@@ -270,13 +282,16 @@ namespace HeretPreWorkControl
                         workInProcess = nWorksInTime,
                     });
                 }
-
-                this.dtFromDate.Value = OriginalValue;
+            }
+            else
+            {
+                tbPanel.Text = "עליך לבחור את היום הראשון בחודש על מנת לחפש חודש קלנדרי";
             }
 
 
             return lstToReturn;
         }
+
 
         private List<WorkerData> SearchWeek(List<tbl_sla_data> lstSlaData, int nJobStatus)
         {
@@ -291,7 +306,7 @@ namespace HeretPreWorkControl
             {
                 WorkerData currWorkerData = new WorkerData();
 
-                currWorkerData.Date = this.dtFromDate.Value.AddDays(i);
+                currWorkerData.Date = OriginalValue.AddDays(i);
                 currWorkerData.DayName = this.GetDayNameFormDate(currWorkerData.Date);
                 currWorkerData.DayName += " " + Utilities.GetDateInNormalFormat(currWorkerData.Date);
 
@@ -309,7 +324,7 @@ namespace HeretPreWorkControl
                         {
                             if (slaData.status_id == Globals.SlaLate)
                             {
-                                if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, dtFromDate.Value.AddDays(i))) //this.dateToSearch.AddDays(i)))
+                                if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, OriginalValue.AddDays(i))) //this.dateToSearch.AddDays(i)))
                                 {
                                     currWorkerData.workInProcess++;
                                 }
@@ -340,9 +355,9 @@ namespace HeretPreWorkControl
                 {
                     this.AllMyJobs = context.tbl_orders
                         .Where( a => (( a.kadas_agent_name != null &&
-                                        a.kadas_agent_name == lbEmployees.SelectedItem.ToString()) ||
+                                        a.kadas_agent_name.Equals(lbEmployees.SelectedItem.ToString())) ||
                                       ( a.studio_agent_name != null &&
-                                        a.studio_agent_name == lbEmployees.SelectedItem.ToString())) &&
+                                        a.studio_agent_name.Equals(lbEmployees.SelectedItem.ToString()))) &&
                                         a.current_status_id == nJobStatus).ToList<tbl_orders>();
                 }
                 catch(Exception ex){ }
@@ -433,12 +448,135 @@ namespace HeretPreWorkControl
 
         private void PerformStationsSearch()
         {
-            
+            if(this.actionToSearch == null)
+            {
+                tbPanel.Text = "אנא בחר תחנה לחיפוש";
+            }
+            else
+            {
+                chartStations.Series["בזמן"].Points.Clear();
+                chartStations.Series["מאחר"].Points.Clear();
+
+                List<tbl_sla_data> lstSlaData = Globals.AllSlaData
+                    .Where(a => a.sla_id == this.actionToSearch.ID &&
+                                a.end_date >= this.dtFrom.Value).ToList<tbl_sla_data>();
+
+                IEnumerable<tbl_sla_data> SortedSlaData = lstSlaData.OrderBy(a => a.order_id);
+
+                if(lstSlaData.Count > 0)
+                {
+                    int nPrevOrderID = SortedSlaData.First<tbl_sla_data>().order_id, nCurrOrderID = 0;
+                    double dOrderSumLate = 0, dOrderSumInTime = 0;
+
+                    List<StationData> lstToChart = new List<StationData>();
+                    StationData currStationData = new StationData();
+
+                    foreach (var slaData in SortedSlaData)
+                    {
+                        nCurrOrderID = slaData.order_id;
+
+                        if (nCurrOrderID == nPrevOrderID)
+                        {
+                            if (slaData.status_id == Globals.SlaLate)
+                            {
+                                dOrderSumLate += (slaData.end_date - slaData.begin_date).TotalDays + 1;
+                            }
+                            else if (slaData.status_id == Globals.SlaInTime)
+                            {
+                                dOrderSumInTime += (slaData.end_date - slaData.begin_date).TotalDays + 1;
+                            }
+                        }
+                        else
+                        {
+                            currStationData.OrderID = "מס\"ד" + nPrevOrderID.ToString();
+                            currStationData.dDaysInTime = dOrderSumInTime;
+                            currStationData.dDaysLate = dOrderSumLate;
+
+                            if (slaData.status_id == Globals.SlaLate)
+                            {
+                                dOrderSumLate = (slaData.end_date - slaData.begin_date).TotalDays + 1;
+                            }
+                            else if (slaData.status_id == Globals.SlaInTime)
+                            {
+                                dOrderSumInTime = (slaData.end_date - slaData.begin_date).TotalDays + 1;
+                            }
+
+                            lstToChart.Add(currStationData);
+
+                            currStationData = new StationData();
+                        }
+                    }
+
+                    currStationData = new StationData();
+
+                    currStationData.OrderID = "מס\"ד" + nCurrOrderID.ToString();
+                    currStationData.dDaysInTime = dOrderSumInTime;
+                    currStationData.dDaysLate = dOrderSumLate;
+
+                    lstToChart.Add(currStationData);
+
+                    foreach (var row in lstToChart)
+                    {
+                        chartStations.Series["בזמן"].Points.AddXY(row.OrderID, row.dDaysInTime);
+                        chartStations.Series["מאחר"].Points.AddXY(row.OrderID, row.dDaysLate);
+                    }
+                }
+            }
         }
 
         private void lbDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateStationList();
+            this.PopulateStationList();
+        }
+
+        private void lbStation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int nSelectedActionTypeID = 0;
+
+            foreach (var dcItem in dcStationData)
+            {
+                if(dcItem.Value.Equals(lbStation.SelectedItem.ToString()))
+                {
+                    nSelectedActionTypeID = dcItem.Key;
+
+                    continue;
+                }
+            }
+
+            if(nSelectedActionTypeID == 0)
+            {
+                tbPanel.Text = "שגיאה לא ידועה, אנא התייעץ עם מפתחי המערכת.";
+            }
+            else
+            {
+                this.actionToSearch = Globals.AllActions
+                    .Where(a => a.ID == nSelectedActionTypeID).Single<tbl_sla_actions>();
+
+                this.PerformStationsSearch();
+            }
+        }
+
+        private void rbWeek_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbWeek.Checked)
+            {
+                rbMonth.Checked = false;
+            }
+
+            this.PerformWorkersSearch();
+        }
+
+        private void rbMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbMonth.Checked)
+            {
+                rbWeek.Checked = false;
+            }
+        }
+
+        private void dtFromDate_ValueChanged(object sender, EventArgs e)
+        {
+            this.PerformWorkersSearch();
         }
     }
 

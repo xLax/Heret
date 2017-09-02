@@ -40,6 +40,8 @@
             this.pbHeret = new System.Windows.Forms.PictureBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.TabStation = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbStation = new System.Windows.Forms.ComboBox();
             this.chartStations = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dtTo = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,8 +51,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbDepartment = new System.Windows.Forms.ComboBox();
             this.TabEmployees = new System.Windows.Forms.TabPage();
-            this.dtToDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
             this.dtFromDate = new System.Windows.Forms.DateTimePicker();
             this.lblFromDate = new System.Windows.Forms.Label();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
@@ -61,8 +61,8 @@
             this.tbTrackBar = new System.Windows.Forms.TrackBar();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbStation = new System.Windows.Forms.ComboBox();
+            this.rbMonth = new System.Windows.Forms.RadioButton();
+            this.rbWeek = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
             this.tabControl.SuspendLayout();
             this.TabStation.SuspendLayout();
@@ -117,6 +117,28 @@
             this.TabStation.TabIndex = 0;
             this.TabStation.Text = "דוח תחנות";
             this.TabStation.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(333, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 61;
+            this.label5.Text = "תחנה:";
+            // 
+            // lbStation
+            // 
+            this.lbStation.BackColor = System.Drawing.SystemColors.Window;
+            this.lbStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbStation.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbStation.FormattingEnabled = true;
+            this.lbStation.Location = new System.Drawing.Point(28, 53);
+            this.lbStation.Name = "lbStation";
+            this.lbStation.Size = new System.Drawing.Size(299, 28);
+            this.lbStation.TabIndex = 60;
+            this.lbStation.SelectedIndexChanged += new System.EventHandler(this.lbStation_SelectedIndexChanged);
             // 
             // chartStations
             // 
@@ -219,8 +241,8 @@
             // 
             // TabEmployees
             // 
-            this.TabEmployees.Controls.Add(this.dtToDate);
-            this.TabEmployees.Controls.Add(this.label1);
+            this.TabEmployees.Controls.Add(this.rbWeek);
+            this.TabEmployees.Controls.Add(this.rbMonth);
             this.TabEmployees.Controls.Add(this.dtFromDate);
             this.TabEmployees.Controls.Add(this.lblFromDate);
             this.TabEmployees.Controls.Add(this.pbRefresh);
@@ -237,26 +259,6 @@
             this.TabEmployees.Text = "דוח עובדים";
             this.TabEmployees.UseVisualStyleBackColor = true;
             // 
-            // dtToDate
-            // 
-            this.dtToDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.dtToDate.Location = new System.Drawing.Point(105, 18);
-            this.dtToDate.MaxDate = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
-            this.dtToDate.Name = "dtToDate";
-            this.dtToDate.Size = new System.Drawing.Size(181, 26);
-            this.dtToDate.TabIndex = 57;
-            this.dtToDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(303, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 20);
-            this.label1.TabIndex = 56;
-            this.label1.Text = "עד תאריך:";
-            // 
             // dtFromDate
             // 
             this.dtFromDate.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
@@ -266,6 +268,7 @@
             this.dtFromDate.Size = new System.Drawing.Size(180, 26);
             this.dtFromDate.TabIndex = 55;
             this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
+            this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
             // 
             // lblFromDate
             // 
@@ -380,26 +383,29 @@
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
-            // label5
+            // rbMonth
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(333, 56);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 20);
-            this.label5.TabIndex = 61;
-            this.label5.Text = "תחנה:";
+            this.rbMonth.AutoSize = true;
+            this.rbMonth.Location = new System.Drawing.Point(194, 19);
+            this.rbMonth.Name = "rbMonth";
+            this.rbMonth.Size = new System.Drawing.Size(65, 23);
+            this.rbMonth.TabIndex = 56;
+            this.rbMonth.Text = "חודש";
+            this.rbMonth.UseVisualStyleBackColor = true;
+            this.rbMonth.CheckedChanged += new System.EventHandler(this.rbMonth_CheckedChanged);
             // 
-            // lbStation
+            // rbWeek
             // 
-            this.lbStation.BackColor = System.Drawing.SystemColors.Window;
-            this.lbStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lbStation.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbStation.FormattingEnabled = true;
-            this.lbStation.Location = new System.Drawing.Point(28, 53);
-            this.lbStation.Name = "lbStation";
-            this.lbStation.Size = new System.Drawing.Size(299, 28);
-            this.lbStation.TabIndex = 60;
+            this.rbWeek.AutoSize = true;
+            this.rbWeek.Checked = true;
+            this.rbWeek.Location = new System.Drawing.Point(305, 19);
+            this.rbWeek.Name = "rbWeek";
+            this.rbWeek.Size = new System.Drawing.Size(62, 23);
+            this.rbWeek.TabIndex = 57;
+            this.rbWeek.TabStop = true;
+            this.rbWeek.Text = "שבוע";
+            this.rbWeek.UseVisualStyleBackColor = true;
+            this.rbWeek.CheckedChanged += new System.EventHandler(this.rbWeek_CheckedChanged);
             // 
             // ManagerReportForm
             // 
@@ -459,11 +465,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox lbDepartment;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartStations;
-        private System.Windows.Forms.DateTimePicker dtToDate;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.Label lblFromDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox lbStation;
+        private System.Windows.Forms.RadioButton rbWeek;
+        private System.Windows.Forms.RadioButton rbMonth;
     }
 }

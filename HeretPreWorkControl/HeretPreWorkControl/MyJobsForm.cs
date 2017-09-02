@@ -372,6 +372,8 @@ namespace HeretPreWorkControl
 
                             if (result == DialogResult.Yes)
                             {
+                                new InsertTemplateNumberForm(SelectedOrder).ShowDialog();
+
                                 if (Utilities.TransferJobAndActionToNext(SelectedOrder))
                                 {
                                     tbPanel.Text = "עבודה בוצעה בהצלחה ! לנתונים עדכניים לחץ על רענון";
@@ -519,7 +521,7 @@ namespace HeretPreWorkControl
                     else if(lstActionsToDept.Count > 1)
                     {
                         // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                        new MovementsForm(lstActionsToDept, SelectedOrder, nActionTypeID).ShowDialog();
+                        new MovementsForm(lstActionsToDept, SelectedOrder, nActionTypeID, false).ShowDialog();
 
                         if(MyJobsForm.isJobSucceeded &&
                            nSlaStatusID != 0)

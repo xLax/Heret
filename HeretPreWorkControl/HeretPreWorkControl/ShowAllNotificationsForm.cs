@@ -16,11 +16,21 @@ namespace HeretPreWorkControl
         {
             InitializeComponent();
 
-            foreach (string Note in Globals.lstAllNotifications)
+            if (Globals.lstAllNotifications == null)
             {
-                ListViewItem currItem = new ListViewItem(Note);
+                Globals.lstAllNotifications = new List<string>();
+                tbPanel.Text = "אין התראות חדשות";
+            }
+            else
+            {
+                tbPanel.Text = "";
 
-                lvListView.Items.Add(currItem);
+                foreach (string Note in Globals.lstAllNotifications)
+                {
+                    ListViewItem currItem = new ListViewItem(Note);
+
+                    lvListView.Items.Add(currItem);
+                }
             }
         }
 

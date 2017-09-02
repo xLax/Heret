@@ -67,7 +67,7 @@ namespace HeretPreWorkControl
                         .Where(ad => ad.action_ID == 7)
                                     .ToList<tbl_action_to_dept>();
 
-            new MovementsForm(lstActionsToDept, SelectedOrder, 7).Show();
+            new MovementsForm(lstActionsToDept, SelectedOrder, 7, false).ShowDialog();
         }
 
         private tbl_orders GetSelectedOrder()

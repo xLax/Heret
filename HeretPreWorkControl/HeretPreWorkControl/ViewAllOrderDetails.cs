@@ -34,6 +34,12 @@ namespace HeretPreWorkControl
             lbStudioWork.Items.Add(Globals.StudioPrisaAndModel);
             lbStudioWork.Items.Add(Globals.StudioCutModel);
 
+            if (Globals.UserGroupID != Globals.AdminID)
+            {
+                pbSalesUpdate.Visible = false;
+                lblSalesUpdate.Visible = false;
+            }
+
             this.order = selectedOrder;
             this.isEnabled = false;
             ChangeScreenUI();
@@ -80,12 +86,14 @@ namespace HeretPreWorkControl
                                     .Where(s => s.order_id == order.ID)
                                                     .ToArray<tbl_orders_id>();
 
-                    if(orderNumbers != null)
+                    if(orderNumbers.Length > 0)
                     {
                         for(int i = 0; i < orderNumbers.Length; i++)
                         {
                             cbOrderNumbers.Items.Add(orderNumbers[i].heret_order_id);
                         }
+
+                        cbOrderNumbers.SelectedIndex = 0;
                     }
                 }
                 catch (Exception ex)
@@ -111,18 +119,15 @@ namespace HeretPreWorkControl
 
         private void pbSalesUpdate_Click(object sender, EventArgs e)
         {
-            if(Globals.UserGroupID == Globals.AdminID)
+            if (this.order.current_status_id == Globals.StatusClosed)
             {
-                if (this.order.current_status_id == Globals.StatusClosed)
-                {
-                    tbPanel.Text = "שגיאה ! הזמנה זו סגורה אין באפשרותך לערוך את פרטיה";
-                }
-                else
-                {
-                    this.isEnabled = !this.isEnabled;
+                tbPanel.Text = "שגיאה ! הזמנה זו סגורה אין באפשרותך לערוך את פרטיה";
+            }
+            else
+            {
+                this.isEnabled = !this.isEnabled;
 
-                    ChangeScreenUI();
-                }
+                ChangeScreenUI();
             }
         }
 

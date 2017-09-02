@@ -397,7 +397,7 @@ namespace HeretPreWorkControl
                     string strDeptName = dataGridView.SelectedRows[0].Cells[3].Value.ToString();
                     tbl_user_groups userGroup = Globals.AllUserGroups.Where(u => u.name.Equals(strDeptName)).SingleOrDefault<tbl_user_groups>();
 
-                    if(userGroup == null)
+                    if (userGroup == null)
                     {
                         tbPanel.Text = "שגיאה! יש תקלה באמינות הנתונים אנא צא וכנס למערכת";
                     }
@@ -423,36 +423,43 @@ namespace HeretPreWorkControl
 
         private void pbReminder_Click(object sender, EventArgs e)
         {
-            int nDepartToNotify = this.GetSelectedDepartmentID();
+            tbl_orders order = this.GetSelectedOrder();
 
-            if(nDepartToNotify != -1)
+            if(order.current_status_id == Globals.StatusClosed)
             {
-                tbl_orders order = this.GetSelectedOrder();
+                tbPanel.Text = "אין באפשרותך לתזכר ביצוע עבודה לעבודה סגורה";
+            }
+            else
+            {
+                int nDepartToNotify = this.GetSelectedDepartmentID();
 
-                if(order == null)
+                if (nDepartToNotify != -1)
                 {
-                    tbPanel.Text = "שגיאה באמינות הנתונים אנא צא וכנס מהמערכת";
-                }
-                else
-                {
-                    tbl_notifications currNotification = new tbl_notifications();
-                    currNotification.ID = Utilities.GetNextNotificationID();
-                    currNotification.order_id = order.ID;
-                    currNotification.Deparment_id = nDepartToNotify;
-                    currNotification.is_notified = 0;
-
-                    using (var context = new DB_Entities())
+                    if (order == null)
                     {
-                        try
-                        {
-                            context.tbl_notifications.Add(currNotification);
-                            context.SaveChanges();
+                        tbPanel.Text = "שגיאה באמינות הנתונים אנא צא וכנס מהמערכת";
+                    }
+                    else
+                    {
+                        tbl_notifications currNotification = new tbl_notifications();
+                        currNotification.ID = Utilities.GetNextNotificationID();
+                        currNotification.order_id = order.ID;
+                        currNotification.Deparment_id = nDepartToNotify;
+                        currNotification.is_notified = 0;
 
-                            tbPanel.Text = "ההתראה נשלחה בהצלחה";
-                        }
-                        catch (Exception ex)
+                        using (var context = new DB_Entities())
                         {
-                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                            try
+                            {
+                                context.tbl_notifications.Add(currNotification);
+                                context.SaveChanges();
+
+                                tbPanel.Text = "ההתראה נשלחה בהצלחה";
+                            }
+                            catch (Exception ex)
+                            {
+                                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                            }
                         }
                     }
                 }

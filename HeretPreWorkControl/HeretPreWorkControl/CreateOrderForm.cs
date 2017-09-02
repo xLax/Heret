@@ -209,22 +209,7 @@ namespace HeretPreWorkControl
                                     NewOrder.alert_creation_date = Globals.AlertNow;
                                 }
 
-                                using (var context = new DB_Entities())
-                                {
-                                    try
-                                    {
-                                        context.tbl_orders.Add(NewOrder);
-                                        context.SaveChanges();
-
-                                        tbPanel.Text = "ההזמנה נוצרה בהצלחה ! " + strPromoteMessage;
-
-                                        isSucceeded = true;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-                                    }
-                                }
+                                isSucceeded = true;
                             }
                             else
                             {
@@ -255,7 +240,7 @@ namespace HeretPreWorkControl
                 }
 
                 // פתח מסך ניתוב עבודה לפי ID של מחלקה
-                new MovementsForm(lstActionsToDept, NewOrder, NewOrder.action_type_id.Value).Show();
+                new MovementsForm(lstActionsToDept, NewOrder, NewOrder.action_type_id.Value, true).ShowDialog();
             }
         }
 
