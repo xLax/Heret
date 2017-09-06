@@ -44,12 +44,19 @@ namespace HeretPreWorkControl
         {
             InitializeComponent();
 
-            if(CurrentOrder.files_number != null)
+            if (CurrentOrder.files_number != null)
             {
-                nfilesno = CurrentOrder.files_number;
+                if (CurrentOrder.files_number <= 10)
+                {
+                    nfilesno = CurrentOrder.files_number;
+                }
+                else
+                {
+                    nfilesno = 1;
+                }
             }
-            
-            if(nfilesno > 1)
+
+            if (nfilesno > 1)
             {
                 lblExecute.Text = "הזן מספרי הזמנות";
             }
@@ -149,38 +156,91 @@ namespace HeretPreWorkControl
             // Save error panel distance from edges
             int nErrorPanelSpace = this.Width - tbPanel.Width;
 
+            // ----- Variables for the screen initialzation -----
+            // counter for each side
+            int j = 0;
+            int k = 0;
+
+            // Screen objects
+            Label lblFilesNumber;
+            Label lblOrderId;
+            TextBox tbOrderId;
+
             for (int i = 1; i <= nfilesno; i++ )
             {
-                Label lblFilesNumber = new Label();
-                lblFilesNumber.Width = nLabelWidth;
-                lblFilesNumber.Height = nLabelHeight;
-                lblFilesNumber.Font = fLabelFont;
-                lblFilesNumber.Name = strFilesNumberName + i;
-                lblFilesNumber.Text = strFilesNumberText + i;
-                lblFilesNumber.Location = new Point(nLabelX,nStartY + ( nTotalHeight * (i - 1)));
-                this.Controls.Add(lblFilesNumber);
+                if(i % 2 == 1)
+                {
+                    j++;
+                    lblFilesNumber = new Label();
+                    lblFilesNumber.Width = nLabelWidth;
+                    lblFilesNumber.Height = nLabelHeight;
+                    lblFilesNumber.Font = fLabelFont;
+                    lblFilesNumber.Name = strFilesNumberName + i;
+                    lblFilesNumber.Text = strFilesNumberText + i;
+                    lblFilesNumber.Location = new Point(nLabelX, nStartY + (nTotalHeight * (j - 1)));
+                    this.Controls.Add(lblFilesNumber);
 
-                Label lblOrderId = new Label();
-                lblOrderId.Width = nLabelWidth;
-                lblOrderId.Height = nLabelHeight;
-                lblOrderId.Font = fLabelFont;
-                lblOrderId.Name = strOrderIdLabelName + i;
-                lblOrderId.Text = strOrderIdLabelText;
-                lblOrderId.Location = new Point(nLabelX, nStartY + (nTotalHeight * (i - 1)) + (nTotalHeight / 2));
-                this.Controls.Add(lblOrderId);
+                    lblOrderId = new Label();
+                    lblOrderId.Width = nLabelWidth;
+                    lblOrderId.Height = nLabelHeight;
+                    lblOrderId.Font = fLabelFont;
+                    lblOrderId.Name = strOrderIdLabelName + i;
+                    lblOrderId.Text = strOrderIdLabelText;
+                    lblOrderId.Location = new Point(nLabelX, nStartY + (nTotalHeight * (j - 1)) + (nTotalHeight / 2));
+                    this.Controls.Add(lblOrderId);
 
-                TextBox tbOrderId = new TextBox();
-                tbOrderId.Width = nInputWidth;
-                tbOrderId.Height = nInputHeight;
-                tbOrderId.Font = fInputFont;
-                tbOrderId.Name = strOrderIdInputName + i;
-                tbOrderId.RightToLeft = rtlInputAlign;
-                tbOrderId.Location = new Point(lblOrderId.Location.X + lblOrderId.Width + 13, nStartY + (nTotalHeight * (i - 1)) + (nTotalHeight / 2) - 3);
-                this.Controls.Add(tbOrderId);
+                    tbOrderId = new TextBox();
+                    tbOrderId.Width = nInputWidth;
+                    tbOrderId.Height = nInputHeight;
+                    tbOrderId.Font = fInputFont;
+                    tbOrderId.Name = strOrderIdInputName + i;
+                    tbOrderId.RightToLeft = rtlInputAlign;
+                    tbOrderId.Location = new Point(lblOrderId.Location.X + lblOrderId.Width + 13, nStartY + (nTotalHeight * (j - 1)) + (nTotalHeight / 2) - 3);
+                    this.Controls.Add(tbOrderId);
+                }
+                else
+                {
+                    k++;
+                    lblFilesNumber = new Label();
+                    lblFilesNumber.Width = nLabelWidth;
+                    lblFilesNumber.Height = nLabelHeight;
+                    lblFilesNumber.Font = fLabelFont;
+                    lblFilesNumber.Name = strFilesNumberName + i;
+                    lblFilesNumber.Text = strFilesNumberText + i;
+                    lblFilesNumber.Location = new Point(nLabelX + this.Width, nStartY + (nTotalHeight * (k - 1)));
+                    this.Controls.Add(lblFilesNumber);
+
+                    lblOrderId = new Label();
+                    lblOrderId.Width = nLabelWidth;
+                    lblOrderId.Height = nLabelHeight;
+                    lblOrderId.Font = fLabelFont;
+                    lblOrderId.Name = strOrderIdLabelName + i;
+                    lblOrderId.Text = strOrderIdLabelText;
+                    lblOrderId.Location = new Point(nLabelX + this.Width, nStartY + (nTotalHeight * (k - 1)) + (nTotalHeight / 2));
+                    this.Controls.Add(lblOrderId);
+
+                    tbOrderId = new TextBox();
+                    tbOrderId.Width = nInputWidth;
+                    tbOrderId.Height = nInputHeight;
+                    tbOrderId.Font = fInputFont;
+                    tbOrderId.Name = strOrderIdInputName + i;
+                    tbOrderId.RightToLeft = rtlInputAlign;
+                    tbOrderId.Location = new Point(lblOrderId.Location.X + lblOrderId.Width + 13, nStartY + (nTotalHeight * (k - 1)) + (nTotalHeight / 2) - 3);
+                    this.Controls.Add(tbOrderId);
+                }
+                
             }
 
-            this.Height = nStartY + (nTotalHeight * (int)nfilesno) + nOkButtonTopToFormBottom;
-            //this.Width = flowLayoutPanel1.Location.X + flowLayoutPanel1.Width + (nPreviusWidth - nFlowLeft);
+            // Change the height of the screen so it fit to the number of the files
+            this.Height = nStartY + (nTotalHeight * j) + nOkButtonTopToFormBottom;
+
+            // Fit the width as well
+            if(nfilesno > 1)
+            {
+                this.Width = this.Width * 2;
+            }
+            
+            // Change screen constant objects to fit the new sizes
             tbPanel.Location = new Point(tbPanel.Location.X, this.Height - nErrorPanelYFromDownEdge);
             pbExecute.Location = new Point(this.Width - nOkButtonXFromLeftEdge, this.Height - nOkButtonYFromDwonEdge);
             lblExecute.Location = new Point(this.Width - nOkLabelXFromLeftEdge, this.Height - nOkLabelYFromDownEdge);
