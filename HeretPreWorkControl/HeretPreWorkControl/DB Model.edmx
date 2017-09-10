@@ -111,7 +111,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="sla_id" Type="int" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="department_id" Type="int" Nullable="false" />
           <Property Name="begin_date" Type="date" Nullable="false" />
           <Property Name="end_date" Type="date" Nullable="false" />
           <Property Name="status_id" Type="int" Nullable="false" />
@@ -346,7 +346,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="tbl_sla_data">
-              <PropertyRef Name="user_id" />
+              <PropertyRef Name="department_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,7 +549,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="sla_id" Type="Int32" Nullable="false" />
           <Property Name="order_id" Type="Int32" Nullable="false" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_orders" Relationship="Self.order_id" FromRole="tbl_sla_data" ToRole="tbl_orders" />
           <NavigationProperty Name="tbl_sla_actions" Relationship="Self.sla_id" FromRole="tbl_sla_data" ToRole="tbl_sla_actions" />
           <NavigationProperty Name="tbl_users" Relationship="Self.user_id" FromRole="tbl_sla_data" ToRole="tbl_users" />
@@ -557,6 +556,8 @@
           <Property Name="employee_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="begin_date" Type="DateTime" Nullable="false" />
           <Property Name="end_date" Type="DateTime" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_users1" Relationship="DB_Model.user_id1" FromRole="tbl_sla_data" ToRole="tbl_users" />
         </EntityType>
         <EntityType Name="tbl_user_groups">
           <Key>
@@ -583,6 +584,7 @@
           <Property Name="user_group_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_sla_data" Relationship="Self.user_id" FromRole="tbl_users" ToRole="tbl_sla_data" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.Id" FromRole="tbl_users" ToRole="tbl_user_groups" />
+          <NavigationProperty Name="tbl_sla_data1" Relationship="DB_Model.user_id1" FromRole="tbl_users" ToRole="tbl_sla_data" />
         </EntityType>
         <Association Name="action">
           <End Role="tbl_sla_actions" Type="Self.tbl_sla_actions" Multiplicity="1" />
@@ -836,6 +838,10 @@
             <End Role="tbl_user_groups" EntitySet="tbl_user_groups" />
             <End Role="tbl_sla_actions" EntitySet="tbl_sla_actions" />
           </AssociationSet>
+          <AssociationSet Name="user_id1" Association="DB_Model.user_id1">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_sla_data" EntitySet="tbl_sla_data" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_notifications">
           <Key>
@@ -902,6 +908,18 @@
             </Principal>
             <Dependent Role="tbl_sla_actions">
               <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_id1">
+          <End Type="DB_Model.tbl_users" Role="tbl_users" Multiplicity="1" />
+          <End Type="DB_Model.tbl_sla_data" Role="tbl_sla_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_sla_data">
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,6 +1020,7 @@
           <EntitySetMapping Name="tbl_sla_data">
             <EntityTypeMapping TypeName="DB_Model.tbl_sla_data">
               <MappingFragment StoreEntitySet="tbl_sla_data">
+                <ScalarProperty Name="user_id" ColumnName="department_id" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="begin_date" ColumnName="begin_date" />
                 <ScalarProperty Name="employee_name" ColumnName="employee_name" />
@@ -1009,7 +1028,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sla_id" ColumnName="sla_id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

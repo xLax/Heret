@@ -208,6 +208,12 @@
     <Compile Include="SpecialApprovedJobsForm.Designer.cs">
       <DependentUpon>SpecialApprovedJobsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InsertTemplateNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertTemplateNumberForm.Designer.cs">
+      <DependentUpon>InsertTemplateNumberForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="tbl_action_to_dept.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
     </Compile>
@@ -240,12 +246,6 @@
     </Compile>
     <Compile Include="tbl_user_groups.cs">
       <DependentUpon>DB Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertTemplateNumberForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InsertTemplateNumberForm.Designer.cs">
-      <DependentUpon>InsertTemplateNumberForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TopUserForm.cs">
       <SubType>Form</SubType>

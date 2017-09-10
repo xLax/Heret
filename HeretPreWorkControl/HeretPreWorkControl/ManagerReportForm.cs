@@ -20,21 +20,29 @@ namespace HeretPreWorkControl
 
     struct StationData
     {
-        public string OrderID;
+        public string WorkerName;
+        public int nOrderID;
         public double dDaysInTime;
         public double dDaysLate;
     }
 
     public partial class ManagerReportForm : Form
     {
+        private int nSelectedDepartmentID = 0;
+
         private List<tbl_employees> allEmployees;
         private Dictionary<int, string> dcEmployees;
         private Dictionary<DateTime, WorkerData> dcWorkerData = new Dictionary<DateTime, WorkerData>();
         private Dictionary<int, string> dcStationData = new Dictionary<int, string>();
-        private tbl_sla_actions actionToSearch = new tbl_sla_actions();
+
+        private List<StationData> lstCurrChartData = new List<StationData>();
+        private List<StationData> lstMonthData = new List<StationData>();
 
         private DateTime dtToDate = new DateTime();
+        private DateTime dtToDateStation = new DateTime();
+
         private DateTime OriginalValue = new DateTime();
+        private DateTime OriginalValueStation = new DateTime();
 
         public List<tbl_orders> AllMyJobs;
 
@@ -53,28 +61,36 @@ namespace HeretPreWorkControl
             allEmployees = Globals.AllEmployeesResp
                 .Where( a => a.Department_id != 0).ToList<tbl_employees>();
 
-            foreach (tbl_employees emp in allEmployees)
-            {
-                dcEmployees.Add(emp.ID, emp.name);
-                lbEmployees.Items.Add(emp.name);
-            }
-
             foreach (tbl_user_groups userGroup in Globals.AllUserGroups)
             {
                 // User group 0 is null
                 if(userGroup.ID != 0 &&
                    userGroup.ID != Globals.AdminID)
                 {
+                    if (nSelectedDepartmentID == 0)
+                    {
+                        nSelectedDepartmentID = userGroup.ID;
+                    }
+
                     lbDepartment.Items.Add(userGroup.name);
                 }
             }
 
-            if(lbDepartment.Items.Count > 0)
+            if (lbDepartment.Items.Count > 0)
             {
                 lbDepartment.SelectedIndex = 0;
             }
 
-            PopulateStationList();
+            foreach (tbl_employees emp in allEmployees)
+            {
+                dcEmployees.Add(emp.ID, emp.name);
+                lbEmployees.Items.Add(emp.name);
+
+                if(emp.Department_id == this.nSelectedDepartmentID)
+                {
+                    lbWorkersInDept.Items.Add(emp.name);
+                }
+            }
 
             if (allEmployees.Count > 0)
             {
@@ -100,42 +116,16 @@ namespace HeretPreWorkControl
             //dtToDate.MinDate = DateTime.Today.Date.AddYears(-1);
             //dtToDate.Value = dtFromDate.Value.AddDays(6);
 
-            dtTo.Format = DateTimePickerFormat.Custom;
-            dtTo.CustomFormat = "dd/MM/yyyy";
-            dtTo.MaxDate = DateTime.Today;
-            dtTo.MinDate = DateTime.Today.Date.AddYears(-1);
-            dtTo.Value = dtFromDate.Value.AddDays(6);
+            //dtTo.Format = DateTimePickerFormat.Custom;
+            //dtTo.CustomFormat = "dd/MM/yyyy";
+            //dtTo.MaxDate = DateTime.Today;
+            //dtTo.MinDate = DateTime.Today.Date.AddYears(-1);
+            //dtTo.Value = dtFromDate.Value.AddDays(6);
 
             tbTrackBar.Value = 0;
             lblPeriod.Text = "עבודות סגורות";
 
             // this.PerformWorkersSearch();
-        }
-
-        private void PopulateStationList()
-        {
-            lbStation.Items.Clear();
-            dcStationData.Clear();
-
-            tbl_user_groups currGroup = Globals.AllUserGroups
-                .Where(a => a.name.Equals(lbDepartment.SelectedItem.ToString())).Single<tbl_user_groups>();
-
-            foreach (tbl_sla_actions action in Globals.AllActions)
-            {
-                if (action.department_id == currGroup.ID)
-                {
-                    if(action.ID != 0)
-                    {
-                        lbStation.Items.Add(action.desc);
-                        dcStationData.Add(action.ID, action.desc);
-                    }
-                }
-            }
-            
-            if(lbStation.Items.Count > 0)
-            {
-                lbStation.SelectedIndex = 0;
-            }
         }
 
         private void tbTrackBar_Scroll(object sender, EventArgs e)
@@ -150,44 +140,6 @@ namespace HeretPreWorkControl
             }
 
             this.PerformWorkersSearch();
-        }
-
-        private void PerformWorkersSearch()
-        {
-            this.OriginalValue = dtFromDate.Value;
-
-            List<WorkerData> lstToChart = new List<WorkerData>();
-
-            chartWorkers.Series["בזמן"].Points.Clear();
-            chartWorkers.Series["מאחר"].Points.Clear();
-
-            if (Globals.AllSlaData == null)
-            {
-                Utilities.GetAllSlaData();
-            }
-
-            List<tbl_sla_data> lstSlaData = Globals.AllSlaData
-                .Where(a => a.employee_name != null &&
-                            a.employee_name.Equals(lbEmployees.SelectedItem.ToString()) &&
-                                                   a.end_date >= this.dtFromDate.Value)
-                            .ToList<tbl_sla_data>();
-
-            // לחפש עבודות סגורות
-            if(tbTrackBar.Value == 0)
-            {
-                lstToChart = this.Search(lstSlaData, Globals.StatusClosed);
-            }
-            // דוח לגבי עבודות בתהליך
-            else if(tbTrackBar.Value == 1)
-            {
-                lstToChart = this.Search(lstSlaData, Globals.StatusInWork);
-            }
-
-            foreach (var row in lstToChart)
-            {
-                chartWorkers.Series["בזמן"].Points.AddXY(row.DayName, row.workInProcess);
-                chartWorkers.Series["מאחר"].Points.AddXY(row.DayName, row.lateWorks);
-            }
         }
 
         private List<WorkerData> Search(List<tbl_sla_data> lstSlaData ,int nJobStatus)
@@ -233,9 +185,9 @@ namespace HeretPreWorkControl
                     this.OriginalValue = this.OriginalValue.AddDays(7);
                 }
 
-                if (this.dtFromDate.Value < this.dtToDate)
+                if (this.OriginalValue < this.dtToDate)
                 {
-                    int nDaysDifference = int.Parse((this.dtToDate - this.dtFromDate.Value).TotalDays.ToString());
+                    int nDaysDifference = int.Parse((this.dtToDate - this.OriginalValue).TotalDays.ToString());
                     List<WorkerData> lstCalculatedList = new List<WorkerData>();
 
                     int nLateWorks = 0, nWorksInTime = 0;
@@ -253,12 +205,12 @@ namespace HeretPreWorkControl
                             tbl_sla_actions ActionData = Globals.AllActions.Where(a => a.ID == slaData.sla_id)
                                                         .Single<tbl_sla_actions>();
 
-                            if (slaData.begin_date <= this.dtFromDate.Value.AddDays(i) &&
-                                slaData.end_date >= this.dtFromDate.Value.AddDays(i))
+                            if (slaData.begin_date <= this.OriginalValue.AddDays(i) &&
+                                slaData.end_date >= this.OriginalValue.AddDays(i))
                             {
                                 if (slaData.status_id == Globals.SlaLate)
                                 {
-                                    if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, this.dtFromDate.Value.AddDays(i)))
+                                    if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, this.OriginalValue.AddDays(i)))
                                     {
                                         nWorksInTime++;
                                     }
@@ -291,7 +243,6 @@ namespace HeretPreWorkControl
 
             return lstToReturn;
         }
-
 
         private List<WorkerData> SearchWeek(List<tbl_sla_data> lstSlaData, int nJobStatus)
         {
@@ -342,6 +293,143 @@ namespace HeretPreWorkControl
                 }
 
                 lstCalculatedList.Add(currWorkerData);
+            }
+
+            return lstCalculatedList;
+        }
+
+        private List<StationData> SearchStationWeek(List<tbl_sla_data> lstSlaData)
+        {
+            List<StationData> lstCalculatedList = new List<StationData>();
+
+            if (lbWorkersInDept.SelectedItem.ToString().Equals("כולם"))
+            {
+                foreach (string strEmpName in lbWorkersInDept.Items)
+                {
+                    StationData currStationData = new StationData();
+                    currStationData.WorkerName = strEmpName;
+
+                    if (strEmpName.Equals("כולם"))
+                    {
+                        for (int i = 0; i < 7; i++)
+                        {
+                            foreach (tbl_sla_data slaData in lstSlaData)
+                            {
+                                tbl_sla_actions ActionData =
+                                    Globals.AllActions.Where(a => a.ID == slaData.sla_id)
+                                                            .Single<tbl_sla_actions>();
+
+                                if (slaData.begin_date <= this.OriginalValueStation.AddDays(i) &&
+                                    slaData.end_date >= this.OriginalValueStation.AddDays(i))
+                                {
+                                    if (slaData.status_id == Globals.SlaLate)
+                                    {
+                                        if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, OriginalValue.AddDays(i))) //this.dateToSearch.AddDays(i)))
+                                        {
+                                            currStationData.dDaysInTime++;
+                                        }
+                                        else
+                                        {
+                                            currStationData.dDaysLate++;
+                                        }
+                                    }
+                                    else if (slaData.status_id == Globals.SlaInTime)
+                                    {
+                                        currStationData.dDaysInTime++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        List<tbl_sla_data> lstMySlaData = lstSlaData
+                            .Where(a => a.employee_name.Equals(strEmpName))
+                                    .ToList<tbl_sla_data>();
+
+                        for (int i = 0; i < 7; i++)
+                        {
+                            foreach (tbl_sla_data slaData in lstMySlaData)
+                            {
+                                tbl_sla_actions ActionData =
+                                    Globals.AllActions.Where(a => a.ID == slaData.sla_id)
+                                                            .Single<tbl_sla_actions>();
+
+                                if (slaData.begin_date <= this.OriginalValueStation.AddDays(i) &&
+                                    slaData.end_date >= this.OriginalValueStation.AddDays(i))
+                                {
+                                    if (slaData.status_id == Globals.SlaLate)
+                                    {
+                                        if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, OriginalValue.AddDays(i))) //this.dateToSearch.AddDays(i)))
+                                        {
+                                            currStationData.dDaysInTime++;
+                                        }
+                                        else
+                                        {
+                                            currStationData.dDaysLate++;
+                                        }
+                                    }
+                                    else if (slaData.status_id == Globals.SlaInTime)
+                                    {
+                                        currStationData.dDaysInTime++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    lstCalculatedList.Add(currStationData);
+                }
+            }
+            else
+            {
+                List<tbl_sla_data> lstMySlaData = lstSlaData
+                            .Where(a => a.employee_name.Equals(lbWorkersInDept.SelectedItem.ToString()))
+                                    .ToList<tbl_sla_data>();
+
+                StationData currStationData = new StationData();
+                currStationData.WorkerName = lbWorkersInDept.SelectedItem.ToString();
+
+                for (int i = 0; i < 7; i++)
+                {
+                    foreach (tbl_sla_data slaData in lstMySlaData)
+                    {
+                        tbl_sla_actions ActionData =
+                            Globals.AllActions.Where(a => a.ID == slaData.sla_id)
+                                                    .Single<tbl_sla_actions>();
+
+                        if (slaData.begin_date <= this.OriginalValueStation.AddDays(i) &&
+                            slaData.end_date >= this.OriginalValueStation.AddDays(i))
+                        {
+                            if (slaData.status_id == Globals.SlaLate)
+                            {
+                                if (Utilities.CalculateSlaStatus(slaData.begin_date, new TimeSpan(8, 0, 0), ActionData.sla_hours, OriginalValue.AddDays(i))) //this.dateToSearch.AddDays(i)))
+                                {
+                                    currStationData.dDaysInTime++;
+                                    currStationData.nOrderID = slaData.order_id;
+
+                                    this.lstCurrChartData.Add(currStationData);
+                                }
+                                else
+                                {
+                                    currStationData.dDaysLate++;
+                                    currStationData.nOrderID = slaData.order_id;
+
+                                    this.lstCurrChartData.Add(currStationData);
+                                }
+                            }
+                            else if (slaData.status_id == Globals.SlaInTime)
+                            {
+                                currStationData.dDaysInTime++;
+                                currStationData.nOrderID = slaData.order_id;
+
+                                this.lstCurrChartData.Add(currStationData);
+                            }
+                        }
+                    }
+                }
+
+                lstCalculatedList.Add(currStationData);
             }
 
             return lstCalculatedList;
@@ -446,114 +534,135 @@ namespace HeretPreWorkControl
             this.PerformStationsSearch();
         }
 
+        private void PerformWorkersSearch()
+        {
+            this.OriginalValue = dtFromDate.Value;
+
+            List<WorkerData> lstToChart = new List<WorkerData>();
+
+            chartWorkers.Series["בזמן"].Points.Clear();
+            chartWorkers.Series["מאחר"].Points.Clear();
+
+            if (Globals.AllSlaData == null)
+            {
+                Utilities.GetAllSlaData();
+            }
+
+            List<tbl_sla_data> lstSlaData = Globals.AllSlaData
+                .Where(a => a.employee_name != null &&
+                            a.employee_name.Equals(lbEmployees.SelectedItem.ToString()) &&
+                                                   a.end_date >= this.dtFromDate.Value)
+                            .ToList<tbl_sla_data>();
+
+            // לחפש עבודות סגורות
+            if (tbTrackBar.Value == 0)
+            {
+                lstToChart = this.Search(lstSlaData, Globals.StatusClosed);
+            }
+            // דוח לגבי עבודות בתהליך
+            else if (tbTrackBar.Value == 1)
+            {
+                lstToChart = this.Search(lstSlaData, Globals.StatusInWork);
+            }
+
+            foreach (var row in lstToChart)
+            {
+                chartWorkers.Series["בזמן"].Points.AddXY(row.DayName, row.workInProcess);
+                chartWorkers.Series["מאחר"].Points.AddXY(row.DayName, row.lateWorks);
+            }
+        }
+
         private void PerformStationsSearch()
         {
-            if(this.actionToSearch == null)
+            this.OriginalValueStation = this.dtFrom.Value;
+
+            List<StationData> lstToChart = new List<StationData>();
+
+            chartStations.Series["בזמן"].Points.Clear();
+            chartStations.Series["מאחר"].Points.Clear();
+
+            if (Globals.AllSlaData == null)
             {
-                tbPanel.Text = "אנא בחר תחנה לחיפוש";
+                Utilities.GetAllSlaData();
+            }
+
+            List<tbl_sla_data> lstSlaDeptData = Globals.AllSlaData
+                .Where(a => a.user_id == nSelectedDepartmentID &&
+                            a.end_date >= this.dtFrom.Value).ToList<tbl_sla_data>();
+
+            if(lstSlaDeptData.Count == 0)
+            {
+                tbPanel.Text = "לא נמצא מידע עבור מחלקה זו";
             }
             else
             {
-                chartStations.Series["בזמן"].Points.Clear();
-                chartStations.Series["מאחר"].Points.Clear();
+                tbPanel.Text = "";
 
-                List<tbl_sla_data> lstSlaData = Globals.AllSlaData
-                    .Where(a => a.sla_id == this.actionToSearch.ID &&
-                                a.end_date >= this.dtFrom.Value).ToList<tbl_sla_data>();
-
-                IEnumerable<tbl_sla_data> SortedSlaData = lstSlaData.OrderBy(a => a.order_id);
-
-                if(lstSlaData.Count > 0)
+                // Search station week
+                if (rbStationWeek.Checked)
                 {
-                    int nPrevOrderID = SortedSlaData.First<tbl_sla_data>().order_id, nCurrOrderID = 0;
-                    double dOrderSumLate = 0, dOrderSumInTime = 0;
+                    this.lstCurrChartData.Clear();
+                    this.dtToDateStation = this.dtFrom.Value.AddDays(7);
+                    lstToChart = this.SearchStationWeek(lstSlaDeptData);
+                }
+                else if(rbStationMonth.Checked && 
+                        this.dtFrom.Value.Day == 1)
+                {
+                    this.OriginalValueStation = this.dtFrom.Value;
 
-                    List<StationData> lstToChart = new List<StationData>();
-                    StationData currStationData = new StationData();
+                    this.dtToDateStation = new DateTime(dtFrom.Value.Year,
+                                                        dtFrom.Value.Month,
+                                                        DateTime.DaysInMonth(dtFrom.Value.Year, this.dtFrom.Value.Month));
 
-                    foreach (var slaData in SortedSlaData)
+                    for (int i = 0; i < 4; i++)
                     {
-                        nCurrOrderID = slaData.order_id;
+                        List<StationData> lstTempList = this.SearchStationWeek(lstSlaDeptData);
 
-                        if (nCurrOrderID == nPrevOrderID)
+                        foreach (StationData stationData in lstTempList)
                         {
-                            if (slaData.status_id == Globals.SlaLate)
-                            {
-                                dOrderSumLate += (slaData.end_date - slaData.begin_date).TotalDays + 1;
-                            }
-                            else if (slaData.status_id == Globals.SlaInTime)
-                            {
-                                dOrderSumInTime += (slaData.end_date - slaData.begin_date).TotalDays + 1;
-                            }
+                            this.lstMonthData.Add(stationData);
                         }
-                        else
-                        {
-                            currStationData.OrderID = "מס\"ד" + nPrevOrderID.ToString();
-                            currStationData.dDaysInTime = dOrderSumInTime;
-                            currStationData.dDaysLate = dOrderSumLate;
 
-                            if (slaData.status_id == Globals.SlaLate)
-                            {
-                                dOrderSumLate = (slaData.end_date - slaData.begin_date).TotalDays + 1;
-                            }
-                            else if (slaData.status_id == Globals.SlaInTime)
-                            {
-                                dOrderSumInTime = (slaData.end_date - slaData.begin_date).TotalDays + 1;
-                            }
-
-                            lstToChart.Add(currStationData);
-
-                            currStationData = new StationData();
-                        }
+                        this.OriginalValueStation = this.OriginalValueStation.AddDays(7);
                     }
 
-                    currStationData = new StationData();
-
-                    currStationData.OrderID = "מס\"ד" + nCurrOrderID.ToString();
-                    currStationData.dDaysInTime = dOrderSumInTime;
-                    currStationData.dDaysLate = dOrderSumLate;
-
-                    lstToChart.Add(currStationData);
-
-                    foreach (var row in lstToChart)
+                    if((this.dtToDateStation - this.OriginalValueStation).TotalDays > 0)
                     {
-                        chartStations.Series["בזמן"].Points.AddXY(row.OrderID, row.dDaysInTime);
-                        chartStations.Series["מאחר"].Points.AddXY(row.OrderID, row.dDaysLate);
+                        int nDateDifference = (int)(this.dtToDateStation - this.OriginalValueStation).TotalDays;
                     }
+                }
+                else
+                {
+                    tbPanel.Text = "עליך לבחור את היום הראשון בחודש על מנת לחפש חודש קלנדרי";
+                }
+
+                foreach (var row in lstToChart)
+                {
+                    chartStations.Series["בזמן"].Points.AddXY(row.WorkerName, row.dDaysInTime);
+                    chartStations.Series["מאחר"].Points.AddXY(row.WorkerName, row.dDaysLate);
                 }
             }
         }
 
         private void lbDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.PopulateStationList();
-        }
+            lbWorkersInDept.Items.Clear();
+            lbWorkersInDept.Items.Add("כולם");
+            lbWorkersInDept.SelectedIndex = 0;
 
-        private void lbStation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int nSelectedActionTypeID = 0;
+            nSelectedDepartmentID = Globals.AllUserGroups.
+                        Where(a => a.name.Equals(lbDepartment.SelectedItem.ToString()))
+                            .Single<tbl_user_groups>().ID;
 
-            foreach (var dcItem in dcStationData)
+            foreach (tbl_employees employee in allEmployees)
             {
-                if(dcItem.Value.Equals(lbStation.SelectedItem.ToString()))
+                if(employee.Department_id == nSelectedDepartmentID)
                 {
-                    nSelectedActionTypeID = dcItem.Key;
-
-                    continue;
+                    lbWorkersInDept.Items.Add(employee.name);
                 }
             }
 
-            if(nSelectedActionTypeID == 0)
-            {
-                tbPanel.Text = "שגיאה לא ידועה, אנא התייעץ עם מפתחי המערכת.";
-            }
-            else
-            {
-                this.actionToSearch = Globals.AllActions
-                    .Where(a => a.ID == nSelectedActionTypeID).Single<tbl_sla_actions>();
-
-                this.PerformStationsSearch();
-            }
+            this.PerformStationsSearch();
         }
 
         private void rbWeek_CheckedChanged(object sender, EventArgs e)
@@ -577,6 +686,63 @@ namespace HeretPreWorkControl
         private void dtFromDate_ValueChanged(object sender, EventArgs e)
         {
             this.PerformWorkersSearch();
+        }
+
+        private void rbStationWeek_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbStationWeek.Checked)
+            {
+                rbStationMonth.Checked = false;
+            }
+
+            this.PerformStationsSearch();
+        }
+
+        private void rbStationMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbStationMonth.Checked)
+            {
+                rbStationWeek.Checked = false;
+            }
+        }
+
+        private void chartStations_Click(object sender, EventArgs e)
+        {
+            if (lbWorkersInDept.SelectedItem.ToString().Equals("כולם"))
+            {
+                tbPanel.Text = "עליך לבחור עובד ספציפי על מנת לראות נתונים על העבודות שביצע";
+            }
+            else
+            {
+                tbPanel.Text = String.Empty;
+
+                List<int> lstOrdersId = new List<int>();
+
+                if(this.lstCurrChartData.Count > 0)
+                {
+                    foreach (StationData currItem in lstCurrChartData)
+                    {
+                        lstOrdersId.Add(currItem.nOrderID);
+                    }
+
+                    new AdminOverviewForm(lstOrdersId).ShowDialog();
+                }
+            }
+        }
+
+        private void dtFrom_ValueChanged(object sender, EventArgs e)
+        {
+            this.PerformStationsSearch();
+        }
+
+        private void lbWorkersInDept_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PerformStationsSearch();
+        }
+
+        private void pbStationRefresh_Click(object sender, EventArgs e)
+        {
+            pbRefresh_Click(new object(), new EventArgs());
         }
     }
 

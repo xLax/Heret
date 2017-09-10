@@ -24,11 +24,19 @@ namespace HeretPreWorkControl
     {
         Boolean isLoadSucceeded = false;
 
+        private List<int> lstOrdersID = new List<int>();
         private List<RowData> lstAllViewData = new List<RowData>();
 
         public AdminOverviewForm()
         {
             InitializeComponent();
+        }
+
+        public AdminOverviewForm(List<int> lstOrders)
+        {
+            InitializeComponent();
+
+            this.lstOrdersID = lstOrders;
         }
 
         private void AdminOverviewForm_Load(object sender, EventArgs e)
@@ -40,6 +48,41 @@ namespace HeretPreWorkControl
                 if(Globals.AllJobs.Count == 0)
                 {
                     tbPanel.Text = "אין עבודות התואמות את נתוני החיפוש";
+                }
+                else if(this.lstOrdersID != null)
+                {
+                    Utilities.GetAllClientsList();
+                    Utilities.GetAllUserGroupList();
+                    Utilities.GetAllActionsList();
+                    Utilities.SetZebraMode(dataGridView);
+
+                    dtFromDate.Visible = false;
+                    lbJobStatus.Visible = false;
+
+                    List<tbl_orders> detailedList = 
+                        Globals.AllJobs.Where(a => lstOrdersID.Contains(a.ID)).ToList<tbl_orders>();
+
+                    foreach (tbl_orders order in detailedList)
+                    {
+                        if (order.creation_date.Value >= dtFromDate.Value)
+                        {
+                            if (order.special_department_id != null &&
+                                order.special_department_id != Globals.AdminID)
+                            {
+                                InsertSpecialRow(order);
+                            }
+
+                            InsertRowFromOrder(order);
+                        }
+
+                        if (order.special_department_id != null &&
+                            order.special_department_id != Globals.AdminID)
+                        {
+                            AddSpecialToInternalTable(order);
+                        }
+
+                        AddToInternalTable(order);
+                    }
                 }
                 else
                 {

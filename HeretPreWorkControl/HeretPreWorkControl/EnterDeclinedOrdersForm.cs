@@ -307,7 +307,7 @@ namespace HeretPreWorkControl
                                         Properties.Resources.My_Jobs;
                     }
 
-                    tbPanel.Text = "הזנת ההזמנה נדחתה בהצלחה!";
+                    tbPanel.Text = "הזנת הסירוב נדחה למועד בהצלחה למועד מאוחר יותר!";
                 }
             }
             catch (Exception ex)

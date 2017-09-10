@@ -18,6 +18,7 @@ namespace HeretPreWorkControl
         public tbl_users()
         {
             this.tbl_sla_data = new HashSet<tbl_sla_data>();
+            this.tbl_sla_data1 = new HashSet<tbl_sla_data>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace HeretPreWorkControl
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_sla_data> tbl_sla_data { get; set; }
         public virtual tbl_user_groups tbl_user_groups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_sla_data> tbl_sla_data1 { get; set; }
     }
 }
