@@ -26,52 +26,22 @@ namespace HeretPreWorkControl
             lbRejectReason.Items.Add(Globals.DelayReason);
             lbRejectReason.Items.Add(Globals.OtherReason);
 
+            lbRejectReason.SelectedIndex = 0;
+
             tbAgentName.Text = Globals.Name;
             tbInsertDate.Text = Utilities.GetDateInNormalFormat(System.DateTime.Now.Date);
 
             DeclinedOrder = DecOrder;
         }
 
-        private void SetAllFieldsEnabled()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if(!control.Name.Equals("tbAgentName") &&
-                   !control.Name.Equals("tbInsertDate") &&
-                   control is TextBox)
-                {
-                    (control as TextBox).Enabled = true;
-                    (control as TextBox).BackColor = Color.White;
-                }
-            }
-        }
-
         private void EnterDeclinedOrdersForm_Load(object sender, EventArgs e)
         {
             if (Globals.AllClients == null)
             {
-                using (var context = new DB_Entities())
-                {
-                    try
-                    {
-                        List<tbl_clients> Clients = context.tbl_clients.ToList<tbl_clients>();
-                        Utilities.SetClientList(Clients);
-                    }
-                    catch(Exception ex)
-                    {
-                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-                    }   
-                }
+                Utilities.GetAllClientsList();
             }
 
-            if (this.DeclinedOrder.client_id == null)
-            {
-                SetAllFieldsEnabled();
-            }
-            else
-            {
-                FillScreenWithOrderData(DeclinedOrder);
-            }
+            FillScreenWithOrderData(DeclinedOrder);
         }
 
         private void FillScreenWithOrderData(tbl_orders DeclinedOrder)
@@ -113,169 +83,47 @@ namespace HeretPreWorkControl
             tbAmount.Text = DeclinedOrder.amount.ToString();
         }
 
-        private void pbCleanAll_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void tbContactDate_Leave(object sender, EventArgs e)
-        {
-            List<tbl_orders> lstDeclinedOrders = new List<tbl_orders>();
-
-            tbContactDate.BackColor = Color.White;
-
-            try
-            {
-                string strDate = tbContactDate.Text.ToString();
-                int nDay = int.Parse(strDate.Substring(0, 2));
-                int nMonth = int.Parse(strDate.Substring(3, 2));
-                int nYear = int.Parse(strDate.Substring(6, 4));
-
-                DateTime dtContactDate = new DateTime(nYear, nMonth, nDay);
-
-                if(!tbClientNumber.Text.Equals(String.Empty))
-                {
-                    lstDeclinedOrders =
-                    Globals.MyDeclinedOrders
-                        .Where(d => d.client_id == int.Parse(tbClientNumber.Text) &&
-                                    d.contact_date == dtContactDate )
-                                        .ToList<tbl_orders>();
-                }
-                else
-                {
-                    lstDeclinedOrders =
-                    Globals.MyDeclinedOrders
-                        .Where(d => d.contact_date == dtContactDate)
-                                        .ToList<tbl_orders>();
-                }
-            }
-            catch (Exception ex)
-            {
-                tbContactDate.BackColor = Color.Tomato;
-                tbPanel.Text = "שגיאה! אנא הזן תאריך בפורמט dd/mm/yyyy";
-            }
-
-            if (lstDeclinedOrders.Count == 1)
-            {
-                FillScreenWithOrderData(lstDeclinedOrders[0]);
-            }
-        }
-
-        private void tbClientNumber_Leave(object sender, EventArgs e)
-        {
-            List<tbl_orders> lstDeclinedOrders = new List<tbl_orders>();
-
-            tbClientNumber.BackColor = Color.White;
-
-            if(!tbClientNumber.Text.Equals(String.Empty))
-            {
-                try
-                {
-                    lstDeclinedOrders =
-                        Globals.MyDeclinedOrders
-                            .Where(d => d.client_id == int.Parse(tbClientNumber.Text))
-                                            .ToList<tbl_orders>();
-                }
-                catch (Exception ex)
-                {
-                    tbClientNumber.BackColor = Color.Tomato;
-                    tbPanel.Text = "שגיאה! אנא הזן מספרים בשדה מספר לקוח";
-                }
-
-                if (lstDeclinedOrders.Count == 1)
-                {
-                    FillScreenWithOrderData(lstDeclinedOrders[0]);
-                }
-            }     
-        }
-
-        private void tbNoFiles_Leave(object sender, EventArgs e)
-        {
-            List<tbl_orders> lstDeclinedOrders = new List<tbl_orders>();
-
-            tbNoFiles.BackColor = Color.White;
-
-            try
-            {
-                string strDate = tbContactDate.Text.ToString();
-                if(!strDate.Equals(String.Empty) &&
-                   !tbClientNumber.Text.Equals(String.Empty) &&
-                   !tbNoFiles.Text.Equals(String.Empty))
-                {
-                    int nDay = int.Parse(strDate.Substring(0, 2));
-                    int nMonth = int.Parse(strDate.Substring(3, 2));
-                    int nYear = int.Parse(strDate.Substring(6, 4));
-
-                    DateTime dtContactDate = new DateTime(nYear, nMonth, nDay);
-
-                    lstDeclinedOrders =
-                        Globals.MyDeclinedOrders
-                            .Where(d => d.client_id == int.Parse(tbClientNumber.Text) &&
-                                        d.contact_date == dtContactDate && 
-                                        d.files_number == int.Parse(tbNoFiles.Text))
-                                                .ToList<tbl_orders>();
-                }
-            }
-            catch (Exception ex)
-            {
-                tbNoFiles.BackColor = Color.Tomato;
-                tbPanel.Text = "שגיאה! אנא הזן מספרים בשדה מספר קבצים";
-            }
-
-            if (lstDeclinedOrders.Count == 1)
-            {
-                FillScreenWithOrderData(lstDeclinedOrders[0]);
-            }
-        }
-
         private void InsertButton_Click(object sender, EventArgs e)
         {
             DeclinedOrder.reject_date = System.DateTime.Now.Date;
 
-            if (lbRejectReason.SelectedItem == null)
+            DeclinedOrder.reject_reason = lbRejectReason.SelectedItem.ToString();
+            DeclinedOrder.comments = tbComments.Text.ToString();
+            DeclinedOrder.current_status_id = Globals.StatusDenied;
+            
+            try
             {
-                tbPanel.Text = "אנא סמן סיבת דחייה";
-            }
-            else 
-            {
-                DeclinedOrder.reject_reason = lbRejectReason.SelectedItem.ToString();
-                DeclinedOrder.comments = tbComments.Text.ToString();
-                DeclinedOrder.current_status_id = Globals.StatusDenied;
-
-                try
+                using (var context = new DB_Entities())
                 {
-                    using (var context = new DB_Entities())
+                    context.tbl_orders.Attach(DeclinedOrder);
+                    var Entry = context.Entry(DeclinedOrder);
+                    Entry.Property(o => o.reject_date).IsModified = true;
+                    Entry.Property(o => o.reject_reason).IsModified = true;
+                    Entry.Property(o => o.comments).IsModified = true;
+                    Entry.Property(o => o.current_status_id).IsModified = true;
+            
+                    // context.tbl_orders.AddOrUpdate(DeclinedOrder);
+            
+                    context.SaveChanges();
+            
+                    if(Utilities.GetNewDeclinedOrdersAndCount() == 0)
                     {
-                        context.tbl_orders.Attach(DeclinedOrder);
-                        var Entry = context.Entry(DeclinedOrder);
-                        Entry.Property(o => o.reject_date).IsModified = true;
-                        Entry.Property(o => o.reject_reason).IsModified = true;
-                        Entry.Property(o => o.comments).IsModified = true;
-                        Entry.Property(o => o.current_status_id).IsModified = true;
-
-                        // context.tbl_orders.AddOrUpdate(DeclinedOrder);
-
-                        context.SaveChanges();
-
-                        if(Utilities.GetNewDeclinedOrdersAndCount() == 0)
-                        {
-                            Globals.SalesFormInstance.pbEnterDeclinedOrder.Image = 
-                                            Properties.Resources.Enter_Rejected_Job_Icon;
-                        }
-
-                        if(Utilities.GetMyJobCount() == 0)
-                        {
-                            Globals.SalesFormInstance.pbMyJobs.Image =
-                                            Properties.Resources.My_Jobs;
-                        }
-
-                        tbPanel.Text = "ההזמנה הוזנה בהצלחה !";
+                        Globals.SalesFormInstance.pbEnterDeclinedOrder.Image = 
+                                        Properties.Resources.Enter_Rejected_Job_Icon;
                     }
+            
+                    if(Utilities.GetMyJobCount() == 0)
+                    {
+                        Globals.SalesFormInstance.pbMyJobs.Image =
+                                        Properties.Resources.My_Jobs;
+                    }
+            
+                    tbPanel.Text = "ההזמנה הוזנה בהצלחה !";
                 }
-                catch(Exception ex)
-                {
-                    tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
-                }
+            }
+            catch(Exception ex)
+            {
+                tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
             }
         }
 
@@ -307,7 +155,7 @@ namespace HeretPreWorkControl
                                         Properties.Resources.My_Jobs;
                     }
 
-                    tbPanel.Text = "הזנת הסירוב נדחה למועד בהצלחה למועד מאוחר יותר!";
+                    tbPanel.Text = "הזנת הסירוב נדחתה בהצלחה למועד מאוחר יותר!";
                 }
             }
             catch (Exception ex)

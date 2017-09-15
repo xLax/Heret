@@ -162,7 +162,6 @@
             this.tbClientNumber.Size = new System.Drawing.Size(83, 31);
             this.tbClientNumber.TabIndex = 13;
             this.tbClientNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbClientNumber.Leave += new System.EventHandler(this.tbClientNumber_Leave);
             // 
             // label5
             // 
@@ -185,7 +184,6 @@
             this.tbContactDate.Size = new System.Drawing.Size(313, 31);
             this.tbContactDate.TabIndex = 15;
             this.tbContactDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbContactDate.Leave += new System.EventHandler(this.tbContactDate_Leave);
             // 
             // label6
             // 
@@ -208,7 +206,6 @@
             this.tbNoFiles.Size = new System.Drawing.Size(313, 31);
             this.tbNoFiles.TabIndex = 17;
             this.tbNoFiles.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbNoFiles.Leave += new System.EventHandler(this.tbNoFiles_Leave);
             // 
             // tbPrisaTempDesc
             // 

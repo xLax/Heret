@@ -593,6 +593,15 @@ namespace HeretPreWorkControl
                 if (Globals.MyJobs == null || Globals.MyJobs.Count == 0)
                 {
                     tbPanel.Text += " אין עבודות לביצוע";
+
+                    if(Globals.UserGroupID == Globals.SalesUserID)
+                    {
+                        Globals.SalesFormInstance.pbMyJobs.Image = Properties.Resources.My_Jobs;
+                    }
+                    else
+                    {
+                        Globals.NotSalesFormInstance.pbMyJobs.Image = Properties.Resources.My_Jobs;
+                    }
                 }
             }
             else

@@ -894,31 +894,35 @@ namespace HeretPreWorkControl
 
         private void chartStations_Click(object sender, EventArgs e)
         {
-            if (lbWorkersInDept.SelectedItem.ToString().Equals("כולם"))
+            if(chartStations.Series["בזמן"].Points.Count > 0 ||
+               chartStations.Series["מאחר"].Points.Count > 0)
             {
-                tbPanel.Text = "עליך לבחור עובד ספציפי על מנת לראות נתונים על העבודות שביצע";
-            }
-            else
-            {
-                tbPanel.Text = String.Empty;
-
-                List<int> lstOrdersId = new List<int>();
-
-                if(this.lstCurrChartData.Count > 0)
+                if (lbWorkersInDept.SelectedItem.ToString().Equals("כולם"))
                 {
-                    foreach (StationData currItem in lstCurrChartData)
-                    {
-                        if (currItem.WorkerName.Equals(lbWorkersInDept.SelectedItem.ToString()))
-                        {
-                            lstOrdersId.Add(currItem.nOrderID);
-                        }
-                    }
-
-                    new AdminOverviewForm(lstOrdersId).ShowDialog();
+                    tbPanel.Text = "עליך לבחור עובד ספציפי על מנת לראות נתונים על העבודות שביצע";
                 }
                 else
                 {
-                    tbPanel.Text = "אין עבודות להצגה על עובד זה";
+                    tbPanel.Text = String.Empty;
+
+                    List<int> lstOrdersId = new List<int>();
+
+                    if (this.lstCurrChartData.Count > 0)
+                    {
+                        foreach (StationData currItem in lstCurrChartData)
+                        {
+                            if (currItem.WorkerName.Equals(lbWorkersInDept.SelectedItem.ToString()))
+                            {
+                                lstOrdersId.Add(currItem.nOrderID);
+                            }
+                        }
+
+                        new AdminOverviewForm(lstOrdersId).ShowDialog();
+                    }
+                    else
+                    {
+                        tbPanel.Text = "אין עבודות להצגה על עובד זה";
+                    }
                 }
             }
         }

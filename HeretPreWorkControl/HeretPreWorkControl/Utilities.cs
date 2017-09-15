@@ -401,7 +401,8 @@ namespace HeretPreWorkControl
             {
                 nStatusID = Globals.SlaLate;
             }
-            else if(strSlaStatus.Equals(Globals.SlaStatusInWork))
+            else if(strSlaStatus.Equals(Globals.SlaStatusInWork) ||
+                    strSlaStatus.Equals("לביצוע מיידי"))
             {
                 nStatusID = Globals.SlaInTime;
             }
@@ -644,7 +645,7 @@ namespace HeretPreWorkControl
             
             if(nSlaHours == Globals.SlaImmediate)
             {
-                if(System.DateTime.Now.Hour - recievedHour.Value.Hours < 1)
+                if(System.DateTime.Now.Hour - recievedHour.Value.Hours < 2)
                 {
                     strSlaStatus = "לביצוע מיידי";
                 }

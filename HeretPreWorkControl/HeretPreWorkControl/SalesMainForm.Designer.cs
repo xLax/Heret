@@ -91,7 +91,7 @@
             // tmrCheckNewJobsTimer
             // 
             this.tmrCheckNewJobsTimer.Enabled = true;
-            this.tmrCheckNewJobsTimer.Interval = 30000;
+            this.tmrCheckNewJobsTimer.Interval = 900000;
             this.tmrCheckNewJobsTimer.Tick += new System.EventHandler(this.tmrCheckNewJobsTimer_Tick);
             // 
             // pbMyJobs

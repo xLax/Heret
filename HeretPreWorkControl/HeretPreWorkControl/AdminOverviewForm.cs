@@ -25,6 +25,7 @@ namespace HeretPreWorkControl
         Boolean isLoadSucceeded = false;
 
         private List<int> lstOrdersID = new List<int>();
+        Boolean isList = false;
         private List<RowData> lstAllViewData = new List<RowData>();
 
         public AdminOverviewForm()
@@ -35,7 +36,7 @@ namespace HeretPreWorkControl
         public AdminOverviewForm(List<int> lstOrders)
         {
             InitializeComponent();
-
+            isList = true;
             this.lstOrdersID = lstOrders;
         }
 
@@ -49,7 +50,7 @@ namespace HeretPreWorkControl
                 {
                     tbPanel.Text = "אין עבודות התואמות את נתוני החיפוש";
                 }
-                else if(this.lstOrdersID != null)
+                else if(isList)
                 {
                     Utilities.GetAllClientsList();
                     Utilities.GetAllUserGroupList();

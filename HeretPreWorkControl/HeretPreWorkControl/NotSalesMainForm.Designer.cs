@@ -99,7 +99,7 @@
             // tmrCheckNewJobsTimer
             // 
             this.tmrCheckNewJobsTimer.Enabled = true;
-            this.tmrCheckNewJobsTimer.Interval = 30000;
+            this.tmrCheckNewJobsTimer.Interval = 900000;
             this.tmrCheckNewJobsTimer.Tick += new System.EventHandler(this.tmrCheckNewJobsTimer_Tick);
             // 
             // pbAllNotifications
@@ -148,7 +148,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblHello;
         private System.Windows.Forms.TextBox tbPanel;
-        private System.Windows.Forms.PictureBox pbMyJobs;
+        public System.Windows.Forms.PictureBox pbMyJobs;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer tmrCheckNewJobsTimer;
         public System.Windows.Forms.PictureBox pbAllNotifications;

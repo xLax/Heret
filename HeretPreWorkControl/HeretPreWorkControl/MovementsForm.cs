@@ -98,6 +98,10 @@ namespace HeretPreWorkControl
 
         private void pbMoveButton_Click(object sender, EventArgs e)
         {
+
+            string strOfferID = string.Empty;
+            DateTime dtSentTime = new DateTime();
+
             Boolean isSucceded = false;
 
             if(dataGridView.SelectedRows.Count > 1)
@@ -116,8 +120,8 @@ namespace HeretPreWorkControl
             {
                 if(nSelectedDepartID == Globals.SalesUserID)
                 {
-                    string strOfferID = tbSalesOfferID.Text.ToString();
-                    DateTime dtSentTime = dtSalesOfferDate.Value.Date;
+                    strOfferID = tbSalesOfferID.Text.ToString();
+                    dtSentTime = dtSalesOfferDate.Value.Date;
 
                     tbl_action_to_dept actionToDept =
                         lstActionsToDepartments.Where(a => a.recieved_department_ID == Globals.SalesUserID &&
@@ -135,28 +139,34 @@ namespace HeretPreWorkControl
                         currentOrder.action_type_id = actionToDept.recieved_department_action_id;
                     }
 
-                    try
+                    if (!isNewOrder)
                     {
-                        using (var context = new DB_Entities())
+                        try
                         {
-                            if (!strOfferID.Trim(' ').Equals(String.Empty))
+                            using (var context = new DB_Entities())
                             {
-                                tbl_offers currOffer = new tbl_offers();
-                                currOffer.offer_id = strOfferID;
-                                currOffer.offer_date = dtSentTime;
-                                currOffer.order_id = currentOrder.ID;
+                                if (!strOfferID.Trim(' ').Equals(String.Empty))
+                                {
+                                    tbl_offers currOffer = new tbl_offers();
+                                    currOffer.offer_id = strOfferID;
+                                    currOffer.offer_date = dtSentTime;
+                                    currOffer.order_id = currentOrder.ID;
 
-                                context.tbl_offers.AddOrUpdate(currOffer);
+                                    context.tbl_offers.AddOrUpdate(currOffer);
+                                }
+
+                                isSucceded = true;
+                                context.SaveChanges();
                             }
-
-                            context.SaveChanges();
-
-                            isSucceded = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                        isSucceded = true;
                     }
                 }
                 else if(nSelectedDepartID == Globals.KadasUserID)
@@ -242,6 +252,28 @@ namespace HeretPreWorkControl
                             {
                                 context.tbl_orders.Add(currentOrder);
                                 context.SaveChanges();
+
+                                if (nSelectedDepartID == Globals.SalesUserID)
+                                {
+                                    try
+                                    {
+                                        if (!strOfferID.Trim(' ').Equals(String.Empty))
+                                        {
+                                            tbl_offers currOffer = new tbl_offers();
+                                            currOffer.offer_id = strOfferID;
+                                            currOffer.offer_date = dtSentTime;
+                                            currOffer.order_id = currentOrder.ID;
+
+                                            context.tbl_offers.AddOrUpdate(currOffer);
+                                        }
+
+                                        context.SaveChanges();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                                    }
+                                }
 
                                 tbPanel.Text = "יצירת העבודה התבצעה בהצלחה";
                             }
