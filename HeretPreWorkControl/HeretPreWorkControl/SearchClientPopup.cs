@@ -85,6 +85,9 @@ namespace HeretPreWorkControl
                 tbClientNumber.Text = lstclients[0].ID.ToString();
                 tbPanel.Text = "נמצאה התאמה";
 
+                tbClientName.BackColor = Color.White;
+                tbClientNumber.BackColor = Color.White;
+
                 tbClientName.Enabled = false;
                 tbClientNumber.Enabled = false;
 
