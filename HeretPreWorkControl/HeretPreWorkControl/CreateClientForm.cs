@@ -204,6 +204,10 @@ namespace HeretPreWorkControl
                     }
                 }
             }
+            else if(e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.tbClientNumber_Leave(new object(), new EventArgs());
+            }
         }
     }
 }

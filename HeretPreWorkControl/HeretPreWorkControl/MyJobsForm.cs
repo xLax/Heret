@@ -207,8 +207,14 @@ namespace HeretPreWorkControl
                     dtBeginDate = SelectedOrder.dep_recieve_date.Value;
                 }
 
-                int nSlaStatusID = Utilities.ConvertSlaStatusToNumber(strSlaStatus);
-                
+                int nSlaStatusID = 0;
+
+                if (nActionTypeBeforeConvertion != 13 &&
+                    nActionTypeBeforeConvertion != 14)
+                {
+                    nSlaStatusID = Utilities.ConvertSlaStatusToNumber(strSlaStatus);
+                }
+
                 int nActionTypeID =
                     Utilities.ConvertIfNeeded
                         (nActionTypeBeforeConvertion);

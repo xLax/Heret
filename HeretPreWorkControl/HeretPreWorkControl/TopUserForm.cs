@@ -25,6 +25,7 @@ namespace HeretPreWorkControl
             lblHello.Text = "שלום " + Globals.Name;
 
             tmrSpecialApproveTimer_Tick(new object(), new EventArgs());
+            tmrLateOrdersInsertTimer_Tick(new object(), new EventArgs());
         }
 
         private void pbAddUser_Click(object sender, EventArgs e)

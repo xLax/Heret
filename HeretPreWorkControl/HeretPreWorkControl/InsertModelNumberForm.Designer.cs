@@ -62,6 +62,7 @@
             this.tbModelNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbModelNum.Size = new System.Drawing.Size(236, 31);
             this.tbModelNum.TabIndex = 26;
+            this.tbModelNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 

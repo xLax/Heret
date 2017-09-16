@@ -99,6 +99,7 @@
             this.tbSalesOfferID.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbSalesOfferID.Size = new System.Drawing.Size(121, 31);
             this.tbSalesOfferID.TabIndex = 21;
+            this.tbSalesOfferID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblSalesOfferID
             // 

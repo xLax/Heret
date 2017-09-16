@@ -57,6 +57,7 @@ namespace HeretPreWorkControl
                     if(client != null)
                     {
                         tbClientName.Text = client.name;
+                        tbPanel.Text = "";
 
                         SetFieldsEnabled(true);
                     }
@@ -145,7 +146,12 @@ namespace HeretPreWorkControl
                         strToConvert = tbAmount.Text.ToString().Trim(' ');
                         isConvertionOk = int.TryParse(strToConvert, out nAmount);
 
-                        if (!isConvertionOk)
+                        if(strToConvert.Equals(string.Empty))
+                        {
+                            tbAmount.BackColor = Color.Tomato;
+                            tbPanel.Text = "שגיאה ! השדה כמות ריק !";
+                        }
+                        else if (!isConvertionOk)
                         {
                             tbAmount.BackColor = Color.Tomato;
                             tbPanel.Text = "שגיאה ! אנא הזן ספרות בשדה כמות";
@@ -221,7 +227,8 @@ namespace HeretPreWorkControl
             }
             else
             {
-                tbPanel.Text = "עליך למלא את השדה מספר קבצים";
+                tbFilesNo.BackColor = Color.Tomato;
+                tbPanel.Text = "שגיאה! השדה מספר קבצים ריק !";
             }
 
             if(isSucceeded)

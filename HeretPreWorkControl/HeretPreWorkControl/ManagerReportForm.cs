@@ -346,7 +346,8 @@ namespace HeretPreWorkControl
                     else
                     {
                         List<tbl_sla_data> lstMySlaData = lstSlaData
-                            .Where(a => a.employee_name.Equals(strEmpName))
+                            .Where(a => a.employee_name != null &&
+                                        a.employee_name.Equals(strEmpName))
                                     .ToList<tbl_sla_data>();
 
                         for (int i = 0; i < 7; i++)
@@ -571,6 +572,7 @@ namespace HeretPreWorkControl
             {
                 chartWorkers.Series["בזמן"].Points.AddXY(row.DayName, row.workInProcess);
                 chartWorkers.Series["מאחר"].Points.AddXY(row.DayName, row.lateWorks);
+                tbPanel.Text = "";
             }
         }
 
@@ -827,6 +829,7 @@ namespace HeretPreWorkControl
             {
                 chartStations.Series["בזמן"].Points.AddXY(row.WorkerName, row.dDaysInTime);
                 chartStations.Series["מאחר"].Points.AddXY(row.WorkerName, row.dDaysLate);
+                tbPanel.Text = "";
             }
         }
 
