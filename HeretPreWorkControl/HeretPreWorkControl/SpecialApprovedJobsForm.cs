@@ -143,6 +143,8 @@ namespace HeretPreWorkControl
                 if (Globals.SpecialApprovedJobs == null || Globals.SpecialApprovedJobs.Count == 0)
                 {
                     tbPanel.Text += " אין קידום עבודות לאישור";
+
+                    Globals.TopUserFormInstance.pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
                 }
             }
             else

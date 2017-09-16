@@ -241,7 +241,7 @@
         private System.Windows.Forms.Label lblCreateUser;
         private System.Windows.Forms.PictureBox pbAddUser;
         private System.Windows.Forms.Label lblSpecialApprove;
-        private System.Windows.Forms.PictureBox pbSpecialApprove;
+        public System.Windows.Forms.PictureBox pbSpecialApprove;
         private System.Windows.Forms.Label lblStatistics;
         private System.Windows.Forms.PictureBox pbStatistics;
         private System.Windows.Forms.TextBox tbPanel;

@@ -228,9 +228,9 @@ namespace HeretPreWorkControl
                 {
                     if (lstActionsToDept.Count == 1)
                     {
-                        if(isSpecial)
+                        if (isSpecial)
                         {
-                            if(Utilities.TransferJobAndActionToNext(SelectedOrder, isSpecial))
+                            if (Utilities.TransferJobAndActionToNext(SelectedOrder, isSpecial))
                             {
                                 tbPanel.Text = "העברת העבודה התבצעה בהצלחה";
                                 MyJobsForm.isJobSucceeded = true;
@@ -240,7 +240,7 @@ namespace HeretPreWorkControl
                                 tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                             }
                         }
-                        else if(Globals.UserGroupID == Globals.KadasUserID &&
+                        else if (Globals.UserGroupID == Globals.KadasUserID &&
                                 SelectedOrder.special_department_id != null)
                         {
                             if (lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
@@ -344,7 +344,7 @@ namespace HeretPreWorkControl
                             }
                             else if (result == DialogResult.No)
                             {
-                                SelectedOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.StudioUserID,SelectedOrder.studio_work);
+                                SelectedOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.StudioUserID, SelectedOrder.studio_work);
                                 SelectedOrder.dep_recieve_date = System.DateTime.Now.Date;
                                 SelectedOrder.dep_recieve_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
 
@@ -370,7 +370,7 @@ namespace HeretPreWorkControl
                                 }
                             }
                         }
-                        else if(lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
+                        else if (lstActionsToDept[0].action_ID == Globals.ActionTypeKadasWaitClient)
                         {
                             DialogResult result = MessageBox.Show("האם הלקוח אישר  ?", "אישור הלקוח", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
 
@@ -421,12 +421,16 @@ namespace HeretPreWorkControl
                                 }
                             }
                         }
-                        else if((SelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
+                        else if ((SelectedOrder.action_type_id >= Globals.ActionTypeKadasApprovePDF &&
                                  SelectedOrder.action_type_id <= Globals.ActionTypeKadasGraphicUpdate &&
-                                 SelectedOrder.kadas_agent_name == null ) ||
+                                 SelectedOrder.kadas_agent_name == null) ||
                                 (SelectedOrder.action_type_id >= Globals.ActionTypeStudioOnlyPrisa &&
                                  SelectedOrder.action_type_id <= Globals.ActionTypeStudioCutModel &&
-                                 SelectedOrder.studio_agent_name == null ))
+                                 SelectedOrder.studio_agent_name == null) ||
+                                (SelectedOrder.action_type_id == 24 &&
+                                 SelectedOrder.studio_agent_name == null) ||
+                                (SelectedOrder.action_type_id == 25 &&
+                                 SelectedOrder.kadas_agent_name == null))
                         {
                             tbPanel.Text = "שים לב! עליך למנות עובד לביצוע לפני ביצוע העבודה";
                         }
@@ -789,6 +793,28 @@ namespace HeretPreWorkControl
                     if (this.ListSelectedOrder.studio_agent_name != null)
                     {
                         lbEmployees.SelectedItem = this.ListSelectedOrder.studio_agent_name;
+                    }
+                }
+                else if(this.ListSelectedOrder.action_type_id == 24)
+                {
+                    pbSetEmployee.Visible = true;
+                    lblEmployee.Visible = true;
+                    lbEmployees.Visible = true;
+
+                    if (this.ListSelectedOrder.studio_agent_name != null)
+                    {
+                        lbEmployees.SelectedItem = this.ListSelectedOrder.studio_agent_name;
+                    }
+                }
+                else if(this.ListSelectedOrder.action_type_id == 25)
+                {
+                    pbSetEmployee.Visible = true;
+                    lblEmployee.Visible = true;
+                    lbEmployees.Visible = true;
+
+                    if (this.ListSelectedOrder.kadas_agent_name != null)
+                    {
+                        lbEmployees.SelectedItem = this.ListSelectedOrder.kadas_agent_name;
                     }
                 }
                 else
