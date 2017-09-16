@@ -126,6 +126,7 @@ namespace HeretPreWorkControl
         public static List<tbl_sla_actions> AllActions;
         public static List<tbl_action_to_dept> AllActionToDept;
         public static List<tbl_user_groups> AllUserGroups;
+        public static List<tbl_users> AllUsers;
         public static List<tbl_employees> AllMyEmployees;
 
         public static List<tbl_orders> MyDeclinedOrders;

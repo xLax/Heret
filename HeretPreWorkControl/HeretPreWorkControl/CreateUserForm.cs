@@ -14,6 +14,7 @@ namespace HeretPreWorkControl
     {
         private int ChosenUserTypeID;
         private tbl_users usrNewUser;
+        private tbl_users[] users;
 
         public CreateUserForm()
         {
@@ -25,6 +26,9 @@ namespace HeretPreWorkControl
             lbUserType.Items.Add(Globals.OrdersUserType);
 
             this.usrNewUser = new tbl_users();
+
+            Utilities.GetAllUserList();
+
             this.ChosenUserTypeID = 0;
         }
 
@@ -32,33 +36,33 @@ namespace HeretPreWorkControl
         {
             string strUserName = tbUserName.Text.Trim(' ');
 
+            tbWorkerName.BackColor = Color.White;
+            tbUserName.BackColor = Color.White;
+            tbPassword.BackColor = Color.White;
+            lbUserType.BackColor = Color.White;
+
             if (tbWorkerName.Text == "")
             {
                 tbPanel.Text = "לא הוזן שם עובד !";
                 tbWorkerName.BackColor = Color.Tomato;
             }
             else if (tbUserName.Text == "")
-            {
-                tbWorkerName.BackColor = Color.White;
+            {                
                 tbPanel.Text = "לא הוזן שם משתמש !";
                 tbUserName.BackColor = Color.Tomato;
             }
             else if (tbPassword.Text == "")
-            {
-                tbUserName.BackColor = Color.White;
+            {                
                 tbPanel.Text = "לא הוזנה סיסמא !";
                 tbPassword.BackColor = Color.Tomato;
             }
             else if (lbUserType.SelectedItem == null)
-            {
-                tbPassword.BackColor = Color.White;
+            {                
                 tbPanel.Text = "לא נבחר סוג משתמש !";
                 lbUserType.BackColor = Color.Tomato;
             }
             else
-            {
-                lbUserType.BackColor = Color.White;
-
+            {            
                 // Set the info of the new user
                 this.usrNewUser.name = tbWorkerName.Text;
                 this.usrNewUser.user_group_id = ChosenUserTypeID;
@@ -74,11 +78,25 @@ namespace HeretPreWorkControl
                                                         .FirstOrDefault<tbl_users>();
                         if (userData != null)
                         {
-                            tbPanel.Text = "שם המשתמש קיים במערכת ! אנא הזן שם משתמש אחר";
+                            userData.name = tbWorkerName.Text;
+                            userData.password = tbPassword.Text;
+                            userData.user_group_id = ChosenUserTypeID;
+
+                            context.tbl_users.Attach(userData);
+                            var Entry = context.Entry(userData);
+
+                            Entry.Property(o => o.name).IsModified = true;
+                            Entry.Property(o => o.password).IsModified = true;
+                            Entry.Property(o => o.user_group_id).IsModified = true;
+                            
+                            context.SaveChanges();
+
+                            tbPanel.Text = "המשתמש עודכן בהצלחה !";
                         }
                         else
                         {
                             context.tbl_users.Add(this.usrNewUser);
+                            Globals.AllUsers.Add(this.usrNewUser);
                             context.SaveChanges();
                             tbPanel.Text = "המשתמש נוצר בהצלחה !";
                         }
@@ -111,6 +129,63 @@ namespace HeretPreWorkControl
                 default:
                     break;
 
+            }
+        }
+
+        private void CreateUserForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                tbPanel.Text = String.Empty;
+                string strUserName = tbUserName.Text.Trim(' ');
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        var userData = context.tbl_users
+                                        .Where(s => s.user_name == strUserName)
+                                                        .FirstOrDefault<tbl_users>();
+                        if (userData != null)
+                        {
+                            tbWorkerName.Text = userData.name;
+                            tbUserName.Text = userData.user_name;
+                            tbPassword.Text = userData.password;
+
+                            switch (userData.user_group_id)
+                            {
+                                case Globals.SalesUserID:
+                                    lbUserType.SelectedItem = Globals.SalesUserType;
+                                    break;
+                                case Globals.StudioUserID:
+                                    lbUserType.SelectedItem = Globals.StudioUserType;
+                                    break;
+                                case Globals.KadasUserID:
+                                    lbUserType.SelectedItem = Globals.KadasUserType;
+                                    break;
+                                case Globals.OrdersUserID:
+                                    lbUserType.SelectedItem = Globals.OrdersUserType;
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+                            lbUserType_SelectedIndexChanged(sender, e);
+                            tbPanel.Text = "שם המשתמש נמצא !";
+                        }
+                        else
+                        {
+                            tbWorkerName.Text = String.Empty;
+                            tbPassword.Text = String.Empty;
+                            tbPanel.Text = "שם משתמש זה אינו קיים במערכת !";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
             }
         }
     }

@@ -194,6 +194,24 @@ namespace HeretPreWorkControl
             }
         }
 
+        public static void GetAllUserList()
+        {
+            List<tbl_users> lstUsers;
+
+            if (Globals.AllUsers == null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        lstUsers = context.tbl_users.ToList<tbl_users>();
+                        Globals.AllUsers = lstUsers;
+                    }
+                    catch (Exception ex) { }
+                }
+            }
+        }
+
         private static void SetAllUserGroupsList(List<tbl_user_groups> lstUserGroups)
         {
             Globals.AllUserGroups = lstUserGroups;
