@@ -42,6 +42,7 @@
             this.InsertButton = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pbCreateUserTitle = new System.Windows.Forms.PictureBox();
+            this.cbShowPass = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.InsertButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCreateUserTitle)).BeginInit();
@@ -121,11 +122,11 @@
             this.tbPassword.Location = new System.Drawing.Point(241, 222);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
             this.tbPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbPassword.Size = new System.Drawing.Size(311, 37);
             this.tbPassword.TabIndex = 11;
             this.tbPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbPassword.UseSystemPasswordChar = true;
             // 
             // tbPanel
             // 
@@ -200,12 +201,26 @@
             this.pbCreateUserTitle.TabIndex = 0;
             this.pbCreateUserTitle.TabStop = false;
             // 
+            // cbShowPass
+            // 
+            this.cbShowPass.AutoSize = true;
+            this.cbShowPass.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.cbShowPass.Location = new System.Drawing.Point(62, 344);
+            this.cbShowPass.Margin = new System.Windows.Forms.Padding(4);
+            this.cbShowPass.Name = "cbShowPass";
+            this.cbShowPass.Size = new System.Drawing.Size(133, 28);
+            this.cbShowPass.TabIndex = 44;
+            this.cbShowPass.Text = "הצג סיסמא";
+            this.cbShowPass.UseVisualStyleBackColor = true;
+            this.cbShowPass.CheckedChanged += new System.EventHandler(this.cbMoveToManager_CheckedChanged);
+            // 
             // CreateUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(593, 450);
+            this.Controls.Add(this.cbShowPass);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.InsertButton);
             this.Controls.Add(this.lbUserType);
@@ -253,5 +268,6 @@
         private System.Windows.Forms.ComboBox lbUserType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox InsertButton;
+        private System.Windows.Forms.CheckBox cbShowPass;
     }
 }

@@ -188,5 +188,17 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void cbMoveToManager_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbShowPass.Checked == true)
+            {
+                tbPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tbPassword.UseSystemPasswordChar = true;
+            }
+        }
     }
 }
