@@ -146,6 +146,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -463,7 +471,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PreworkControlSetup"
         "ProductCode" = "8:{3F889AF2-56BA-4D62-A431-036BCFED760F}"
-        "PackageCode" = "8:{4811102B-B0D5-42ED-A220-F0C49E91C82D}"
+        "PackageCode" = "8:{EE3D25F5-10CF-47E7-9E53-5034B5AA4C88}"
         "UpgradeCode" = "8:{E4FA25DE-05E4-4E0C-84EE-8085E9D23C95}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -471,7 +479,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:Heret Prework"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:PreworkControlSetup"
