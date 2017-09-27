@@ -67,6 +67,8 @@
             this.cbOrderNumbers = new System.Windows.Forms.ComboBox();
             this.tbModelNumber = new System.Windows.Forms.TextBox();
             this.lblModelNumber = new System.Windows.Forms.Label();
+            this.tbClientOrderNum = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSalesUpdate)).BeginInit();
@@ -387,7 +389,7 @@
             this.tbPanel.BackColor = System.Drawing.SystemColors.Info;
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbPanel.Location = new System.Drawing.Point(12, 441);
+            this.tbPanel.Location = new System.Drawing.Point(12, 453);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(930, 29);
@@ -490,12 +492,36 @@
             this.lblModelNumber.TabIndex = 83;
             this.lblModelNumber.Text = "מספר דגם :";
             // 
+            // tbClientOrderNum
+            // 
+            this.tbClientOrderNum.BackColor = System.Drawing.SystemColors.Info;
+            this.tbClientOrderNum.Enabled = false;
+            this.tbClientOrderNum.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.tbClientOrderNum.Location = new System.Drawing.Point(245, 414);
+            this.tbClientOrderNum.Name = "tbClientOrderNum";
+            this.tbClientOrderNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbClientOrderNum.Size = new System.Drawing.Size(218, 31);
+            this.tbClientOrderNum.TabIndex = 86;
+            this.tbClientOrderNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 419);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 20);
+            this.label1.TabIndex = 85;
+            this.label1.Text = "מספר הזמנת לקוח :";
+            // 
             // ViewAllOrderDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(952, 481);
+            this.ClientSize = new System.Drawing.Size(952, 491);
+            this.Controls.Add(this.tbClientOrderNum);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbModelNumber);
             this.Controls.Add(this.lblModelNumber);
             this.Controls.Add(this.cbOrderNumbers);
@@ -593,5 +619,7 @@
         private System.Windows.Forms.ComboBox cbOrderNumbers;
         private System.Windows.Forms.TextBox tbModelNumber;
         private System.Windows.Forms.Label lblModelNumber;
+        private System.Windows.Forms.TextBox tbClientOrderNum;
+        private System.Windows.Forms.Label label1;
     }
 }

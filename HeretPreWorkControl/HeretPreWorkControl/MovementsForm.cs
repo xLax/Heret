@@ -250,7 +250,21 @@ namespace HeretPreWorkControl
                         {
                             if(this.isNewOrder)
                             {
+                                tbl_sla_data currSlaData = new tbl_sla_data();
+
+                                currSlaData.ID = Utilities.GetNextSlaDataID();
+                                currSlaData.user_id = Globals.SalesUserID;
+                                currSlaData.order_id = currentOrder.ID;
+                                currSlaData.sla_id = 0;
+                                currSlaData.status_id = Globals.SlaInTime;
+                                currSlaData.begin_date = currentOrder.creation_date.Value;
+                                currSlaData.end_date = currentOrder.creation_date.Value;
+                                currSlaData.employee_name = currentOrder.sales_agent_name;
+
+                                context.tbl_sla_data.Add(currSlaData);
+
                                 context.tbl_orders.Add(currentOrder);
+
                                 context.SaveChanges();
 
                                 if (nSelectedDepartID == Globals.SalesUserID)

@@ -32,7 +32,7 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    this.OrderToInsert.client_order_id = int.Parse(tbOrderNum.Text.ToString());
+                    this.OrderToInsert.client_order_id = tbOrderNum.Text.ToString();
                     this.OrderToInsert.curr_departnent_id = Globals.SalesUserID;
 
                     this.OrderToInsert.action_type_id = 

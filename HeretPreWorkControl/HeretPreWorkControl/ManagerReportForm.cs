@@ -48,11 +48,11 @@ namespace HeretPreWorkControl
 
         public ManagerReportForm()
         {
-            Utilities.GetAllSlaData();
-            Utilities.GetAllActionsList();
-
             InitializeComponent();
 
+            Utilities.GetAllUserList();
+            Utilities.GetAllSlaData();
+            Utilities.GetAllActionsList();
             Utilities.AllEmployeesForResponsible();
             Utilities.GetAllActionsList();
             Utilities.GetAllUserGroupList();
@@ -387,7 +387,8 @@ namespace HeretPreWorkControl
             else
             {
                 List<tbl_sla_data> lstMySlaData = lstSlaData
-                            .Where(a => a.employee_name.Equals(lbWorkersInDept.SelectedItem.ToString()))
+                            .Where(a => a.employee_name != null &&
+                                        a.employee_name.Equals(lbWorkersInDept.SelectedItem.ToString()))
                                     .ToList<tbl_sla_data>();
 
                 StationData currStationData = new StationData();
@@ -681,7 +682,8 @@ namespace HeretPreWorkControl
                                 else
                                 {
                                     List<tbl_sla_data> lstMySlaData = lstSlaDeptData
-                                        .Where(a => a.employee_name.Equals(strEmpName))
+                                        .Where(a => a.employee_name != null &&
+                                                    a.employee_name.Equals(strEmpName))
                                                 .ToList<tbl_sla_data>();
 
                                     for (int i = 0; i < nDateDifference; i++)
@@ -721,7 +723,8 @@ namespace HeretPreWorkControl
                         else
                         {
                             List<tbl_sla_data> lstMySlaData = lstSlaDeptData
-                                        .Where(a => a.employee_name.Equals(lbWorkersInDept.SelectedItem.ToString()))
+                                        .Where(a => a.employee_name != null &&
+                                                    a.employee_name.Equals(lbWorkersInDept.SelectedItem.ToString()))
                                                 .ToList<tbl_sla_data>();
 
                             StationData currStationData = new StationData();
@@ -782,7 +785,8 @@ namespace HeretPreWorkControl
             }
 
             if (rbStationMonth.Checked &&
-                this.dtFrom.Value.Day == 1)
+                this.dtFrom.Value.Day == 1 &&
+                lstSlaDeptData.Count > 0)
             {
                 Dictionary<string, StationData> dcData = new Dictionary<string, StationData>();
                 string strFirstEmp = string.Empty;
@@ -843,11 +847,24 @@ namespace HeretPreWorkControl
                         Where(a => a.name.Equals(lbDepartment.SelectedItem.ToString()))
                             .Single<tbl_user_groups>().ID;
 
-            foreach (tbl_employees employee in allEmployees)
+            if (nSelectedDepartmentID == Globals.SalesUserID)
             {
-                if(employee.Department_id == nSelectedDepartmentID)
+                foreach (tbl_users user in Globals.AllUsers)
                 {
-                    lbWorkersInDept.Items.Add(employee.name);
+                    if(user.user_group_id == Globals.SalesUserID)
+                    {
+                        lbWorkersInDept.Items.Add(user.name);
+                    }
+                }
+            }
+            else
+            {
+                foreach (tbl_employees employee in allEmployees)
+                {
+                    if (employee.Department_id == nSelectedDepartmentID)
+                    {
+                        lbWorkersInDept.Items.Add(employee.name);
+                    }
                 }
             }
 

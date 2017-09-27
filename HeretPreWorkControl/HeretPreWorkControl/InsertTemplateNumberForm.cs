@@ -44,6 +44,7 @@ namespace HeretPreWorkControl
 
                             context.SaveChanges();
 
+                            MyJobsForm.isJobSucceeded = true;
                             tbPanel.Text = "מספר התבנית נשמר בהצלחה";
                         }
                         catch (Exception ex)

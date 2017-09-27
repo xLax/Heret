@@ -500,6 +500,11 @@ namespace HeretPreWorkControl
                             }
                         }
 
+                        if(MyJobsForm.isJobSucceeded)
+                        {
+                            this.SilentRefresh();
+                        }
+
                         if(MyJobsForm.isJobSucceeded &&
                            nSlaStatusID != 0)
                         {
@@ -700,11 +705,16 @@ namespace HeretPreWorkControl
                 if (this.ListSelectedOrder != null)
                 {
                     if(this.ListSelectedOrder.special_department_id != null &&
-                       Globals.UserGroupID == Globals.KadasUserID)
+                      ( Globals.UserGroupID == Globals.KadasUserID || 
+                        Globals.UserGroupID == Globals.OrdersUserID))
                     {
                         if (this.ListSelectedOrder.special_department_id == Globals.KadasUserID)
                         {
                             this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                        }
+                        else if(this.ListSelectedOrder.special_department_id == Globals.OrdersUserID)
+                        {
+                            this.ListSelectedOrder.orders_agent_name = lbEmployees.SelectedItem.ToString();
                         }
                     }
                     else
@@ -716,6 +726,10 @@ namespace HeretPreWorkControl
                         else if (this.ListSelectedOrder.curr_departnent_id == Globals.KadasUserID)
                         {
                             this.ListSelectedOrder.kadas_agent_name = lbEmployees.SelectedItem.ToString();
+                        }
+                        else if(this.ListSelectedOrder.curr_departnent_id == Globals.OrdersUserID)
+                        {
+                            this.ListSelectedOrder.orders_agent_name = lbEmployees.SelectedItem.ToString();
                         }
                     }
 
@@ -730,6 +744,7 @@ namespace HeretPreWorkControl
 
                             Entry.Property(o => o.kadas_agent_name).IsModified = true;
                             Entry.Property(o => o.studio_agent_name).IsModified = true;
+                            Entry.Property(o => o.orders_agent_name).IsModified = true;
 
                             context.SaveChanges();
 
@@ -784,7 +799,8 @@ namespace HeretPreWorkControl
                     }
                 }
                 else if (this.ListSelectedOrder.action_type_id >= Globals.ActionTypeStudioOnlyPrisa &&
-                         this.ListSelectedOrder.action_type_id <= Globals.ActionTypeStudioCutModel)
+                         this.ListSelectedOrder.action_type_id <= Globals.ActionTypeStudioCutModel ||
+                         this.ListSelectedOrder.action_type_id == 24)
                 {
                     pbSetEmployee.Visible = true;
                     lblEmployee.Visible = true;
@@ -795,26 +811,15 @@ namespace HeretPreWorkControl
                         lbEmployees.SelectedItem = this.ListSelectedOrder.studio_agent_name;
                     }
                 }
-                else if(this.ListSelectedOrder.action_type_id == 24)
+                else if(this.ListSelectedOrder.action_type_id == Globals.ActionTypeInsertOrderID)
                 {
                     pbSetEmployee.Visible = true;
                     lblEmployee.Visible = true;
                     lbEmployees.Visible = true;
 
-                    if (this.ListSelectedOrder.studio_agent_name != null)
+                    if (this.ListSelectedOrder.orders_agent_name != null)
                     {
-                        lbEmployees.SelectedItem = this.ListSelectedOrder.studio_agent_name;
-                    }
-                }
-                else if(this.ListSelectedOrder.action_type_id == 25)
-                {
-                    pbSetEmployee.Visible = true;
-                    lblEmployee.Visible = true;
-                    lbEmployees.Visible = true;
-
-                    if (this.ListSelectedOrder.kadas_agent_name != null)
-                    {
-                        lbEmployees.SelectedItem = this.ListSelectedOrder.kadas_agent_name;
+                        lbEmployees.SelectedItem = this.ListSelectedOrder.orders_agent_name;
                     }
                 }
                 else

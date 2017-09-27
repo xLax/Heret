@@ -54,6 +54,7 @@ namespace HeretPreWorkControl
             tbFilesNo.Text = this.order.files_number + "";
             tbTemplateNumber.Text = this.order.template_id;
             tbPrisaNumber.Text = this.order.prisa_id;
+            tbClientOrderNum.Text = this.order.client_order_id;
             tbProjDesc.Text = this.order.project_desc;
             tbAmount.Text = this.order.amount + "";
             lbStudioWork.SelectedItem = this.order.studio_work;
@@ -152,6 +153,7 @@ namespace HeretPreWorkControl
             tbFilesNo.Enabled = this.isEnabled;
             tbTemplateNumber.Enabled = this.isEnabled;
             tbPrisaNumber.Enabled = this.isEnabled;
+            tbClientOrderNum.Enabled = this.isEnabled;
             tbProjDesc.Enabled = this.isEnabled;
             tbAmount.Enabled = this.isEnabled;
             lbStudioWork.Enabled = this.isEnabled;
@@ -170,6 +172,7 @@ namespace HeretPreWorkControl
             tbFilesNo.BackColor = color;
             tbTemplateNumber.BackColor = color;
             tbPrisaNumber.BackColor = color;
+            tbClientOrderNum.BackColor = color;
             tbProjDesc.BackColor = color;
             tbAmount.BackColor = color;
             lbStudioWork.BackColor = color;
@@ -194,6 +197,7 @@ namespace HeretPreWorkControl
             this.order.contact_date = dtContactDate.Value.Date;
             this.order.template_id = tbTemplateNumber.Text;
             this.order.prisa_id = tbPrisaNumber.Text;
+            this.order.client_order_id = tbClientOrderNum.Text;
             this.order.project_desc = tbProjDesc.Text;
             this.order.model_id = tbModelNumber.Text;
             //this.order.order_number = tbOrderNumber.Text;

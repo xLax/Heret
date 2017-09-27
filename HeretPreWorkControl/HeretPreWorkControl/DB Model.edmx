@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Department_id" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
@@ -59,7 +59,7 @@
           <Property Name="creation_date" Type="date" />
           <Property Name="contact_date" Type="date" />
           <Property Name="files_number" Type="int" />
-          <Property Name="client_order_id" Type="int" />
+          <Property Name="client_order_id" Type="varchar" MaxLength="45" />
           <Property Name="template_id" Type="varchar" MaxLength="45" />
           <Property Name="prisa_id" Type="varchar" MaxLength="45" />
           <Property Name="model_id" Type="varchar" MaxLength="45" />
@@ -466,7 +466,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Department_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Nullable="false" Unicode="true" />
           <NavigationProperty Name="tbl_user_groups" Relationship="Self.departments" FromRole="tbl_employees" ToRole="tbl_user_groups" />
@@ -490,7 +490,7 @@
           <Property Name="creation_date" Type="DateTime" />
           <Property Name="contact_date" Type="DateTime" />
           <Property Name="files_number" Type="Int32" />
-          <Property Name="client_order_id" Type="Int32" />
+          <Property Name="client_order_id" Type="String" />
           <Property Name="template_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="prisa_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="project_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />

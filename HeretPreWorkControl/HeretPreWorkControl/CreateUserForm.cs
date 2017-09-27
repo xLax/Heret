@@ -24,6 +24,7 @@ namespace HeretPreWorkControl
             lbUserType.Items.Add(Globals.StudioUserType);
             lbUserType.Items.Add(Globals.KadasUserType);
             lbUserType.Items.Add(Globals.OrdersUserType);
+            lbUserType.Items.Add(Globals.AdminUserType);
 
             this.usrNewUser = new tbl_users();
 
@@ -62,8 +63,9 @@ namespace HeretPreWorkControl
                 lbUserType.BackColor = Color.Tomato;
             }
             else
-            {            
+            {
                 // Set the info of the new user
+                this.usrNewUser.ID = Utilities.GetNextUserID();
                 this.usrNewUser.name = tbWorkerName.Text;
                 this.usrNewUser.user_group_id = ChosenUserTypeID;
                 this.usrNewUser.user_name = tbUserName.Text;
@@ -95,10 +97,17 @@ namespace HeretPreWorkControl
                         }
                         else
                         {
-                            context.tbl_users.Add(this.usrNewUser);
-                            Globals.AllUsers.Add(this.usrNewUser);
-                            context.SaveChanges();
-                            tbPanel.Text = "המשתמש נוצר בהצלחה !";
+                            if (this.usrNewUser.user_group_id == Globals.AdminID)
+                            {
+                                tbPanel.Text = "אין באפשרותך ליצור משתמש מנהל חדש";
+                            }
+                            else
+                            {
+                                context.tbl_users.Add(this.usrNewUser);
+                                Globals.AllUsers.Add(this.usrNewUser);
+                                context.SaveChanges();
+                                tbPanel.Text = "המשתמש נוצר בהצלחה !";
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -124,6 +133,9 @@ namespace HeretPreWorkControl
                     break;
                 case Globals.OrdersUserType:
                     ChosenUserTypeID = Globals.OrdersUserID;
+                    break;
+                case Globals.AdminUserType:
+                    ChosenUserTypeID = Globals.AdminID;
                     break;
 
                 default:
@@ -165,6 +177,9 @@ namespace HeretPreWorkControl
                                     break;
                                 case Globals.OrdersUserID:
                                     lbUserType.SelectedItem = Globals.OrdersUserType;
+                                    break;
+                                case Globals.AdminID:
+                                    lbUserType.SelectedItem = Globals.AdminUserType;
                                     break;
 
                                 default:

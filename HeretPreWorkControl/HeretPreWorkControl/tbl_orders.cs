@@ -29,7 +29,7 @@ namespace HeretPreWorkControl
         public Nullable<System.DateTime> creation_date { get; set; }
         public Nullable<System.DateTime> contact_date { get; set; }
         public Nullable<int> files_number { get; set; }
-        public Nullable<int> client_order_id { get; set; }
+        public string client_order_id { get; set; }
         public string template_id { get; set; }
         public string prisa_id { get; set; }
         public string project_desc { get; set; }

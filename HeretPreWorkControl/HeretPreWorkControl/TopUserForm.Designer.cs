@@ -44,11 +44,14 @@
             this.pbHeret = new System.Windows.Forms.PictureBox();
             this.tmrLateOrdersInsertTimer = new System.Windows.Forms.Timer(this.components);
             this.tmrSpecialApproveTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.pbCreateEmloyee = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatistics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecialApprove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCreateEmloyee)).BeginInit();
             this.SuspendLayout();
             // 
             // lblHello
@@ -87,7 +90,7 @@
             // 
             this.lblSpecialApprove.AutoSize = true;
             this.lblSpecialApprove.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpecialApprove.Location = new System.Drawing.Point(101, 365);
+            this.lblSpecialApprove.Location = new System.Drawing.Point(29, 365);
             this.lblSpecialApprove.Name = "lblSpecialApprove";
             this.lblSpecialApprove.Size = new System.Drawing.Size(216, 27);
             this.lblSpecialApprove.TabIndex = 21;
@@ -97,7 +100,7 @@
             // 
             this.lblStatistics.AutoSize = true;
             this.lblStatistics.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatistics.Location = new System.Drawing.Point(400, 365);
+            this.lblStatistics.Location = new System.Drawing.Point(452, 365);
             this.lblStatistics.Name = "lblStatistics";
             this.lblStatistics.Size = new System.Drawing.Size(148, 27);
             this.lblStatistics.TabIndex = 25;
@@ -126,7 +129,7 @@
             // 
             this.pbStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStatistics.Image = global::HeretPreWorkControl.Properties.Resources.Statistics_Icon;
-            this.pbStatistics.Location = new System.Drawing.Point(424, 264);
+            this.pbStatistics.Location = new System.Drawing.Point(474, 264);
             this.pbStatistics.Name = "pbStatistics";
             this.pbStatistics.Size = new System.Drawing.Size(102, 98);
             this.pbStatistics.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -138,7 +141,7 @@
             // 
             this.pbSpecialApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSpecialApprove.Image = global::HeretPreWorkControl.Properties.Resources.Special_Approval_Icon;
-            this.pbSpecialApprove.Location = new System.Drawing.Point(156, 264);
+            this.pbSpecialApprove.Location = new System.Drawing.Point(82, 264);
             this.pbSpecialApprove.Name = "pbSpecialApprove";
             this.pbSpecialApprove.Size = new System.Drawing.Size(102, 98);
             this.pbSpecialApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -194,12 +197,36 @@
             this.tmrSpecialApproveTimer.Interval = 1800000;
             this.tmrSpecialApproveTimer.Tick += new System.EventHandler(this.tmrSpecialApproveTimer_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("David", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(292, 365);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 27);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "צור עובד";
+            // 
+            // pbCreateEmloyee
+            // 
+            this.pbCreateEmloyee.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCreateEmloyee.Image = global::HeretPreWorkControl.Properties.Resources.Add_Employee_Icon;
+            this.pbCreateEmloyee.Location = new System.Drawing.Point(292, 264);
+            this.pbCreateEmloyee.Name = "pbCreateEmloyee";
+            this.pbCreateEmloyee.Size = new System.Drawing.Size(102, 98);
+            this.pbCreateEmloyee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCreateEmloyee.TabIndex = 27;
+            this.pbCreateEmloyee.TabStop = false;
+            this.pbCreateEmloyee.Click += new System.EventHandler(this.pbCreateEmloyee_Click);
+            // 
             // TopUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(646, 443);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pbCreateEmloyee);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.lblStatistics);
             this.Controls.Add(this.pbStatistics);
@@ -227,6 +254,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAddUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeret)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCreateEmloyee)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,5 +276,7 @@
         private System.Windows.Forms.Button btnGetClientsFromExcel;
         private System.Windows.Forms.Timer tmrLateOrdersInsertTimer;
         private System.Windows.Forms.Timer tmrSpecialApproveTimer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pbCreateEmloyee;
     }
 }

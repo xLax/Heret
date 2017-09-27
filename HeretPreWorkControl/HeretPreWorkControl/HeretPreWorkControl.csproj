@@ -81,6 +81,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEmployeeForm.Designer.cs">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,6 +272,9 @@
     <Compile Include="ViewAllOrderDetails.Designer.cs">
       <DependentUpon>ViewAllOrderDetails.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddEmployeeForm.resx">
+      <DependentUpon>AddEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminOverviewForm.resx">
       <DependentUpon>AdminOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -451,6 +460,8 @@
       <DependentUpon>DB Model.edmx</DependentUpon>
       <LastGenOutput>DB Model.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\AddEmployeeTitle.png" />
+    <None Include="Resources\Add Employee Icon.jpg" />
     <None Include="Resources\TemplateNumberTitle.png" />
     <None Include="Resources\WatchNotesTitle.png" />
     <None Include="Resources\All Notification Icon.png" />

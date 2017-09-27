@@ -67,6 +67,34 @@ namespace HeretPreWorkControl
             return isLoadSucceeded;
         }
 
+        public static int GetNextUserID()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_users order = context.tbl_users.OrderByDescending(u => u.ID).FirstOrDefault<tbl_users>();
+
+                    if (order == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = order.ID + 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
+        }
+
         public static void Popup_Clicked(object sender, System.EventArgs e)
         {
             if(Globals.OpenScreenID == Globals.ToMyJobs)
@@ -472,7 +500,7 @@ namespace HeretPreWorkControl
             {
                 strToReturn = Order.prisa_id.ToString();
             }
-            else if(Order.model_id != null)
+            else if(Order.client_order_id != null)
             {
                 strToReturn = Order.model_id.ToString();
             }
@@ -735,12 +763,26 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    MyJobs =
+                    if(Globals.UserGroupID == Globals.SalesUserID)
+                    {
+                        MyJobs =
                        context.tbl_orders
-                           .Where(o => ( o.curr_departnent_id == Globals.UserGroupID ||
-                                         o.special_department_id == Globals.UserGroupID ) &&
+                           .Where(o => (o.curr_departnent_id == Globals.UserGroupID ||
+                                         o.special_department_id == Globals.UserGroupID) &&
+                                         o.current_status_id == Globals.StatusInWork &&
+                                         o.sales_agent_name == Globals.Name
+                                              ).ToList<tbl_orders>();
+                    }
+                    else
+                    {
+                        MyJobs =
+                       context.tbl_orders
+                           .Where(o => (o.curr_departnent_id == Globals.UserGroupID ||
+                                         o.special_department_id == Globals.UserGroupID) &&
                                          o.current_status_id == Globals.StatusInWork
                                               ).ToList<tbl_orders>();
+                    }
+
 
                     Utilities.SetNewJobs(MyJobs);
                     
@@ -895,9 +937,17 @@ namespace HeretPreWorkControl
                 {
                     try
                     {
-                        lstEmployees = context.tbl_employees
-                                .Where( e => e.Department_id == Globals.UserGroupID)
+                        if(Globals.UserGroupID == Globals.AdminID)
+                        {
+                            lstEmployees = context.tbl_employees.ToList<tbl_employees>();
+                        }
+                        else
+                        {
+                            lstEmployees = context.tbl_employees
+                                .Where(e => e.Department_id == Globals.UserGroupID)
                                             .ToList<tbl_employees>();
+                        }
+                        
                         Utilities.SetMyEmployeesList(lstEmployees);
                     }
                     catch (Exception ex) { }
@@ -936,6 +986,35 @@ namespace HeretPreWorkControl
         private static void SetMyEmployeesList(List<tbl_employees> lstEmployees)
         {
             Globals.AllMyEmployees = lstEmployees;
+        }
+
+        public static int GetNextEmployeeID()
+        {
+            int nMaxID = 0;
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    tbl_employees employee = context.tbl_employees
+                        .OrderByDescending(u => u.ID).FirstOrDefault<tbl_employees>();
+
+                    if (employee == null)
+                    {
+                        nMaxID = 1;
+                    }
+                    else
+                    {
+                        nMaxID = employee.ID + 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    nMaxID = -1;
+                }
+            }
+
+            return nMaxID;
         }
     }
 }

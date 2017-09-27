@@ -167,5 +167,10 @@ namespace HeretPreWorkControl
         {
             new ManagerReportForm().Show();
         }
+
+        private void pbCreateEmloyee_Click(object sender, EventArgs e)
+        {
+            new AddEmployeeForm().Show();
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace HeretPreWorkControl
         public const string StudioUserType = "סטודיו";
         public const string KadasUserType = "קדם דפוס";
         public const string OrdersUserType = "הזמנות";
+        public const string AdminUserType = "מנהל מערכת";
 
         public const int ToMyJobs = 1;
         public const int ToDeclinedOrders = 2;
@@ -36,6 +37,7 @@ namespace HeretPreWorkControl
         public const string TemplateNumber = "מספר תבנית";
         public const string ProjectDesc = "תיאור פרויקט";
         public const string ModelNumber = "מספר דגם";
+        public const string ClientOrderNum = "מס' הזמנת לקוח";
 
         public const string PriceReason = "מחיר גבוה";
         public const string TimeReason = "זמן אספקה";
@@ -147,5 +149,7 @@ namespace HeretPreWorkControl
 
         public static int SlaInTime = 1;
         public static int SlaLate = 2;
+
+        
     }
 }

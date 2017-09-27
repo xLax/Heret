@@ -63,6 +63,16 @@ namespace HeretPreWorkControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_Employee_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Add_Employee_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Add_User {
             get {
                 object obj = ResourceManager.GetObject("Add_User", resourceCulture);
@@ -76,6 +86,16 @@ namespace HeretPreWorkControl.Properties {
         internal static System.Drawing.Bitmap AddClientTitle {
             get {
                 object obj = ResourceManager.GetObject("AddClientTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AddEmployeeTitle {
+            get {
+                object obj = ResourceManager.GetObject("AddEmployeeTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
