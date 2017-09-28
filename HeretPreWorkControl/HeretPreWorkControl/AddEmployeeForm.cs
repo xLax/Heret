@@ -33,7 +33,7 @@ namespace HeretPreWorkControl
        {
             if(e.KeyValue == Globals.KeyValueEnter)
             {
-                this.SearchAndUpdateCurrEmployee();
+                
             }
         }
 
@@ -50,7 +50,6 @@ namespace HeretPreWorkControl
             }
             else if (lstCurrEmployees.Count == 1)
             {
-                tbPanel.Text = "נמצא עובד בשם זה! אנא בחר שם ייחודי";
                 this.currEmployee = lstCurrEmployees[0];
 
                 string strDepartmentDesc = this.GetDepartmentDescFromID(this.currEmployee.Department_id);
@@ -134,6 +133,38 @@ namespace HeretPreWorkControl
             else
             {
                 tbPanel.Text = "שים לב! עליך לבחור שם ייחודי לעובד";
+            }
+        }
+
+        private void pbDeleteEmp_Click(object sender, EventArgs e)
+        {
+            this.SearchAndUpdateCurrEmployee();
+
+            if (this.currEmployee != null)
+            {
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        List<tbl_sla_data> lstSlaDataOfEmployee =
+                                context.tbl_sla_data.Where(s => s.employee_name != null &&
+                                                           s.employee_name.Equals(this.currEmployee.name))
+                                                      .ToList<tbl_sla_data>();
+
+                        context.tbl_sla_data.RemoveRange(lstSlaDataOfEmployee);
+
+                        context.tbl_employees.Attach(this.currEmployee);
+                        context.tbl_employees.Remove(this.currEmployee);
+
+                        context.SaveChanges();
+
+                        tbPanel.Text = "העובד ורשומותיו נמחקו בהצלחה";
+                    }
+                    catch (Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל!";
+                    }
+                }
             }
         }
     }

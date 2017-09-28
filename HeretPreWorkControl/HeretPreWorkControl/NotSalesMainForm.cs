@@ -24,7 +24,7 @@ namespace HeretPreWorkControl
 
         private void NotSalesMainForm_Load(object sender, EventArgs e)
         {
-            lblHello.Text = "שלום " + Globals.Name;
+            lblHello.Text = "שלום ";
 
             nPrevJobCount = Utilities.GetMyJobCount();
 

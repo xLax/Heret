@@ -37,9 +37,12 @@
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pbCreateUserTitle = new System.Windows.Forms.PictureBox();
             this.lbDepartment = new System.Windows.Forms.ComboBox();
+            this.lblEnterDeclined = new System.Windows.Forms.Label();
+            this.pbDeleteEmp = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddEmplyee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCreateUserTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDeleteEmp)).BeginInit();
             this.SuspendLayout();
             // 
             // lblUserName
@@ -140,12 +143,36 @@
             this.lbDepartment.Size = new System.Drawing.Size(234, 28);
             this.lbDepartment.TabIndex = 35;
             // 
+            // lblEnterDeclined
+            // 
+            this.lblEnterDeclined.AutoSize = true;
+            this.lblEnterDeclined.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnterDeclined.Location = new System.Drawing.Point(21, 188);
+            this.lblEnterDeclined.Name = "lblEnterDeclined";
+            this.lblEnterDeclined.Size = new System.Drawing.Size(85, 20);
+            this.lblEnterDeclined.TabIndex = 37;
+            this.lblEnterDeclined.Text = "מחק עובד";
+            // 
+            // pbDeleteEmp
+            // 
+            this.pbDeleteEmp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbDeleteEmp.Image = global::HeretPreWorkControl.Properties.Resources.Decline_Icon;
+            this.pbDeleteEmp.Location = new System.Drawing.Point(112, 183);
+            this.pbDeleteEmp.Name = "pbDeleteEmp";
+            this.pbDeleteEmp.Size = new System.Drawing.Size(35, 31);
+            this.pbDeleteEmp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbDeleteEmp.TabIndex = 36;
+            this.pbDeleteEmp.TabStop = false;
+            this.pbDeleteEmp.Click += new System.EventHandler(this.pbDeleteEmp_Click);
+            // 
             // AddEmployeeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(435, 267);
+            this.Controls.Add(this.lblEnterDeclined);
+            this.Controls.Add(this.pbDeleteEmp);
             this.Controls.Add(this.lbDepartment);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pbAddEmplyee);
@@ -169,6 +196,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAddEmplyee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCreateUserTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDeleteEmp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,5 +213,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pbAddEmplyee;
         private System.Windows.Forms.ComboBox lbDepartment;
+        private System.Windows.Forms.Label lblEnterDeclined;
+        private System.Windows.Forms.PictureBox pbDeleteEmp;
     }
 }

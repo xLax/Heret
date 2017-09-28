@@ -266,8 +266,10 @@ namespace HeretPreWorkControl
 
             string strFifthCol = Utilities.GetDateInNormalFormat(order.creation_date.Value);
 
+            string strThirdCol = Utilities.GetFilledDataFromOrder(order);
+
             dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
-                                  strCurrDepartment, strCreationDate, strSlaStatus);
+                                  strCurrDepartment, strCreationDate, strSlaStatus, strThirdCol);
         }
 
         private void InsertRowFromOrder(tbl_orders order)
@@ -308,8 +310,10 @@ namespace HeretPreWorkControl
 
             string strFifthCol = Utilities.GetDateInNormalFormat(order.creation_date.Value);
 
+            string strThirdCol = Utilities.GetFilledDataFromOrder(order);
+
             dataGridView.Rows.Add(strOrderID, strClientName, strJobStatus,
-                                  strCurrDepartment, strCreationDate, strSlaStatus);
+                                  strCurrDepartment, strCreationDate, strSlaStatus, strThirdCol);
         }
 
         private void dtFromDate_ValueChanged(object sender, EventArgs e)
