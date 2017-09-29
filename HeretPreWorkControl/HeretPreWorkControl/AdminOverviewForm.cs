@@ -27,15 +27,33 @@ namespace HeretPreWorkControl
         private List<int> lstOrdersID = new List<int>();
         Boolean isList = false;
         private List<RowData> lstAllViewData = new List<RowData>();
+        private bool isFirstResize = true;
+
+        // Objects Places on screen
+        private int refreshStartX;
+        private int logoStartX;
+        private int alertLabelX;
+        private int alertButtonX;
+        private int hefreshBetweenPanelAndScreenWidth;
+        private int hefreshBetweenTableAndScreenWidth;
+
+        private int lblShowDetailsY;
+        private int btnShowDetailsY;
+        private int lblAlertY;
+        private int btnAlertY;
+        private int panelY;
+        private int hefreshBetweenTableAndScreenHeight;
 
         public AdminOverviewForm()
         {
             InitializeComponent();
+            initialObjectInfo();
         }
 
         public AdminOverviewForm(List<int> lstOrders)
         {
             InitializeComponent();
+            initialObjectInfo();
             isList = true;
             this.lstOrdersID = lstOrders;
         }
@@ -135,9 +153,26 @@ namespace HeretPreWorkControl
 
             if(Globals.UserGroupID == Globals.SalesUserID)
             {
-                label3.Visible = false;
+                lblReminder.Visible = false;
                 pbReminder.Visible = false;
             }
+        }
+
+        private void initialObjectInfo()
+        {
+            refreshStartX = this.Width - this.pbRefresh.Location.X;
+            logoStartX = this.Width - this.pbLogo.Location.X;
+            alertButtonX = this.Width - this.pbReminder.Location.X;
+            alertLabelX = this.Width - this.lblReminder.Location.X;
+            hefreshBetweenPanelAndScreenWidth = this.Width - this.tbPanel.Width;
+            hefreshBetweenTableAndScreenWidth = this.Width - this.dataGridView.Width;
+
+            lblShowDetailsY = this.Height - lblEnterDeclined.Location.Y;
+            btnShowDetailsY = this.Height - pbEditOrderInfo.Location.Y;
+            lblAlertY = this.Height - this.lblReminder.Location.Y;
+            btnAlertY = this.Height - this.pbReminder.Location.Y;
+            panelY = this.Height - this.tbPanel.Location.Y;
+            hefreshBetweenTableAndScreenHeight = this.Height - this.dataGridView.Height;
         }
 
         private void AddSpecialToInternalTable(tbl_orders order)
@@ -511,6 +546,27 @@ namespace HeretPreWorkControl
                         }
                     }
                 }
+            }
+        }
+
+        private void AdminOverviewForm_SizeChanged(object sender, EventArgs e)
+        {
+            if(isFirstResize == true)
+            {
+                isFirstResize = false;
+            }
+            else
+            {
+                this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
+                this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
+                this.pbReminder.Location = new Point(this.Width - alertButtonX, this.Height - btnAlertY);
+                this.lblReminder.Location = new Point(this.Width - alertLabelX, this.Height - lblAlertY);
+                this.tbPanel.Width = this.Width - hefreshBetweenPanelAndScreenWidth;
+                this.dataGridView.Width = this.Width - hefreshBetweenTableAndScreenWidth;
+                this.dataGridView.Height = this.Height - hefreshBetweenTableAndScreenHeight;
+                this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
+                this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblShowDetailsY);
+                this.pbEditOrderInfo.Location = new Point(this.pbEditOrderInfo.Location.X, this.Height - btnShowDetailsY);
             }
         }
     }
