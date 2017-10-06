@@ -22,6 +22,7 @@ namespace HeretPreWorkControl
             lbDepartment.Items.Add(Globals.StudioUserType);
             lbDepartment.Items.Add(Globals.KadasUserType);
             lbDepartment.Items.Add(Globals.OrdersUserType);
+            lbDepartment.Items.Add(Globals.ResponsibleDesc);
         }
 
         private void AddEmployeeForm_Load(object sender, EventArgs e)
@@ -73,6 +74,8 @@ namespace HeretPreWorkControl
                     return Globals.KadasUserType;
                 case (Globals.OrdersUserID):
                     return Globals.OrdersUserType;
+                case (Globals.ResponsibleID):
+                    return Globals.ResponsibleDesc;
             }
 
             return null;
@@ -88,6 +91,8 @@ namespace HeretPreWorkControl
                     return Globals.KadasUserID;
                 case (Globals.OrdersUserType):
                     return Globals.OrdersUserID;
+                case (Globals.ResponsibleDesc):
+                    return Globals.ResponsibleID;
             }
 
             return 0;
@@ -157,6 +162,8 @@ namespace HeretPreWorkControl
                         context.tbl_employees.Remove(this.currEmployee);
 
                         context.SaveChanges();
+
+                        Globals.AllMyEmployees.Remove(this.currEmployee);
 
                         tbPanel.Text = "העובד ורשומותיו נמחקו בהצלחה";
                     }

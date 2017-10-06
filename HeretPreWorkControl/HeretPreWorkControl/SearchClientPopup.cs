@@ -83,6 +83,9 @@ namespace HeretPreWorkControl
             else if (lstclients.Count == 1)
             {
                 tbClientNumber.Text = lstclients[0].ID.ToString();
+                tbEmployee.Text = lstclients[0].person_responsible.ToString();
+                tbStatus.Text = lstclients[0].status.ToString();
+
                 tbPanel.Text = "נמצאה התאמה";
 
                 tbClientName.BackColor = Color.White;
@@ -112,6 +115,8 @@ namespace HeretPreWorkControl
 
             tbClientName.Clear();
             tbClientNumber.Clear();
+            tbStatus.Clear();
+            tbEmployee.Clear();
             tbPanel.Clear();
 
             this.ActiveControl = tbClientName;

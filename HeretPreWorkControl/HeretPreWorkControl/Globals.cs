@@ -25,6 +25,7 @@ namespace HeretPreWorkControl
         public const string KadasUserType = "קדם דפוס";
         public const string OrdersUserType = "הזמנות";
         public const string AdminUserType = "מנהל מערכת";
+        public const string ResponsibleDesc = "עובד אחראי";
 
         public const int ToMyJobs = 1;
         public const int ToDeclinedOrders = 2;

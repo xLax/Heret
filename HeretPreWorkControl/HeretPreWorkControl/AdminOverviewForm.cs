@@ -18,6 +18,7 @@ namespace HeretPreWorkControl
         public string CurrentDepartment;
         public DateTime CreationDate;
         public string SlaStatus;
+        public string PrisaTempDesc;
     }
 
     public partial class AdminOverviewForm : Form
@@ -73,6 +74,7 @@ namespace HeretPreWorkControl
                     Utilities.GetAllClientsList();
                     Utilities.GetAllUserGroupList();
                     Utilities.GetAllActionsList();
+                    Utilities.GetAllSlaData();
                     Utilities.SetZebraMode(dataGridView);
 
                     dtFromDate.Visible = false;
@@ -207,6 +209,8 @@ namespace HeretPreWorkControl
                 strSlaStatus = "---";
             }
 
+            string strThirdCol = Utilities.GetFilledDataFromOrder(order);
+
             RowData row = new RowData();
             row.OrderID = order.ID;
             row.JobStatus = strJobStatus;
@@ -214,6 +218,7 @@ namespace HeretPreWorkControl
             row.CreationDate = order.creation_date.Value.Date;
             row.CurrentDepartment = strCurrDepartment;
             row.ClientName = strClientName;
+            row.PrisaTempDesc = strThirdCol;
 
             lstAllViewData.Add(row);
         }
@@ -226,6 +231,8 @@ namespace HeretPreWorkControl
                .Where(c => c.ID == order.client_id.Value).Single<tbl_clients>().name;
 
             string strCreationDate = Utilities.GetDateInNormalFormat(order.creation_date.Value.Date);
+
+            string strThirdCol = Utilities.GetFilledDataFromOrder(order);
 
             string strCurrDepartment = String.Empty;
             string strSlaStatus = String.Empty;
@@ -259,6 +266,7 @@ namespace HeretPreWorkControl
             row.CreationDate = order.creation_date.Value.Date;
             row.CurrentDepartment = strCurrDepartment;
             row.ClientName = strClientName;
+            row.PrisaTempDesc = strThirdCol;
 
             lstAllViewData.Add(row);
         }
@@ -393,7 +401,8 @@ namespace HeretPreWorkControl
                     dataGridView.Rows.Add(row.OrderID, row.ClientName,
                                           row.JobStatus, row.CurrentDepartment,
                                           Utilities.GetDateInNormalFormat(row.CreationDate),
-                                          row.SlaStatus);
+                                          row.SlaStatus,
+                                          row.PrisaTempDesc);
                 }
             }
         }
@@ -567,6 +576,46 @@ namespace HeretPreWorkControl
                 this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
                 this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblShowDetailsY);
                 this.pbEditOrderInfo.Location = new Point(this.pbEditOrderInfo.Location.X, this.Height - btnShowDetailsY);
+            }
+        }
+
+        private void pbDeleteOrder_Click(object sender, EventArgs e)
+        {
+            tbl_orders orderToDelete = this.GetSelectedOrder();
+
+            if (orderToDelete != null)
+            {
+                // Get all the order data that needs to also be deleted
+                List<tbl_sla_data> lstStatisticsOrderList = Globals.AllSlaData.
+                            Where(a => a.order_id == orderToDelete.ID).ToList<tbl_sla_data>();
+                List<tbl_offers> lstOfferList = Utilities.GetMyOffersData(orderToDelete.ID);
+                List<tbl_orders_id> lstOrdersIDList = Utilities.GetMyOrdersIDData(orderToDelete.ID);
+                List<tbl_notifications> lstNotification = Utilities.GetOrderNotifications(orderToDelete.ID);
+
+                using (var context = new DB_Entities())
+                {
+                    try
+                    {
+                        context.tbl_sla_data.RemoveRange(lstStatisticsOrderList);
+                        context.tbl_offers.RemoveRange(lstOfferList);
+                        context.tbl_orders_id.RemoveRange(lstOrdersIDList);
+                        context.tbl_notifications.RemoveRange(lstNotification);
+
+                        context.tbl_orders.Attach(orderToDelete);
+                        context.tbl_orders.Remove(orderToDelete);
+
+                        context.SaveChanges();
+
+                        Globals.AllJobs.Remove(orderToDelete);
+                        Globals.MyJobs.Remove(orderToDelete);
+
+                        tbPanel.Text = "ההזמנה ורשומותיה נמחקו בהצלחה!";
+                    }
+                    catch(Exception ex)
+                    {
+                        tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
+                    }
+                }
             }
         }
     }

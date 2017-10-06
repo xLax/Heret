@@ -325,7 +325,7 @@ namespace HeretPreWorkControl
 
                                             context.SaveChanges();
                                             MyJobsForm.isJobSucceeded = true;
-                                            this.SilentRefresh();
+                                            //this.SilentRefresh();
                                         }
                                     }
                                     catch (Exception ex)
@@ -403,7 +403,7 @@ namespace HeretPreWorkControl
 
                                         context.SaveChanges();
                                         MyJobsForm.isJobSucceeded = true;
-                                        this.SilentRefresh();
+                                        //this.SilentRefresh();
                                     }
                                 }
                                 catch (Exception ex)
@@ -454,7 +454,7 @@ namespace HeretPreWorkControl
 
                                         context.SaveChanges();
                                         MyJobsForm.isJobSucceeded = true;
-                                        this.SilentRefresh();
+                                        // this.SilentRefresh();
                                     }
                                 }
                                 catch (Exception ex)
@@ -674,7 +674,7 @@ namespace HeretPreWorkControl
 
             if (selectedOrder != null)
             {
-                new EnterDeclinedOrdersForm(selectedOrder).Show();
+                new EnterDeclinedOrdersForm(selectedOrder).ShowDialog();
             }
         }
 
@@ -879,7 +879,7 @@ namespace HeretPreWorkControl
 
             if (selectedOrder != null)
             {
-                new UpdateOrderForm(selectedOrder).Show();
+                new UpdateOrderForm(selectedOrder).ShowDialog();
             }
         }
 

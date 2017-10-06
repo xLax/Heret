@@ -747,6 +747,40 @@ namespace HeretPreWorkControl
             return strSlaStatus;
         }
 
+        public static List<tbl_notifications> GetOrderNotifications(int nOrderID)
+        {
+            List<tbl_notifications> lstNotification = new List<tbl_notifications>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    lstNotification = context.tbl_notifications.
+                          Where(a => a.order_id == nOrderID).ToList<tbl_notifications>();
+                }
+                catch (Exception ex) { };
+            }
+
+            return lstNotification;
+        }
+
+        public static List<tbl_orders_id> GetMyOrdersIDData(int nOrderID)
+        {
+            List<tbl_orders_id> lstOrdersID = new List<tbl_orders_id>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    lstOrdersID = context.tbl_orders_id.
+                          Where(a => a.order_id == nOrderID).ToList<tbl_orders_id>();
+                }
+                catch(Exception ex) { };
+            }
+
+            return lstOrdersID;
+        }
+
         public static void SetNewDeclinedJobs(List<tbl_orders> myDeclinedJobs)
         {
             Globals.MyDeclinedOrders = myDeclinedJobs;
@@ -986,6 +1020,23 @@ namespace HeretPreWorkControl
         private static void SetMyEmployeesList(List<tbl_employees> lstEmployees)
         {
             Globals.AllMyEmployees = lstEmployees;
+        }
+
+        public static List<tbl_offers> GetMyOffersData(int nOrderID)
+        {
+            List<tbl_offers> lstOffers = new List<tbl_offers>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    lstOffers = context.tbl_offers.
+                        Where(a => a.order_id == nOrderID).ToList<tbl_offers>();
+                }
+                catch (Exception ex) { };
+            }
+
+            return lstOffers;
         }
 
         public static int GetNextEmployeeID()
