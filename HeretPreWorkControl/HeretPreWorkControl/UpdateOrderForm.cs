@@ -14,6 +14,11 @@ namespace HeretPreWorkControl
     {
         private tbl_orders order;
 
+        private int updateLabelY;
+        private int updateButtonY;
+        private int panelY;
+        private int heightFromDescToEndScreen;
+
         public UpdateOrderForm(tbl_orders selectedOrder)
         {
             InitializeComponent();
@@ -28,6 +33,22 @@ namespace HeretPreWorkControl
             lbPriseTempDesc.SelectedIndex = 0;
         }
 
+        private void saveObjectsInfo()
+        {
+            updateLabelY = lblUpdateOrder.Location.Y - tbDescription.Location.Y - tbDescription.Height;
+            updateButtonY = btnUpdateOrder.Location.Y - tbDescription.Location.Y - tbDescription.Height;
+            panelY = tbPanel.Location.Y - tbDescription.Location.Y - tbDescription.Height;
+            heightFromDescToEndScreen = this.Height - tbDescription.Location.Y - tbDescription.Height;
+        }
+
+        private void changeScreenObjectLocations()
+        {
+            this.Height = tbDescription.Location.Y + tbDescription.Height + heightFromDescToEndScreen;
+            btnUpdateOrder.Location = new Point(btnUpdateOrder.Location.X, tbDescription.Location.Y + tbDescription.Height + updateButtonY);
+            lblUpdateOrder.Location = new Point(lblUpdateOrder.Location.X, tbDescription.Location.Y + tbDescription.Height + updateLabelY);
+            tbPanel.Location = new Point(tbPanel.Location.X, tbDescription.Location.Y + tbDescription.Height + panelY);
+        }
+
         private void lbPriseTempDesc_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch(lbPriseTempDesc.SelectedItem.ToString())
@@ -38,6 +59,10 @@ namespace HeretPreWorkControl
                     tbDescription.RightToLeft = RightToLeft.No;
                     tbDescription.Text = this.order.prisa_id;
                     tbDescription.BackColor = Color.White;
+                    saveObjectsInfo();
+                    tbDescription.Multiline = true;
+                    tbDescription.Height = 91;
+                    changeScreenObjectLocations();
                     break;
 
                 case Globals.TemplateNumber:
@@ -46,6 +71,10 @@ namespace HeretPreWorkControl
                     tbDescription.RightToLeft = RightToLeft.No;
                     tbDescription.Text = this.order.template_id;
                     tbDescription.BackColor = Color.White;
+                    saveObjectsInfo();
+                    tbDescription.Multiline = true;
+                    tbDescription.Height = 91;
+                    changeScreenObjectLocations();
                     break;
 
                 case Globals.ClientOrderNum:
@@ -54,6 +83,10 @@ namespace HeretPreWorkControl
                     tbDescription.RightToLeft = RightToLeft.No;
                     tbDescription.Text = this.order.model_id;
                     tbDescription.BackColor = Color.White;
+                    saveObjectsInfo();
+                    tbDescription.Multiline = false;
+                    tbDescription.Height = 30;
+                    changeScreenObjectLocations();
                     break;
 
                 case Globals.ProjectDesc:
@@ -62,6 +95,10 @@ namespace HeretPreWorkControl
                     tbDescription.RightToLeft = RightToLeft.Yes;
                     tbDescription.Text = this.order.project_desc;
                     tbDescription.BackColor = Color.White;
+                    saveObjectsInfo();
+                    tbDescription.Multiline = true;
+                    tbDescription.Height = 91;
+                    changeScreenObjectLocations();
                     break;
 
                 default:
