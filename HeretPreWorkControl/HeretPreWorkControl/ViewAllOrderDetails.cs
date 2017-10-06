@@ -19,6 +19,16 @@ namespace HeretPreWorkControl
         {
             InitializeComponent();
 
+            Utilities.AllEmployeesForResponsible();
+
+            foreach (tbl_employees employee in Globals.AllEmployeesResp)
+            {
+                if (employee.Department_id.Equals(Globals.ResponsibleID))
+                {
+                    lbResponseWorker.Items.Add(employee.name);
+                }
+            }
+
             dtContactDate.Format = DateTimePickerFormat.Custom;
             dtContactDate.CustomFormat = "dd/MM/yyyy";
             dtContactDate.MaxDate = DateTime.Today;
@@ -60,12 +70,13 @@ namespace HeretPreWorkControl
             lbStudioWork.SelectedItem = this.order.studio_work;
             lbKadasWork.SelectedItem = this.order.kadas_work;
             tbModelNumber.Text = this.order.model_id;
-
+            
             tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
 
             if(client != null)
             {
                 tbClientName.Text = client.name;
+                lbResponseWorker.SelectedItem = client.person_responsible;
             }
 
             tbActionType.Text = Globals.AllActions.Where(a => a.ID == order.action_type_id).Single<tbl_sla_actions>().desc;
@@ -157,6 +168,7 @@ namespace HeretPreWorkControl
             tbProjDesc.Enabled = this.isEnabled;
             tbAmount.Enabled = this.isEnabled;
             lbStudioWork.Enabled = this.isEnabled;
+            lbResponseWorker.Enabled = this.isEnabled;
             //tbCurrentDepartment.Enabled = this.isEnabled;
             //tbActionType.Enabled = this.isEnabled;
             //tbOrderNumber.Enabled = this.isEnabled;
@@ -181,6 +193,7 @@ namespace HeretPreWorkControl
             //tbOrderNumber.BackColor = color;
             //tbWorkStatus.BackColor = color;
             lbKadasWork.BackColor = color;
+            lbResponseWorker.BackColor = color;
 
             // Button save ui properties change
             lblSave.Visible = this.isEnabled;
@@ -286,6 +299,15 @@ namespace HeretPreWorkControl
                                                 Entry.Property(o => o.files_number).IsModified = true;
                                                 Entry.Property(o => o.amount).IsModified = true;
                                                 Entry.Property(o => o.client_id).IsModified = true;
+
+                                                tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
+                                                context.tbl_clients.Attach(client);
+                                                var Entry2 = context.Entry(client);
+                                                if(!lbResponseWorker.SelectedItem.ToString().Equals(client.person_responsible))
+                                                {
+                                                    client.person_responsible = lbResponseWorker.SelectedItem.ToString();
+                                                    Entry2.Property(o => o.person_responsible).IsModified = true;
+                                                }
 
                                                 context.SaveChanges();
 
