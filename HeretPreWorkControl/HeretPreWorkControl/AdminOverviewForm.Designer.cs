@@ -46,10 +46,10 @@
             this.lblReminder = new System.Windows.Forms.Label();
             this.pbReminder = new System.Windows.Forms.PictureBox();
             this.lbJobStatus = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblShowJobs = new System.Windows.Forms.Label();
+            this.lblFromDate = new System.Windows.Forms.Label();
             this.dtFromDate = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbDelete = new System.Windows.Forms.Label();
             this.pbDeleteOrder = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -226,25 +226,25 @@
             this.lbJobStatus.TabIndex = 32;
             this.lbJobStatus.SelectedIndexChanged += new System.EventHandler(this.lbJobStatus_SelectedIndexChanged);
             // 
-            // label1
+            // lblShowJobs
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 105);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 20);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "הצג עבודות:";
+            this.lblShowJobs.AutoSize = true;
+            this.lblShowJobs.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShowJobs.Location = new System.Drawing.Point(8, 105);
+            this.lblShowJobs.Name = "lblShowJobs";
+            this.lblShowJobs.Size = new System.Drawing.Size(104, 20);
+            this.lblShowJobs.TabIndex = 31;
+            this.lblShowJobs.Text = "הצג עבודות:";
             // 
-            // label2
+            // lblFromDate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(423, 105);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 20);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "החל מתאריך:";
+            this.lblFromDate.AutoSize = true;
+            this.lblFromDate.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFromDate.Location = new System.Drawing.Point(423, 105);
+            this.lblFromDate.Name = "lblFromDate";
+            this.lblFromDate.Size = new System.Drawing.Size(117, 20);
+            this.lblFromDate.TabIndex = 33;
+            this.lblFromDate.Text = "החל מתאריך:";
             // 
             // dtFromDate
             // 
@@ -257,15 +257,15 @@
             this.dtFromDate.Value = new System.DateTime(2017, 8, 7, 0, 0, 0, 0);
             this.dtFromDate.ValueChanged += new System.EventHandler(this.dtFromDate_ValueChanged);
             // 
-            // label3
+            // lbDelete
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(355, 432);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 20);
-            this.label3.TabIndex = 39;
-            this.label3.Text = "מחק הזמנה";
+            this.lbDelete.AutoSize = true;
+            this.lbDelete.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDelete.Location = new System.Drawing.Point(355, 432);
+            this.lbDelete.Name = "lbDelete";
+            this.lbDelete.Size = new System.Drawing.Size(100, 20);
+            this.lbDelete.TabIndex = 39;
+            this.lbDelete.Text = "מחק הזמנה";
             // 
             // pbDeleteOrder
             // 
@@ -285,12 +285,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(835, 509);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbDelete);
             this.Controls.Add(this.pbDeleteOrder);
             this.Controls.Add(this.dtFromDate);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblFromDate);
             this.Controls.Add(this.lbJobStatus);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblShowJobs);
             this.Controls.Add(this.lblEnterDeclined);
             this.Controls.Add(this.pbEditOrderInfo);
             this.Controls.Add(this.lblReminder);
@@ -333,8 +333,8 @@
         private System.Windows.Forms.Label lblReminder;
         private System.Windows.Forms.PictureBox pbReminder;
         private System.Windows.Forms.ComboBox lbJobStatus;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblShowJobs;
+        private System.Windows.Forms.Label lblFromDate;
         private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
@@ -343,7 +343,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Creation_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectDesc;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbDelete;
         private System.Windows.Forms.PictureBox pbDeleteOrder;
     }
 }
