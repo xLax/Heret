@@ -40,6 +40,7 @@
           <Property Name="Deparment_id" Type="int" />
           <Property Name="order_id" Type="int" />
           <Property Name="is_notified" Type="int" />
+          <Property Name="sales_agent_name" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="tbl_offers">
           <Key>
@@ -61,7 +62,7 @@
           <Property Name="files_number" Type="int" />
           <Property Name="client_order_id" Type="varchar" MaxLength="45" />
           <Property Name="template_id" Type="varchar" MaxLength="100" />
-          <Property Name="prisa_id" Type="varchar" MaxLength="45" />
+          <Property Name="prisa_id" Type="varchar" MaxLength="100" />
           <Property Name="model_id" Type="varchar" MaxLength="45" />
           <Property Name="project_desc" Type="varchar" MaxLength="45" />
           <Property Name="amount" Type="int" />
@@ -128,7 +129,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_name" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="password" Type="text" Nullable="false" />
           <Property Name="name" Type="char" MaxLength="30" Nullable="false" />
@@ -853,6 +854,7 @@
           <NavigationProperty Name="tbl_user_groups" Relationship="DB_Model.department_id" FromRole="tbl_notifications" ToRole="tbl_user_groups" />
           <Property Name="order_id" Type="Int32" />
           <NavigationProperty Name="tbl_orders" Relationship="DB_Model.ord_id" FromRole="tbl_notifications" ToRole="tbl_orders" />
+          <Property Name="sales_agent_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="department_id">
           <End Type="DB_Model.tbl_user_groups" Role="tbl_user_groups" Multiplicity="0..1" />
@@ -1053,6 +1055,7 @@
           <EntitySetMapping Name="tbl_notifications">
             <EntityTypeMapping TypeName="DB_Model.tbl_notifications">
               <MappingFragment StoreEntitySet="tbl_notifications">
+                <ScalarProperty Name="sales_agent_name" ColumnName="sales_agent_name" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="is_notified" ColumnName="is_notified" />
                 <ScalarProperty Name="Deparment_id" ColumnName="Deparment_id" />

@@ -122,6 +122,40 @@ namespace HeretPreWorkControl
             currPopup.Hide();
         }
 
+        public static List<tbl_notifications> GetMyNotificationsList()
+        {
+            List<tbl_notifications> lstMyNotes = new List<tbl_notifications>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    lstMyNotes = context.tbl_notifications
+                        .Where(a => a.sales_agent_name.Equals(Globals.Name)).ToList<tbl_notifications>();
+                }
+                catch (Exception ex) { };
+            }
+
+            return lstMyNotes;
+        }
+
+        public static List<tbl_sla_data> GetMySlaData()
+        {
+            List<tbl_sla_data> lstMyNotes = new List<tbl_sla_data>();
+
+            using (var context = new DB_Entities())
+            {
+                try
+                {
+                    lstMyNotes = context.tbl_sla_data
+                    .Where(a => a.employee_name.Equals(Globals.Name)).ToList<tbl_sla_data>();
+                }
+                catch (Exception ex) { };
+            }
+
+            return lstMyNotes;
+        }
+
         public static string GetStatusDesc(int nStatusID)
         {
             string strStatusDesc = String.Empty;
@@ -170,9 +204,19 @@ namespace HeretPreWorkControl
             {
                 try
                 {
-                    notes = context.tbl_notifications.
-                            Where(n => n.Deparment_id == Globals.UserGroupID)
+                    if (Globals.UserGroupID == Globals.SalesUserID)
+                    {
+                        notes = context.tbl_notifications.
+                            Where(n => n.Deparment_id == Globals.UserGroupID &&
+                                       n.sales_agent_name == Globals.Name)
                                         .ToList<tbl_notifications>();
+                    }
+                    else
+                    {
+                        notes = context.tbl_notifications.
+                                Where(n => n.Deparment_id == Globals.UserGroupID)
+                                            .ToList<tbl_notifications>();
+                    }
 
                     foreach (tbl_notifications Note in notes)
                     {

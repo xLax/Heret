@@ -56,7 +56,7 @@ namespace HeretPreWorkControl
                 Utilities.GetAllClientsList();
                 Utilities.GetAllActionsList();
 
-                foreach (tbl_orders order in Globals.MyJobs)
+                /* foreach (tbl_orders order in Globals.MyJobs)
                 {
                     if (order.special_department_id != null &&
                         order.special_department_id == Globals.SalesUserID)
@@ -81,9 +81,12 @@ namespace HeretPreWorkControl
                         // Last Col
                         string strAction = ActionData.desc;
 
-                        dataGridView.Rows.Add(order.ID.ToString(), strClientName, strFilesNo, strThirdCol, strSlaStatus, strAction);
+                        string strAgentName = order.sales_agent_name;
+
+                        dataGridView.Rows.Add(order.ID.ToString(), strClientName, strAgentName, strFilesNo, strThirdCol, strSlaStatus, strAction);
                     }
                 }
+                */
             }
 
             Utilities.GetAllActionToDeptList();
@@ -193,7 +196,9 @@ namespace HeretPreWorkControl
                     // Last Col
                     string strAction = ActionData.desc;
 
-                    dataGridView.Rows.Add(nOrderID, strClientName, nFilesNo, strThirdCol, strSlaStatus, strAction);
+                    string strAgentName = Order.sales_agent_name;
+
+                    dataGridView.Rows.Add(nOrderID, strClientName, strAgentName, nFilesNo, strThirdCol, strSlaStatus, strAction);
                 }
             }
         }

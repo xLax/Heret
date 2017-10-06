@@ -14,7 +14,6 @@ namespace HeretPreWorkControl
     {
         private int ChosenUserTypeID;
         private tbl_users usrNewUser;
-        private tbl_users[] users;
 
         public CreateUserForm()
         {
@@ -80,6 +79,48 @@ namespace HeretPreWorkControl
                                                         .FirstOrDefault<tbl_users>();
                         if (userData != null)
                         {
+                            if(!userData.name.Equals(tbWorkerName.Text))
+                            {
+                                tbPanel.Text = "שים לב פעולה זו עלולה להימשך כדקה";
+                                
+                                // Change every fucking where
+                                Utilities.GetAllJobs();
+                                List<tbl_sla_data> lstMySlaData = Utilities.GetMySlaData();
+                                List<tbl_notifications> lstNotifications = Utilities.GetMyNotificationsList();
+
+                                foreach (var item in Globals.AllJobs)
+                                {
+                                    item.sales_agent_name = tbWorkerName.Text;
+
+                                    context.tbl_orders.Attach(item);
+                                    var OrderEntry = context.Entry(item);
+
+                                    OrderEntry.Property(o => o.sales_agent_name).IsModified = true;
+                                }
+
+                                foreach (var item in lstMySlaData)
+                                {
+                                    item.employee_name = tbWorkerName.Text;
+
+                                    context.tbl_sla_data.Attach(item);
+                                    var SlaDataEntry = context.Entry(item);
+
+                                    SlaDataEntry.Property(o => o.employee_name).IsModified = true;
+                                }
+
+                                foreach (var item in lstNotifications)
+                                {
+                                    item.sales_agent_name = tbWorkerName.Text;
+
+                                    context.tbl_notifications.Attach(item);
+                                    var NotificationsEntry = context.Entry(item);
+
+                                    NotificationsEntry.Property(o => o.sales_agent_name).IsModified = true;
+                                }
+
+                                context.SaveChanges();
+                            }
+
                             userData.name = tbWorkerName.Text;
                             userData.password = tbPassword.Text;
                             userData.user_group_id = ChosenUserTypeID;

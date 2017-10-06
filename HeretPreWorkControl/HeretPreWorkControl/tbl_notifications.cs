@@ -18,6 +18,7 @@ namespace HeretPreWorkControl
         public Nullable<int> Deparment_id { get; set; }
         public Nullable<int> is_notified { get; set; }
         public Nullable<int> order_id { get; set; }
+        public string sales_agent_name { get; set; }
     
         public virtual tbl_user_groups tbl_user_groups { get; set; }
         public virtual tbl_orders tbl_orders { get; set; }

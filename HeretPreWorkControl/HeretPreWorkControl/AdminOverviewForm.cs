@@ -544,6 +544,11 @@ namespace HeretPreWorkControl
                         currNotification.Deparment_id = nDepartToNotify;
                         currNotification.is_notified = 0;
 
+                        if(nDepartToNotify == Globals.SalesUserID)
+                        {
+                            currNotification.sales_agent_name = order.sales_agent_name;
+                        }
+
                         using (var context = new DB_Entities())
                         {
                             try
