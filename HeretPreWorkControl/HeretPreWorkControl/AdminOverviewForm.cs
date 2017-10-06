@@ -77,6 +77,8 @@ namespace HeretPreWorkControl
                     Utilities.GetAllSlaData();
                     Utilities.SetZebraMode(dataGridView);
 
+                    lblFromDate.Visible = false;
+                    lblShowJobs.Visible = false;
                     dtFromDate.Visible = false;
                     lbJobStatus.Visible = false;
 
@@ -158,6 +160,8 @@ namespace HeretPreWorkControl
             {
                 lblReminder.Visible = false;
                 pbReminder.Visible = false;
+                pbDeleteOrder.Visible = false;
+                lbDelete.Visible = false;
             }
         }
 
