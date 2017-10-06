@@ -544,7 +544,9 @@ namespace HeretPreWorkControl
 
                         if(MyJobsForm.isJobSucceeded)
                         {
+                            tbPanel.Text = "אנא המתן לסיום רענון ...";
                             this.SilentRefresh();
+                            tbPanel.Text = "רענון בוצע בהצלחה";
                         }
 
                         if(MyJobsForm.isJobSucceeded &&
@@ -570,6 +572,10 @@ namespace HeretPreWorkControl
                                     nActionTypeID == 9)
                             {
                                 currSlaData.employee_name = SelectedOrder.kadas_agent_name;
+                            }
+                            else if(nActionTypeID == 10)
+                            {
+                                currSlaData.employee_name = SelectedOrder.orders_agent_name;
                             }
 
                             this.InsertIntoSlaData(currSlaData);

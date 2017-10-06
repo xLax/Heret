@@ -109,6 +109,7 @@ namespace HeretPreWorkControl
                 {
                     Utilities.GetAllClientsList();
                     Utilities.GetAllUserGroupList();
+                    Utilities.GetAllSlaData();
                     Utilities.GetAllActionsList();
                     Utilities.SetZebraMode(dataGridView);
 
@@ -596,18 +597,45 @@ namespace HeretPreWorkControl
                 {
                     try
                     {
-                        context.tbl_sla_data.RemoveRange(lstStatisticsOrderList);
-                        context.tbl_offers.RemoveRange(lstOfferList);
-                        context.tbl_orders_id.RemoveRange(lstOrdersIDList);
-                        context.tbl_notifications.RemoveRange(lstNotification);
+                        foreach (var item in lstStatisticsOrderList)
+                        {
+                            context.tbl_sla_data.Attach(item);
+                            context.tbl_sla_data.Remove(item);
+                        }
+
+                        foreach (var item in lstOfferList)
+                        {
+                            context.tbl_offers.Attach(item);
+                            context.tbl_offers.Remove(item);
+                        }
+
+                        foreach (var item in lstOrdersIDList)
+                        {
+                            context.tbl_orders_id.Attach(item);
+                            context.tbl_orders_id.Remove(item);
+                        }
+
+                        foreach (var item in lstNotification)
+                        {
+                            context.tbl_notifications.Attach(item);
+                            context.tbl_notifications.Remove(item);
+                        }
+
+                        // context.tbl_sla_data.RemoveRange(lstStatisticsOrderList);
+                        // context.tbl_offers.RemoveRange(lstOfferList);
+                        // context.tbl_orders_id.RemoveRange(lstOrdersIDList);
+                        // context.tbl_notifications.RemoveRange(lstNotification);
 
                         context.tbl_orders.Attach(orderToDelete);
                         context.tbl_orders.Remove(orderToDelete);
 
                         context.SaveChanges();
 
-                        Globals.AllJobs.Remove(orderToDelete);
-                        Globals.MyJobs.Remove(orderToDelete);
+                        try
+                        {
+                            Globals.AllJobs.Remove(orderToDelete);
+                        }
+                        catch (Exception ex) { };
 
                         tbPanel.Text = "ההזמנה ורשומותיה נמחקו בהצלחה!";
                     }

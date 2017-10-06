@@ -841,7 +841,6 @@ namespace HeretPreWorkControl
         {
             lbWorkersInDept.Items.Clear();
             lbWorkersInDept.Items.Add("כולם");
-            lbWorkersInDept.SelectedIndex = 0;
 
             nSelectedDepartmentID = Globals.AllUserGroups.
                         Where(a => a.name.Equals(lbDepartment.SelectedItem.ToString()))
@@ -868,7 +867,7 @@ namespace HeretPreWorkControl
                 }
             }
 
-            this.PerformStationsSearch();
+            lbWorkersInDept.SelectedIndex = 0;
         }
 
         private void rbWeek_CheckedChanged(object sender, EventArgs e)
