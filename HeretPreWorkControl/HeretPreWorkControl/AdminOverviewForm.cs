@@ -37,6 +37,8 @@ namespace HeretPreWorkControl
         private int alertButtonX;
         private int hefreshBetweenPanelAndScreenWidth;
         private int hefreshBetweenTableAndScreenWidth;
+        private int deleteLabelX;
+        private int deleteButtonX;
 
         private int lblShowDetailsY;
         private int btnShowDetailsY;
@@ -44,6 +46,8 @@ namespace HeretPreWorkControl
         private int btnAlertY;
         private int panelY;
         private int hefreshBetweenTableAndScreenHeight;
+        private int deleteLabelY;
+        private int deleteButtonY;
 
         public AdminOverviewForm()
         {
@@ -173,6 +177,8 @@ namespace HeretPreWorkControl
             alertLabelX = this.Width - this.lblReminder.Location.X;
             hefreshBetweenPanelAndScreenWidth = this.Width - this.tbPanel.Width;
             hefreshBetweenTableAndScreenWidth = this.Width - this.dataGridView.Width;
+            deleteLabelX = (this.Width / 2) - lbDelete.Location.X;
+            deleteButtonX = pbDeleteOrder.Location.X - lbDelete.Location.X;
 
             lblShowDetailsY = this.Height - lblEnterDeclined.Location.Y;
             btnShowDetailsY = this.Height - pbEditOrderInfo.Location.Y;
@@ -180,6 +186,8 @@ namespace HeretPreWorkControl
             btnAlertY = this.Height - this.pbReminder.Location.Y;
             panelY = this.Height - this.tbPanel.Location.Y;
             hefreshBetweenTableAndScreenHeight = this.Height - this.dataGridView.Height;
+            deleteLabelY = this.Height - lbDelete.Location.Y;
+            deleteButtonY = this.Height - pbDeleteOrder.Location.Y;
         }
 
         private void AddSpecialToInternalTable(tbl_orders order)
@@ -570,23 +578,18 @@ namespace HeretPreWorkControl
 
         private void AdminOverviewForm_SizeChanged(object sender, EventArgs e)
         {
-            if(isFirstResize == true)
-            {
-                isFirstResize = false;
-            }
-            else
-            {
-                this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
-                this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
-                this.pbReminder.Location = new Point(this.Width - alertButtonX, this.Height - btnAlertY);
-                this.lblReminder.Location = new Point(this.Width - alertLabelX, this.Height - lblAlertY);
-                this.tbPanel.Width = this.Width - hefreshBetweenPanelAndScreenWidth;
-                this.dataGridView.Width = this.Width - hefreshBetweenTableAndScreenWidth;
-                this.dataGridView.Height = this.Height - hefreshBetweenTableAndScreenHeight;
-                this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
-                this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblShowDetailsY);
-                this.pbEditOrderInfo.Location = new Point(this.pbEditOrderInfo.Location.X, this.Height - btnShowDetailsY);
-            }
+            this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
+            this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
+            this.pbReminder.Location = new Point(this.Width - alertButtonX, this.Height - btnAlertY);
+            this.lblReminder.Location = new Point(this.Width - alertLabelX, this.Height - lblAlertY);
+            this.tbPanel.Width = this.Width - hefreshBetweenPanelAndScreenWidth;
+            this.dataGridView.Width = this.Width - hefreshBetweenTableAndScreenWidth;
+            this.dataGridView.Height = this.Height - hefreshBetweenTableAndScreenHeight;
+            this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
+            this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblShowDetailsY);
+            this.pbEditOrderInfo.Location = new Point(this.pbEditOrderInfo.Location.X, this.Height - btnShowDetailsY);
+            this.lbDelete.Location = new Point(this.Width / 2 - deleteLabelX, this.Height - deleteLabelY);
+            this.pbDeleteOrder.Location = new Point(lbDelete.Location.X + deleteButtonX, this.Height - deleteButtonY);
         }
 
         private void pbDeleteOrder_Click(object sender, EventArgs e)

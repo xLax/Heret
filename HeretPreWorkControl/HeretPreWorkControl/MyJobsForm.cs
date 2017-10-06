@@ -896,28 +896,21 @@ namespace HeretPreWorkControl
 
         private void MyJobsForm_SizeChanged(object sender, EventArgs e)
         {
-            if (isFirstResize == true)
-            {
-                isFirstResize = false;
-            }
-            else
-            {
-                this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
-                this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
-                this.pbExecute.Location = new Point(this.Width - executeButtonX, this.Height - executeButtonY);
-                this.lblExecute.Location = new Point(this.Width - executeLabelX, this.Height - executeLabelY);
-                this.tbPanel.Width = this.Width - hefreshBetweenPanelAndScreenWidth;
-                this.dataGridView.Width = this.Width - hefreshBetweenTableAndScreenWidth;
+            this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
+            this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
+            this.pbExecute.Location = new Point(this.Width - executeButtonX, this.Height - executeButtonY);
+            this.lblExecute.Location = new Point(this.Width - executeLabelX, this.Height - executeLabelY);
+            this.tbPanel.Width = this.Width - hefreshBetweenPanelAndScreenWidth;
+            this.dataGridView.Width = this.Width - hefreshBetweenTableAndScreenWidth;
 
-                this.dataGridView.Height = this.Height - hefreshBetweenTableAndScreenHeight;
-                this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
-                this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblDeclineY);
-                this.pbSetDeclinedAndInsert.Location = new Point(this.pbSetDeclinedAndInsert.Location.X, this.Height - btnDeclineY);
+            this.dataGridView.Height = this.Height - hefreshBetweenTableAndScreenHeight;
+            this.tbPanel.Location = new Point(this.tbPanel.Location.X, this.Height - panelY);
+            this.lblEnterDeclined.Location = new Point(this.lblEnterDeclined.Location.X, this.Height - lblDeclineY);
+            this.pbSetDeclinedAndInsert.Location = new Point(this.pbSetDeclinedAndInsert.Location.X, this.Height - btnDeclineY);
 
-                this.lbEmployees.Location = new Point(this.lbEmployees.Location.X, this.Height - deployEmpolyeeDDL);
-                this.lblEmployee.Location = new Point(this.lblEmployee.Location.X, this.Height - deployEmpolyeeLBL);
-                this.pbSetEmployee.Location = new Point(this.pbSetEmployee.Location.X, this.Height - deployEmpolyeeBTN);
-            }
+            this.lbEmployees.Location = new Point(this.lbEmployees.Location.X, this.Height - deployEmpolyeeDDL);
+            this.lblEmployee.Location = new Point(this.lblEmployee.Location.X, this.Height - deployEmpolyeeLBL);
+            this.pbSetEmployee.Location = new Point(this.pbSetEmployee.Location.X, this.Height - deployEmpolyeeBTN);
         }
     }
 }
