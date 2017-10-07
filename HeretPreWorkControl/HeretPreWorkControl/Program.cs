@@ -17,7 +17,7 @@ namespace HeretPreWorkControl
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
-            //Application.Run(new UpdateOrderForm(new tbl_orders()));
+            //Application.Run(new UpdateOrderForm( new tbl_orders()));
         }
     }
 }

@@ -54,7 +54,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.SearchClientTitle;
             this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(207, 62);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -65,7 +65,7 @@
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.Location = new System.Drawing.Point(245, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(204, 62);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -78,7 +78,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 359);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(432, 35);
@@ -90,7 +90,7 @@
             this.tbClientNumber.BackColor = System.Drawing.SystemColors.Window;
             this.tbClientNumber.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbClientNumber.Location = new System.Drawing.Point(164, 95);
-            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbClientNumber.Name = "tbClientNumber";
             this.tbClientNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbClientNumber.Size = new System.Drawing.Size(284, 37);
@@ -114,7 +114,7 @@
             this.tbClientName.BackColor = System.Drawing.SystemColors.Window;
             this.tbClientName.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbClientName.Location = new System.Drawing.Point(164, 140);
-            this.tbClientName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbClientName.Margin = new System.Windows.Forms.Padding(4);
             this.tbClientName.Multiline = true;
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -150,7 +150,7 @@
             this.Login_Button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Login_Button.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
             this.Login_Button.Location = new System.Drawing.Point(399, 309);
-            this.Login_Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Login_Button.Margin = new System.Windows.Forms.Padding(4);
             this.Login_Button.Name = "Login_Button";
             this.Login_Button.Size = new System.Drawing.Size(51, 43);
             this.Login_Button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -163,7 +163,7 @@
             this.pbClean.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbClean.Image = global::HeretPreWorkControl.Properties.Resources.Clean_Icon;
             this.pbClean.Location = new System.Drawing.Point(76, 309);
-            this.pbClean.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbClean.Margin = new System.Windows.Forms.Padding(4);
             this.pbClean.Name = "pbClean";
             this.pbClean.Size = new System.Drawing.Size(53, 43);
             this.pbClean.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -210,7 +210,7 @@
             this.tbStatus.Enabled = false;
             this.tbStatus.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbStatus.Location = new System.Drawing.Point(164, 218);
-            this.tbStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbStatus.Margin = new System.Windows.Forms.Padding(4);
             this.tbStatus.Name = "tbStatus";
             this.tbStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbStatus.Size = new System.Drawing.Size(284, 37);
@@ -223,7 +223,7 @@
             this.tbEmployee.Enabled = false;
             this.tbEmployee.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbEmployee.Location = new System.Drawing.Point(164, 263);
-            this.tbEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmployee.Name = "tbEmployee";
             this.tbEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbEmployee.Size = new System.Drawing.Size(284, 37);
@@ -254,14 +254,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "SearchClientPopup";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchClientPopup_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).EndInit();

@@ -67,7 +67,6 @@
             this.tbTemplateNum.Size = new System.Drawing.Size(412, 91);
             this.tbTemplateNum.TabIndex = 33;
             this.tbTemplateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbTemplateNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbTemplateNum_KeyUp);
             // 
             // lblTemplateNumber
             // 
