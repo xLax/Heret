@@ -66,5 +66,13 @@ namespace HeretPreWorkControl
             }
             
         }
+
+        private void EnterOfferDataPopup_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.pbInsertButton_Click(new object(), new EventArgs());
+            }
+        }
     }
 }

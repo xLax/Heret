@@ -119,6 +119,7 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.InsertOrderIDForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbExecute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

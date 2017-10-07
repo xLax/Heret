@@ -182,5 +182,13 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void UpdateOrderForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.Login_Button_Click(new object(), new EventArgs());
+            }
+        }
     }
 }

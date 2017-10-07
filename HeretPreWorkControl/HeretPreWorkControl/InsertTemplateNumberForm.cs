@@ -59,5 +59,13 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void tbTemplateNum_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.pbExecute_Click(new object(), new EventArgs());
+            }
+        }
     }
 }

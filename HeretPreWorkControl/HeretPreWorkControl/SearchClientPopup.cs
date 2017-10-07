@@ -141,5 +141,13 @@ namespace HeretPreWorkControl
                 }
             }
         }
+
+        private void SearchClientPopup_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.Login_Button_Click(new object(), new EventArgs());
+            }
+        }
     }
 }
