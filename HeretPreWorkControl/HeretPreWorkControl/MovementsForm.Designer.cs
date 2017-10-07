@@ -45,6 +45,8 @@
             this.lblKadasWork = new System.Windows.Forms.Label();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.lblSalesNote = new System.Windows.Forms.Label();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -180,6 +182,7 @@
             this.lbKadasWork.Name = "lbKadasWork";
             this.lbKadasWork.Size = new System.Drawing.Size(241, 27);
             this.lbKadasWork.TabIndex = 30;
+            this.lbKadasWork.SelectedIndexChanged += new System.EventHandler(this.lbKadasWork_SelectedIndexChanged);
             // 
             // lblKadasWork
             // 
@@ -214,12 +217,37 @@
             this.lblSalesNote.TabIndex = 32;
             this.lblSalesNote.Text = "* שים לב ! תוכל להזין מס\' הצעת מחיר ותאריך דרך עבודות לביצוע";
             // 
+            // tbEmail
+            // 
+            this.tbEmail.BackColor = System.Drawing.SystemColors.Window;
+            this.tbEmail.Font = new System.Drawing.Font("David", 16F);
+            this.tbEmail.Location = new System.Drawing.Point(199, 219);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbEmail.Size = new System.Drawing.Size(278, 28);
+            this.tbEmail.TabIndex = 33;
+            this.tbEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbEmail.Visible = false;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Font = new System.Drawing.Font("David", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(195, 197);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(107, 19);
+            this.lblEmail.TabIndex = 34;
+            this.lblEmail.Text = "מייל לשליחה:";
+            this.lblEmail.Visible = false;
+            // 
             // MovementsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(489, 350);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.lblSalesNote);
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.lbKadasWork);
@@ -272,5 +300,7 @@
         private System.Windows.Forms.Label lblKadasWork;
         private System.Windows.Forms.TextBox tbPanel;
         private System.Windows.Forms.Label lblSalesNote;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.Label lblEmail;
     }
 }

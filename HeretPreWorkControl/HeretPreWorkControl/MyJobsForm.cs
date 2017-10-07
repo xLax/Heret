@@ -846,6 +846,20 @@ namespace HeretPreWorkControl
                     lblEmployee.Visible = true;
                     lbEmployees.Visible = true;
 
+                    if(this.ListSelectedOrder.action_type_id == Globals.ActionTypeKadasApprovePDF ||
+                       this.ListSelectedOrder.action_type_id == Globals.ActionTypeKadasNewPDF)
+                    {
+                        lblEmail.Visible = true;
+                        tbEmail.Visible = true;
+
+                        tbEmail.Text = this.ListSelectedOrder.pdf_email;
+                    }
+                    else
+                    {
+                        lblEmail.Visible = false;
+                        tbEmail.Visible = false;
+                    }
+
                     if (this.ListSelectedOrder.kadas_agent_name != null)
                     {
                         lbEmployees.SelectedItem = this.ListSelectedOrder.kadas_agent_name;
