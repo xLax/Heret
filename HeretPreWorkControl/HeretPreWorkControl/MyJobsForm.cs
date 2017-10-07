@@ -120,6 +120,8 @@ namespace HeretPreWorkControl
             deployEmpolyeeDDL = this.Height - this.lbEmployees.Location.Y;
             deployEmpolyeeLBL = this.Height - this.lblEmployee.Location.Y;
             deployEmpolyeeBTN = this.Height - this.pbSetEmployee.Location.Y;
+
+            isFirstResize = false;
         }
 
         private void LoadRelevantData()
@@ -910,10 +912,9 @@ namespace HeretPreWorkControl
 
         private void MyJobsForm_SizeChanged(object sender, EventArgs e)
         {
-            if(isFirstResize == true)
+            if (isFirstResize == true)
             {
                 initialObjectInfo();
-                isFirstResize = false;
             }
 
             this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
