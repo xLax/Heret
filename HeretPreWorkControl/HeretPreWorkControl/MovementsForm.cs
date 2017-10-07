@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.Drawing;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,7 +99,6 @@ namespace HeretPreWorkControl
 
         private void pbMoveButton_Click(object sender, EventArgs e)
         {
-
             string strOfferID = string.Empty;
             DateTime dtSentTime = new DateTime();
 
@@ -189,17 +189,46 @@ namespace HeretPreWorkControl
                             if (currentOrder.special_department_id != null)
                             {
                                 currentOrder.special_action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, strKadasWork);
+
+                                isSucceded = true;
+
+                                if (currentOrder.special_action_type_id == Globals.ActionTypeKadasApprovePDF ||
+                                    currentOrder.special_action_type_id == Globals.ActionTypeKadasNewPDF)
+                                {
+                                    if (!(new EmailAddressAttribute().IsValid(tbEmail.Text)))
+                                    {
+                                        isSucceded = false;
+                                    }
+                                    else
+                                    {
+                                        currentOrder.pdf_email = tbEmail.Text;
+                                    }
+                                }
+
                                 currentOrder.special_recieved_date = System.DateTime.Now.Date;
                                 currentOrder.special_recieved_hour = TimeSpan.Parse(System.DateTime.Now.TimeOfDay.ToString().Substring(0, 8));
                             }
                             else
                             {
+                                isSucceded = true;
+
                                 currentOrder.action_type_id = Utilities.GetActionTypeIDFormWork(Globals.KadasUserID, strKadasWork);
+
+                                if (currentOrder.action_type_id == Globals.ActionTypeKadasApprovePDF ||
+                                    currentOrder.action_type_id == Globals.ActionTypeKadasNewPDF)
+                                {
+                                    if (!(new EmailAddressAttribute().IsValid(tbEmail.Text)))
+                                    {
+                                        isSucceded = false;
+                                    }
+                                    else
+                                    {
+                                        currentOrder.pdf_email = tbEmail.Text;
+                                    }
+                                }
                             }
 
                             currentOrder.kadas_work = strKadasWork;
-
-                            isSucceded = true;
                         }
                     }                   
                 }
@@ -391,6 +420,10 @@ namespace HeretPreWorkControl
                             }
                         }
                     }
+                    else
+                    {
+                        tbPanel.Text = "האימייל שהזנת לא חוקי ! אנא תקן ונסה שוב";
+                    }
                 }
             }
         }
@@ -413,6 +446,12 @@ namespace HeretPreWorkControl
                         lstActionsToDepartments.Where(a => a.recieved_department_ID == Globals.SalesUserID &&
                                                            a.recieved_department_action_id == Globals.ActionTypeSetAndSendOffer)
                                 .SingleOrDefault<tbl_action_to_dept>();
+
+                if(nSelectedDepartID != Globals.KadasUserID)
+                {
+                    lblEmail.Visible = false;
+                    tbEmail.Visible = false;
+                }
 
                 foreach (Control control in this.Controls)
                 {
@@ -442,11 +481,20 @@ namespace HeretPreWorkControl
             }
         }
 
-        private void MovementsForm_KeyUp(object sender, KeyEventArgs e)
+        private void lbKadasWork_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (e.KeyValue == Globals.KeyValueEnter)
+            if(lbKadasWork.SelectedItem != null &&
+              (lbKadasWork.SelectedItem.ToString().Equals(Globals.KadasApprovePDF) ||
+               lbKadasWork.SelectedItem.ToString().Equals(Globals.KadasNewPDF)))
             {
-                this.pbMoveButton_Click(new object(), new EventArgs());
+                // TODO: Continue from here
+                lblEmail.Visible = true;
+                tbEmail.Visible = true;
+            }
+            else
+            {
+                lblEmail.Visible = false;
+                tbEmail.Visible = false;
             }
         }
     }

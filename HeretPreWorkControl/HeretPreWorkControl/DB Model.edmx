@@ -73,6 +73,7 @@
           <Property Name="curr_departnent_id" Type="int" />
           <Property Name="studio_agent_name" Type="varchar" MaxLength="45" />
           <Property Name="kadas_agent_name" Type="varchar" MaxLength="45" />
+          <Property Name="pdf_email" Type="varchar" MaxLength="45" />
           <Property Name="orders_agent_name" Type="varchar" MaxLength="45" />
           <Property Name="action_type_id" Type="int" />
           <Property Name="special_approve" Type="int" />
@@ -526,6 +527,7 @@
           <NavigationProperty Name="tbl_notifications" Relationship="DB_Model.ord_id" FromRole="tbl_orders" ToRole="tbl_notifications" />
           <NavigationProperty Name="tbl_orders_id" Relationship="DB_Model.orders" FromRole="tbl_orders" ToRole="tbl_orders_id" />
           <Property Name="model_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pdf_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_sla_actions">
           <Key>
@@ -973,6 +975,7 @@
           <EntitySetMapping Name="tbl_orders">
             <EntityTypeMapping TypeName="DB_Model.tbl_orders">
               <MappingFragment StoreEntitySet="tbl_orders">
+                <ScalarProperty Name="pdf_email" ColumnName="pdf_email" />
                 <ScalarProperty Name="model_id" ColumnName="model_id" />
                 <ScalarProperty Name="special_recieved_hour" ColumnName="special_recieved_hour" />
                 <ScalarProperty Name="special_recieved_date" ColumnName="special_recieved_date" />

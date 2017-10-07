@@ -55,6 +55,7 @@ namespace HeretPreWorkControl
         public Nullable<System.DateTime> special_recieved_date { get; set; }
         public Nullable<System.TimeSpan> special_recieved_hour { get; set; }
         public string model_id { get; set; }
+        public string pdf_email { get; set; }
     
         public virtual tbl_clients tbl_clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
