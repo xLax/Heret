@@ -912,5 +912,13 @@ namespace HeretPreWorkControl
             this.lblEmployee.Location = new Point(this.lblEmployee.Location.X, this.Height - deployEmpolyeeLBL);
             this.pbSetEmployee.Location = new Point(this.pbSetEmployee.Location.X, this.Height - deployEmpolyeeBTN);
         }
+
+        private void MyJobsForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.pbExecute_Click(new object(), new EventArgs());
+            }
+        }
     }
 }

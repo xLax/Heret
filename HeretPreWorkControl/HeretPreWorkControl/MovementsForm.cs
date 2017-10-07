@@ -441,5 +441,13 @@ namespace HeretPreWorkControl
                 this.nSelectedDepartID = 0;
             }
         }
+
+        private void MovementsForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.pbMoveButton_Click(new object(), new EventArgs());
+            }
+        }
     }
 }

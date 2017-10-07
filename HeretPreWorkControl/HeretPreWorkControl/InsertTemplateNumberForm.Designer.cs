@@ -47,7 +47,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(13, 243);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(566, 35);
@@ -59,7 +59,7 @@
             this.tbTemplateNum.BackColor = System.Drawing.SystemColors.Window;
             this.tbTemplateNum.Font = new System.Drawing.Font("David", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbTemplateNum.Location = new System.Drawing.Point(167, 98);
-            this.tbTemplateNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbTemplateNum.Margin = new System.Windows.Forms.Padding(4);
             this.tbTemplateNum.MaxLength = 100;
             this.tbTemplateNum.Multiline = true;
             this.tbTemplateNum.Name = "tbTemplateNum";
@@ -67,6 +67,7 @@
             this.tbTemplateNum.Size = new System.Drawing.Size(412, 91);
             this.tbTemplateNum.TabIndex = 33;
             this.tbTemplateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbTemplateNum.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbTemplateNum_KeyUp);
             // 
             // lblTemplateNumber
             // 
@@ -83,7 +84,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.TemplateNumberTitle;
             this.pictureBox2.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(223, 62);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -106,7 +107,7 @@
             this.pbExecute.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbExecute.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
             this.pbExecute.Location = new System.Drawing.Point(532, 197);
-            this.pbExecute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbExecute.Margin = new System.Windows.Forms.Padding(4);
             this.pbExecute.Name = "pbExecute";
             this.pbExecute.Size = new System.Drawing.Size(47, 38);
             this.pbExecute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -118,7 +119,7 @@
             // 
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.Location = new System.Drawing.Point(375, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(204, 62);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -141,7 +142,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "InsertTemplateNumberForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;

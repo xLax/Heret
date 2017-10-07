@@ -248,12 +248,12 @@ namespace HeretPreWorkControl
             tbPanel.Width = this.Width - nErrorPanelSpace;
         }
 
-        //private void button1_click(object sender, EventArgs e)
-        //{
-        //    for (int i = 1; i <= nfilesno; i++)
-        //    {
-        //        tbPanel.Text = tbPanel.Text + this.Controls.Find(strOrderIdInputName + i, false).Single<Control>().Text + " , ";
-        //    }
-        //}
+        private void InsertOrderIDForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue == Globals.KeyValueEnter)
+            {
+                this.pbExecute_Click(new object(), new EventArgs());
+            }
+        }
     }
 }
