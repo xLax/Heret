@@ -149,10 +149,12 @@ namespace HeretPreWorkControl
             if(this.isEnabled)
             {
                 color = Color.White;
+                lblSalesUpdate.Text = "הצג הזמנה";
             }
             else
             {
                 color = Color.Wheat;
+                lblSalesUpdate.Text = "ערוך הזמנה";
             }
 
             // Change The availability of the item

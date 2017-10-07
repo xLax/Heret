@@ -63,6 +63,7 @@ namespace HeretPreWorkControl
                     tbDescription.Multiline = true;
                     tbDescription.Height = 91;
                     changeScreenObjectLocations();
+                    tbDescription.MaxLength = 100;
                     break;
 
                 case Globals.TemplateNumber:
@@ -75,6 +76,7 @@ namespace HeretPreWorkControl
                     tbDescription.Multiline = true;
                     tbDescription.Height = 91;
                     changeScreenObjectLocations();
+                    tbDescription.MaxLength = 100;
                     break;
 
                 case Globals.ClientOrderNum:
@@ -87,6 +89,7 @@ namespace HeretPreWorkControl
                     tbDescription.Multiline = false;
                     tbDescription.Height = 30;
                     changeScreenObjectLocations();
+                    tbDescription.MaxLength = 45;
                     break;
 
                 case Globals.ProjectDesc:
@@ -99,6 +102,7 @@ namespace HeretPreWorkControl
                     tbDescription.Multiline = true;
                     tbDescription.Height = 91;
                     changeScreenObjectLocations();
+                    tbDescription.MaxLength = 45;
                     break;
 
                 default:

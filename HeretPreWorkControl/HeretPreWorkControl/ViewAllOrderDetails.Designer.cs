@@ -265,11 +265,12 @@
             this.tbProjDesc.BackColor = System.Drawing.SystemColors.Info;
             this.tbProjDesc.Enabled = false;
             this.tbProjDesc.Font = new System.Drawing.Font("David", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.tbProjDesc.Location = new System.Drawing.Point(327, 463);
+            this.tbProjDesc.Location = new System.Drawing.Point(327, 465);
             this.tbProjDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbProjDesc.MaxLength = 45;
             this.tbProjDesc.Name = "tbProjDesc";
             this.tbProjDesc.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbProjDesc.Size = new System.Drawing.Size(289, 37);
+            this.tbProjDesc.Size = new System.Drawing.Size(927, 37);
             this.tbProjDesc.TabIndex = 60;
             this.tbProjDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
