@@ -283,7 +283,7 @@
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("David", 14.75F);
-            this.lblEmail.Location = new System.Drawing.Point(315, 99);
+            this.lblEmail.Location = new System.Drawing.Point(313, 99);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(145, 20);
             this.lblEmail.TabIndex = 38;

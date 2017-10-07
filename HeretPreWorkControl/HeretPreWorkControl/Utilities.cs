@@ -546,7 +546,7 @@ namespace HeretPreWorkControl
             }
             else if(Order.client_order_id != null)
             {
-                strToReturn = Order.model_id.ToString();
+                strToReturn = Order.client_order_id.ToString();
             }
             else
             {

@@ -13,6 +13,7 @@ namespace HeretPreWorkControl
     public partial class SpecialApprovedJobsForm : Form
     {
         Boolean isSucceeded = false;
+        Boolean isFirstTime = true;
 
         public SpecialApprovedJobsForm()
         {
@@ -136,22 +137,35 @@ namespace HeretPreWorkControl
             dataGridView.Rows.Clear();
             LoadRelevantData();
 
-            if (isSucceeded)
+            if (!isFirstTime)
             {
-                tbPanel.Text = "רענון בוצע בהצלחה !";
-
-                if (Globals.SpecialApprovedJobs == null || Globals.SpecialApprovedJobs.Count == 0)
+                if (isSucceeded)
                 {
-                    tbPanel.Text += " אין קידום עבודות לאישור";
+                    tbPanel.Text = "רענון בוצע בהצלחה !";
 
-                    Globals.TopUserFormInstance.pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
+                    if (Globals.SpecialApprovedJobs == null || Globals.SpecialApprovedJobs.Count == 0)
+                    {
+                        tbPanel.Text += " אין קידום עבודות לאישור";
+
+                        Globals.TopUserFormInstance.pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
+                    }
+                }
+                else
+                {
+                    isSucceeded = true;
                 }
             }
             else
             {
-                isSucceeded = true;
-            }
+                isFirstTime = false;
 
+                if (Globals.SpecialApprovedJobs == null || Globals.SpecialApprovedJobs.Count == 0)
+                {
+                    tbPanel.Text = " אין קידום עבודות לאישור";
+
+                    Globals.TopUserFormInstance.pbSpecialApprove.Image = Properties.Resources.Special_Approval_Icon;
+                }
+            }
         }
 
         private void pbDecline_Click(object sender, EventArgs e)
@@ -190,6 +204,11 @@ namespace HeretPreWorkControl
             {
                 this.pbApprove_Click(new object(), new EventArgs());
             }
+        }
+
+        private void SpecialApprovedJobsForm_Load(object sender, EventArgs e)
+        {
+            pbRefresh_Click(new object(), new EventArgs());
         }
     }
 }

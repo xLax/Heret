@@ -90,12 +90,15 @@ namespace HeretPreWorkControl
 
                                 foreach (var item in Globals.AllJobs)
                                 {
-                                    item.sales_agent_name = tbWorkerName.Text;
+                                    if(item.sales_agent_name == userData.name)
+                                    {
+                                        item.sales_agent_name = tbWorkerName.Text;
 
-                                    context.tbl_orders.Attach(item);
-                                    var OrderEntry = context.Entry(item);
+                                        context.tbl_orders.Attach(item);
+                                        var OrderEntry = context.Entry(item);
 
-                                    OrderEntry.Property(o => o.sales_agent_name).IsModified = true;
+                                        OrderEntry.Property(o => o.sales_agent_name).IsModified = true;
+                                    }
                                 }
 
                                 foreach (var item in lstMySlaData)
