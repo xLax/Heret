@@ -183,13 +183,5 @@ namespace HeretPreWorkControl
                 }
             }
         }
-
-        private void SpecialApprovedJobsForm_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == Globals.KeyValueEnter)
-            {
-                this.pbApprove_Click(new object(), new EventArgs());
-            }
-        }
     }
 }

@@ -66,7 +66,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 508);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(972, 35);
@@ -87,7 +87,7 @@
             this.Sla,
             this.Action_Type});
             this.dataGridView.Location = new System.Drawing.Point(16, 170);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(973, 284);
@@ -149,7 +149,7 @@
             this.pbRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbRefresh.Image = global::HeretPreWorkControl.Properties.Resources.Refresh_icon;
             this.pbRefresh.Location = new System.Drawing.Point(917, 55);
-            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4);
             this.pbRefresh.Name = "pbRefresh";
             this.pbRefresh.Size = new System.Drawing.Size(72, 46);
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -161,7 +161,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.MyJobsTitle;
             this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(387, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -173,7 +173,7 @@
             this.pbLogo.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pbLogo.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pbLogo.Location = new System.Drawing.Point(495, 15);
-            this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(4);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(340, 86);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -185,7 +185,7 @@
             this.pbExecute.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbExecute.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
             this.pbExecute.Location = new System.Drawing.Point(943, 462);
-            this.pbExecute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbExecute.Margin = new System.Windows.Forms.Padding(4);
             this.pbExecute.Name = "pbExecute";
             this.pbExecute.Size = new System.Drawing.Size(47, 38);
             this.pbExecute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -220,7 +220,7 @@
             this.pbSetDeclinedAndInsert.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSetDeclinedAndInsert.Image = global::HeretPreWorkControl.Properties.Resources.Decline_Icon;
             this.pbSetDeclinedAndInsert.Location = new System.Drawing.Point(125, 462);
-            this.pbSetDeclinedAndInsert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbSetDeclinedAndInsert.Margin = new System.Windows.Forms.Padding(4);
             this.pbSetDeclinedAndInsert.Name = "pbSetDeclinedAndInsert";
             this.pbSetDeclinedAndInsert.Size = new System.Drawing.Size(47, 38);
             this.pbSetDeclinedAndInsert.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -244,7 +244,7 @@
             this.pbSalesUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSalesUpdate.Image = global::HeretPreWorkControl.Properties.Resources.Update_Icon;
             this.pbSalesUpdate.Location = new System.Drawing.Point(152, 116);
-            this.pbSalesUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbSalesUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.pbSalesUpdate.Name = "pbSalesUpdate";
             this.pbSalesUpdate.Size = new System.Drawing.Size(47, 38);
             this.pbSalesUpdate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -259,7 +259,7 @@
             this.lbEmployees.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbEmployees.FormattingEnabled = true;
             this.lbEmployees.Location = new System.Drawing.Point(21, 464);
-            this.lbEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbEmployees.Margin = new System.Windows.Forms.Padding(4);
             this.lbEmployees.Name = "lbEmployees";
             this.lbEmployees.Size = new System.Drawing.Size(251, 33);
             this.lbEmployees.TabIndex = 37;
@@ -282,7 +282,7 @@
             this.pbSetEmployee.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbSetEmployee.Image = global::HeretPreWorkControl.Properties.Resources.Add_User;
             this.pbSetEmployee.Location = new System.Drawing.Point(451, 462);
-            this.pbSetEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbSetEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.pbSetEmployee.Name = "pbSetEmployee";
             this.pbSetEmployee.Size = new System.Drawing.Size(47, 38);
             this.pbSetEmployee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -312,7 +312,7 @@
             this.Controls.Add(this.tbPanel);
             this.Controls.Add(this.pbLogo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1026, 608);
             this.Name = "MyJobsForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -321,7 +321,6 @@
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
             this.Load += new System.EventHandler(this.MyJobsForm_Load);
             this.SizeChanged += new System.EventHandler(this.MyJobsForm_SizeChanged);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MyJobsForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

@@ -896,6 +896,12 @@ namespace HeretPreWorkControl
 
         private void MyJobsForm_SizeChanged(object sender, EventArgs e)
         {
+            if(isFirstResize == true)
+            {
+                initialObjectInfo();
+                isFirstResize = false;
+            }
+
             this.pbRefresh.Location = new Point(this.Width - refreshStartX, this.pbRefresh.Location.Y);
             this.pbLogo.Location = new Point(this.Width - logoStartX, this.pbLogo.Location.Y);
             this.pbExecute.Location = new Point(this.Width - executeButtonX, this.Height - executeButtonY);
@@ -911,14 +917,6 @@ namespace HeretPreWorkControl
             this.lbEmployees.Location = new Point(this.lbEmployees.Location.X, this.Height - deployEmpolyeeDDL);
             this.lblEmployee.Location = new Point(this.lblEmployee.Location.X, this.Height - deployEmpolyeeLBL);
             this.pbSetEmployee.Location = new Point(this.pbSetEmployee.Location.X, this.Height - deployEmpolyeeBTN);
-        }
-
-        private void MyJobsForm_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == Globals.KeyValueEnter)
-            {
-                this.pbExecute_Click(new object(), new EventArgs());
-            }
         }
     }
 }

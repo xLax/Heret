@@ -45,7 +45,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.UpdateOrder;
             this.pictureBox2.Location = new System.Drawing.Point(13, 14);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(277, 80);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -57,7 +57,7 @@
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.Location = new System.Drawing.Point(346, 14);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(307, 80);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -70,7 +70,7 @@
             this.tbDescription.Enabled = false;
             this.tbDescription.Font = new System.Drawing.Font("David", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbDescription.Location = new System.Drawing.Point(242, 112);
-            this.tbDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbDescription.Margin = new System.Windows.Forms.Padding(4);
             this.tbDescription.MaxLength = 100;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -85,7 +85,7 @@
             this.lbPriseTempDesc.Font = new System.Drawing.Font("David", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbPriseTempDesc.FormattingEnabled = true;
             this.lbPriseTempDesc.Location = new System.Drawing.Point(13, 111);
-            this.lbPriseTempDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbPriseTempDesc.Margin = new System.Windows.Forms.Padding(4);
             this.lbPriseTempDesc.Name = "lbPriseTempDesc";
             this.lbPriseTempDesc.Size = new System.Drawing.Size(221, 33);
             this.lbPriseTempDesc.TabIndex = 38;
@@ -97,7 +97,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(13, 222);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(641, 35);
@@ -120,7 +120,7 @@
             this.btnUpdateOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdateOrder.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
             this.btnUpdateOrder.Location = new System.Drawing.Point(594, 159);
-            this.btnUpdateOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdateOrder.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(60, 49);
             this.btnUpdateOrder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -150,7 +150,6 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UpdateOrderForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUpdateOrder)).EndInit();

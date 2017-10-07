@@ -65,7 +65,7 @@
             this.Amount,
             this.Agent_Name});
             this.dataGridView.Location = new System.Drawing.Point(16, 133);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(973, 284);
             this.dataGridView.TabIndex = 14;
@@ -122,7 +122,7 @@
             this.pbRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbRefresh.Image = global::HeretPreWorkControl.Properties.Resources.Refresh_icon;
             this.pbRefresh.Location = new System.Drawing.Point(917, 55);
-            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbRefresh.Margin = new System.Windows.Forms.Padding(4);
             this.pbRefresh.Name = "pbRefresh";
             this.pbRefresh.Size = new System.Drawing.Size(72, 46);
             this.pbRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -134,7 +134,7 @@
             // 
             this.pictureBox2.Image = global::HeretPreWorkControl.Properties.Resources.ApprovedJobsTitle;
             this.pictureBox2.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(419, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -146,7 +146,7 @@
             this.pictureBox1.Image = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.InitialImage = global::HeretPreWorkControl.Properties.Resources.Heret_Logo;
             this.pictureBox1.Location = new System.Drawing.Point(495, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(340, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -159,7 +159,7 @@
             this.tbPanel.Enabled = false;
             this.tbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.tbPanel.Location = new System.Drawing.Point(16, 480);
-            this.tbPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbPanel.Multiline = true;
             this.tbPanel.Name = "tbPanel";
             this.tbPanel.Size = new System.Drawing.Size(972, 35);
@@ -182,7 +182,7 @@
             this.pbDecline.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbDecline.Image = global::HeretPreWorkControl.Properties.Resources.Decline_Icon;
             this.pbDecline.Location = new System.Drawing.Point(140, 434);
-            this.pbDecline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbDecline.Margin = new System.Windows.Forms.Padding(4);
             this.pbDecline.Name = "pbDecline";
             this.pbDecline.Size = new System.Drawing.Size(47, 38);
             this.pbDecline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -206,7 +206,7 @@
             this.pbApprove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbApprove.Image = global::HeretPreWorkControl.Properties.Resources.Go_icon;
             this.pbApprove.Location = new System.Drawing.Point(943, 434);
-            this.pbApprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbApprove.Margin = new System.Windows.Forms.Padding(4);
             this.pbApprove.Name = "pbApprove";
             this.pbApprove.Size = new System.Drawing.Size(47, 38);
             this.pbApprove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -231,14 +231,13 @@
             this.Controls.Add(this.pbRefresh);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "SpecialApprovedJobsForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SpecialApprovedJobsForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
