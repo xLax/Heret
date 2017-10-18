@@ -79,10 +79,10 @@ namespace HeretPreWorkControl
                                                         .FirstOrDefault<tbl_users>();
                         if (userData != null)
                         {
-                            if(!userData.name.Equals(tbWorkerName.Text))
-                            {
-                                tbPanel.Text = "שים לב פעולה זו עלולה להימשך כדקה";
-                                
+                            tbPanel.Text = "שים לב פעולה זו עלולה להימשך כדקה";
+
+                            if (!userData.name.Equals(tbWorkerName.Text))
+                            {                                
                                 // Change every fucking where
                                 Utilities.GetAllJobs();
                                 List<tbl_sla_data> lstMySlaData = Utilities.GetMySlaData();

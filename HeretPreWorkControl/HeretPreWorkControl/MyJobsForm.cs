@@ -360,11 +360,6 @@ namespace HeretPreWorkControl
                                 }
                             }
                         }
-                        else if (lstActionsToDept[0].action_ID == Globals.ActionTypeInsertOrderID)
-                        {
-                            // Insert order number
-                            new InsertOrderIDForm(SelectedOrder).ShowDialog();
-                        }
                         else if (lstActionsToDept[0].action_ID == Globals.ActionTypeRecieveClientOrder)
                         {
                             // Insert Client order number
@@ -479,9 +474,16 @@ namespace HeretPreWorkControl
                                 (SelectedOrder.action_type_id == 24 &&
                                  SelectedOrder.studio_agent_name == null) ||
                                 (SelectedOrder.action_type_id == 25 &&
-                                 SelectedOrder.kadas_agent_name == null))
+                                 SelectedOrder.kadas_agent_name == null) ||
+                                (SelectedOrder.action_type_id == 10 &&
+                                 SelectedOrder.orders_agent_name == null))
                         {
                             tbPanel.Text = "שים לב! עליך למנות עובד לביצוע לפני ביצוע העבודה";
+                        }
+                        else if (SelectedOrder.action_type_id == Globals.ActionTypeInsertOrderID)
+                        {
+                            // Insert order number
+                            new InsertOrderIDForm(SelectedOrder).ShowDialog();
                         }
                         else if(SelectedOrder.action_type_id == Globals.ActionTypeSetAndSendOffer)
                         {
@@ -932,6 +934,15 @@ namespace HeretPreWorkControl
             this.lbEmployees.Location = new Point(this.lbEmployees.Location.X, this.Height - deployEmpolyeeDDL);
             this.lblEmployee.Location = new Point(this.lblEmployee.Location.X, this.Height - deployEmpolyeeLBL);
             this.pbSetEmployee.Location = new Point(this.pbSetEmployee.Location.X, this.Height - deployEmpolyeeBTN);
+        }
+
+        private void dataGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.Column.Index == 0)
+            {
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
         }
     }
 }

@@ -93,6 +93,7 @@
             this.dataGridView.Size = new System.Drawing.Size(730, 231);
             this.dataGridView.TabIndex = 12;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
+            this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
             // 
             // ID
             // 

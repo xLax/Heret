@@ -236,7 +236,6 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "מערכת לבקרת תהליך קדם העבודה";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SpecialApprovedJobsForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

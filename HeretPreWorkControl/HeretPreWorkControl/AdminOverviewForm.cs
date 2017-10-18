@@ -12,7 +12,7 @@ namespace HeretPreWorkControl
 {
     struct RowData
     {
-        public int OrderID;
+        public string OrderID;
         public string ClientName;
         public string JobStatus;
         public string CurrentDepartment;
@@ -225,7 +225,7 @@ namespace HeretPreWorkControl
             string strThirdCol = Utilities.GetFilledDataFromOrder(order);
 
             RowData row = new RowData();
-            row.OrderID = order.ID;
+            row.OrderID = order.ID.ToString();
             row.JobStatus = strJobStatus;
             row.SlaStatus = strSlaStatus;
             row.CreationDate = order.creation_date.Value.Date;
@@ -273,7 +273,7 @@ namespace HeretPreWorkControl
             }
 
             RowData row = new RowData();
-            row.OrderID = order.ID;
+            row.OrderID = order.ID.ToString();
             row.JobStatus = strJobStatus;
             row.SlaStatus = strSlaStatus;
             row.CreationDate = order.creation_date.Value.Date;
@@ -656,6 +656,15 @@ namespace HeretPreWorkControl
                         tbPanel.Text = "שגיאה! החיבור לבסיס הנתונים כשל";
                     }
                 }
+            }
+        }
+
+        private void dataGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.Column.Index == 0)
+            {
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
             }
         }
     }

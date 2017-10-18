@@ -33,13 +33,6 @@
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JobStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Curr_Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sla_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProjectDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.lblEnterDeclined = new System.Windows.Forms.Label();
             this.pbEditOrderInfo = new System.Windows.Forms.PictureBox();
@@ -51,6 +44,13 @@
             this.dtFromDate = new System.Windows.Forms.DateTimePicker();
             this.lbDelete = new System.Windows.Forms.Label();
             this.pbDeleteOrder = new System.Windows.Forms.PictureBox();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JobStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Curr_Dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sla_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProjectDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).BeginInit();
@@ -110,53 +110,7 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(812, 274);
             this.dataGridView.TabIndex = 20;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "מס\"ד עבודה";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 70;
-            // 
-            // Client_Name
-            // 
-            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Client_Name.HeaderText = "שם לקוח";
-            this.Client_Name.Name = "Client_Name";
-            this.Client_Name.ReadOnly = true;
-            // 
-            // JobStatus
-            // 
-            this.JobStatus.HeaderText = "סטטוס עבודה";
-            this.JobStatus.Name = "JobStatus";
-            this.JobStatus.ReadOnly = true;
-            this.JobStatus.Width = 120;
-            // 
-            // Curr_Dept
-            // 
-            this.Curr_Dept.HeaderText = "מחלקה נוכחית";
-            this.Curr_Dept.Name = "Curr_Dept";
-            this.Curr_Dept.ReadOnly = true;
-            this.Curr_Dept.Width = 90;
-            // 
-            // Creation_date
-            // 
-            this.Creation_date.HeaderText = "תאריך יצירת הזמנה";
-            this.Creation_date.Name = "Creation_date";
-            this.Creation_date.ReadOnly = true;
-            // 
-            // Sla_Status
-            // 
-            this.Sla_Status.HeaderText = "סטטוס SLA";
-            this.Sla_Status.Name = "Sla_Status";
-            this.Sla_Status.ReadOnly = true;
-            // 
-            // ProjectDesc
-            // 
-            this.ProjectDesc.HeaderText = "תיאור פרויקט\\ מס\' פריסה\\ מס\' תבנית\\ מס\' הזמנת לקוח";
-            this.ProjectDesc.Name = "ProjectDesc";
-            this.ProjectDesc.ReadOnly = true;
-            this.ProjectDesc.Width = 150;
+            this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
             // 
             // tbPanel
             // 
@@ -279,6 +233,53 @@
             this.pbDeleteOrder.TabStop = false;
             this.pbDeleteOrder.Click += new System.EventHandler(this.pbDeleteOrder_Click);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "מס\"ד עבודה";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 70;
+            // 
+            // Client_Name
+            // 
+            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Client_Name.HeaderText = "שם לקוח";
+            this.Client_Name.Name = "Client_Name";
+            this.Client_Name.ReadOnly = true;
+            // 
+            // JobStatus
+            // 
+            this.JobStatus.HeaderText = "סטטוס עבודה";
+            this.JobStatus.Name = "JobStatus";
+            this.JobStatus.ReadOnly = true;
+            this.JobStatus.Width = 120;
+            // 
+            // Curr_Dept
+            // 
+            this.Curr_Dept.HeaderText = "מחלקה נוכחית";
+            this.Curr_Dept.Name = "Curr_Dept";
+            this.Curr_Dept.ReadOnly = true;
+            this.Curr_Dept.Width = 90;
+            // 
+            // Creation_date
+            // 
+            this.Creation_date.HeaderText = "תאריך יצירת הזמנה";
+            this.Creation_date.Name = "Creation_date";
+            this.Creation_date.ReadOnly = true;
+            // 
+            // Sla_Status
+            // 
+            this.Sla_Status.HeaderText = "סטטוס SLA";
+            this.Sla_Status.Name = "Sla_Status";
+            this.Sla_Status.ReadOnly = true;
+            // 
+            // ProjectDesc
+            // 
+            this.ProjectDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProjectDesc.HeaderText = "תיאור פרויקט\\ מס\' פריסה\\ מס\' תבנית\\ מס\' הזמנת לקוח";
+            this.ProjectDesc.Name = "ProjectDesc";
+            this.ProjectDesc.ReadOnly = true;
+            // 
             // AdminOverviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,6 +337,8 @@
         private System.Windows.Forms.Label lblShowJobs;
         private System.Windows.Forms.Label lblFromDate;
         private System.Windows.Forms.DateTimePicker dtFromDate;
+        private System.Windows.Forms.Label lbDelete;
+        private System.Windows.Forms.PictureBox pbDeleteOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn JobStatus;
@@ -343,7 +346,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Creation_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectDesc;
-        private System.Windows.Forms.Label lbDelete;
-        private System.Windows.Forms.PictureBox pbDeleteOrder;
     }
 }

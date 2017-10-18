@@ -102,7 +102,7 @@ namespace HeretPreWorkControl
                     tbDescription.Multiline = true;
                     tbDescription.Height = 91;
                     changeScreenObjectLocations();
-                    tbDescription.MaxLength = 45;
+                    tbDescription.MaxLength = 100;
                     break;
 
                 default:
