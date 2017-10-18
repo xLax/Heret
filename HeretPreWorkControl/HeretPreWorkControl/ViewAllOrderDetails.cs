@@ -305,12 +305,15 @@ namespace HeretPreWorkControl
                                                 tbl_clients client = Globals.AllClients.Where(a => a.ID == order.client_id).SingleOrDefault<tbl_clients>();
                                                 context.tbl_clients.Attach(client);
                                                 var Entry2 = context.Entry(client);
-                                                if(!lbResponseWorker.SelectedItem.ToString().Equals(client.person_responsible))
+                                                if(lbResponseWorker.SelectedItem != null)
                                                 {
-                                                    client.person_responsible = lbResponseWorker.SelectedItem.ToString();
-                                                    Entry2.Property(o => o.person_responsible).IsModified = true;
+                                                    if (!lbResponseWorker.SelectedItem.ToString().Equals(client.person_responsible))
+                                                    {
+                                                        client.person_responsible = lbResponseWorker.SelectedItem.ToString();
+                                                        Entry2.Property(o => o.person_responsible).IsModified = true;
+                                                    }
                                                 }
-
+                                               
                                                 context.SaveChanges();
 
                                                 tbPanel.Text = "ההזמנה עודכנה בהצלחה !";
