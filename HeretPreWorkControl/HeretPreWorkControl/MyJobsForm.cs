@@ -200,7 +200,9 @@ namespace HeretPreWorkControl
 
                     string strAgentName = Order.sales_agent_name;
 
-                    dataGridView.Rows.Add(nOrderID, strClientName, strAgentName, nFilesNo, strThirdCol, strSlaStatus, strAction);
+                    string strCreationDate = Utilities.GetDateInNormalFormat(Order.creation_date.Value);
+                        
+                    dataGridView.Rows.Add(nOrderID, strClientName, strAgentName, strCreationDate, nFilesNo, strThirdCol, strSlaStatus, strAction);
                 }
             }
         }

@@ -31,13 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyJobsForm));
             this.tbPanel = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SalesAgentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.No_Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Project_Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sla = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Action_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbRefresh = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
@@ -52,6 +45,14 @@
             this.pbSetEmployee = new System.Windows.Forms.PictureBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Client_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesAgentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.No_Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Project_Desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sla = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Action_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -83,6 +84,7 @@
             this.ID,
             this.Client_Name,
             this.SalesAgentName,
+            this.CreationDate,
             this.No_Files,
             this.Project_Desc,
             this.Sla,
@@ -94,56 +96,6 @@
             this.dataGridView.TabIndex = 12;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "מס\"ד עבודה";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 70;
-            // 
-            // Client_Name
-            // 
-            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Client_Name.HeaderText = "שם לקוח";
-            this.Client_Name.Name = "Client_Name";
-            this.Client_Name.ReadOnly = true;
-            // 
-            // SalesAgentName
-            // 
-            this.SalesAgentName.HeaderText = "סוכן מכירות";
-            this.SalesAgentName.Name = "SalesAgentName";
-            this.SalesAgentName.ReadOnly = true;
-            this.SalesAgentName.Width = 120;
-            // 
-            // No_Files
-            // 
-            this.No_Files.HeaderText = "מספר קבצים";
-            this.No_Files.Name = "No_Files";
-            this.No_Files.ReadOnly = true;
-            this.No_Files.Width = 60;
-            // 
-            // Project_Desc
-            // 
-            this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ מס\' הזמנת לקוח/ תיאור פרויקט";
-            this.Project_Desc.Name = "Project_Desc";
-            this.Project_Desc.ReadOnly = true;
-            this.Project_Desc.Width = 132;
-            // 
-            // Sla
-            // 
-            this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Sla.FillWeight = 110F;
-            this.Sla.HeaderText = "סטטוס SLA";
-            this.Sla.Name = "Sla";
-            this.Sla.ReadOnly = true;
-            // 
-            // Action_Type
-            // 
-            this.Action_Type.HeaderText = "סוג פעולה";
-            this.Action_Type.Name = "Action_Type";
-            this.Action_Type.ReadOnly = true;
-            this.Action_Type.Width = 200;
             // 
             // pbRefresh
             // 
@@ -304,6 +256,64 @@
             this.tbEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbEmail.Visible = false;
             // 
+            // ID
+            // 
+            this.ID.FillWeight = 80F;
+            this.ID.HeaderText = "מס\"ד עבודה";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 70;
+            // 
+            // Client_Name
+            // 
+            this.Client_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Client_Name.HeaderText = "שם לקוח";
+            this.Client_Name.Name = "Client_Name";
+            this.Client_Name.ReadOnly = true;
+            // 
+            // SalesAgentName
+            // 
+            this.SalesAgentName.HeaderText = "סוכן מכירות";
+            this.SalesAgentName.Name = "SalesAgentName";
+            this.SalesAgentName.ReadOnly = true;
+            this.SalesAgentName.Width = 92;
+            // 
+            // CreationDate
+            // 
+            this.CreationDate.HeaderText = "תאריך יצירת הזמנה";
+            this.CreationDate.Name = "CreationDate";
+            this.CreationDate.ReadOnly = true;
+            this.CreationDate.Width = 85;
+            // 
+            // No_Files
+            // 
+            this.No_Files.HeaderText = "מספר קבצים";
+            this.No_Files.Name = "No_Files";
+            this.No_Files.ReadOnly = true;
+            this.No_Files.Width = 50;
+            // 
+            // Project_Desc
+            // 
+            this.Project_Desc.HeaderText = "מס\' תבנית/ מס\' פריסה/ מס\' הזמנת לקוח/ תיאור פרויקט";
+            this.Project_Desc.Name = "Project_Desc";
+            this.Project_Desc.ReadOnly = true;
+            this.Project_Desc.Width = 132;
+            // 
+            // Sla
+            // 
+            this.Sla.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Sla.FillWeight = 110F;
+            this.Sla.HeaderText = "סטטוס SLA";
+            this.Sla.Name = "Sla";
+            this.Sla.ReadOnly = true;
+            // 
+            // Action_Type
+            // 
+            this.Action_Type.HeaderText = "סוג פעולה";
+            this.Action_Type.Name = "Action_Type";
+            this.Action_Type.ReadOnly = true;
+            this.Action_Type.Width = 170;
+            // 
             // MyJobsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,14 +374,15 @@
         private System.Windows.Forms.ComboBox lbEmployees;
         private System.Windows.Forms.Label lblEmployee;
         private System.Windows.Forms.PictureBox pbSetEmployee;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Client_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesAgentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn No_Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn Project_Desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sla;
         private System.Windows.Forms.DataGridViewTextBoxColumn Action_Type;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.TextBox tbEmail;
     }
 }

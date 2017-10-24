@@ -195,13 +195,14 @@ namespace HeretPreWorkControl
                                 if (currentOrder.special_action_type_id == Globals.ActionTypeKadasApprovePDF ||
                                     currentOrder.special_action_type_id == Globals.ActionTypeKadasNewPDF)
                                 {
-                                    if (!(new EmailAddressAttribute().IsValid(tbEmail.Text)))
+                                    if(tbEmail.Text.Trim(' ').Equals(String.Empty) ||
+                                      (new EmailAddressAttribute().IsValid(tbEmail.Text)))
                                     {
-                                        isSucceded = false;
+                                        currentOrder.pdf_email = tbEmail.Text;
                                     }
                                     else
                                     {
-                                        currentOrder.pdf_email = tbEmail.Text;
+                                        isSucceded = false;
                                     }
                                 }
 
@@ -217,13 +218,14 @@ namespace HeretPreWorkControl
                                 if (currentOrder.action_type_id == Globals.ActionTypeKadasApprovePDF ||
                                     currentOrder.action_type_id == Globals.ActionTypeKadasNewPDF)
                                 {
-                                    if (!(new EmailAddressAttribute().IsValid(tbEmail.Text)))
+                                    if (tbEmail.Text.Trim(' ').Equals(String.Empty) ||
+                                       (new EmailAddressAttribute().IsValid(tbEmail.Text)))
                                     {
-                                        isSucceded = false;
+                                        currentOrder.pdf_email = tbEmail.Text;
                                     }
                                     else
                                     {
-                                        currentOrder.pdf_email = tbEmail.Text;
+                                        isSucceded = false;
                                     }
                                 }
                             }

@@ -209,7 +209,7 @@ namespace HeretPreWorkControl
             string strToConvert;
 
             //this.order.sales_agent_name = tbSalesAgent.Text;
-            this.order.contact_date = dtContactDate.Value.Date;
+             this.order.contact_date = dtContactDate.Value.Date;
             this.order.template_id = tbTemplateNumber.Text;
             this.order.prisa_id = tbPrisaNumber.Text;
             this.order.client_order_id = tbClientOrderNum.Text;
